@@ -1,0 +1,11 @@
+{
+  "domain": "xtherma_fp",
+  "name": "Xtherma Fernportal",
+  "codeowners": [
+    "@xrad"
+  ],
+  "version": "0.1",
+  "manifest_version": 1,
+  "config_flow": true,
+  "integration_type": "device"
+}

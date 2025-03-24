@@ -1,0 +1,22 @@
+{
+  "title": "Xtherma Fernportal",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Xtherma Fernportal",
+        "description": "Zugangsdaten für das Fernportal",
+        "data": {
+          "api_key": "API Token",
+          "serial_number": "SN Fernportal-Modul"
+        }
+      }
+    },
+    "error": {
+      "bad_arguments": "Anmeldedaten haben ein falsches Format",
+      "rate_limit": "Zu viele Anfragen an Fernportal, 1 Minute warten",
+      "timeout": "Keine Antwort",
+      "cannot_connect": "Anmeldung am Fernportal nicht möglich",
+      "unknown": "Unbekannter Fehler"
+    }
+  }
+}

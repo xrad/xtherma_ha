@@ -1,0 +1,22 @@
+{
+  "title": "Xtherma Fernportal",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Xtherma Fernportal",
+        "description": "Provide credentials to access Fernportal",
+        "data": {
+          "api_key": "API Token",
+          "serial_number": "SN Fernportal-Module"
+        }
+      }
+    },
+    "error": {
+      "bad_arguments": "Error in authorization data format",
+      "rate_limit": "Too many requests to Fernportal, wait 1 minute",
+      "timeout": "No response",
+      "cannot_connect": "Could not connect to Fernportal",
+      "unknown": "Unknown Error"
+    }
+  }
+}
