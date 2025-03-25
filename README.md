@@ -18,7 +18,7 @@ Achtung: der Konfigurationsdialog prüft die eingegebenen Daten, indem testweise
 
 ## Funktion
 
-Aktuell ist das REST-API read-only. Es werden nur die Sensorwerte des Datenbereichs `db_data` angezeigt.
+Aktuell ist das REST-API read-only. Es werden nur die Sensorwerte des Datenbereichs `telemetry` angezeigt.
 
 ## Logging
 
