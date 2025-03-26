@@ -1,24 +1,29 @@
-"""The xtherma integration."""
+"""The Xtherma integration."""
 
 from __future__ import annotations
 
-from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant
-from homeassistant.helpers.aiohttp_client import async_get_clientsession
-from homeassistant.const import CONF_API_KEY, Platform
+from typing import TYPE_CHECKING
 
-from .const import FERNPORTAL_URL, CONF_SERIAL_NUMBER, DOMAIN, LOGGER, VERSION
-from .xtherma_client import XthermaClient
+from homeassistant.const import CONF_API_KEY, Platform
+from homeassistant.helpers.aiohttp_client import async_get_clientsession
+
+from .const import CONF_SERIAL_NUMBER, DOMAIN, FERNPORTAL_URL, LOGGER, VERSION
 from .coordinator import XthermaDataUpdateCoordinator
+from .xtherma_client import XthermaClient
 from .xtherma_data import XthermaData
+
+if TYPE_CHECKING:
+    from homeassistant.config_entries import ConfigEntry
+    from homeassistant.core import HomeAssistant
 
 _PLATFORMS = [ Platform.SENSOR ]
 
 async def async_setup_entry(
-    hass: HomeAssistant, 
-    entry: ConfigEntry, 
+    hass: HomeAssistant,
+    entry: ConfigEntry,
 ) -> bool:
-    LOGGER.debug(f"Setup integration")
+    """Initialize integration."""
+    LOGGER.debug("Setup integ…ration")
 
     # setup global data
     hass.data.setdefault(DOMAIN, {})
@@ -32,12 +37,12 @@ async def async_setup_entry(
 
     # create API client connector
     client = XthermaClient(
-        url = FERNPORTAL_URL, 
-        api_key = api_key, 
-        serial_number = serial_number, 
+        url = FERNPORTAL_URL,
+        api_key = api_key,
+        serial_number = serial_number,
         session = async_get_clientsession(hass))
 
-    # create data coordinator 
+    # create data coordinator
     # first refresh may take some time, especially if the config flow just ran,
     # so do this asynchronously
     xtherma_data.coordinator = XthermaDataUpdateCoordinator(hass, entry, client)
@@ -48,9 +53,9 @@ async def async_setup_entry(
     try:
         LOGGER.debug("Attempting initial data fetch")
         await xtherma_data.coordinator.async_config_entry_first_refresh()
-    except Exception:
-        LOGGER.debug("Data fetch failed, probably due to rate limiting. Will try again.")
-        pass
+    except Exception:  # noqa: BLE001
+        LOGGER.debug(
+            "Data fetch failed, probably due to rate limiting. Will try again.")
 
     # initialize platforms
     await hass.config_entries.async_forward_entry_setups(entry, _PLATFORMS)
@@ -58,11 +63,14 @@ async def async_setup_entry(
     return True
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Unload integration."""
     LOGGER.debug("Unload integration")
     return await hass.config_entries.async_unload_platforms(entry, _PLATFORMS)
 
-async def async_migrate_entry(hass, config_entry: ConfigEntry):
-    LOGGER.debug("Migrating configuration from version %s.%s", config_entry.version, config_entry.minor_version)
+async def async_migrate_entry(_: HomeAssistant, config_entry: ConfigEntry) -> bool:
+    """Migrate config entry."""
+    LOGGER.debug("Migrating configuration from version %s.%s",
+                 config_entry.version, config_entry.minor_version)
 
     if config_entry.version > VERSION:
         LOGGER.error("Downgrade not supported")

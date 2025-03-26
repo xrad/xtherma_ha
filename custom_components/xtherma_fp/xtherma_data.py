@@ -1,11 +1,17 @@
+"""Global data for integration."""
+
 from .coordinator import XthermaDataUpdateCoordinator
 
+
 class XthermaData:
-    coordinator: XthermaDataUpdateCoordinator
+    """Global data for integration."""
+
+    coordinator: XthermaDataUpdateCoordinator|None
     sensors_initialized: bool
     serial_fp: str
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """XthermaData constructor."""
         self.coordinator = None
         self.sensors_initialized = False
         self.serial_fp = "()"

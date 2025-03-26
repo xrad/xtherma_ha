@@ -1,24 +1,34 @@
+"""Sensor descriptions."""
+
 from dataclasses import dataclass
 
-from homeassistant.components.sensor import (
-    SensorDeviceClass,
-    SensorEntity, SensorEntityDescription, SensorStateClass,
-)
-from homeassistant.const import (
-    UnitOfTemperature, UnitOfPower, UnitOfVolumeFlowRate, UnitOfFrequency, UnitOfEnergy,
-    REVOLUTIONS_PER_MINUTE
-)
 from homeassistant.components.binary_sensor import (
     BinarySensorEntityDescription,
 )
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+    SensorEntityDescription,
+    SensorStateClass,
+)
+from homeassistant.const import (
+    REVOLUTIONS_PER_MINUTE,
+    UnitOfEnergy,
+    UnitOfFrequency,
+    UnitOfPower,
+    UnitOfTemperature,
+    UnitOfVolumeFlowRate,
+)
+
 
 @dataclass(kw_only=True, frozen=True)
 class XtSensorEntityDescription(SensorEntityDescription):
+    """Abstract base class."""
+
     factor: float|None = None
 
 @dataclass(kw_only=True, frozen=True)
 class XtBinarySensorEntityDescription(BinarySensorEntityDescription):
-    pass
+    """A binary sensor."""
 
 SENSOR_DESCRIPTIONS = [
     XtSensorEntityDescription(
@@ -112,14 +122,12 @@ SENSOR_DESCRIPTIONS = [
         key="ld1",
         name="[LD1] Lüfter 1 Drehzahl",
         native_unit_of_measurement=REVOLUTIONS_PER_MINUTE,
-        device_class="rotational_speed",
         state_class=SensorStateClass.MEASUREMENT,
     ),
     XtSensorEntityDescription(
         key="ld2",
         name="[LD2] Lüfter 2 Drehzahl",
         native_unit_of_measurement=REVOLUTIONS_PER_MINUTE,
-        device_class="rotational_speed",
         state_class=SensorStateClass.MEASUREMENT,
     ),
     XtSensorEntityDescription(
@@ -277,14 +285,14 @@ SENSOR_DESCRIPTIONS = [
     ),
     XtSensorEntityDescription(
         key="day_backup6_out_hw",
-        name="Tag Warmwasserbetrieb Zusatzheizung Stufe 2 (6 kW) thermische Leistungsabgabe",
+        name="Tag Warmwasserbetrieb Zusatzheizung Stufe 2 (6 kW) thermische Leistungsabgabe",  # noqa: E501
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
     XtSensorEntityDescription(
         key="day_backup3_out_hw",
-        name="Tag Warmwasserbetrieb Zusatzheizung Stufe 1 (3 kW) thermische Leistungsabgabe",
+        name="Tag Warmwasserbetrieb Zusatzheizung Stufe 1 (3 kW) thermische Leistungsabgabe",  # noqa: E501
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -312,28 +320,28 @@ SENSOR_DESCRIPTIONS = [
     ),
     XtSensorEntityDescription(
         key="day_backup3_in_hw",
-        name="Tag Warmwasserbetrieb Zusatzheizung Stufe 1 (3 kW) elektrische Leistungsaufnahme",
+        name="Tag Warmwasserbetrieb Zusatzheizung Stufe 1 (3 kW) elektrische Leistungsaufnahme",  # noqa: E501
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
     XtSensorEntityDescription(
         key="day_backup6_in_hw",
-        name="Tag Warmwasserbetrieb Zusatzheizung Stufe 2 (6 kW) elektrische Leistungsaufnahme",
+        name="Tag Warmwasserbetrieb Zusatzheizung Stufe 2 (6 kW) elektrische Leistungsaufnahme",  # noqa: E501
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
     XtSensorEntityDescription(
         key="day_backup3_in_h",
-        name="Tag Heizbetrieb Zusatzheizung Stufe 1 (3 kW) elektrische Leistungsaufnahme",
+        name="Tag Heizbetrieb Zusatzheizung Stufe 1 (3 kW) elektrische Leistungsaufnahme",  # noqa: E501
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
     XtSensorEntityDescription(
         key="day_backup6_in_h",
-        name="Tag Heizbetrieb Zusatzheizung Stufe 2 (6 kW) elektrische Leistungsaufnahme",
+        name="Tag Heizbetrieb Zusatzheizung Stufe 2 (6 kW) elektrische Leistungsaufnahme",  # noqa: E501
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL_INCREASING,
