@@ -12,7 +12,12 @@ MANUFACTURER = "Xtherma"
 
 # configuration keys.
 # CONF_API_KEY is already defined by homeassistant.const
+CONF_CONNECTION = "connection"
 CONF_SERIAL_NUMBER = "serial_number"
+
+# connection variants
+CONF_CONNECTION_RESTAPI = "rest_api"
+CONF_CONNECTION_MODBUSTCP = "modbus_tcp"
 
 FERNPORTAL_URL = "https://fernportal.xtherma.de/api/device"
 

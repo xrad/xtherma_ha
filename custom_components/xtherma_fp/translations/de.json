@@ -1,13 +1,25 @@
 {
-  "title": "Xtherma Fernportal",
+  "title": "Xtherma Wärmepumpe",
   "config": {
     "step": {
       "user": {
-        "title": "Xtherma Fernportal",
+        "data": {
+          "connection": "Welche Verbindung soll hergestellt werden?"
+        }
+      },
+      "rest_api": {
         "description": "Zugangsdaten für das Fernportal",
         "data": {
           "api_key": "API Token",
           "serial_number": "SN Fernportal-Modul"
+        }
+      },
+      "modbus_tcp": {
+        "description": "Zugangsdaten für Modbus/TCP",
+        "data": {
+          "host": "IP Addresse",
+          "port": "Portnummer",
+          "address": "Modbus Addresse"
         }
       }
     },
@@ -17,6 +29,33 @@
       "timeout": "Keine Antwort",
       "cannot_connect": "Anmeldung am Fernportal nicht möglich",
       "unknown": "Unbekannter Fehler"
+    }
+  },
+  "selector": {
+    "connection": {
+      "options": {
+        "rest_api": "Fernportal REST API - Cloud",
+        "modbus_tcp": "Modbus TCP - Lokal"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rest_api": {
+        "description": "Zugangsdaten für das Fernportal",
+        "data": {
+          "api_key": "API Token",
+          "serial_number": "SN Fernportal-Modul"
+        }
+      },
+      "modbus_tcp": {
+        "description": "Zugangsdaten für Modbus/TCP",
+        "data": {
+          "host": "IP Addresse",
+          "port": "Portnummer",
+          "address": "Modbus Addresse"
+        }
+      }
     }
   }
 }

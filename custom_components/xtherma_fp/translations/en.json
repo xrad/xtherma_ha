@@ -1,13 +1,25 @@
 {
-  "title": "Xtherma Fernportal",
+  "title": "Xtherma Heatpump",
   "config": {
     "step": {
       "user": {
-        "title": "Xtherma Fernportal",
+        "data": {
+          "connection": "Which connection to create?"
+        }
+      },
+      "rest_api": {
         "description": "Provide credentials to access Fernportal",
         "data": {
           "api_key": "API Token",
           "serial_number": "SN Fernportal-Module"
+        }
+      },
+      "modbus_tcp": {
+        "description": "Connection to Modbus/TCP",
+        "data": {
+          "host": "IP address",
+          "port": "port number",
+          "address": "modbus address"
         }
       }
     },
@@ -17,6 +29,33 @@
       "timeout": "No response",
       "cannot_connect": "Could not connect to Fernportal",
       "unknown": "Unknown Error"
+    }
+  },
+  "selector": {
+    "connection": {
+      "options": {
+        "rest_api": "Fernportal REST API - cloud",
+        "modbus_tcp": "Modbus TCP - local"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rest_api": {
+        "description": "Provide credentials to access Fernportal",
+        "data": {
+          "api_key": "API Token",
+          "serial_number": "SN Fernportal-Module"
+        }
+      },
+      "modbus_tcp": {
+        "description": "Connection to Modbus/TCP",
+        "data": {
+          "host": "IP address",
+          "port": "port number",
+          "address": "modbus address"
+        }
+      }
     }
   }
 }

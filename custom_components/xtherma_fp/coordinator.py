@@ -1,7 +1,6 @@
 """DataUpdater for Xtherma Fernportal cloud integration."""
 
 import logging
-from datetime import timedelta
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -9,7 +8,6 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, Upda
 
 from .const import (
     DOMAIN,
-    FERNPORTAL_RATE_LIMIT_S,
     KEY_ENTRY_INPUT_FACTOR,
     KEY_ENTRY_KEY,
     KEY_ENTRY_UNIT,
@@ -17,7 +15,16 @@ from .const import (
     KEY_TELEMETRY,
     LOGGER,
 )
-from .xtherma_client import XthermaClient, XthermaRateLimitError, XthermaTimeoutError
+from .xtherma_client_common import (
+    XthermaModbusError,
+    XthermaNotConnectedError,
+    XthermaRestApiError,
+)
+from .xtherma_client_rest import (
+    XthermaClient,
+    XthermaRateLimitError,
+    XthermaTimeoutError,
+)
 
 _FACTORS = {
     "*1000": 1000,
@@ -26,10 +33,11 @@ _FACTORS = {
     "1000": 1000,
     "100": 100,
     "10": 10,
-    "/1000": .001,
-    "/100": .01,
-    "/10": .1,
+    "/1000": 0.001,
+    "/100": 0.01,
+    "/10": 0.1,
 }
+
 
 class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
     """Regularly Fetches data from API client."""
@@ -37,19 +45,17 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
     _client: XthermaClient
 
     def __init__(
-        self,
-        hass: HomeAssistant,
-        config_entry: ConfigEntry,
-        client: XthermaClient
+        self, hass: HomeAssistant, config_entry: ConfigEntry, client: XthermaClient
     ) -> None:
         """Class constructor."""
         self._client = client
+        update_interval = client.update_interval()
         super().__init__(
             hass=hass,
             logger=LOGGER,
             config_entry=config_entry,
             name=DOMAIN,
-            update_interval=timedelta(seconds=FERNPORTAL_RATE_LIMIT_S),
+            update_interval=update_interval,
         )
 
     async def _async_setup(self) -> None:
@@ -61,9 +67,12 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         return factor * value
 
     async def _async_update_data(self) -> dict[str, float]:
-        result : dict[str, float] = {}
+        result: dict[str, float] = {}
         try:
-            LOGGER.debug("coordinator requesting new data")
+            if not await self._client.is_connected():
+                LOGGER.debug("Connecting client")
+                await self._client.connect()
+            LOGGER.debug("Coordinator requesting new data")
             raw = await self._client.async_get_data()
             telemetry = raw[KEY_TELEMETRY]
             for entry in telemetry:
@@ -79,15 +88,28 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
                     rawvalue = entry[KEY_ENTRY_VALUE]
                     inputfactor = entry[KEY_ENTRY_INPUT_FACTOR]
                     unit = entry[KEY_ENTRY_UNIT]
-                    LOGGER.debug(f'key="{key}" raw="{rawvalue}" value="{value}" unit="{unit}" inputfactor="{inputfactor}"')  # noqa: E501
+                    LOGGER.debug(
+                        f'key="{key}" raw="{rawvalue}" value="{value}" unit="{unit}" inputfactor="{inputfactor}"'
+                    )
         except XthermaRateLimitError as err:
             msg = "Error communicating with API, rate limiting"
             raise UpdateFailed(msg) from err
         except XthermaTimeoutError as err:
             msg = "Error communicating with API, time out"
             raise UpdateFailed(msg) from err
+        except XthermaNotConnectedError as err:
+            msg = "No connection to server"
+            raise UpdateFailed(msg) from err
+        except XthermaRestApiError as err:
+            msg = f"REST API error {err.code}"
+            raise UpdateFailed(msg) from err
+        except XthermaModbusError as err:
+            msg = "Modbus error"
+            raise UpdateFailed(msg) from err
         except Exception as err:
             msg = "Error communicating with API, unknown reason"
             raise UpdateFailed(msg) from err
-        LOGGER.debug(f"coordinator processed {len(result)}/{len(telemetry)} telemetry values")  # noqa: E501
+        LOGGER.debug(
+            f"coordinator processed {len(result)}/{len(telemetry)} telemetry values"
+        )
         return result
