@@ -47,7 +47,7 @@ async def async_setup_entry(
     hass.data[DOMAIN][entry.entry_id] = xtherma_data
 
     # create API client connector
-    connection = entry.data[CONF_CONNECTION]
+    connection = entry.data.get(CONF_CONNECTION, CONF_CONNECTION_RESTAPI)
     if connection == CONF_CONNECTION_RESTAPI:
         api_key = entry.data[CONF_API_KEY]
         serial_number = entry.data[CONF_SERIAL_NUMBER]
