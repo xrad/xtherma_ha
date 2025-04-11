@@ -37,6 +37,9 @@
         }
     },
     "remoteUser": "vscode",
+    "mounts": [
+        "type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly",
+    ],
     "features": {
         "ghcr.io/devcontainers-extra/features/apt-packages:1": {
             "packages": [
