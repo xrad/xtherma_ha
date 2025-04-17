@@ -1,10 +1,11 @@
 """REST API client for Xtherma Fernportal cloud integration."""
 
 import datetime
+import logging
 
 import aiohttp
 
-from .const import LOGGER
+_LOGGER = logging.getLogger(__name__)
 
 
 class XthermaRateLimitError(Exception):
@@ -51,13 +52,13 @@ class XthermaClient:
                 response.raise_for_status()
                 return await response.json()
         except aiohttp.ClientResponseError as err:
-            LOGGER.debug("API error: %s", err)
+            _LOGGER.debug("API error: %s", err)
             if err.status == 429:  # noqa: PLR2004
                 raise XthermaRateLimitError from err
             raise XthermaGeneralError(err.status) from err
         except TimeoutError as err:
-            LOGGER.error("API request timed out")
+            _LOGGER.exception("API request timed out")
             raise XthermaTimeoutError from err
         except Exception as err:
-            LOGGER.error("Unknown API error: %s", err)
+            _LOGGER.exception("Unknown API error: %s")
             raise XthermaGeneralError(0) from err

@@ -1,5 +1,6 @@
 """The xtherma integration sensors."""
 
+import logging
 from datetime import date, datetime
 from decimal import Decimal
 
@@ -21,7 +22,6 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from .const import (
     DOMAIN,
-    LOGGER,
     MANUFACTURER,
 )
 from .coordinator import XthermaDataUpdateCoordinator
@@ -32,6 +32,7 @@ from .sensor_descriptors import (
 )
 from .xtherma_data import XthermaData
 
+_LOGGER = logging.getLogger(__name__)
 
 # Create a sensor entity based on description.
 def __build_sensor(
@@ -43,7 +44,7 @@ def __build_sensor(
         return XthermaBinarySensor(coordinator, device_info, desc)
     if isinstance(desc, XtSensorEntityDescription):
         return XthermaSensor(coordinator, device_info, desc)
-    LOGGER.error("Unsupported EntityDescription")
+    _LOGGER.error("Unsupported EntityDescription")
     return None
 
 # Create and register sensor entities based on coordinator.data.
@@ -59,7 +60,7 @@ def _initialize_sensors(
 
     assert(coordinator is not None)  # noqa: S101
 
-    LOGGER.debug(f"Initialize {len(coordinator.data)} sensors")
+    _LOGGER.debug(f"Initialize {len(coordinator.data)} sensors")  # noqa: G004
     device_info = DeviceInfo(
         identifiers={(DOMAIN, xtherma_data.serial_fp)},
         name="Xtherma Wärmepumpe",
@@ -74,13 +75,13 @@ def _initialize_sensors(
         )
         desc = next(matching_descs_it, None)
         if not desc:
-            LOGGER.error(f"No sensor description found for key {key}")
+            _LOGGER.error("No sensor description found for key %s", key)
         else:
-            LOGGER.debug(f"Adding sensor {desc.key}")
+            _LOGGER.debug('Adding sensor "%s"', desc.key)
             sensor = __build_sensor(desc, coordinator, device_info)
             if sensor:
                 sensors.append(sensor)
-        LOGGER.debug(f"Created {len(sensors)} sensors")
+    _LOGGER.debug("Created %d sensors", len(sensors))
     async_add_entities(sensors)
 
     xtherma_data.sensors_initialized = True
@@ -96,7 +97,7 @@ def _try_initialize_sensors(
     if coordinator.data:
         _initialize_sensors(xtherma_data, async_add_entities)
     else:
-        LOGGER.debug("Data coordinator has no data yet, wait for next refresh")
+        _LOGGER.debug("Data coordinator has no data yet, wait for next refresh")
         async_create(
             hass,
             "Xtherma",
@@ -104,14 +105,19 @@ def _try_initialize_sensors(
         )
 
 def _delete_legacy_device(hass: HomeAssistant) -> None:
-    LOGGER.debug("Looking for legacy device in device registry")
+    _LOGGER.debug("Looking for legacy device in device registry")
     dev_reg = device_registry.async_get(hass)
     id_to_delete: str|None = None
     for device in dev_reg.devices.values():
         if device.manufacturer == MANUFACTURER and len(device.identifiers) == 1:
             (id1, id2) = device.identifiers.copy().pop()
             if id1 == DOMAIN and not id2:
-                LOGGER.debug(f"Deleting device = {device.name} {device.id} {list(device.identifiers)}")  # noqa: E501
+                _LOGGER.debug(
+                    "Deleting device = %s %s %s",
+                    device.name,
+                    device.id,
+                    list(device.identifiers),
+                )
                 id_to_delete = device.id
                 break
     if id_to_delete:
@@ -125,7 +131,7 @@ async def async_setup_entry(
     """HA calls this to initialize sensor platform."""
     xtherma_data: XthermaData = hass.data[DOMAIN][config_entry.entry_id]
 
-    LOGGER.debug("Setup sensor platform")
+    _LOGGER.debug("Setup sensor platform")
 
     assert xtherma_data.coordinator is not None  # noqa: S101
 

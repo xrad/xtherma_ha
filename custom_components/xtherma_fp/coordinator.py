@@ -13,7 +13,6 @@ from .const import (
     KEY_ENTRY_UNIT,
     KEY_ENTRY_VALUE,
     KEY_TELEMETRY,
-    LOGGER,
 )
 from .xtherma_client_common import (
     XthermaModbusError,
@@ -25,6 +24,8 @@ from .xtherma_client_rest import (
     XthermaRateLimitError,
     XthermaTimeoutError,
 )
+
+_LOGGER = logging.getLogger(__name__)
 
 _FACTORS = {
     "*1000": 1000,
@@ -52,7 +53,7 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         update_interval = client.update_interval()
         super().__init__(
             hass=hass,
-            logger=LOGGER,
+            logger=_LOGGER,
             config_entry=config_entry,
             name=DOMAIN,
             update_interval=update_interval,
@@ -70,9 +71,9 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         result: dict[str, float] = {}
         try:
             if not await self._client.is_connected():
-                LOGGER.debug("Connecting client")
+                _LOGGER.debug("Connecting client")
                 await self._client.connect()
-            LOGGER.debug("Coordinator requesting new data")
+            _LOGGER.debug("Coordinator requesting new data")
             raw = await self._client.async_get_data()
             telemetry = raw[KEY_TELEMETRY]
             for entry in telemetry:
@@ -80,16 +81,17 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
                 rawvalue = entry.get(KEY_ENTRY_VALUE, None)
                 inputfactor = entry.get(KEY_ENTRY_INPUT_FACTOR, None)
                 if not key or not rawvalue:
-                    LOGGER.error("entry has no 'key'")
+                    _LOGGER.error("entry has no 'key'")
                     continue
                 value = self._apply_input_factor(rawvalue, inputfactor)
                 result[key] = value
-                if LOGGER.getEffectiveLevel() == logging.DEBUG:
+                if _LOGGER.getEffectiveLevel() == logging.DEBUG:
                     rawvalue = entry[KEY_ENTRY_VALUE]
                     inputfactor = entry[KEY_ENTRY_INPUT_FACTOR]
                     unit = entry[KEY_ENTRY_UNIT]
-                    LOGGER.debug(
-                        f'key="{key}" raw="{rawvalue}" value="{value}" unit="{unit}" inputfactor="{inputfactor}"'
+                    _LOGGER.debug(
+                        'key="%s" raw="%s" value="%s" unit="%s" inputfactor="%s"',
+                        key, rawvalue, value, unit, inputfactor
                     )
         except XthermaRateLimitError as err:
             msg = "Error communicating with API, rate limiting"
@@ -109,7 +111,7 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         except Exception as err:
             msg = "Error communicating with API, unknown reason"
             raise UpdateFailed(msg) from err
-        LOGGER.debug(
-            f"coordinator processed {len(result)}/{len(telemetry)} telemetry values"
+        _LOGGER.debug(
+            "coordinator processed %d/%d telemetry values", len(result), len(telemetry)
         )
         return result

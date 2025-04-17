@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from typing import Any
 
 import voluptuous as vol
@@ -31,7 +32,6 @@ from .const import (
     CONF_SERIAL_NUMBER,
     DOMAIN,
     FERNPORTAL_URL,
-    LOGGER,
 )
 from .xtherma_client_modbus import XthermaClientModbus
 from .xtherma_client_rest import (
@@ -41,6 +41,7 @@ from .xtherma_client_rest import (
     XthermaTimeoutError,
 )
 
+_LOGGER = logging.getLogger(__name__)
 
 async def _validate_rest_api(
     hass: HomeAssistant, data: dict[str, Any], errors: dict[str, str]
@@ -65,16 +66,16 @@ async def _validate_rest_api(
         )
         await client.async_get_data()
     except XthermaRateLimitError:
-        LOGGER.debug("RateLimitError")
+        _LOGGER.debug("RateLimitError")
         errors["base"] = "rate_limit"
     except XthermaTimeoutError:
-        LOGGER.debug("TimeoutError")
+        _LOGGER.debug("TimeoutError")
         errors["base"] = "timeout"
     except XthermaGeneralError:
-        LOGGER.debug("GeneralError")
+        _LOGGER.debug("GeneralError")
         errors["base"] = "cannot_connect"
     except Exception:  # noqa: BLE001
-        LOGGER.debug("Unexpected exception")
+        _LOGGER.debug("Unexpected exception")
         errors["base"] = "unknown"
     else:
         return True
@@ -107,13 +108,13 @@ async def _validate_modbus_tcp(
         )
         await client.async_get_data()
     except XthermaTimeoutError:
-        LOGGER.debug("TimeoutError")
+        _LOGGER.debug("TimeoutError")
         errors["base"] = "timeout"
     except XthermaGeneralError:
-        LOGGER.debug("GeneralError")
+        _LOGGER.debug("GeneralError")
         errors["base"] = "cannot_connect"
     except Exception:  # noqa: BLE001
-        LOGGER.debug("Unexpected exception")
+        _LOGGER.debug("Unexpected exception")
         errors["base"] = "unknown"
     else:
         return True

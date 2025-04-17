@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from typing import TYPE_CHECKING
 
 from homeassistant.const import (
@@ -19,7 +20,6 @@ from .const import (
     CONF_SERIAL_NUMBER,
     DOMAIN,
     FERNPORTAL_URL,
-    LOGGER,
     VERSION,
 )
 from .coordinator import XthermaDataUpdateCoordinator
@@ -31,6 +31,8 @@ if TYPE_CHECKING:
     from homeassistant.config_entries import ConfigEntry
     from homeassistant.core import HomeAssistant
 
+_LOGGER = logging.getLogger(__name__)
+
 _PLATFORMS = [Platform.SENSOR]
 
 
@@ -39,7 +41,7 @@ async def async_setup_entry(
     entry: ConfigEntry,
 ) -> bool:
     """Initialize integration."""
-    LOGGER.debug("Setup integ…ration")
+    _LOGGER.debug("Setup integration")
 
     # setup global data
     hass.data.setdefault(DOMAIN, {})
@@ -77,10 +79,10 @@ async def async_setup_entry(
     # fresh data (see https://github.com/Xtherma/Xtherma-API/issues/5)
     # We will therefore ignore errors here.
     try:
-        LOGGER.debug("Attempting initial data fetch")
+        _LOGGER.debug("Attempting initial data fetch")
         await xtherma_data.coordinator.async_config_entry_first_refresh()
     except Exception:  # noqa: BLE001
-        LOGGER.debug(
+        _LOGGER.debug(
             "Data fetch failed, probably due to rate limiting. Will try again."
         )
 
@@ -92,18 +94,18 @@ async def async_setup_entry(
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload integration."""
-    LOGGER.debug("Unload integration")
+    _LOGGER.debug("Unload integration")
     return await hass.config_entries.async_unload_platforms(entry, _PLATFORMS)
 
 
 async def async_migrate_entry(_: HomeAssistant, config_entry: ConfigEntry) -> bool:
     """Migrate config entry."""
     if config_entry.version > VERSION:
-        LOGGER.error("Downgrade not supported")
+        _LOGGER.error("Downgrade not supported")
         return False
 
     if config_entry.version < VERSION:
-        LOGGER.debug(
+        _LOGGER.debug(
             "Migrating configuration from version %s.%s",
             config_entry.version,
             config_entry.minor_version,

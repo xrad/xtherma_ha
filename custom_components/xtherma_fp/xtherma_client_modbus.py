@@ -1,13 +1,12 @@
 """Client to access Modbus server on Xtherma FP module."""
 
-import re
+import logging
 from datetime import timedelta
 
 from pymodbus.client import (
     AsyncModbusTcpClient,
 )
 
-from .const import LOGGER
 from .xtherma_client_common import (
     XthermaClient,
     XthermaGeneralError,
@@ -15,6 +14,8 @@ from .xtherma_client_common import (
     XthermaNotConnectedError,
     XthermaTimeoutError,
 )
+
+_LOGGER = logging.getLogger(__name__)
 
 MODBUS_START_ADDRESS = 10000
 MODBUS_NUM_REGISTERS = 46
@@ -41,7 +42,7 @@ class XthermaClientModbus(XthermaClient):
         try:
             result = await self._client.connect()
         except Exception as err:
-            LOGGER.error("Modbus error: %s", err)
+            _LOGGER.exception("Modbus error: %s")
             raise XthermaModbusError from err
         if not result:
             raise XthermaNotConnectedError
@@ -61,10 +62,10 @@ class XthermaClientModbus(XthermaClient):
                 slave=self._address,
             )
         except TimeoutError as err:
-            LOGGER.error("Modbus request timed out")
+            _LOGGER.exception("Modbus request timed out")
             raise XthermaTimeoutError from err
         except Exception as err:
-            LOGGER.error("Modbus error: %s", err)
+            _LOGGER.exception("Modbus error")
             raise XthermaModbusError from err
         if result.isError():
             raise XthermaGeneralError(result.error)
