@@ -234,10 +234,10 @@ class OptionsFlowHandler(OptionsFlow):
         user_input: dict[str, Any] | None = None,  # noqa: ARG002
     ) -> ConfigFlowResult:
         """Manage the options."""
-        connection_type = self.config_entry.data[CONF_CONNECTION]
-        if connection_type == CONF_CONNECTION_RESTAPI:
+        connection = self.config_entry.data.get(CONF_CONNECTION, CONF_CONNECTION_RESTAPI)
+        if connection == CONF_CONNECTION_RESTAPI:
             return await self.async_step_rest_api()
-        if connection_type == CONF_CONNECTION_MODBUSTCP:
+        if connection == CONF_CONNECTION_MODBUSTCP:
             return await self.async_step_modbus_tcp()
 
         raise ConfigError
