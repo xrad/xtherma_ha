@@ -109,9 +109,11 @@ async def test_async_setup_entry_restapi_ok(hass, aioclient_mock):
 
 
 @pytest.mark.asyncio
-async def test_async_setup_entry_restapi_delay(hass, aioclient_mock, caplog):
+async def test_async_setup_entry_restapi_delay(hass, aioclient_mock):
     """Verify config entries for REST API work."""
 
+    # set up mock responses to simulate that initial response is is invalid
+    # and we have to wait for the next refresh
     mock_data = load_json_value_fixture("rest_response.json")
     url = f"{FERNPORTAL_URL}/{MOCK_SERIAL_NUMBER}"
     side_effect = MockLongPollSideEffect()
@@ -131,6 +133,7 @@ async def test_async_setup_entry_restapi_delay(hass, aioclient_mock, caplog):
     )
     entry.add_to_hass(hass)
 
+    # patch code to shorten update interval to 1 second for testing
     with patch("custom_components.xtherma_fp.XthermaClientRest.update_interval", return_value=timedelta(seconds=1)):
         # Call async_setup_entry()
         assert await hass.config_entries.async_setup(entry.entry_id)
@@ -139,7 +142,12 @@ async def test_async_setup_entry_restapi_delay(hass, aioclient_mock, caplog):
         # Verify setup worked
         _verify_entry(hass, entry)
 
+        # Verify sensors are not yet initialized
+        xtherma_data: XthermaData = hass.data[DOMAIN][entry.entry_id]
+        assert not xtherma_data.sensors_initialized
+
+        # wait a bit more than one second for next coordinator update
         await asyncio.sleep(1.5)
 
-        # Verify sensors are initialized
+        # Verify sensors have now been initialized
         _verify_sensors(hass, entry)
