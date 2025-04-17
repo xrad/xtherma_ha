@@ -2,7 +2,6 @@
 
 import asyncio
 import pytest
-import logging
 from homeassistant.data_entry_flow import FlowResultType
 from custom_components.xtherma_fp.const import (
     CONF_CONNECTION,
@@ -50,9 +49,6 @@ async def test_rest_api_bad_arguments(hass):
 @pytest.mark.asyncio
 async def test_rest_api_good_serial_number(hass, aioclient_mock):
     """Test giving an valid data to REST API config flow."""
-    logging.getLogger("homeassistant.custom_components.xtherma_fp").setLevel(
-        logging.DEBUG
-    )
 
     mock_data = load_json_value_fixture("rest_response.json")
     aioclient_mock.get(
@@ -85,9 +81,6 @@ async def test_rest_api_good_serial_number(hass, aioclient_mock):
 @pytest.mark.asyncio
 async def test_rest_error_404(hass, aioclient_mock):
     """Test forcing network errors to REST API config flow."""
-    logging.getLogger("homeassistant.custom_components.xtherma_fp").setLevel(
-        logging.DEBUG
-    )
 
     mock_data = load_json_value_fixture("rest_response.json")
     aioclient_mock.get(
@@ -123,10 +116,6 @@ async def test_rest_error_404(hass, aioclient_mock):
 async def test_rest_error_429(hass, aioclient_mock):
     """Test forcing network errors to REST API config flow."""
 
-    logging.getLogger("homeassistant.custom_components.xtherma_fp").setLevel(
-        logging.DEBUG
-    )
-
     mock_data = load_json_value_fixture("rest_response.json")
     aioclient_mock.get(
         f"{FERNPORTAL_URL}/{MOCK_SERIAL_NUMBER}",
@@ -160,10 +149,6 @@ async def test_rest_error_429(hass, aioclient_mock):
 @pytest.mark.asyncio
 async def test_rest_error_timeout(hass, aioclient_mock):
     """Test forcing network errors to REST API config flow."""
-
-    logging.getLogger("homeassistant.custom_components.xtherma_fp").setLevel(
-        logging.DEBUG
-    )
 
     aioclient_mock.get(
         f"{FERNPORTAL_URL}/{MOCK_SERIAL_NUMBER}", exc=asyncio.exceptions.TimeoutError
