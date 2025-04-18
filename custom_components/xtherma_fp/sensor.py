@@ -129,7 +129,7 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback
 ) -> bool:
     """HA calls this to initialize sensor platform."""
-    xtherma_data: XthermaData = hass.data[DOMAIN][config_entry.entry_id]
+    xtherma_data: XthermaData = config_entry.runtime_data
 
     _LOGGER.debug("Setup sensor platform")
 

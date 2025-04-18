@@ -45,16 +45,14 @@ async def test_async_setup_entry_old(hass, aioclient_mock):
     await hass.async_block_till_done()
 
     # Verify setup worked
-    assert entry.state == ConfigEntryState.LOADED
-    assert DOMAIN in hass.data
-    assert entry.entry_id in hass.data[DOMAIN]
+    _verify_entry(entry)
 
-def _verify_entry(hass: HomeAssistant, entry: ConfigEntry):
-    assert entry.entry_id in hass.data[DOMAIN]
-    assert type(hass.data[DOMAIN][entry.entry_id]) is XthermaData
+def _verify_entry(entry: ConfigEntry):
+    assert isinstance(entry.runtime_data, XthermaData)
+
 
 def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
-    xtherma_data: XthermaData = hass.data[DOMAIN][entry.entry_id]
+    xtherma_data: XthermaData = entry.runtime_data
     assert xtherma_data.sensors_initialized
 
     our_sensors = [
@@ -102,7 +100,7 @@ async def test_async_setup_entry_restapi_ok(hass, aioclient_mock):
     await hass.async_block_till_done()
 
     # Verify setup worked
-    _verify_entry(hass, entry)
+    _verify_entry(entry)
 
     # Verify sensors are initialized
     _verify_sensors(hass, entry)
@@ -140,10 +138,10 @@ async def test_async_setup_entry_restapi_delay(hass, aioclient_mock):
         await hass.async_block_till_done()
 
         # Verify setup worked
-        _verify_entry(hass, entry)
+        _verify_entry(entry)
 
         # Verify sensors are not yet initialized
-        xtherma_data: XthermaData = hass.data[DOMAIN][entry.entry_id]
+        xtherma_data: XthermaData = entry.runtime_data
         assert not xtherma_data.sensors_initialized
 
         # wait a bit more than one second for next coordinator update

@@ -18,7 +18,6 @@ from .const import (
     CONF_CONNECTION,
     CONF_CONNECTION_RESTAPI,
     CONF_SERIAL_NUMBER,
-    DOMAIN,
     FERNPORTAL_URL,
     VERSION,
 )
@@ -43,10 +42,10 @@ async def async_setup_entry(
     """Initialize integration."""
     _LOGGER.debug("Setup integration")
 
-    # setup global data
-    hass.data.setdefault(DOMAIN, {})
+    # setup global data - Note that subclassing ConfigEntry would be nicer for
+    # type safety, but then the MockConfigEntry used in tests would be incompatible.
     xtherma_data = XthermaData()
-    hass.data[DOMAIN][entry.entry_id] = xtherma_data
+    entry.runtime_data = xtherma_data
 
     # create API client connector
     connection = entry.data.get(CONF_CONNECTION, CONF_CONNECTION_RESTAPI)
