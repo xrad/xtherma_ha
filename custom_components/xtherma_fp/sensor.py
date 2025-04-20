@@ -176,7 +176,7 @@ class XthermaBinarySensor(BinarySensorEntity):
         """Return true if the binary sensor is on."""
         if self._coordinator.data:
             raw_value = self._coordinator.data.get(self.entity_description.key, None)
-            if raw_value:
+            if raw_value is not None:
                 return raw_value > 0
         return None
 
