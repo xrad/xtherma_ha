@@ -3,7 +3,6 @@ from datetime import timedelta
 from unittest.mock import patch
 import pytest
 
-from homeassistant.config_entries import ConfigEntryState
 from homeassistant.const import CONF_API_KEY
 
 from pytest_homeassistant_custom_component.common import MockConfigEntry
@@ -75,14 +74,12 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
     assert state.attributes["device_class"] == SensorDeviceClass.ENERGY
     assert state.attributes["unit_of_measurement"] == "kWh"
 
-
 @pytest.mark.asyncio
 async def test_async_setup_entry_restapi_ok(hass, aioclient_mock):
     """Verify config entries for REST API work."""
     mock_data = load_json_value_fixture("rest_response.json")
     url = f"{FERNPORTAL_URL}/{MOCK_SERIAL_NUMBER}"
     aioclient_mock.get(url, json=mock_data)
-
     # Create a mock config entry
     entry = MockConfigEntry(
         domain=DOMAIN,

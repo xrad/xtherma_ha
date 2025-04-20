@@ -159,6 +159,9 @@ async def async_setup_entry(
 class XthermaBinarySensor(BinarySensorEntity):
     """Xtherma Binary Sensor."""
 
+    # keep this for type safe access to custom members
+    xt_description: XtBinarySensorEntityDescription
+
     def __init__(self,
                  coordinator: DataUpdateCoordinator,
                  device_info: DeviceInfo,
@@ -166,6 +169,7 @@ class XthermaBinarySensor(BinarySensorEntity):
         """Class Constructor."""
         self._coordinator = coordinator
         self.entity_description = description
+        self.xt_description = description
         self._attr_device_info = device_info
         self._attr_device_class = description.device_class
         self._attr_unique_id = f"{DOMAIN}_{description.key}"
@@ -180,22 +184,23 @@ class XthermaBinarySensor(BinarySensorEntity):
                 return raw_value > 0
         return None
 
-    """
-    @property
-    def icon(self):
-        if self.state == STATE_ON:
-            return "mdi:on"
-        else:
-            return "mdi:off"
-    """
-
     @property
     def available(self) -> bool:
         """Return True if entity is available."""
         return self._coordinator.last_update_success
 
+    @property
+    def icon(self) -> str | None:
+        """Return the icon to use in the frontend, if any."""
+        if self.xt_description.icon_provider:
+            return self.xt_description.icon_provider(self.is_on)
+        return super().icon
+
 class XthermaSensor(SensorEntity):
     """Xtherma Value Sensor."""
+
+    # keep this for type safe access to custom members
+    xt_description: XtSensorEntityDescription
 
     def __init__(self,
                  coordinator: DataUpdateCoordinator,
@@ -204,6 +209,7 @@ class XthermaSensor(SensorEntity):
         """Class Constructor."""
         self._coordinator = coordinator
         self.entity_description = description
+        self.xt_description = description
         self._attr_device_info = device_info
         self._attr_native_unit_of_measurement = description.native_unit_of_measurement
         self._attr_device_class = description.device_class
@@ -223,3 +229,10 @@ class XthermaSensor(SensorEntity):
     def available(self) -> bool:
         """Return True if entity is available."""
         return self._coordinator.last_update_success
+
+    @property
+    def icon(self) -> str | None:
+        """Return the icon to use in the frontend, if any."""
+        if self.xt_description.icon_provider:
+            return self.xt_description.icon_provider(self.native_value)
+        return super().icon
