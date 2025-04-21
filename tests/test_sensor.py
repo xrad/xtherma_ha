@@ -2,9 +2,14 @@ import pytest
 
 from homeassistant.core import State, HomeAssistant
 from homeassistant.helpers.entity_platform import async_get_platforms
-
+from homeassistant.helpers.translation import async_get_translations
+from homeassistant.const import Platform
 from custom_components.xtherma_fp.const import DOMAIN
 
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+)
+from custom_components.xtherma_fp.sensor_descriptors import SENSOR_DESCRIPTIONS
 async def _find_state(hass: HomeAssistant, id: str) -> State:
     full_id = f"sensor.xtherma_fp_{id}"
     state = hass.states.get(full_id)
@@ -43,6 +48,27 @@ async def test_opmode_sensor_icon(hass, init_integration):
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
     assert entity.icon == "mdi:thermometer-water"
+
+async def test_opmode_sensor_translation(hass, init_integration):
+    """Ensure all enum sensor values are translated."""
+    prefix = f"component.{DOMAIN}.entity.{Platform.SENSOR.value}"
+
+    # collect all sensor state translations
+    translations = await async_get_translations(hass, "en", "entity", [DOMAIN])
+    translation_states = {
+        k for k in translations if k.startswith(prefix) and ".state." in k
+    }
+
+    # collect all options of all enum sensors
+    sensor_options = {
+        f"{prefix}.{entity_description.translation_key}.state.{option}"
+        for entity_description in SENSOR_DESCRIPTIONS
+        if entity_description.device_class == SensorDeviceClass.ENUM
+        for option in entity_description.options
+    }
+
+    assert sensor_options == translation_states
+
 
 async def test_sgready_sensor_icon(hass, init_integration):
     platforms = async_get_platforms(hass, DOMAIN)

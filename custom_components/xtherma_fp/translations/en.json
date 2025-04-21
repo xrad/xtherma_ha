@@ -57,5 +57,18 @@
         }
       }
     }
+  },
+  "entity": {
+    "sensor": {
+      "mode_3": {
+        "state": {
+          "standby": "stand-by",
+          "heating": "heating",
+          "cooling": "cooling",
+          "water": "warm water",
+          "auto": "automatic"
+        }
+      }
+    }
   }
 }

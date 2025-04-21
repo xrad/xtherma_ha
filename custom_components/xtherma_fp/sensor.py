@@ -8,7 +8,10 @@ from homeassistant.components.binary_sensor import (
     BinarySensorEntity,
 )
 from homeassistant.components.persistent_notification import async_create
-from homeassistant.components.sensor import SensorEntity
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+    SensorEntity,
+)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers import device_registry
@@ -43,6 +46,8 @@ def __build_sensor(
     if isinstance(desc, XtBinarySensorEntityDescription):
         return XthermaBinarySensor(coordinator, device_info, desc)
     if isinstance(desc, XtSensorEntityDescription):
+        if desc.device_class == SensorDeviceClass.ENUM:
+            return XthermaEnumSensor(coordinator, device_info, desc)
         return XthermaSensor(coordinator, device_info, desc)
     _LOGGER.error("Unsupported EntityDescription")
     return None
@@ -236,3 +241,21 @@ class XthermaSensor(SensorEntity):
         if self.xt_description.icon_provider:
             return self.xt_description.icon_provider(self.native_value)
         return super().icon
+
+class XthermaEnumSensor(XthermaSensor):
+    """Xtherma Enum Value Sensor."""
+
+    @property
+    def native_value(self) -> StateType | date | datetime | Decimal:
+        """Return the value reported by the sensor."""
+        if self._coordinator.data:
+            value = self._coordinator.data.get(self.entity_description.key, None)
+            if not isinstance(value, (int, float)):
+                return None
+            options = self.entity_description.options
+            if options is None:
+                return None
+            index = int(value)
+            if 0 <= index < len(options):
+                return options[index]
+        return None

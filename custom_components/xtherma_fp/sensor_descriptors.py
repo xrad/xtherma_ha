@@ -56,6 +56,8 @@ def _pump_icon(state: bool | None) -> str:
         return "mdi:pump"
     return "mdi:pump-off"
 
+_opmode_options = ["standby", "heating", "cooling", "water", "auto" ]
+
 _opmode_icon_map = {
     0: "mdi:power-standby",
     1: "mdi:heating-coil",
@@ -65,9 +67,12 @@ _opmode_icon_map = {
 }
 
 def _operation_mode_icon(state: StateType | date | datetime | Decimal) -> str:
-    if isinstance(state, (int, float, Decimal)):
-        index = int(state)
-        return _opmode_icon_map.get(index, "mdi:cogs")
+    if isinstance(state, str):
+        try:
+            index = _opmode_options.index(state)
+            return _opmode_icon_map.get(index, "mdi:cogs")
+        except ValueError:
+            pass
     return "mdi:cogs"
 
 _sgready_icon_map = {
@@ -333,8 +338,10 @@ SENSOR_DESCRIPTIONS = [
     XtSensorEntityDescription(
         key="mode_3",
         name="Betriebsmodus",
-        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.ENUM,
+        options=_opmode_options,
         icon_provider=_operation_mode_icon,
+        translation_key="mode_3",
     ),
     XtSensorEntityDescription(
         key="ta8",
