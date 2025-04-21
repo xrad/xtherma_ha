@@ -170,6 +170,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfFrequency.HERTZ,
         device_class=SensorDeviceClass.FREQUENCY,
         state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=0,
         icon=_icon_frequency,
     ),
     XtSensorEntityDescription(
