@@ -68,6 +68,15 @@
           "water": "Warmwasser",
           "auto": "Automatikbetrieb"
         }
+      },
+      "sgready": {
+        "state": {
+          "off": "Nicht aktiviert",
+          "normal": "Normalbetrieb",
+          "block": "Sperre",
+          "raise": "Temperaturanhebung",
+          "start": "Anlaufbefehl"
+        }
       }
     }
   }

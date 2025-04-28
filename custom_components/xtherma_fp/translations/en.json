@@ -68,6 +68,15 @@
           "water": "warm water",
           "auto": "automatic"
         }
+      },
+      "sgready": {
+        "state": {
+          "off": "Not active",
+          "normal": "Normal operation",
+          "block": "Blocking",
+          "raise": "Raise temperatures",
+          "start": "Start"
+        }
       }
     }
   }

@@ -78,19 +78,47 @@ def _operation_mode_icon(state: StateType | date | datetime | Decimal) -> str:
     return "mdi:cogs"
 
 
+"""
+see also https://www.waermepumpe.de/normen-technik/sg-ready/
+0: Nicht aktiviert
+
+1: Betriebszustand 2: Normalbetrieb
+   Klemme 0/0
+   Anteilige Wärmespeicher-Füllung für die maximal zweistündige EVU-Sperre
+
+2: Betriebszustand 1: Sperre
+   Klemme 1/0
+   Maximal zwei Stunden „harte“ Sperrzeit
+
+3: Betriebszustand 3: Temperaturen anheben
+   Klemme 0/1
+   Verstärkter Betrieb für Raumheizung und Warmwasserbereitung
+
+4: Betriebszustand 4: Anlaufbefehl
+   Klemme 1/1
+   Variante 1: Die Wärmepumpe (Verdichter) wird aktiv eingeschaltet.
+   Variante 2: Die Wärmepumpe (Verdichter und elektrische Zusatzheizungen) wird aktiv
+               eingeschaltet, optional: höhere Temperatur in den Wärmespeichern
+"""
+
+_sgready_options = ["off", "normal", "block", "raise", "start"]
+
 _sgready_icon_map = {
-    0: "mdi:circle-outline",  # "Kein Eingriff
-    1: "mdi:cancel",  # Sperre
-    2: "mdi:circle",  # Normalbetrieb
-    3: "mdi:thermometer-chevron-up",  # Temperaturen anheben
-    4: "mdi:ray-start-arrow",  # Anlaufbefehl
+    0: "mdi:cancel",  # "Kein Eingriff
+    1: "mdi:circle",  # Normalbetrieb
+    2: "mdi:circle-double",  # Sperre
+    3: "mdi:thermometer-plus",  # Temperaturen anheben
+    4: "mdi:home-thermometer",  # Anlaufbefehl
 }
 
 
 def _sgready_icon(state: StateType | date | datetime | Decimal) -> str:
-    if isinstance(state, (int, float, Decimal)):
-        index = int(state)
-        return _sgready_icon_map.get(index, "mdi:cogs")
+    if isinstance(state, str):
+        try:
+            index = _sgready_options.index(state)
+            return _sgready_icon_map.get(index, "mdi:cogs")
+        except ValueError:
+            pass
     return "mdi:cogs"
 
 
@@ -363,8 +391,10 @@ SENSOR_DESCRIPTIONS = [
     XtSensorEntityDescription(
         key="sg",
         name="SG-Ready Status",
-        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.ENUM,
+        options=_sgready_options,
         icon_provider=_sgready_icon,
+        translation_key="sgready",
     ),
     XtSensorEntityDescription(
         key="day_hp_out_h",

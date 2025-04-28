@@ -84,4 +84,4 @@ async def test_sgready_sensor_icon(hass, init_integration):
     state = await _find_state(hass, "sg")
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
-    assert entity.icon == "mdi:circle-outline"
+    assert entity.icon == "mdi:cancel"
