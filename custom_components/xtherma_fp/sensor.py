@@ -37,12 +37,13 @@ from .xtherma_data import XthermaData
 
 _LOGGER = logging.getLogger(__name__)
 
+
 # Create a sensor entity based on description.
 def __build_sensor(
-        desc: EntityDescription,
-        coordinator: XthermaDataUpdateCoordinator,
-        device_info: DeviceInfo
-        ) -> Entity | None:
+    desc: EntityDescription,
+    coordinator: XthermaDataUpdateCoordinator,
+    device_info: DeviceInfo,
+) -> Entity | None:
     if isinstance(desc, XtBinarySensorEntityDescription):
         return XthermaBinarySensor(coordinator, device_info, desc)
     if isinstance(desc, XtSensorEntityDescription):
@@ -52,18 +53,19 @@ def __build_sensor(
     _LOGGER.error("Unsupported EntityDescription")
     return None
 
+
 # Create and register sensor entities based on coordinator.data.
 # Call site must ensure there is data and sensors are not already
 # registerd.
 def _initialize_sensors(
-        xtherma_data: XthermaData,
-        async_add_entities: AddEntitiesCallback
-        ) -> None:
-    assert(not xtherma_data.sensors_initialized)  # noqa: S101
+    xtherma_data: XthermaData,
+    async_add_entities: AddEntitiesCallback,
+) -> None:
+    assert not xtherma_data.sensors_initialized  # noqa: S101
 
     coordinator = xtherma_data.coordinator
 
-    assert(coordinator is not None)  # noqa: S101
+    assert coordinator is not None  # noqa: S101
 
     _LOGGER.debug(f"Initialize {len(coordinator.data)} sensors")  # noqa: G004
     device_info = DeviceInfo(
@@ -73,7 +75,7 @@ def _initialize_sensors(
         model=xtherma_data.serial_fp,
     )
 
-    sensors = [ ]
+    sensors = []
     for key in coordinator.data:
         matching_descs_it = (
             d for d in SENSOR_DESCRIPTIONS if d.key.lower() == key.lower()
@@ -91,11 +93,12 @@ def _initialize_sensors(
 
     xtherma_data.sensors_initialized = True
 
+
 # Initialize sensor entities if there is valid data in coordinator.
 def _try_initialize_sensors(
     hass: HomeAssistant,
     xtherma_data: XthermaData,
-    async_add_entities: AddEntitiesCallback
+    async_add_entities: AddEntitiesCallback,
 ) -> None:
     coordinator = xtherma_data.coordinator
     assert coordinator is not None  # noqa: S101
@@ -106,13 +109,14 @@ def _try_initialize_sensors(
         async_create(
             hass,
             "Xtherma",
-            "Data coordinator has no data yet, wait for next refresh"
+            "Data coordinator has no data yet, wait for next refresh",
         )
+
 
 def _delete_legacy_device(hass: HomeAssistant) -> None:
     _LOGGER.debug("Looking for legacy device in device registry")
     dev_reg = device_registry.async_get(hass)
-    id_to_delete: str|None = None
+    id_to_delete: str | None = None
     for device in dev_reg.devices.values():
         if device.manufacturer == MANUFACTURER and len(device.identifiers) == 1:
             (id1, id2) = device.identifiers.copy().pop()
@@ -128,10 +132,11 @@ def _delete_legacy_device(hass: HomeAssistant) -> None:
     if id_to_delete:
         dev_reg.async_remove_device(id_to_delete)
 
+
 async def async_setup_entry(
     hass: HomeAssistant,
     config_entry: ConfigEntry,
-    async_add_entities: AddEntitiesCallback
+    async_add_entities: AddEntitiesCallback,
 ) -> bool:
     """HA calls this to initialize sensor platform."""
     xtherma_data: XthermaData = config_entry.runtime_data
@@ -161,16 +166,19 @@ async def async_setup_entry(
 
     return True
 
+
 class XthermaBinarySensor(BinarySensorEntity):
     """Xtherma Binary Sensor."""
 
     # keep this for type safe access to custom members
     xt_description: XtBinarySensorEntityDescription
 
-    def __init__(self,
-                 coordinator: DataUpdateCoordinator,
-                 device_info: DeviceInfo,
-                 description: XtBinarySensorEntityDescription) -> None:
+    def __init__(
+        self,
+        coordinator: DataUpdateCoordinator,
+        device_info: DeviceInfo,
+        description: XtBinarySensorEntityDescription,
+    ) -> None:
         """Class Constructor."""
         self._coordinator = coordinator
         self.entity_description = description
@@ -201,16 +209,19 @@ class XthermaBinarySensor(BinarySensorEntity):
             return self.xt_description.icon_provider(self.is_on)
         return super().icon
 
+
 class XthermaSensor(SensorEntity):
     """Xtherma Value Sensor."""
 
     # keep this for type safe access to custom members
     xt_description: XtSensorEntityDescription
 
-    def __init__(self,
-                 coordinator: DataUpdateCoordinator,
-                 device_info: DeviceInfo,
-                 description: XtSensorEntityDescription) -> None:
+    def __init__(
+        self,
+        coordinator: DataUpdateCoordinator,
+        device_info: DeviceInfo,
+        description: XtSensorEntityDescription,
+    ) -> None:
         """Class Constructor."""
         self._coordinator = coordinator
         self.entity_description = description
@@ -241,6 +252,7 @@ class XthermaSensor(SensorEntity):
         if self.xt_description.icon_provider:
             return self.xt_description.icon_provider(self.native_value)
         return super().icon
+
 
 class XthermaEnumSensor(XthermaSensor):
     """Xtherma Enum Value Sensor."""

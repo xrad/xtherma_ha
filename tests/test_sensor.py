@@ -10,13 +10,17 @@ from homeassistant.components.sensor import (
     SensorDeviceClass,
 )
 from custom_components.xtherma_fp.sensor_descriptors import SENSOR_DESCRIPTIONS
+
+
 async def _find_state(hass: HomeAssistant, id: str) -> State:
     full_id = f"sensor.xtherma_fp_{id}"
     state = hass.states.get(full_id)
     assert state is not None
     return state
 
-#def _get_entity(hass: HomeAssistant, state: State) -> Entity:
+
+# def _get_entity(hass: HomeAssistant, state: State) -> Entity:
+
 
 @pytest.mark.asyncio
 async def test_binary_sensor_state(hass, init_integration):
@@ -24,6 +28,7 @@ async def test_binary_sensor_state(hass, init_integration):
     assert pk.state == "off"
     pww = await _find_state(hass, "pww")
     assert pww.state == "on"
+
 
 async def test_binary_sensor_icon(hass, init_integration):
     platforms = async_get_platforms(hass, DOMAIN)
@@ -40,6 +45,7 @@ async def test_binary_sensor_icon(hass, init_integration):
     assert e_pww is not None
     assert e_pww.icon == "mdi:pump"
 
+
 async def test_opmode_sensor_icon(hass, init_integration):
     platforms = async_get_platforms(hass, DOMAIN)
     assert len(platforms) == 1
@@ -48,6 +54,7 @@ async def test_opmode_sensor_icon(hass, init_integration):
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
     assert entity.icon == "mdi:thermometer-water"
+
 
 async def test_opmode_sensor_translation(hass, init_integration):
     """Ensure all enum sensor values are translated."""

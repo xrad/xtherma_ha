@@ -56,7 +56,8 @@ def _pump_icon(state: bool | None) -> str:
         return "mdi:pump"
     return "mdi:pump-off"
 
-_opmode_options = ["standby", "heating", "cooling", "water", "auto" ]
+
+_opmode_options = ["standby", "heating", "cooling", "water", "auto"]
 
 _opmode_icon_map = {
     0: "mdi:power-standby",
@@ -65,6 +66,7 @@ _opmode_icon_map = {
     3: "mdi:thermometer-water",
     4: "mdi:brightness-auto",
 }
+
 
 def _operation_mode_icon(state: StateType | date | datetime | Decimal) -> str:
     if isinstance(state, str):
@@ -75,6 +77,7 @@ def _operation_mode_icon(state: StateType | date | datetime | Decimal) -> str:
             pass
     return "mdi:cogs"
 
+
 _sgready_icon_map = {
     0: "mdi:circle-outline",  # "Kein Eingriff
     1: "mdi:cancel",  # Sperre
@@ -83,11 +86,13 @@ _sgready_icon_map = {
     4: "mdi:ray-start-arrow",  # Anlaufbefehl
 }
 
+
 def _sgready_icon(state: StateType | date | datetime | Decimal) -> str:
     if isinstance(state, (int, float, Decimal)):
         index = int(state)
         return _sgready_icon_map.get(index, "mdi:cogs")
     return "mdi:cogs"
+
 
 _icon_electric_power = "mdi:lightning-bolt"
 _icon_thermal_power = "mdi:heat-wave"
@@ -227,7 +232,9 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_temperature,
     ),
     XtBinarySensorEntityDescription(
-        key="evu", name="EVU Status", icon_provider=_electric_switch_icon
+        key="evu",
+        name="EVU Status",
+        icon_provider=_electric_switch_icon,
     ),
     XtBinarySensorEntityDescription(
         key="pk",

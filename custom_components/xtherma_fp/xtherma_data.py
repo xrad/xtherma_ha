@@ -6,7 +6,7 @@ from .coordinator import XthermaDataUpdateCoordinator
 class XthermaData:
     """Global data for integration."""
 
-    coordinator: XthermaDataUpdateCoordinator|None
+    coordinator: XthermaDataUpdateCoordinator | None
     sensors_initialized: bool
     serial_fp: str
 
@@ -15,4 +15,3 @@ class XthermaData:
         self.coordinator = None
         self.sensors_initialized = False
         self.serial_fp = "()"
-

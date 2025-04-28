@@ -21,9 +21,8 @@ async def test_options_flow_rest_api_ok(hass, init_integration):
     assert entry.state is ConfigEntryState.LOADED
 
     result = await hass.config_entries.options.async_init(
-        entry.entry_id,
-        context={"source": "test"}, data=None
-        )
+        entry.entry_id, context={"source": "test"}, data=None
+    )
     assert result["type"] == FlowResultType.FORM
 
     result = await hass.config_entries.options.async_configure(

@@ -82,7 +82,7 @@ async def async_setup_entry(
         await xtherma_data.coordinator.async_config_entry_first_refresh()
     except Exception:  # noqa: BLE001
         _LOGGER.debug(
-            "Data fetch failed, probably due to rate limiting. Will try again."
+            "Data fetch failed, probably due to rate limiting. Will try again.",
         )
 
     # initialize platforms

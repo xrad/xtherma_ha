@@ -46,7 +46,10 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
     _client: XthermaClient
 
     def __init__(
-        self, hass: HomeAssistant, config_entry: ConfigEntry, client: XthermaClient
+        self,
+        hass: HomeAssistant,
+        config_entry: ConfigEntry,
+        client: XthermaClient,
     ) -> None:
         """Class constructor."""
         self._client = client
@@ -67,7 +70,7 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         factor = _FACTORS.get(inputfactor, 1.0)
         return factor * value
 
-    async def _async_update_data(self) -> dict[str, float]:
+    async def _async_update_data(self) -> dict[str, float]:  # noqa: C901
         result: dict[str, float] = {}
         try:
             if not await self._client.is_connected():
@@ -91,7 +94,11 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
                     unit = entry[KEY_ENTRY_UNIT]
                     _LOGGER.debug(
                         'key="%s" raw="%s" value="%s" unit="%s" inputfactor="%s"',
-                        key, rawvalue, value, unit, inputfactor
+                        key,
+                        rawvalue,
+                        value,
+                        unit,
+                        inputfactor,
                     )
         except XthermaRateLimitError as err:
             msg = "Error communicating with API, rate limiting"
@@ -112,6 +119,8 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
             msg = "Error communicating with API, unknown reason"
             raise UpdateFailed(msg) from err
         _LOGGER.debug(
-            "coordinator processed %d/%d telemetry values", len(result), len(telemetry)
+            "coordinator processed %d/%d telemetry values",
+            len(result),
+            len(telemetry),
         )
         return result

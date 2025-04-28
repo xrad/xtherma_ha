@@ -20,6 +20,7 @@ from tests.const import MOCK_API_KEY, MOCK_SERIAL_NUMBER
 def auto_enable_custom_integrations(enable_custom_integrations):
     yield
 
+
 @pytest.fixture
 async def init_integration(hass, aioclient_mock) -> MockConfigEntry:
     mock_data = load_json_value_fixture("rest_response.json")

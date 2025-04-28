@@ -16,11 +16,16 @@ from .xtherma_client_common import (
 
 _LOGGER = logging.getLogger(__name__)
 
+
 class XthermaClientRest(XthermaClient):
     """REST API access client."""
 
     def __init__(
-        self, url: str, api_key: str, serial_number: str, session: aiohttp.ClientSession
+        self,
+        url: str,
+        api_key: str,
+        serial_number: str,
+        session: aiohttp.ClientSession,
     ) -> None:
         """Class constructor."""
         self._url = f"{url}/{serial_number}"

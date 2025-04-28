@@ -7,7 +7,13 @@ from homeassistant.const import CONF_API_KEY
 
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from custom_components.xtherma_fp.const import CONF_CONNECTION, CONF_CONNECTION_RESTAPI, CONF_SERIAL_NUMBER, DOMAIN, FERNPORTAL_URL
+from custom_components.xtherma_fp.const import (
+    CONF_CONNECTION,
+    CONF_CONNECTION_RESTAPI,
+    CONF_SERIAL_NUMBER,
+    DOMAIN,
+    FERNPORTAL_URL,
+)
 from pytest_homeassistant_custom_component.common import load_json_value_fixture
 from pytest_homeassistant_custom_component.test_util.aiohttp import (
     MockLongPollSideEffect,
@@ -46,6 +52,7 @@ async def test_async_setup_entry_old(hass, aioclient_mock):
     # Verify setup worked
     _verify_entry(entry)
 
+
 def _verify_entry(entry: ConfigEntry):
     assert isinstance(entry.runtime_data, XthermaData)
 
@@ -55,7 +62,8 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
     assert xtherma_data.sensors_initialized
 
     our_sensors = [
-        state for state in hass.states.async_all("sensor")
+        state
+        for state in hass.states.async_all("sensor")
         if state.entity_id.startswith("sensor.xtherma_fp")
     ]
     assert len(our_sensors) == 46
@@ -68,11 +76,12 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
     assert state.attributes["unit_of_measurement"] == "°C"
 
     # check last sensor state
-    state = our_sensors[len(our_sensors)-1]
+    state = our_sensors[len(our_sensors) - 1]
     assert state.entity_id == "sensor.xtherma_fp_day_backup6_in_h"
     assert state.state == "0.0"
     assert state.attributes["device_class"] == SensorDeviceClass.ENERGY
     assert state.attributes["unit_of_measurement"] == "kWh"
+
 
 @pytest.mark.asyncio
 async def test_async_setup_entry_restapi_ok(hass, aioclient_mock):
@@ -129,7 +138,10 @@ async def test_async_setup_entry_restapi_delay(hass, aioclient_mock):
     entry.add_to_hass(hass)
 
     # patch code to shorten update interval to 1 second for testing
-    with patch("custom_components.xtherma_fp.XthermaClientRest.update_interval", return_value=timedelta(seconds=1)):
+    with patch(
+        "custom_components.xtherma_fp.XthermaClientRest.update_interval",
+        return_value=timedelta(seconds=1),
+    ):
         # Call async_setup_entry()
         assert await hass.config_entries.async_setup(entry.entry_id)
         await hass.async_block_till_done()

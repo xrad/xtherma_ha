@@ -15,6 +15,7 @@ class XthermaRateLimitError(Exception):
         """Class constructor."""
         super().__init__("API is busy")
 
+
 class XthermaGeneralError(Exception):
     """Exception indicating a general error."""
 
@@ -23,6 +24,7 @@ class XthermaGeneralError(Exception):
         super().__init__("General error")
         self.code = code
 
+
 class XthermaTimeoutError(Exception):
     """Exception indicating a communication timeout."""
 
@@ -30,11 +32,16 @@ class XthermaTimeoutError(Exception):
         """Class constructor."""
         super().__init__("timeout")
 
+
 class XthermaClient:
     """REST API access client."""
 
     def __init__(
-        self, url: str, api_key: str, serial_number: str, session: aiohttp.ClientSession
+        self,
+        url: str,
+        api_key: str,
+        serial_number: str,
+        session: aiohttp.ClientSession,
     ) -> None:
         """Class constructor."""
         self._url = f"{url}/{serial_number}"
