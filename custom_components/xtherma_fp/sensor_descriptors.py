@@ -242,6 +242,7 @@ SENSOR_DESCRIPTIONS = [
         name="[LD1] Lüfter 1 Drehzahl",
         native_unit_of_measurement=REVOLUTIONS_PER_MINUTE,
         state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=0,
         icon=_icon_fan,
     ),
     XtSensorEntityDescription(
@@ -249,6 +250,7 @@ SENSOR_DESCRIPTIONS = [
         name="[LD2] Lüfter 2 Drehzahl",
         native_unit_of_measurement=REVOLUTIONS_PER_MINUTE,
         state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=0,
         icon=_icon_fan,
     ),
     XtSensorEntityDescription(
