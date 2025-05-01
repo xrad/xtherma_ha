@@ -15,7 +15,6 @@ from pytest_homeassistant_custom_component.common import load_json_value_fixture
 from tests.const import MOCK_API_KEY, MOCK_SERIAL_NUMBER
 
 
-@pytest.mark.asyncio
 async def test_rest_api_bad_arguments(hass):
     """Test giving bad config dat to REST API config flow."""
 
@@ -46,7 +45,6 @@ async def test_rest_api_bad_arguments(hass):
     assert result["errors"] == {"base": "bad_arguments"}
 
 
-@pytest.mark.asyncio
 async def test_rest_api_good_serial_number(hass, aioclient_mock):
     """Test giving an valid data to REST API config flow."""
 
@@ -78,7 +76,6 @@ async def test_rest_api_good_serial_number(hass, aioclient_mock):
     assert result["type"] is FlowResultType.CREATE_ENTRY
 
 
-@pytest.mark.asyncio
 async def test_rest_error_404(hass, aioclient_mock):
     """Test forcing network errors to REST API config flow."""
 
@@ -112,7 +109,6 @@ async def test_rest_error_404(hass, aioclient_mock):
     assert result["errors"] == {"base": "unknown"}
 
 
-@pytest.mark.asyncio
 async def test_rest_error_429(hass, aioclient_mock):
     """Test forcing network errors to REST API config flow."""
 
@@ -146,7 +142,6 @@ async def test_rest_error_429(hass, aioclient_mock):
     assert result["errors"] == {"base": "rate_limit"}
 
 
-@pytest.mark.asyncio
 async def test_rest_error_timeout(hass, aioclient_mock):
     """Test forcing network errors to REST API config flow."""
 

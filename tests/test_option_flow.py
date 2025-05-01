@@ -13,7 +13,6 @@ from homeassistant.config_entries import (
 )
 
 
-@pytest.mark.asyncio
 async def test_options_flow_rest_api_ok(hass, init_integration):
     """Test giving an valid data to REST API config flow."""
 

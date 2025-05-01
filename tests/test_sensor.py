@@ -22,7 +22,6 @@ async def _find_state(hass: HomeAssistant, id: str) -> State:
 # def _get_entity(hass: HomeAssistant, state: State) -> Entity:
 
 
-@pytest.mark.asyncio
 async def test_binary_sensor_state(hass, init_integration):
     pk = await _find_state(hass, "pk")
     assert pk.state == "off"

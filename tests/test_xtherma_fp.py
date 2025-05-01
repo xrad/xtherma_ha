@@ -27,7 +27,6 @@ from homeassistant.core import HomeAssistant
 from homeassistant.config_entries import ConfigEntry
 
 
-@pytest.mark.asyncio
 async def test_async_setup_entry_old(hass, aioclient_mock):
     """Verify old config entries without CONF_CONNECTION work."""
     mock_data = load_json_value_fixture("rest_response.json")
@@ -83,7 +82,6 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
     assert state.attributes["unit_of_measurement"] == "kWh"
 
 
-@pytest.mark.asyncio
 async def test_async_setup_entry_restapi_ok(hass, aioclient_mock):
     """Verify config entries for REST API work."""
     mock_data = load_json_value_fixture("rest_response.json")
@@ -112,7 +110,6 @@ async def test_async_setup_entry_restapi_ok(hass, aioclient_mock):
     _verify_sensors(hass, entry)
 
 
-@pytest.mark.asyncio
 async def test_async_setup_entry_restapi_delay(hass, aioclient_mock):
     """Verify config entries for REST API work."""
 
