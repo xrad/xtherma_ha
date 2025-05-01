@@ -60,7 +60,95 @@
   },
   "entity": {
     "sensor": {
+      "tvl": {
+        "name": "[TVL] Flow temperature"
+      },
+      "trl": {
+        "name": "[TRL] Return temperature"
+      },
+      "tw": {
+        "name": "[TW] Hot water temperature"
+      },
+      "tk": {
+        "name": "[TK] Heating / Cooling temperature"
+      },
+      "tk1": {
+        "name": "[TK1] Circuit 1 temperature"
+      },
+      "tk2": {
+        "name": "[TK2] Circuit 2 temperature"
+      },
+      "vf": {
+        "name": "Compressor frequency"
+      },
+      "ta": {
+        "name": "[TA] Outdoor temperature"
+      },
+      "ta1": {
+        "name": "[TA1] Outdoor temperature average (1h)"
+      },
+      "ta4": {
+        "name": "[TA4] Outdoor temperature average (4h)"
+      },
+      "ta24": {
+        "name": "[TA24] Outdoor temperature average (24h)"
+      },
+      "ld1": {
+        "name": "[LD1] Fan 1 speed"
+      },
+      "ld2": {
+        "name": "[LD2] Fan 2 speed"
+      },
+      "tr": {
+        "name": "[TR] Room temperature"
+      },
+      "evu": {
+        "name": "EVU status"
+      },
+      "pk": {
+        "name": "[PK] Circulation pump enabled"
+      },
+      "pk1": {
+        "name": "[PK1] Circulation pump circuit 1 enabled"
+      },
+      "pk2": {
+        "name": "[PK2] Circulation pump circuit 2 enabled"
+      },
+      "pww": {
+        "name": "[PWW] Circulation pump hot water enabled"
+      },
+      "hw_target": {
+        "name": "Target domestic hot water production"
+      },
+      "h_target": {
+        "name": "Target heating operation"
+      },
+      "c_target": {
+        "name": "Target cooling operation"
+      },
+      "in_hp": {
+        "name": "Power consumption heat pump (electric)"
+      },
+      "v": {
+        "name": "[V] Volume flow"
+      },
+      "out_hp": {
+        "name": "Heat output heat pump (thermal)"
+      },
+      "efficiency_hp": {
+        "name": "Coefficient of performance (COP) heat pump"
+      },
+      "efficiency_total": {
+        "name": "Overall system COP (incl. auxiliary heating)"
+      },
+      "in_backup": {
+        "name": "Power consumption auxiliary/emergency heating (electric)"
+      },
+      "out_backup": {
+        "name": "Heat output auxiliary/emergency heating (thermal)"
+      },
       "mode_3": {
+        "name": "Operating mode",
         "state": {
           "standby": "stand-by",
           "heating": "heating",
@@ -69,14 +157,60 @@
           "auto": "automatic"
         }
       },
-      "sgready": {
+      "ta8": {
+        "name": "[TA8] Outdoor temperature average (8h)"
+      },
+      "sg": {
+        "name": "SG-Ready Status",
         "state": {
-          "off": "Not active",
-          "normal": "Normal operation",
-          "block": "Blocking",
-          "raise": "Raise temperatures",
-          "start": "Start"
+          "off": "not active",
+          "normal": "normal operation",
+          "block": "blocking",
+          "raise": "raise temperatures",
+          "start": "start"
         }
+      },
+      "day_hp_out_h": {
+        "name": "Daily heating operation thermal output"
+      },
+      "day_hp_out_c": {
+        "name": "Daily cooling operation thermal output"
+      },
+      "day_hp_out_hw": {
+        "name": "Daily hot water operation thermal output"
+      },
+      "day_backup3_out_h": {
+        "name": "Daily heating auxiliary stage 1 (3 kW) thermal output"
+      },
+      "day_backup6_out_h": {
+        "name": "Daily heating auxiliary stage 2 (6 kW) thermal output"
+      },
+      "day_backup6_out_hw": {
+        "name": "Daily DHW auxiliary stage 2 (6 kW) thermal output"
+      },
+      "day_backup3_out_hw": {
+        "name": "Daily DHW auxiliary stage 1 (3 kW) thermal output"
+      },
+      "day_hp_in_h": {
+        "name": "Daily heating operation electric power consumption"
+      },
+      "day_hp_in_c": {
+        "name": "Daily cooling operation electric power consumption"
+      },
+      "day_hp_in_hw": {
+        "name": "Daily DHW operation electric power consumption"
+      },
+      "day_backup3_in_hw": {
+        "name": "Daily DHW auxiliary stage 1 (3 kW) electric power consumption"
+      },
+      "day_backup6_in_hw": {
+        "name": "Daily DHW auxiliary stage 2 (6 kW) electric power consumption"
+      },
+      "day_backup3_in_h": {
+        "name": "Daily heating auxiliary stage 1 (3 kW) electric power consumption"
+      },
+      "day_backup6_in_h": {
+        "name": "Daily heating auxiliary stage 2 (6 kW) electric power consumption"
       }
     }
   }

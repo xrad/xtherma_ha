@@ -60,7 +60,95 @@
   },
   "entity": {
     "sensor": {
+      "tvl": {
+        "name": "[TVL] Vorlauftemperatur"
+      },
+      "trl": {
+        "name": "[TRL] Rücklauftemperatur"
+      },
+      "tw": {
+        "name": "[TW] Warmwassertemperatur"
+      },
+      "tk": {
+        "name": "[TK] Heiz-/ Kühltemperatur"
+      },
+      "tk1": {
+        "name": "[TK1] Kreis 1 Temperatur"
+      },
+      "tk2": {
+        "name": "[TK2] Kreis 2 Temperatur"
+      },
+      "vf": {
+        "name": "Verdichter Frequenz"
+      },
+      "ta": {
+        "name": "[TA] Außentemperatur"
+      },
+      "ta1": {
+        "name": "[TA1] Außentemperatur Mittelwert 1h"
+      },
+      "ta4": {
+        "name": "[TA4] Außentemperatur Mittelwert 4h"
+      },
+      "ta24": {
+        "name": "[TA24] Außentemperatur Mittelwert 24h"
+      },
+      "ld1": {
+        "name": "[LD1] Lüfter 1 Drehzahl"
+      },
+      "ld2": {
+        "name": "[LD2] Lüfter 2 Drehzahl"
+      },
+      "tr": {
+        "name": "[TR] Raumtemperatur"
+      },
+      "evu": {
+        "name": "EVU Status"
+      },
+      "pk": {
+        "name": "[PK] Umwälzpumpe eingeschaltet"
+      },
+      "pk1": {
+        "name": "[PK1] Umwälzpumpe Kreis 1 eingeschaltet"
+      },
+      "pk2": {
+        "name": "[PK2] Umwälzpumpe Kreis 2 eingeschaltet"
+      },
+      "pww": {
+        "name": "[PWW] Zirkulationspumpe Warmwasser eingeschaltet"
+      },
+      "hw_target": {
+        "name": "Sollwert Warmwasserbereitung"
+      },
+      "h_target": {
+        "name": "Sollwert Heizbetrieb"
+      },
+      "c_target": {
+        "name": "Sollwert Kühlbetrieb"
+      },
+      "in_hp": {
+        "name": "Leistungsaufnahme Wärmepumpe (elektrisch)"
+      },
+      "v": {
+        "name": "[V] Volumenstrom"
+      },
+      "out_hp": {
+        "name": "Leistungsabgabe Wärmepumpe (thermisch)"
+      },
+      "efficiency_hp": {
+        "name": "Leistungszahl Wärmepumpe"
+      },
+      "efficiency_total": {
+        "name": "Leistungszahl Gesamtsystem (inkl. Zusatzheizing)"
+      },
+      "in_backup": {
+        "name": "Leistungsaufnahme Zusatz-/Notheizung (elektrisch)"
+      },
+      "out_backup": {
+        "name": "Leistungsabgabe Zusatz-/Notheizung (thermisch)"
+      },
       "mode_3": {
+        "name": "Betriebsmodus",
         "state": {
           "standby": "Standby",
           "heating": "Heizbetrieb",
@@ -69,7 +157,11 @@
           "auto": "Automatikbetrieb"
         }
       },
-      "sgready": {
+      "ta8": {
+        "name": "[TA8] Außentemperatur Mittelwert 8h"
+      },
+      "sg": {
+        "name": "SG-Ready Status",
         "state": {
           "off": "Nicht aktiviert",
           "normal": "Normalbetrieb",
@@ -77,6 +169,48 @@
           "raise": "Temperaturanhebung",
           "start": "Anlaufbefehl"
         }
+      },
+      "day_hp_out_h": {
+        "name": "Tag Heizbetrieb thermische Leistungsabgabe"
+      },
+      "day_hp_out_c": {
+        "name": "Tag Kühlbetrieb thermische Leistungsabgabe"
+      },
+      "day_hp_out_hw": {
+        "name": "Tag Warmwasserbetrieb thermische Leistungsabgabe"
+      },
+      "day_backup3_out_h": {
+        "name": "Tag Heizbetrieb Zusatzheizung Stufe 1 (3 kW) thermische Leistungsabgabe"
+      },
+      "day_backup6_out_h": {
+        "name": "Tag Heizbetrieb Zusatzheizung Stufe 2 (6 kW) thermische Leistungsabgabe"
+      },
+      "day_backup6_out_hw": {
+        "name": "Tag Warmwasserbetrieb Zusatzheizung Stufe 2 (6 kW) thermische Leistungsabgabe"
+      },
+      "day_backup3_out_hw": {
+        "name": "Tag Warmwasserbetrieb Zusatzheizung Stufe 1 (3 kW) thermische Leistungsabgabe"
+      },
+      "day_hp_in_h": {
+        "name": "Tag Heizbetrieb elektrische Leistungsaufnahme"
+      },
+      "day_hp_in_c": {
+        "name": "Tag Kühlbetrieb elektrische Leistungsaufnahme"
+      },
+      "day_hp_in_hw": {
+        "name": "Tag Warmwasserbetrieb elektrische Leistungsaufnahme"
+      },
+      "day_backup3_in_hw": {
+        "name": "Tag Warmwasserbetrieb Zusatzheizung Stufe 1 (3 kW) elektrische Leistungsaufnahme"
+      },
+      "day_backup6_in_hw": {
+        "name": "Tag Warmwasserbetrieb Zusatzheizung Stufe 2 (6 kW) elektrische Leistungsaufnahme"
+      },
+      "day_backup3_in_h": {
+        "name": "Tag Heizbetrieb Zusatzheizung Stufe 1 (3 kW) elektrische Leistungsaufnahme"
+      },
+      "day_backup6_in_h": {
+        "name": "Tag Heizbetrieb Zusatzheizung Stufe 2 (6 kW) elektrische Leistungsaufnahme"
       }
     }
   }

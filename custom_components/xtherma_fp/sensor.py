@@ -183,10 +183,12 @@ class XthermaBinarySensor(BinarySensorEntity):
         self._coordinator = coordinator
         self.entity_description = description
         self.xt_description = description
+        self._attr_has_entity_name = True
         self._attr_device_info = device_info
         self._attr_device_class = description.device_class
         self._attr_unique_id = f"{DOMAIN}_{description.key}"
         self.entity_id = f"sensor.{self._attr_unique_id}"
+        self.translation_key = description.key
 
     @property
     def is_on(self) -> bool | None:
@@ -226,6 +228,7 @@ class XthermaSensor(SensorEntity):
         self._coordinator = coordinator
         self.entity_description = description
         self.xt_description = description
+        self._attr_has_entity_name = True
         self._attr_device_info = device_info
         self._attr_native_unit_of_measurement = description.native_unit_of_measurement
         self._attr_device_class = description.device_class
@@ -233,6 +236,7 @@ class XthermaSensor(SensorEntity):
         self._factor = description.factor
         self._attr_unique_id = f"{DOMAIN}_{description.key}"
         self.entity_id = f"sensor.{self._attr_unique_id}"
+        self.translation_key = description.key
 
     @property
     def native_value(self) -> StateType | date | datetime | Decimal:
