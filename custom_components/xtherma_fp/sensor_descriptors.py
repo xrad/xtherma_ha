@@ -337,8 +337,7 @@ SENSOR_DESCRIPTIONS = [
     ),
     XtSensorEntityDescription(
         key="out_hp",
-        name="Leistungsabgabe Wärmepumpe (thermisch)",
-        native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        native_unit_of_measurement=UnitOfPower.WATT,
         device_class=SensorDeviceClass.POWER,
         state_class=SensorStateClass.MEASUREMENT,
         icon=_icon_thermal_power,
@@ -367,8 +366,7 @@ SENSOR_DESCRIPTIONS = [
     ),
     XtSensorEntityDescription(
         key="out_backup",
-        name="Leistungsabgabe Zusatz-/Notheizung (thermisch)",
-        native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        native_unit_of_measurement=UnitOfPower.WATT,
         device_class=SensorDeviceClass.POWER,
         state_class=SensorStateClass.MEASUREMENT,
         icon=_icon_thermal_power,
