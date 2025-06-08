@@ -1,6 +1,6 @@
 {
   "domain": "xtherma_fp",
-  "name": "Xtherma Fernportal",
+  "name": "Xtherma Integration",
   "codeowners": [
     "@xrad"
   ],

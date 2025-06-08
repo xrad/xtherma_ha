@@ -1,5 +1,5 @@
 {
-    "name": "Xtherma Integration",
+    "name": "Xtherma Heatpump Integration",
     "homeassistant": "2025.2.4",
     "hacs": "2.0.1"
 }

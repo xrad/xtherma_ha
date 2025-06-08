@@ -1,28 +1,35 @@
 <h2 align="center">
-   <a href="https://www.xtherma.de/">Xtherma</a> and<a href="https://www.home-assistant.io"> Home Assistant</a> Integration
+   <a href="https://www.xtherma.de/">Xtherma</a> Heatpump integration for <a href="https://www.home-assistant.io">Home Assistant</a>
    </br></br>
 </h2>
 
-## Installation
+## Installation (HACS)
 
-Kopiere den Ordner `custom_components/xtherma_fp` in die HA installation, so dass er dort unter `/config/custom_components/xtherma_fp` gefunden wird.
-Anschließend Home Assistant neu starten.
+1. Go to your Home Assistant > HACS management page.
+2. Open the three-dot menu and select `User defined repositories`
+3. In the repository field, add `https://github.com/Xtherma/xtherma_ha` and select type `Integration`
+4. Click `Add`
 
-## Konfiguration
+After that, you can search and download  the Xtherma integration. Once downloaded within HACS, you will be able to add it via Home Assistant's **Settings > Devices & Services > Add Integration**.
 
-In **Einstellungen > Geräte & Dienste** auf **Integration hinzufügen** klicken. Der Konfigurationsdialog fragt nach dem REST-API Token und der Seriennummer.
+## Installation (manual)
 
-Beides kann aus dem Fernportal herauskopiert werden (Start Seite -> Mein Account.)
+Copy the folder `custom_components/xtherma_fp` into the HA installation so that it can be found under `/config/custom_components/xtherma_fp`.
+Then restart Home Assistant.
 
-Achtung: der Konfigurationsdialog prüft die eingegebenen Daten, indem testweise eine Anfrage geschickt wird. Wenn anschließend die eigentliche Integration startet, muss sie das Download Limit (aktuell 1 Abfrage pro Minute) abwarten. Das bedeutet, dass die Sensoren erst nach ca. einer Minute erscheinen.
+## Configuration
 
-## Funktion
+In **Settings > Devices & Services**, click on **Add Integration**. The configuration dialog will ask for the REST API token and the serial number.
 
-Aktuell ist das REST-API read-only. Es werden nur die Sensorwerte des Datenbereichs `telemetry` angezeigt.
+Both can be copied from the remote portal (Start page -> My Account).
+
+## Function
+
+Currently, the REST API is read-only. Only the sensor values from the `telemetry` data section are displayed.
 
 ## Logging
 
-Debug logs können folgendermaßen eingeschaltet werden:
+Debug logs can be enabled as follows:
 
 ```yaml
 logger:
