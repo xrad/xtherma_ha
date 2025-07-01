@@ -62,13 +62,13 @@ class XthermaClient:
         raise NotImplementedError
 
     @abstractmethod
-    async def is_connected(self) -> bool:
-        """Check if client is currently connected."""
+    async def connect(self) -> None:
+        """Connect client to server endpoint."""
         raise NotImplementedError
 
     @abstractmethod
-    async def connect(self) -> None:
-        """Connect client to server endpoint."""
+    async def disconnect(self) -> None:
+        """Disconnect client."""
         raise NotImplementedError
 
     @abstractmethod

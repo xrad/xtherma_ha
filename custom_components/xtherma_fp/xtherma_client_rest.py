@@ -36,11 +36,10 @@ class XthermaClientRest(XthermaClient):
         """Return update interval for data coordinator."""
         return timedelta(seconds=FERNPORTAL_RATE_LIMIT_S)
 
-    async def is_connected(self) -> bool:
-        """Declare REST as always connected."""
-        return True
-
     async def connect(self) -> None:
+        """Not required for REST."""
+
+    async def disconnect(self) -> None:
         """Not required for REST."""
 
     def _now(self) -> int:

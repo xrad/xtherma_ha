@@ -109,7 +109,9 @@ async def _validate_modbus_tcp(
             port=port,
             address=address,
         )
+        await client.connect()
         await client.async_get_data()
+        await client.disconnect()
     except XthermaTimeoutError:
         _LOGGER.debug("TimeoutError")
         errors["base"] = "timeout"

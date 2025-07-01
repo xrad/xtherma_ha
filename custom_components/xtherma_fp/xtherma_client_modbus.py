@@ -31,10 +31,10 @@ class XthermaClientModbus(XthermaClient):
         self._host = host
         self._port = port
         self._address = address
-
-    async def is_connected(self) -> bool:
-        """Check if client is currently connected."""
-        return self._client is AsyncModbusTcpClient and self._client.connected()
+        self._descriptors = []
+        for i in range(MODBUS_NUM_REGISTERS):
+            d = _find_modbus_desciptor(i)
+            self._descriptors.append(d)
 
     async def connect(self) -> None:
         """Connect client to server endpoint."""

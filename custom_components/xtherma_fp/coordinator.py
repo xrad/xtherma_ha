@@ -62,8 +62,15 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
             update_interval=update_interval,
         )
 
+    async def close(self) -> None:
+        """Terminate usage."""
+        _LOGGER.debug("Coordinator close")
+        await self._client.disconnect()
+
     async def _async_setup(self) -> None:
         """Set up the coordinator."""
+        _LOGGER.debug("Coordinator _async_setup")
+        await self._client.connect()
 
     def _apply_input_factor(self, rawvalue: str, inputfactor: str) -> float:
         value = float(rawvalue)
@@ -73,9 +80,6 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
     async def _async_update_data(self) -> dict[str, float]:  # noqa: C901
         result: dict[str, float] = {}
         try:
-            if not await self._client.is_connected():
-                _LOGGER.debug("Connecting client")
-                await self._client.connect()
             _LOGGER.debug("Coordinator requesting new data")
             raw = await self._client.async_get_data()
             telemetry = raw[KEY_TELEMETRY]

@@ -94,6 +94,10 @@ async def async_setup_entry(
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload integration."""
     _LOGGER.debug("Unload integration")
+    xtherma_data: XthermaData = entry.runtime_data
+    if xtherma_data and xtherma_data.coordinator:
+        _LOGGER.debug("Close data coordinator")
+        await xtherma_data.coordinator.close()
     return await hass.config_entries.async_unload_platforms(entry, _PLATFORMS)
 
 
