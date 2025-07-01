@@ -2,6 +2,7 @@
 
 from abc import abstractmethod
 from datetime import timedelta
+from typing import Any
 
 
 class XthermaRateLimitError(Exception):
@@ -72,6 +73,6 @@ class XthermaClient:
         raise NotImplementedError
 
     @abstractmethod
-    async def async_get_data(self) -> dict[str, dict]:
+    async def async_get_data(self) -> list[dict[str, Any]]:
         """Obtain fresh data."""
         raise NotImplementedError

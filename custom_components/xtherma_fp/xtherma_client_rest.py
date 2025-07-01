@@ -2,10 +2,14 @@
 
 import logging
 from datetime import UTC, datetime, timedelta
+from typing import Any
 
 import aiohttp
 
-from .const import FERNPORTAL_RATE_LIMIT_S
+from .const import (
+    FERNPORTAL_RATE_LIMIT_S,
+    KEY_TELEMETRY,
+)
 from .xtherma_client_common import (
     XthermaClient,
     XthermaGeneralError,
@@ -45,13 +49,18 @@ class XthermaClientRest(XthermaClient):
     def _now(self) -> int:
         return int(datetime.now(UTC).timestamp())
 
-    async def async_get_data(self) -> dict[str, dict]:
+    async def async_get_data(self) -> list[dict[str, Any]]:
         """Obtain fresh data."""
         headers = {"Authorization": f"Bearer {self._api_key}"}
         try:
             async with self._session.get(self._url, headers=headers) as response:
                 response.raise_for_status()
-                return await response.json()
+                json_data: dict[str, Any] = await response.json()
+                telemetry = json_data.get(KEY_TELEMETRY)
+                if not isinstance(telemetry, list):
+                    _LOGGER.error("Telemetry from REST API is not a list")
+                    return []
+                return telemetry
         except aiohttp.ClientResponseError as err:
             _LOGGER.debug("API error: %s", err)
             if err.status == 429:  # noqa: PLR2004
@@ -64,3 +73,4 @@ class XthermaClientRest(XthermaClient):
             _LOGGER.debug("Unknown API error %s", err)
             _LOGGER.exception("Unknown API error")
             raise XthermaGeneralError from err
+        return []

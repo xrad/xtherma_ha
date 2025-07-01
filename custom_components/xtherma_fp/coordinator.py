@@ -10,9 +10,7 @@ from .const import (
     DOMAIN,
     KEY_ENTRY_INPUT_FACTOR,
     KEY_ENTRY_KEY,
-    KEY_ENTRY_UNIT,
     KEY_ENTRY_VALUE,
-    KEY_TELEMETRY,
 )
 from .xtherma_client_common import (
     XthermaModbusError,
@@ -77,31 +75,28 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         factor = _FACTORS.get(inputfactor, 1.0)
         return factor * value
 
-    async def _async_update_data(self) -> dict[str, float]:  # noqa: C901
+    async def _async_update_data(self) -> dict[str, float]:
         result: dict[str, float] = {}
         try:
             _LOGGER.debug("Coordinator requesting new data")
-            raw = await self._client.async_get_data()
-            telemetry = raw[KEY_TELEMETRY]
+            telemetry = await self._client.async_get_data()
             for entry in telemetry:
                 key = entry.get(KEY_ENTRY_KEY, "").lower()
                 rawvalue = entry.get(KEY_ENTRY_VALUE, None)
                 inputfactor = entry.get(KEY_ENTRY_INPUT_FACTOR, None)
                 if not key or not rawvalue:
-                    _LOGGER.error("entry has no 'key'")
+                    _LOGGER.error("entry incomplete")
                     continue
                 value = self._apply_input_factor(rawvalue, inputfactor)
                 result[key] = value
                 if _LOGGER.getEffectiveLevel() == logging.DEBUG:
                     rawvalue = entry[KEY_ENTRY_VALUE]
                     inputfactor = entry[KEY_ENTRY_INPUT_FACTOR]
-                    unit = entry[KEY_ENTRY_UNIT]
                     _LOGGER.debug(
-                        'key="%s" raw="%s" value="%s" unit="%s" inputfactor="%s"',
+                        'key="%s" raw="%s" value="%s" inputfactor="%s"',
                         key,
                         rawvalue,
                         value,
-                        unit,
                         inputfactor,
                     )
         except XthermaRateLimitError as err:
