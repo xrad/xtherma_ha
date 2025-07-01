@@ -70,8 +70,10 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         _LOGGER.debug("Coordinator _async_setup")
         await self._client.connect()
 
-    def _apply_input_factor(self, rawvalue: str, inputfactor: str) -> float:
+    def _apply_input_factor(self, rawvalue: str, inputfactor: str|None) -> float:
         value = float(rawvalue)
+        if not isinstance(inputfactor,str):
+            return value
         factor = _FACTORS.get(inputfactor, 1.0)
         return factor * value
 
