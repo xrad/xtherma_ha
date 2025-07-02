@@ -15,4 +15,4 @@ def test_xt_sensor_entity_description():
     assert desc_tvl.native_unit_of_measurement == UnitOfTemperature.CELSIUS
     assert desc_tvl.device_class == SensorDeviceClass.TEMPERATURE
     assert desc_tvl.state_class == SensorStateClass.MEASUREMENT
-    assert desc_tvl.factor == 0.1
+    assert desc_tvl.factor == "/10"

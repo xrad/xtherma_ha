@@ -143,7 +143,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_heating_in,
     ),
     XtSensorEntityDescription(
@@ -151,7 +151,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_heating_out,
     ),
     XtSensorEntityDescription(
@@ -159,7 +159,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_temperature_water,
     ),
     XtSensorEntityDescription(
@@ -167,7 +167,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_temperature,
     ),
     XtSensorEntityDescription(
@@ -175,7 +175,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_temperature,
     ),
     XtSensorEntityDescription(
@@ -183,7 +183,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_temperature,
     ),
     XtSensorEntityDescription(
@@ -199,7 +199,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_temperature,
     ),
     XtSensorEntityDescription(
@@ -207,7 +207,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_temperature_average,
     ),
     XtSensorEntityDescription(
@@ -215,7 +215,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_temperature_average,
     ),
     XtSensorEntityDescription(
@@ -223,7 +223,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_temperature_average,
     ),
     XtSensorEntityDescription(
@@ -245,7 +245,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_temperature,
     ),
     XtBinarySensorEntityDescription(
@@ -277,7 +277,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_temperature_target_water,
     ),
     XtSensorEntityDescription(
@@ -285,7 +285,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_temperature_target_heating,
     ),
     XtSensorEntityDescription(
@@ -293,7 +293,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_temperature_target_cooling,
     ),
     XtSensorEntityDescription(
@@ -308,7 +308,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfVolumeFlowRate.LITERS_PER_MINUTE,
         device_class=SensorDeviceClass.VOLUME_FLOW_RATE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_volume_rate,
     ),
     XtSensorEntityDescription(
@@ -321,13 +321,13 @@ SENSOR_DESCRIPTIONS = [
     XtSensorEntityDescription(
         key="efficiency_hp",
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.01,
+        factor="/100",
         icon=_icon_performance,
     ),
     XtSensorEntityDescription(
         key="efficiency_total",
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.01,
+        factor="/100",
         icon=_icon_performance,
     ),
     XtSensorEntityDescription(
@@ -355,7 +355,7 @@ SENSOR_DESCRIPTIONS = [
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        factor=0.1,
+        factor="/10",
         icon=_icon_temperature_average,
     ),
     XtSensorEntityDescription(
