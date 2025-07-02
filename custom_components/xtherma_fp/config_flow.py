@@ -25,6 +25,8 @@ from homeassistant.helpers.selector import (
     SelectSelectorMode,
 )
 
+from custom_components.xtherma_fp.xtherma_client_common import XthermaNotConnectedError
+
 from .const import (
     CONF_CONNECTION,
     CONF_CONNECTION_MODBUSTCP,
@@ -44,20 +46,38 @@ from .xtherma_client_rest import (
 _LOGGER = logging.getLogger(__name__)
 
 
-async def _validate_rest_api(
-    hass: HomeAssistant,
+async def _validate_connection(
     data: dict[str, Any],
     errors: dict[str, str],
 ) -> bool:
-    api_key = data.get(CONF_API_KEY)
+    _LOGGER.debug("validate connection settings")
+
     serial_number = data.get(CONF_SERIAL_NUMBER)
-    if not api_key or not serial_number:
+    if not serial_number:
         errors["base"] = "bad_arguments"
         return False
 
     if not serial_number.startswith("FP-"):
         errors["base"] = "bad_arguments"
         return False
+
+    return True
+
+
+async def _validate_rest_api(
+    hass: HomeAssistant,
+    previous_data: dict[str, Any],
+    data: dict[str, Any],
+    errors: dict[str, str],
+) -> bool:
+    _LOGGER.debug("validate REST-API settings")
+
+    api_key = data.get(CONF_API_KEY)
+    if not api_key:
+        errors["base"] = "bad_arguments"
+        return False
+
+    serial_number = previous_data.get(CONF_SERIAL_NUMBER, "")
 
     try:
         session = aiohttp_client.async_get_clientsession(hass)
@@ -67,7 +87,9 @@ async def _validate_rest_api(
             serial_number=serial_number,
             session=session,
         )
+        await client.connect()
         await client.async_get_data()
+        await client.disconnect()
     except XthermaRateLimitError:
         _LOGGER.debug("RateLimitError")
         errors["base"] = "rate_limit"
@@ -81,8 +103,10 @@ async def _validate_rest_api(
         _LOGGER.debug("Unexpected exception")
         errors["base"] = "unknown"
     else:
+        _LOGGER.debug("validation successful")
         return True
 
+    _LOGGER.debug("validation unsuccessful (%s)", errors["base"])
     return False
 
 
@@ -92,6 +116,8 @@ async def _validate_modbus_tcp(
     errors: dict[str, str],
 ) -> bool:
     """Check values in data dict."""
+    _LOGGER.debug("validate Modbus/TCP settings")
+
     host = data.get(CONF_HOST)
     port = data.get(CONF_PORT)
     address = data.get(CONF_ADDRESS)
@@ -106,8 +132,8 @@ async def _validate_modbus_tcp(
     try:
         client = XthermaClientModbus(
             host=host,
-            port=port,
-            address=address,
+            port=int(port),
+            address=int(address),
         )
         await client.connect()
         await client.async_get_data()
@@ -115,15 +141,16 @@ async def _validate_modbus_tcp(
     except XthermaTimeoutError:
         _LOGGER.debug("TimeoutError")
         errors["base"] = "timeout"
-    except XthermaGeneralError:
-        _LOGGER.debug("GeneralError")
-        errors["base"] = "cannot_connect"
-    except Exception:  # noqa: BLE001
-        _LOGGER.debug("Unexpected exception")
+    except XthermaNotConnectedError:
+        errors["base"] = "cannot_connect_modbus"
+    except Exception as e:  # noqa: BLE001
+        _LOGGER.debug("Unexpected exception %s", e)
         errors["base"] = "unknown"
     else:
+        _LOGGER.debug("validation successful")
         return True
 
+    _LOGGER.debug("validation unsuccessful (%s)", errors["base"])
     return False
 
 
@@ -137,12 +164,23 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
     VERSION = 1
     MINOR_VERSION = 0
 
+    def __init__(self) -> None:
+        """Constructor."""
+        # here we will collect inputs from the various pages
+        self._config_data: dict[str,str] = { }
+
     async def async_step_user(
         self,
         user_input: dict[str, Any] | None = None,
     ) -> ConfigFlowResult:
         """Process user step."""
-        if user_input is not None:
+        errors: dict[str, str] = {}
+
+        if user_input is not None and await _validate_connection(
+            user_input,
+            errors,
+        ):
+            self._config_data.update(user_input)
             connection_type = user_input[CONF_CONNECTION]
             if connection_type == CONF_CONNECTION_RESTAPI:
                 return await self.async_step_rest_api()
@@ -151,11 +189,15 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
 
         schema = vol.Schema(
             {
+                vol.Required(
+                    CONF_SERIAL_NUMBER,
+                    msg="Serial Number (FP-XX-XXXXXX)",
+                ): str,
                 vol.Required(CONF_CONNECTION): SelectSelector(
                     SelectSelectorConfig(
                         options=[
                             CONF_CONNECTION_RESTAPI,
-                            # CONF_CONNECTION_MODBUSTCP
+                            CONF_CONNECTION_MODBUSTCP,
                         ],
                         mode=SelectSelectorMode.LIST,
                         translation_key=CONF_CONNECTION,
@@ -164,7 +206,7 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
             },
         )
 
-        return self.async_show_form(step_id="user", data_schema=schema)
+        return self.async_show_form(step_id="user", data_schema=schema, errors=errors)
 
     async def async_step_rest_api(
         self,
@@ -175,21 +217,17 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
 
         if user_input is not None and await _validate_rest_api(
             self.hass,
+            self._config_data,
             user_input,
             errors,
         ):
-            # also store connection type collected in async_step_user()
-            user_input[CONF_CONNECTION] = CONF_CONNECTION_RESTAPI
+            self._config_data.update(user_input)
             title = await _get_title()
-            return self.async_create_entry(title=title, data=user_input)
+            return self.async_create_entry(title=title, data=self._config_data)
 
         schema = vol.Schema(
             {
                 vol.Required(CONF_API_KEY, msg="API Key"): str,
-                vol.Required(
-                    CONF_SERIAL_NUMBER,
-                    msg="Serial Number (FP-XX-XXXXXX)",
-                ): str,
             },
         )
 
@@ -211,20 +249,24 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
             user_input,
             errors,
         ):
-            # also store connection type collected in async_step_user()
-            user_input[CONF_CONNECTION] = CONF_CONNECTION_MODBUSTCP
+            self._config_data.update(user_input)
             title = await _get_title()
-            return self.async_create_entry(title=title, data=user_input)
+            return self.async_create_entry(title=title, data=self._config_data)
 
         schema = vol.Schema(
             {
-                vol.Required(CONF_HOST): str,
-                vol.Required(CONF_PORT, default=10001): vol.All(
+                vol.Required(CONF_HOST, default=""): str,
+                vol.Required(CONF_PORT, default=502): vol.All(
                     vol.Coerce(int),
                     vol.Range(min=0, max=65535),
                 ),
-                vol.Required(CONF_ADDRESS, default=33): NumberSelector(
-                    NumberSelectorConfig(min=1, max=255, mode=NumberSelectorMode.BOX),
+                vol.Required(CONF_ADDRESS, default=1): vol.All(
+                    vol.Coerce(int),
+                    NumberSelector(
+                        NumberSelectorConfig(
+                            min=1, max=255, mode=NumberSelectorMode.BOX,
+                        ),
+                    ),
                 ),
             },
         )
@@ -247,21 +289,44 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
 class OptionsFlowHandler(OptionsFlow):
     """Reconfigure integration."""
 
+    def __init__(self) -> None:
+        """Constructor."""
+        # here we will collect inputs from the various pages
+        self._config_data: dict[str, str] = {}
+
     async def async_step_init(
         self,
         user_input: dict[str, Any] | None = None,  # noqa: ARG002
     ) -> ConfigFlowResult:
         """Manage the options."""
-        connection = self.config_entry.data.get(
-            CONF_CONNECTION,
-            CONF_CONNECTION_RESTAPI,
-        )
-        if connection == CONF_CONNECTION_RESTAPI:
-            return await self.async_step_rest_api()
-        if connection == CONF_CONNECTION_MODBUSTCP:
-            return await self.async_step_modbus_tcp()
+        errors: dict[str, str] = {}
+        entry = self.config_entry
 
-        raise ConfigError
+        if user_input is not None:
+            self._config_data.update(user_input)
+            self._config_data[CONF_SERIAL_NUMBER] = entry.data[CONF_SERIAL_NUMBER]
+            connection_type = user_input[CONF_CONNECTION]
+            if connection_type == CONF_CONNECTION_RESTAPI:
+                return await self.async_step_rest_api()
+            if connection_type == CONF_CONNECTION_MODBUSTCP:
+                return await self.async_step_modbus_tcp()
+
+        schema = vol.Schema(
+            {
+                vol.Required(CONF_CONNECTION): SelectSelector(
+                    SelectSelectorConfig(
+                        options=[
+                            CONF_CONNECTION_RESTAPI,
+                            CONF_CONNECTION_MODBUSTCP,
+                        ],
+                        mode=SelectSelectorMode.LIST,
+                        translation_key=CONF_CONNECTION,
+                    ),
+                ),
+            },
+        )
+
+        return self.async_show_form(step_id="init", data_schema=schema, errors=errors)
 
     async def async_step_rest_api(
         self,
@@ -274,22 +339,19 @@ class OptionsFlowHandler(OptionsFlow):
         entry = self.config_entry
 
         if user_input is not None:
-            user_input[CONF_CONNECTION] = CONF_CONNECTION_RESTAPI
-            hass.config_entries.async_update_entry(entry, data=user_input)
+            self._config_data.update(user_input)
+            hass.config_entries.async_update_entry(entry, data=self._config_data)
             await hass.config_entries.async_reload(entry.entry_id)
             return self.async_create_entry(data={})
+
+        def_api_key = entry.data.get(CONF_API_KEY, "")
 
         schema = vol.Schema(
             {
                 vol.Required(
                     CONF_API_KEY,
                     msg="API Key",
-                    default=entry.data[CONF_API_KEY],
-                ): str,
-                vol.Required(
-                    CONF_SERIAL_NUMBER,
-                    msg="Serial Number (FP-XX-XXXXXX)",
-                    default=entry.data[CONF_SERIAL_NUMBER],
+                    default=def_api_key,
                 ): str,
             },
         )
@@ -311,21 +373,25 @@ class OptionsFlowHandler(OptionsFlow):
         entry = self.config_entry
 
         if user_input is not None:
-            user_input[CONF_CONNECTION] = CONF_CONNECTION_MODBUSTCP
-            hass.config_entries.async_update_entry(entry, data=user_input)
+            self._config_data.update(user_input)
+            hass.config_entries.async_update_entry(entry, data=self._config_data)
             await hass.config_entries.async_reload(entry.entry_id)
-            return self.async_create_entry(data={})
+            return self.async_create_entry(data=self._config_data)
+
+        def_host = entry.data.get(CONF_HOST, "")
+        def_port = entry.data.get(CONF_PORT, 502)
+        def_address = entry.data.get(CONF_ADDRESS, 1)
 
         schema = vol.Schema(
             {
-                vol.Required(CONF_HOST, default=entry.data[CONF_HOST]): str,
-                vol.Required(CONF_PORT, default=entry.data[CONF_PORT]): vol.All(
+                vol.Required(CONF_HOST, default=def_host): str,
+                vol.Required(CONF_PORT, default=def_port): vol.All(
                     vol.Coerce(int),
                     vol.Range(min=0, max=65535),
                 ),
                 vol.Required(
                     CONF_ADDRESS,
-                    default=entry.data[CONF_ADDRESS],
+                    default=def_address,
                 ): NumberSelector(
                     NumberSelectorConfig(min=1, max=255, mode=NumberSelectorMode.BOX),
                 ),

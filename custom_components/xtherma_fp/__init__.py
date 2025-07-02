@@ -47,12 +47,13 @@ async def async_setup_entry(
     xtherma_data = XthermaData()
     entry.runtime_data = xtherma_data
 
+    serial_number = entry.data[CONF_SERIAL_NUMBER]
+    xtherma_data.serial_fp = serial_number
+
     # create API client connector
     connection = entry.data.get(CONF_CONNECTION, CONF_CONNECTION_RESTAPI)
     if connection == CONF_CONNECTION_RESTAPI:
         api_key = entry.data[CONF_API_KEY]
-        serial_number = entry.data[CONF_SERIAL_NUMBER]
-        xtherma_data.serial_fp = serial_number
         client = XthermaClientRest(
             url=FERNPORTAL_URL,
             api_key=api_key,
@@ -60,6 +61,7 @@ async def async_setup_entry(
             session=async_get_clientsession(hass),
         )
     else:
+        serial_number = entry.data[CONF_SERIAL_NUMBER]
         host = entry.data[CONF_HOST]
         port = entry.data[CONF_PORT]
         address = entry.data[CONF_ADDRESS]

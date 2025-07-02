@@ -15,7 +15,7 @@ from pytest_homeassistant_custom_component.common import load_json_value_fixture
 from tests.const import MOCK_API_KEY, MOCK_SERIAL_NUMBER
 
 
-async def test_rest_api_bad_arguments(hass):
+async def test_config_common_bad_arguments(hass):
     """Test giving bad config dat to REST API config flow."""
 
     result = await hass.config_entries.flow.async_init(
@@ -26,22 +26,14 @@ async def test_rest_api_bad_arguments(hass):
     assert result["step_id"] == "user"
 
     result = await hass.config_entries.flow.async_configure(
-        result["flow_id"], user_input={CONF_CONNECTION: CONF_CONNECTION_RESTAPI}
-    )
-
-    assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "rest_api"
-
-    result = await hass.config_entries.flow.async_configure(
-        result["flow_id"],
-        user_input={
-            CONF_API_KEY: MOCK_API_KEY,
+        result["flow_id"], user_input={
             CONF_SERIAL_NUMBER: "SerialNumbersMustBeginWithFP",
-        },
+            CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+        }
     )
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "rest_api"
+    assert result["step_id"] == "user"
     assert result["errors"] == {"base": "bad_arguments"}
 
 
@@ -62,7 +54,10 @@ async def test_rest_api_good_serial_number(hass, aioclient_mock):
     assert result["step_id"] == "user"
 
     result = await hass.config_entries.flow.async_configure(
-        result["flow_id"], user_input={CONF_CONNECTION: CONF_CONNECTION_RESTAPI}
+        result["flow_id"], user_input={
+            CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER
+        }
     )
 
     assert result["type"] is FlowResultType.FORM
@@ -70,7 +65,7 @@ async def test_rest_api_good_serial_number(hass, aioclient_mock):
 
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"],
-        user_input={CONF_API_KEY: MOCK_API_KEY, CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER},
+        user_input={CONF_API_KEY: MOCK_API_KEY},
     )
 
     assert result["type"] is FlowResultType.CREATE_ENTRY
@@ -94,7 +89,10 @@ async def test_rest_error_404(hass, aioclient_mock):
     assert result["step_id"] == "user"
 
     result = await hass.config_entries.flow.async_configure(
-        result["flow_id"], user_input={CONF_CONNECTION: CONF_CONNECTION_RESTAPI}
+        result["flow_id"], user_input={
+            CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER
+        }
     )
 
     assert result["type"] is FlowResultType.FORM
@@ -102,7 +100,7 @@ async def test_rest_error_404(hass, aioclient_mock):
 
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"],
-        user_input={CONF_API_KEY: MOCK_API_KEY, CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER},
+        user_input={CONF_API_KEY: MOCK_API_KEY},
     )
     assert result["type"] is FlowResultType.FORM
     assert result["step_id"] == "rest_api"
@@ -127,7 +125,10 @@ async def test_rest_error_429(hass, aioclient_mock):
     assert result["step_id"] == "user"
 
     result = await hass.config_entries.flow.async_configure(
-        result["flow_id"], user_input={CONF_CONNECTION: CONF_CONNECTION_RESTAPI}
+        result["flow_id"], user_input={
+            CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER
+        }
     )
 
     assert result["type"] is FlowResultType.FORM
@@ -135,7 +136,7 @@ async def test_rest_error_429(hass, aioclient_mock):
 
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"],
-        user_input={CONF_API_KEY: MOCK_API_KEY, CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER},
+        user_input={CONF_API_KEY: MOCK_API_KEY},
     )
     assert result["type"] is FlowResultType.FORM
     assert result["step_id"] == "rest_api"
@@ -157,7 +158,10 @@ async def test_rest_error_timeout(hass, aioclient_mock):
     assert result["step_id"] == "user"
 
     result = await hass.config_entries.flow.async_configure(
-        result["flow_id"], user_input={CONF_CONNECTION: CONF_CONNECTION_RESTAPI}
+        result["flow_id"], user_input={
+            CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER
+        }
     )
 
     assert result["type"] is FlowResultType.FORM
@@ -165,7 +169,7 @@ async def test_rest_error_timeout(hass, aioclient_mock):
 
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"],
-        user_input={CONF_API_KEY: MOCK_API_KEY, CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER},
+        user_input={CONF_API_KEY: MOCK_API_KEY},
     )
     assert result["type"] is FlowResultType.FORM
     assert result["step_id"] == "rest_api"

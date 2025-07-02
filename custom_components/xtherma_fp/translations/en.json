@@ -28,6 +28,7 @@
       "rate_limit": "Too many requests to Fernportal, wait 1 minute",
       "timeout": "No response",
       "cannot_connect": "Could not connect to Fernportal",
+      "cannot_connect_modbus": "Anmeldung am Modbus Server nicht möglich",
       "unknown": "Unknown Error"
     }
   },

@@ -28,10 +28,16 @@ type SensorIconProvider = Callable[[StateType | date | datetime | Decimal], str]
 
 
 @dataclass(kw_only=True, frozen=True)
-class XtSensorEntityDescription(SensorEntityDescription):
-    """Abstract base class."""
+class XtModbusEntityDescription:
+    """Manage properties related to Modbus."""
 
-    factor: float | None = None
+    modbus_index: int = -1
+
+@dataclass(kw_only=True, frozen=True)
+class XtSensorEntityDescription(XtModbusEntityDescription, SensorEntityDescription):
+    """A numeric value sensor."""
+
+    factor: str | None = None
     icon_provider: SensorIconProvider | None = None
 
 
@@ -39,7 +45,8 @@ type BinaryIconProvider = Callable[[bool | None], str]
 
 
 @dataclass(kw_only=True, frozen=True)
-class XtBinarySensorEntityDescription(BinarySensorEntityDescription):
+class XtBinarySensorEntityDescription(
+    XtModbusEntityDescription, BinarySensorEntityDescription):
     """A binary sensor."""
 
     icon_provider: BinaryIconProvider | None = None
@@ -139,6 +146,7 @@ _icon_performance = "mdi:poll"
 
 SENSOR_DESCRIPTIONS = [
     XtSensorEntityDescription(
+        modbus_index=2,
         key="tvl",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -147,6 +155,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_heating_in,
     ),
     XtSensorEntityDescription(
+        modbus_index=3,
         key="trl",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -155,6 +164,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_heating_out,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="tw",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -163,6 +173,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_temperature_water,
     ),
     XtSensorEntityDescription(
+        modbus_index=4,
         key="tk",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -171,6 +182,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_temperature,
     ),
     XtSensorEntityDescription(
+        modbus_index=5,
         key="tk1",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -179,6 +191,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_temperature,
     ),
     XtSensorEntityDescription(
+        modbus_index=6,
         key="tk2",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -187,6 +200,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_temperature,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="vf",
         native_unit_of_measurement=UnitOfFrequency.HERTZ,
         device_class=SensorDeviceClass.FREQUENCY,
@@ -195,6 +209,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_frequency,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="ta",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -203,6 +218,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_temperature,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="ta1",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -211,6 +227,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_temperature_average,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="ta4",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -219,6 +236,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_temperature_average,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="ta24",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -227,6 +245,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_temperature_average,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="ld1",
         native_unit_of_measurement=REVOLUTIONS_PER_MINUTE,
         state_class=SensorStateClass.MEASUREMENT,
@@ -234,6 +253,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_fan,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="ld2",
         native_unit_of_measurement=REVOLUTIONS_PER_MINUTE,
         state_class=SensorStateClass.MEASUREMENT,
@@ -241,6 +261,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_fan,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="tr",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -249,30 +270,36 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_temperature,
     ),
     XtBinarySensorEntityDescription(
+        modbus_index=0,
         key="evu",
         icon_provider=_electric_switch_icon,
     ),
     XtBinarySensorEntityDescription(
+        modbus_index=0,
         key="pk",
         device_class=BinarySensorDeviceClass.RUNNING,
         icon_provider=_pump_icon,
     ),
     XtBinarySensorEntityDescription(
+        modbus_index=0,
         key="pk1",
         device_class=BinarySensorDeviceClass.RUNNING,
         icon_provider=_pump_icon,
     ),
     XtBinarySensorEntityDescription(
+        modbus_index=0,
         key="pk2",
         device_class=BinarySensorDeviceClass.RUNNING,
         icon_provider=_pump_icon,
     ),
     XtBinarySensorEntityDescription(
+        modbus_index=0,
         key="pww",
         device_class=BinarySensorDeviceClass.RUNNING,
         icon_provider=_pump_icon,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="hw_target",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -281,6 +308,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_temperature_target_water,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="h_target",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -289,6 +317,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_temperature_target_heating,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="c_target",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -297,6 +326,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_temperature_target_cooling,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="in_hp",
         native_unit_of_measurement=UnitOfPower.WATT,
         device_class=SensorDeviceClass.POWER,
@@ -304,6 +334,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_electric_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="v",
         native_unit_of_measurement=UnitOfVolumeFlowRate.LITERS_PER_MINUTE,
         device_class=SensorDeviceClass.VOLUME_FLOW_RATE,
@@ -312,6 +343,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_volume_rate,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="out_hp",
         native_unit_of_measurement=UnitOfPower.WATT,
         device_class=SensorDeviceClass.POWER,
@@ -319,18 +351,21 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_thermal_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="efficiency_hp",
         state_class=SensorStateClass.MEASUREMENT,
         factor="/100",
         icon=_icon_performance,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="efficiency_total",
         state_class=SensorStateClass.MEASUREMENT,
         factor="/100",
         icon=_icon_performance,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="in_backup",
         native_unit_of_measurement=UnitOfPower.WATT,
         device_class=SensorDeviceClass.POWER,
@@ -338,6 +373,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_electric_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="out_backup",
         native_unit_of_measurement=UnitOfPower.WATT,
         device_class=SensorDeviceClass.POWER,
@@ -345,12 +381,14 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_thermal_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="mode_3",
         device_class=SensorDeviceClass.ENUM,
         options=_opmode_options,
         icon_provider=_operation_mode_icon,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="ta8",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -359,12 +397,14 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_temperature_average,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="sg",
         device_class=SensorDeviceClass.ENUM,
         options=_sgready_options,
         icon_provider=_sgready_icon,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="day_hp_out_h",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -372,6 +412,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_thermal_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="day_hp_out_c",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -379,6 +420,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_thermal_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="day_hp_out_hw",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -386,6 +428,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_thermal_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="day_backup3_out_h",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -393,6 +436,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_thermal_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="day_backup6_out_h",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -400,6 +444,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_thermal_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="day_backup6_out_hw",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -407,6 +452,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_thermal_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="day_backup3_out_hw",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -414,6 +460,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_thermal_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="day_hp_in_h",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -421,6 +468,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_electric_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="day_hp_in_c",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -428,6 +476,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_electric_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="day_hp_in_hw",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -435,6 +484,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_electric_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="day_backup3_in_hw",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -442,6 +492,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_electric_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="day_backup6_in_hw",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -449,6 +500,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_electric_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="day_backup3_in_h",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -456,6 +508,7 @@ SENSOR_DESCRIPTIONS = [
         icon=_icon_electric_power,
     ),
     XtSensorEntityDescription(
+        modbus_index=0,
         key="day_backup6_in_h",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
