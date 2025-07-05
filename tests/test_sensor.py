@@ -9,7 +9,7 @@ from custom_components.xtherma_fp.const import DOMAIN
 from homeassistant.components.sensor import (
     SensorDeviceClass,
 )
-from custom_components.xtherma_fp.sensor_descriptors import SENSOR_DESCRIPTIONS
+from custom_components.xtherma_fp.sensor_descriptors import MODBUS_SENSOR_DESCRIPTIONS, SENSOR_DESCRIPTIONS
 
 
 async def _find_state(hass: HomeAssistant, id: str) -> State:
@@ -89,12 +89,18 @@ async def test_sensor_name_translation(hass, init_integration):
         }
 
         # collect all options of all enum sensors
-        sensor_names = {
+        sensor_names_rest = {
             f"{prefix}.{entity_description.key}.name"
             for entity_description in SENSOR_DESCRIPTIONS
         }
+        sensor_names_modbus = {
+            f"{prefix}.{entity_description.key}.name"
+            for reg_desc in MODBUS_SENSOR_DESCRIPTIONS
+            for entity_description in reg_desc.descriptors
+            if entity_description is not None
+        }
 
-        assert sensor_names == translation_states
+        assert sensor_names_rest.union(sensor_names_modbus) == translation_states
 
 
 async def test_sgready_sensor_icon(hass, init_integration):

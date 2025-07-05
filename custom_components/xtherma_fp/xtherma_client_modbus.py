@@ -18,7 +18,7 @@ from custom_components.xtherma_fp.const import (
     KEY_ENTRY_VALUE,
 )
 from custom_components.xtherma_fp.sensor_descriptors import (
-    SENSOR_DESCRIPTIONS,
+    MODBUS_SENSOR_DESCRIPTIONS,
     XtSensorEntityDescription,
 )
 
@@ -33,17 +33,10 @@ _LOGGER = logging.getLogger(__name__)
 MODBUS_START_ADDRESS = 0
 MODBUS_NUM_REGISTERS = 10
 
-def _find_modbus_desciptor(index: int) -> EntityDescription | None:
-    for sensor in SENSOR_DESCRIPTIONS:
-        if sensor.modbus_index == index:
-            return sensor
-    return None
-
 class XthermaClientModbus(XthermaClient):
     """Modbus access client."""
 
     _client: AsyncModbusTcpClient | None = None
-    _descriptors: list[EntityDescription|None]
 
     def __init__(
         self,
@@ -55,10 +48,6 @@ class XthermaClientModbus(XthermaClient):
         self._host = host
         self._port = port
         self._address = address
-        self._descriptors = []
-        for i in range(MODBUS_NUM_REGISTERS):
-            d = _find_modbus_desciptor(i)
-            self._descriptors.append(d)
 
     async def connect(self) -> None:
         """Connect client to server endpoint."""
@@ -86,19 +75,33 @@ class XthermaClientModbus(XthermaClient):
 
     def update_interval(self) -> timedelta:
         """Return update interval for data coordinator."""
-        return timedelta(seconds=10)
+        return timedelta(seconds=60)
 
     async def async_get_data(self) -> list[dict[str, Any]]:
         """Obtain fresh data."""
+        result: list[dict[str, Any]] = []
         if self._client is None or not self._client.connected:
             _LOGGER.debug("not connected")
             raise XthermaNotConnectedError
         try:
-            regs = await self._client.read_holding_registers(
-                address=MODBUS_START_ADDRESS,
-                count=MODBUS_NUM_REGISTERS,
-                slave=int(self._address),
-            )
+            for reg_desc in MODBUS_SENSOR_DESCRIPTIONS:
+                regs = await self._client.read_holding_registers(
+                    address=reg_desc.base,
+                    count=len(reg_desc.descriptors),
+                    slave=int(self._address),
+                )
+                for i,desc in enumerate(reg_desc.descriptors):
+                    if not desc:
+                        _LOGGER.debug("no descriptor for %d.%d", reg_desc.base, i)
+                    else:
+                        entry = {}
+                        entry[KEY_ENTRY_KEY] = desc.key
+                        entry[KEY_ENTRY_VALUE] = str(regs.registers[i])
+                        if isinstance(desc, XtSensorEntityDescription):
+                            entry[KEY_ENTRY_INPUT_FACTOR] = desc.factor
+                        else:
+                            entry[KEY_ENTRY_INPUT_FACTOR] = None
+                        result.append(entry)
         except ModbusIOException as err:
             _LOGGER.error("Modbus error: %s", err.string)  # noqa: TRY400
             raise XthermaModbusError from err
@@ -109,18 +112,6 @@ class XthermaClientModbus(XthermaClient):
             if regs.isError():
                 _LOGGER.error("Modbus error %s", regs.exception_code)
                 raise XthermaModbusError
-            result: list[dict[str, Any]] = []
-            for i in range(MODBUS_NUM_REGISTERS):
-                d = self._descriptors[i]
-                if d:
-                    entry = {}
-                    entry[KEY_ENTRY_KEY] = d.key
-                    entry[KEY_ENTRY_VALUE] = regs.registers[i]
-                    if isinstance(d, XtSensorEntityDescription):
-                        entry[KEY_ENTRY_INPUT_FACTOR] = d.factor
-                    else:
-                        entry[KEY_ENTRY_INPUT_FACTOR] = None
-                    result.append(entry)
             return result
 
     def find_description(self, key) -> EntityDescription | None:

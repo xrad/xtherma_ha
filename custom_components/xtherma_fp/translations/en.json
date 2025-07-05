@@ -212,6 +212,9 @@
       },
       "day_backup6_in_h": {
         "name": "Daily heating auxiliary stage 2 (6 kW) electric power consumption"
+      },
+      "system_active": {
+        "name": "Heat pump turned on"
       }
     }
   }
