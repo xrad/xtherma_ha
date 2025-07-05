@@ -310,9 +310,11 @@ class OptionsFlowHandler(OptionsFlow):
             if connection_type == CONF_CONNECTION_MODBUSTCP:
                 return await self.async_step_modbus_tcp()
 
+        def_connection = entry.data.get(CONF_CONNECTION, "")
+
         schema = vol.Schema(
             {
-                vol.Required(CONF_CONNECTION): SelectSelector(
+                vol.Required(CONF_CONNECTION, default=def_connection): SelectSelector(
                     SelectSelectorConfig(
                         options=[
                             CONF_CONNECTION_RESTAPI,
