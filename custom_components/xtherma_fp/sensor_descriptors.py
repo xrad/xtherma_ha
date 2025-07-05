@@ -52,13 +52,13 @@ class XtBinarySensorEntityDescription(
     icon_provider: BinaryIconProvider | None = None
 
 
-def _electric_switch_icon(state: bool | None) -> str:
+def _electric_switch_icon(state: bool | None) -> str:  # noqa: FBT001
     if state:
         return "mdi:electric-switch"
     return "mdi:electric-switch-closed"
 
 
-def _pump_icon(state: bool | None) -> str:
+def _pump_icon(state: bool | None) -> str:  # noqa: FBT001
     if state:
         return "mdi:pump"
     return "mdi:pump-off"

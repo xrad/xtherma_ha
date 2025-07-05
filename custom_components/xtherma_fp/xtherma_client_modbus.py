@@ -49,7 +49,7 @@ class XthermaClientModbus(XthermaClient):
         self,
         host: str,
         port: int,
-        address: int
+        address: int,
     ) -> None:
         """Class constructor."""
         self._host = host

@@ -8,7 +8,6 @@ from typing import Any
 import voluptuous as vol
 from homeassistant.config_entries import (
     ConfigEntry,
-    ConfigError,
     ConfigFlow,
     ConfigFlowResult,
     OptionsFlow,
@@ -296,7 +295,7 @@ class OptionsFlowHandler(OptionsFlow):
 
     async def async_step_init(
         self,
-        user_input: dict[str, Any] | None = None,  # noqa: ARG002
+        user_input: dict[str, Any] | None = None,
     ) -> ConfigFlowResult:
         """Manage the options."""
         errors: dict[str, str] = {}
