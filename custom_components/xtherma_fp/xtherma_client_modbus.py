@@ -122,3 +122,11 @@ class XthermaClientModbus(XthermaClient):
                         entry[KEY_ENTRY_INPUT_FACTOR] = None
                     result.append(entry)
             return result
+
+    def find_description(self, key) -> EntityDescription | None:
+        """Find entity description for a given key."""
+        for reg_desc in MODBUS_SENSOR_DESCRIPTIONS:
+            for desc in reg_desc.descriptors:
+                if desc is not None and desc.key.lower() == key.lower():
+                    return desc
+        return None

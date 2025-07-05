@@ -5,6 +5,9 @@ from datetime import UTC, datetime, timedelta
 from typing import Any
 
 import aiohttp
+from homeassistant.helpers.entity import EntityDescription
+
+from custom_components.xtherma_fp.sensor_descriptors import SENSOR_DESCRIPTIONS
 
 from .const import (
     FERNPORTAL_RATE_LIMIT_S,
@@ -74,3 +77,10 @@ class XthermaClientRest(XthermaClient):
             _LOGGER.exception("Unknown API error")
             raise XthermaGeneralError from err
         return []
+
+    def find_description(self, key) -> EntityDescription | None:
+        """Find entity description for a given key."""
+        for desc in SENSOR_DESCRIPTIONS:
+            if desc is not None and desc.key.lower() == key.lower():
+                return desc
+        return None

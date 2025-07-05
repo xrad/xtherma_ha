@@ -29,7 +29,6 @@ from .const import (
 )
 from .coordinator import XthermaDataUpdateCoordinator
 from .sensor_descriptors import (
-    SENSOR_DESCRIPTIONS,
     XtBinarySensorEntityDescription,
     XtSensorEntityDescription,
 )
@@ -77,10 +76,7 @@ def _initialize_sensors(
 
     sensors = []
     for key in coordinator.data:
-        matching_descs_it = (
-            d for d in SENSOR_DESCRIPTIONS if d.key.lower() == key.lower()
-        )
-        desc = next(matching_descs_it, None)
+        desc = coordinator.find_description(key)
         if not desc:
             _LOGGER.error("No sensor description found for key %s", key)
         else:

@@ -5,6 +5,7 @@ import logging
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+from homeassistant.helpers.entity import EntityDescription
 
 from .const import (
     DOMAIN,
@@ -125,3 +126,9 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
             len(telemetry),
         )
         return result
+
+    def find_description(self, key) -> EntityDescription | None:
+        """Find entity description for a given key."""
+        if self._client is not None:
+            return self._client.find_description(key)
+        return None

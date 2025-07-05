@@ -4,6 +4,8 @@ from abc import abstractmethod
 from datetime import timedelta
 from typing import Any
 
+from homeassistant.helpers.entity import EntityDescription
+
 
 class XthermaRateLimitError(Exception):
     """Exception indicating REST API was accessed to frequently."""
@@ -75,4 +77,9 @@ class XthermaClient:
     @abstractmethod
     async def async_get_data(self) -> list[dict[str, Any]]:
         """Obtain fresh data."""
+        raise NotImplementedError
+
+    @abstractmethod
+    def find_description(self, name) -> EntityDescription | None:
+        """Find entity description for a given key."""
         raise NotImplementedError
