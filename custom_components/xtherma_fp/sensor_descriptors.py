@@ -938,4 +938,5 @@ SENSOR_DESCRIPTIONS = [
     _sensor_day_backup6_in_hw,
     _sensor_day_backup3_in_h,
     _sensor_day_backup6_in_h,
+    _sensor_error,
 ]
