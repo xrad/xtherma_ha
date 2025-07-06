@@ -49,6 +49,7 @@ class XtBinarySensorEntityDescription(
     """A binary sensor."""
 
     icon_provider: BinaryIconProvider | None = None
+    low_active: bool = False
 
 
 def _electric_switch_icon(state: bool | None) -> str:  # noqa: FBT001
@@ -64,8 +65,8 @@ def _pump_on_off_icon(state: bool | None) -> str:  # noqa: FBT001
 
 def _error_icon(state: bool | None) -> str:  # noqa: FBT001
     if state:
-        return "mdi:check"
-    return "mdi:alert"
+        return "mdi:alert"
+    return "mdi:check"
 
 
 _opmode_options = ["standby", "heating", "cooling", "water", "auto"]
@@ -699,6 +700,7 @@ _sensor_error = XtBinarySensorEntityDescription(
     key="error",
     device_class=BinarySensorDeviceClass.RUNNING,
     icon_provider=_error_icon,
+    low_active=True,
 )
 
 

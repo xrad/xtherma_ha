@@ -194,7 +194,10 @@ class XthermaBinarySensor(BinarySensorEntity):
         if self._coordinator.data:
             raw_value = self._coordinator.data.get(self.entity_description.key, None)
             if raw_value is not None:
-                return raw_value > 0
+                bool_value = raw_value > 0
+                return (
+                    bool_value if not self.xt_description.low_active else not bool_value
+                )
         return None
 
     @property

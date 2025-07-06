@@ -64,6 +64,10 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
     assert state is not None
     assert state.state == "-1.0"
 
+    state = _find_state(our_sensor_states, "sensor.xtherma_fp_error")
+    assert state is not None
+    assert state.state == "off"
+
 from pymodbus.client import AsyncModbusTcpClient
 
 MODBUS_CLIENT_PATH = "custom_components.xtherma_fp.xtherma_client_modbus.AsyncModbusTcpClient"
