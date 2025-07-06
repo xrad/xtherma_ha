@@ -4,6 +4,9 @@ import logging
 from datetime import timedelta
 from typing import Any
 
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+)
 from homeassistant.helpers.entity import EntityDescription
 from pymodbus.client import (
     AsyncModbusTcpClient,
@@ -77,6 +80,16 @@ class XthermaClientModbus(XthermaClient):
         """Return update interval for data coordinator."""
         return timedelta(seconds=60)
 
+    # apply two's complement for negative values. For now, only temperatures can be
+    # negative.
+    def _decode_int(self, raw_value: int, desc: EntityDescription) -> int:
+        if (
+            desc.device_class == SensorDeviceClass.TEMPERATURE
+            and raw_value > 32767  # noqa: PLR2004
+        ):
+            return raw_value - 65536
+        return raw_value
+
     async def async_get_data(self) -> list[dict[str, Any]]:
         """Obtain fresh data."""
         result: list[dict[str, Any]] = []
@@ -96,7 +109,8 @@ class XthermaClientModbus(XthermaClient):
                     else:
                         entry = {}
                         entry[KEY_ENTRY_KEY] = desc.key
-                        entry[KEY_ENTRY_VALUE] = str(regs.registers[i])
+                        value = self._decode_int(regs.registers[i], desc)
+                        entry[KEY_ENTRY_VALUE] = str(value)
                         if isinstance(desc, XtSensorEntityDescription):
                             entry[KEY_ENTRY_INPUT_FACTOR] = desc.factor
                         else:
