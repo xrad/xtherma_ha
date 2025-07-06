@@ -48,6 +48,8 @@ def __build_sensor(
     if isinstance(desc, XtSensorEntityDescription):
         if desc.device_class == SensorDeviceClass.ENUM:
             return XthermaEnumSensor(coordinator, device_info, desc)
+        if "version" in desc.key:
+            return XthermaVersionSensor(coordinator, device_info, desc)
         return XthermaSensor(coordinator, device_info, desc)
     _LOGGER.error("Unsupported EntityDescription")
     return None
@@ -270,4 +272,19 @@ class XthermaEnumSensor(XthermaSensor):
             index = int(value)
             if 0 <= index < len(options):
                 return options[index]
+        return None
+
+class XthermaVersionSensor(XthermaSensor):
+    """Xtherma Version Value Sensor."""
+
+    @property
+    def native_value(self) -> StateType | date | datetime | Decimal:
+        """Return the value reported by the sensor."""
+        if self._coordinator.data:
+            value = self._coordinator.data.get(self.entity_description.key, None)
+            if not isinstance(value, (int, float)):
+                return None
+            major = int(value // 100)
+            minor = int(value % 100)
+            return f"{major}.{minor:02d}"
         return None

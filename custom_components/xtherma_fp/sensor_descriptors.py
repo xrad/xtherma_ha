@@ -15,6 +15,7 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 from homeassistant.const import (
+    PERCENTAGE,
     REVOLUTIONS_PER_MINUTE,
     UnitOfEnergy,
     UnitOfFrequency,
@@ -56,10 +57,15 @@ def _electric_switch_icon(state: bool | None) -> str:  # noqa: FBT001
     return "mdi:electric-switch-closed"
 
 
-def _pump_icon(state: bool | None) -> str:  # noqa: FBT001
+def _pump_on_off_icon(state: bool | None) -> str:  # noqa: FBT001
     if state:
         return "mdi:pump"
     return "mdi:pump-off"
+
+def _error_icon(state: bool | None) -> str:  # noqa: FBT001
+    if state:
+        return "mdi:check"
+    return "mdi:alert"
 
 
 _opmode_options = ["standby", "heating", "cooling", "water", "auto"]
@@ -141,6 +147,10 @@ _icon_temperature_target_heating = "mdi:home-thermometer-outline"
 _icon_temperature_target_cooling = "mdi:snowflake-thermometer"
 _icon_volume_rate = "mdi:waves-arrow-right"
 _icon_performance = "mdi:poll"
+_icon_pump = "mdi:pump"
+_icon_hot_water = "mdi:water-boiler"
+_icon_heating = "mdi:heating-coil"
+_icon_cooling = "mdi:snowflake"
 
 _sensor_tvl = XtSensorEntityDescription(
     key="tvl",
@@ -259,33 +269,63 @@ _sensor_evu = XtBinarySensorEntityDescription(
 _sensor_pk = XtBinarySensorEntityDescription(
     key="pk",
     device_class=BinarySensorDeviceClass.RUNNING,
-    icon_provider=_pump_icon,
+    icon_provider=_pump_on_off_icon,
+)
+_sensor_pk_amount = XtSensorEntityDescription(
+    key="pk_amount",
+    factor="/10",
+    native_unit_of_measurement=PERCENTAGE,
+    device_class=None,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_pump,
 )
 _sensor_pk1 = XtBinarySensorEntityDescription(
     key="pk1",
     device_class=BinarySensorDeviceClass.RUNNING,
-    icon_provider=_pump_icon,
+    icon_provider=_pump_on_off_icon,
 )
 _sensor_pk2 = XtBinarySensorEntityDescription(
     key="pk2",
     device_class=BinarySensorDeviceClass.RUNNING,
-    icon_provider=_pump_icon,
+    icon_provider=_pump_on_off_icon,
 )
 _sensor_pww = XtBinarySensorEntityDescription(
     key="pww",
     device_class=BinarySensorDeviceClass.RUNNING,
-    icon_provider=_pump_icon,
+    icon_provider=_pump_on_off_icon,
 )
 _sensor_hw_target = XtSensorEntityDescription(
     key="hw_target",
     native_unit_of_measurement=UnitOfTemperature.CELSIUS,
     device_class=SensorDeviceClass.TEMPERATURE,
     state_class=SensorStateClass.MEASUREMENT,
-    factor="/10",
+    icon=_icon_temperature_target_water,
+)
+_sensor_hw_keep_target = XtSensorEntityDescription(
+    key="hw_keep_target",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
     icon=_icon_temperature_target_water,
 )
 _sensor_h_target = XtSensorEntityDescription(
     key="h_target",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    factor="/10",
+    icon=_icon_temperature_target_heating,
+)
+_sensor_h1_target = XtSensorEntityDescription(
+    key="h1_target",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    factor="/10",
+    icon=_icon_temperature_target_heating,
+)
+_sensor_h2_target = XtSensorEntityDescription(
+    key="h2_target",
     native_unit_of_measurement=UnitOfTemperature.CELSIUS,
     device_class=SensorDeviceClass.TEMPERATURE,
     state_class=SensorStateClass.MEASUREMENT,
@@ -300,8 +340,23 @@ _sensor_c_target = XtSensorEntityDescription(
     factor="/10",
     icon=_icon_temperature_target_cooling,
 )
+_sensor_c1_target = XtSensorEntityDescription(
+    key="c1_target",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    factor="/10",
+    icon=_icon_temperature_target_cooling,
+)
+_sensor_c2_target = XtSensorEntityDescription(
+    key="c2_target",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    factor="/10",
+    icon=_icon_temperature_target_cooling,
+)
 _sensor_in_hp = XtSensorEntityDescription(
-
     key="in_hp",
     native_unit_of_measurement=UnitOfPower.WATT,
     device_class=SensorDeviceClass.POWER,
@@ -309,7 +364,6 @@ _sensor_in_hp = XtSensorEntityDescription(
     icon=_icon_electric_power,
 )
 _sensor_v = XtSensorEntityDescription(
-
     key="v",
     native_unit_of_measurement=UnitOfVolumeFlowRate.LITERS_PER_MINUTE,
     device_class=SensorDeviceClass.VOLUME_FLOW_RATE,
@@ -318,7 +372,6 @@ _sensor_v = XtSensorEntityDescription(
     icon=_icon_volume_rate,
 )
 _sensor_out_hp = XtSensorEntityDescription(
-
     key="out_hp",
     native_unit_of_measurement=UnitOfPower.WATT,
     device_class=SensorDeviceClass.POWER,
@@ -326,21 +379,18 @@ _sensor_out_hp = XtSensorEntityDescription(
     icon=_icon_thermal_power,
 )
 _sensor_efficiency_hp = XtSensorEntityDescription(
-
     key="efficiency_hp",
     state_class=SensorStateClass.MEASUREMENT,
     factor="/100",
     icon=_icon_performance,
 )
 _sensor_efficiency_total = XtSensorEntityDescription(
-
     key="efficiency_total",
     state_class=SensorStateClass.MEASUREMENT,
     factor="/100",
     icon=_icon_performance,
 )
 _sensor_in_backup = XtSensorEntityDescription(
-
     key="in_backup",
     native_unit_of_measurement=UnitOfPower.WATT,
     device_class=SensorDeviceClass.POWER,
@@ -476,6 +526,181 @@ _sensor_system_active = XtBinarySensorEntityDescription(
     key="system_active",
     device_class=BinarySensorDeviceClass.POWER,
 )
+_sensor_sw_version = XtSensorEntityDescription(
+    key="sw_version",
+    icon="mdi:information-outline",
+)
+_sensor_hotwater_now = XtBinarySensorEntityDescription(
+    key="hotwater_now",
+    device_class=BinarySensorDeviceClass.RUNNING,
+    icon=_icon_hot_water,
+)
+_sensor_hk1_enabled = XtBinarySensorEntityDescription(
+    key="hk1_enabled",
+    device_class=BinarySensorDeviceClass.RUNNING,
+    icon=_icon_heating,
+)
+_sensor_hk1_ta_p1 = XtSensorEntityDescription(
+    key="hk1_ta_p1",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_hk1_ta_p2 = XtSensorEntityDescription(
+    key="hk1_ta_p2",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_hk1_target_p1 = XtSensorEntityDescription(
+    key="hk1_target_p1",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_hk1_target_p2 = XtSensorEntityDescription(
+    key="hk1_target_p2",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_hk1_h_target_const = XtSensorEntityDescription(
+    key="hk1_h_target_const",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_hk2_enabled = XtBinarySensorEntityDescription(
+    key="hk2_enabled",
+    device_class=BinarySensorDeviceClass.RUNNING,
+    icon=_icon_heating,
+)
+_sensor_hk2_ta_p1 = XtSensorEntityDescription(
+    key="hk2_ta_p1",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_hk2_ta_p2 = XtSensorEntityDescription(
+    key="hk2_ta_p2",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_hk2_target_p1 = XtSensorEntityDescription(
+    key="hk2_target_p1",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_hk2_target_p2 = XtSensorEntityDescription(
+    key="hk2_target_p2",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_hk2_h_target_const = XtSensorEntityDescription(
+    key="hk2_h_target_const",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_kk1_enabled = XtBinarySensorEntityDescription(
+    key="kk1_enabled",
+    device_class=BinarySensorDeviceClass.RUNNING,
+    icon=_icon_cooling,
+)
+_sensor_kk1_ta_p1 = XtSensorEntityDescription(
+    key="kk1_ta_p1",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_kk1_ta_p2 = XtSensorEntityDescription(
+    key="kk1_ta_p2",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_kk1_target_p1 = XtSensorEntityDescription(
+    key="kk1_target_p1",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_kk1_target_p2 = XtSensorEntityDescription(
+    key="kk1_target_p2",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_kk1_c_target_const = XtSensorEntityDescription(
+    key="kk1_c_target_const",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_kk2_enabled = XtBinarySensorEntityDescription(
+    key="kk2_enabled",
+    device_class=BinarySensorDeviceClass.RUNNING,
+    icon=_icon_cooling,
+)
+_sensor_kk2_ta_p1 = XtSensorEntityDescription(
+    key="kk2_ta_p1",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_kk2_ta_p2 = XtSensorEntityDescription(
+    key="kk2_ta_p2",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_kk2_target_p1 = XtSensorEntityDescription(
+    key="kk2_target_p1",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_kk2_target_p2 = XtSensorEntityDescription(
+    key="kk2_target_p2",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_kk2_c_target_const = XtSensorEntityDescription(
+    key="kk2_c_target_const",
+    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+    device_class=SensorDeviceClass.TEMPERATURE,
+    state_class=SensorStateClass.MEASUREMENT,
+    icon=_icon_temperature,
+)
+_sensor_error = XtBinarySensorEntityDescription(
+    key="error",
+    device_class=BinarySensorDeviceClass.RUNNING,
+    icon_provider=_error_icon,
+)
+
 
 @dataclass(kw_only=True, frozen=True)
 class ModbusRegisterSet:
@@ -490,72 +715,72 @@ MODBUS_SENSORS_GENERAL_STATE = ModbusRegisterSet(
     descriptors=[
         _sensor_system_active,
         _sensor_mode_3,
-        None,
+        _sensor_hotwater_now,
     ],
 )
 
 MODBUS_SENSORS_HEATING_CURVE_1 = ModbusRegisterSet(
     base=10,
     descriptors=[
-        None,
-        None,
-        None,
-        None,
-        None,
-        None,
+        _sensor_hk1_enabled,
+        _sensor_hk1_ta_p1,
+        _sensor_hk1_ta_p2,
+        _sensor_hk1_target_p1,
+        _sensor_hk1_target_p2,
+        _sensor_hk1_h_target_const,
     ],
 )
 
 MODBUS_SENSORS_COOLING_CURVE_1 = ModbusRegisterSet(
     base=20,
     descriptors=[
-        None,
-        None,
-        None,
-        None,
-        None,
-        None,
+        _sensor_kk1_enabled,
+        _sensor_kk1_ta_p1,
+        _sensor_kk1_ta_p2,
+        _sensor_kk1_target_p1,
+        _sensor_kk1_target_p2,
+        _sensor_kk1_c_target_const,
     ],
 )
 
 MODBUS_SENSORS_HEATING_CURVE_2 = ModbusRegisterSet(
     base=30,
     descriptors=[
-        None,
-        None,
-        None,
-        None,
-        None,
-        None,
-        None,
+        _sensor_hk2_enabled,
+        _sensor_hk2_ta_p1,
+        _sensor_hk2_ta_p2,
+        _sensor_hk2_target_p1,
+        _sensor_hk2_target_p2,
+        _sensor_hk2_h_target_const,
+        _sensor_kk2_enabled,
     ],
 )
 
 MODBUS_SENSORS_COOLING_CURVE_2 = ModbusRegisterSet(
     base=40,
     descriptors=[
-        None,
-        None,
-        None,
-        None,
-        None,
+        _sensor_kk2_ta_p1,
+        _sensor_kk2_ta_p2,
+        _sensor_kk2_target_p1,
+        _sensor_kk2_target_p2,
+        _sensor_kk2_c_target_const,
     ],
 )
 
 MODBUS_SENSORS_HOT_WATER = ModbusRegisterSet(
     base=50,
     descriptors=[
-        None,
-        None,
+        _sensor_hw_target,
+        _sensor_hw_keep_target,
     ],
 )
 
 MODBUS_SENSORS_NETWORK = ModbusRegisterSet(
     base=100,
     descriptors=[
+        _sensor_sw_version,
         None,
-        None,
-        None,
+        _sensor_error,
         None,
         None,
         _sensor_evu,
@@ -566,11 +791,11 @@ MODBUS_SENSORS_HEATING_STATE = ModbusRegisterSet(
     base=110,
     descriptors=[
         _sensor_h_target,
-        None,
-        None,
+        _sensor_h1_target,
+        _sensor_h2_target,
         _sensor_c_target,
-        None,
-        None,
+        _sensor_c1_target,
+        _sensor_c2_target,
         _sensor_hw_target,
     ],
 )
@@ -590,7 +815,7 @@ MODBUS_SENSORS_HYDRAULIC_CIRCUIT = ModbusRegisterSet(
     descriptors=[
         _sensor_v,
         _sensor_pk,
-        None,
+        _sensor_pk_amount,
         _sensor_pk1,
         _sensor_pk2,
         _sensor_pww,
@@ -676,12 +901,17 @@ SENSOR_DESCRIPTIONS = [
     _sensor_tr,
     _sensor_evu,
     _sensor_pk,
+    _sensor_pk_amount,
     _sensor_pk1,
     _sensor_pk2,
     _sensor_pww,
     _sensor_hw_target,
     _sensor_h_target,
+    _sensor_h1_target,
+    _sensor_h2_target,
     _sensor_c_target,
+    _sensor_c1_target,
+    _sensor_c2_target,
     _sensor_in_hp,
     _sensor_v,
     _sensor_out_hp,

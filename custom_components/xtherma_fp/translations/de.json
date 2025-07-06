@@ -109,6 +109,9 @@
       "pk": {
         "name": "[PK] Umwälzpumpe eingeschaltet"
       },
+      "pk_amount": {
+        "name": "[PK] Umwälzpumpe Leistung"
+      },
       "pk1": {
         "name": "[PK1] Umwälzpumpe Kreis 1 eingeschaltet"
       },
@@ -121,11 +124,26 @@
       "hw_target": {
         "name": "Sollwert Warmwasserbereitung"
       },
+      "hw_keep_target": {
+        "name": "Warmhalten Sollwert"
+      },
       "h_target": {
         "name": "Sollwert Heizbetrieb"
       },
+      "h1_target": {
+        "name": "Sollwert Heizen 1"
+      },
+      "h2_target": {
+        "name": "Sollwert Heizen 2"
+      },
       "c_target": {
         "name": "Sollwert Kühlbetrieb"
+      },
+      "c1_target": {
+        "name": "Sollwert Kühlen 1"
+      },
+      "c2_target": {
+        "name": "Sollwert Kühlen 2"
       },
       "in_hp": {
         "name": "Leistungsaufnahme Wärmepumpe (elektrisch)"
@@ -215,6 +233,87 @@
       },
       "system_active": {
         "name": "Wärmepumpe eingeschaltet"
+      },
+      "sw_version": {
+        "name": "Software Version"
+      },
+      "hotwater_now": {
+        "name": "Warmwasser sofort"
+      },
+      "hk1_enabled": {
+        "name": "Heizkurve 1 aktiviert"
+      },
+      "hk1_ta_p1": {
+        "name": "Heizkurve 1 Außentemperatur niedrig (P1)"
+      },
+      "hk1_ta_p2": {
+        "name": "Heizkurve 1 Außentemperatur hoch (P2)"
+      },
+      "hk1_target_p1": {
+        "name": "Heizkurve 1 Heiztemperatur niedrig (P1)"
+      },
+      "hk1_target_p2": {
+        "name": "Heizkurve 1 Heiztemperatur hoch (P2)"
+      },
+      "hk1_h_target_const": {
+        "name": "Heizkurve 1 Konstante Heiztemperatur"
+      },
+      "hk2_enabled": {
+        "name": "Heizkurve 2 aktiviert"
+      },
+      "hk2_ta_p1": {
+        "name": "Heizkurve 2 Außentemperatur niedrig (P1)"
+      },
+      "hk2_ta_p2": {
+        "name": "Heizkurve 2 Außentemperatur niedrig (P2)"
+      },
+      "hk2_target_p1": {
+        "name": "Heizkurve 2 Heiztemperatur hoch (P1)"
+      },
+      "hk2_target_p2": {
+        "name": "Heizkurve 2 Heiztemperatur hoch (P2)"
+      },
+      "hk2_h_target_const": {
+        "name": "Heizkurve 2 Konstante Heiztemperatur"
+      },
+      "kk1_enabled": {
+        "name": "Kühlkurve 1 aktiviert"
+      },
+      "kk1_ta_p1": {
+        "name": "Kühlkurve 1 Außentemperatur niedrig (P1)"
+      },
+      "kk1_ta_p2": {
+        "name": "Kühlkurve 1 Außentemperatur hoch (P2)"
+      },
+      "kk1_target_p1": {
+        "name": "Kühlkurve 1 Kühltemperatur niedrig (P1)"
+      },
+      "kk1_target_p2": {
+        "name": "Kühlkurve 1 Kühltemperatur hoch (P2)"
+      },
+      "kk1_c_target_const": {
+        "name": "Kühlkurve 1 Konstante Kühltemperatur"
+      },
+      "kk2_enabled": {
+        "name": "Kühlkurve 2 aktiviert"
+      },
+      "kk2_ta_p1": {
+        "name": "Kühlkurve 2 Außentemperatur niedrig (P1)"
+      },
+      "kk2_ta_p2": {
+        "name": "Kühlkurve 2 Außentemperatur hoch (P2)"
+      },
+      "kk2_target_p1": {
+        "name": "Kühlkurve 2 Kühltemperatur niedrig (P1)"
+      },
+      "kk2_target_p2": {
+        "name": "Kühlkurve 2 Kühltemperatur hoch (P2)"
+      },
+      "kk2_c_target_const": {
+        "name": "Kühlkurve 1 Konstante Kühltemperatur"
+      },
+      "error": {
+        "name": "Fehler, Anlage gestoppt"
       }
     }
   }

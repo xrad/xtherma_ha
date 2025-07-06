@@ -48,13 +48,21 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
         for state in hass.states.async_all("sensor")
         if state.entity_id.startswith("sensor.xtherma_fp")
     ]
-    assert len(our_sensor_states) == 43
+    assert len(our_sensor_states) == 76
 
     # check some entities
     state = _find_state(our_sensor_states, "sensor.xtherma_fp_system_active")
     assert state is not None
     assert state.state == "on"
     assert state.attributes["device_class"] == BinarySensorDeviceClass.POWER
+
+    state = _find_state(our_sensor_states, "sensor.xtherma_fp_sw_version")
+    assert state is not None
+    assert state.state == "0.01"
+
+    state = _find_state(our_sensor_states, "sensor.xtherma_fp_hk1_ta_p1")
+    assert state is not None
+    assert state.state == "-1.0"
 
 from pymodbus.client import AsyncModbusTcpClient
 
@@ -100,7 +108,7 @@ async def mock_modbus_tcp_client(request):
     [
         ([
             list(range(1, len(MODBUS_SENSORS_GENERAL_STATE.descriptors) + 1)),
-            list(range(1, len(MODBUS_SENSORS_HEATING_CURVE_1.descriptors) + 1)),
+            [ 1, -1 + 65536, 9, 10, 20, 23 ],
             list(range(1, len(MODBUS_SENSORS_COOLING_CURVE_1.descriptors) + 1)),
             list(range(1, len(MODBUS_SENSORS_HEATING_CURVE_2.descriptors) + 1)),
             list(range(1, len(MODBUS_SENSORS_COOLING_CURVE_2.descriptors) + 1)),

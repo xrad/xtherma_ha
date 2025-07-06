@@ -109,6 +109,9 @@
       "pk": {
         "name": "[PK] Circulation pump enabled"
       },
+      "pk_amount": {
+        "name": "[PK] Circulation pump amount"
+      },
       "pk1": {
         "name": "[PK1] Circulation pump circuit 1 enabled"
       },
@@ -121,11 +124,26 @@
       "hw_target": {
         "name": "Target domestic hot water production"
       },
+      "hw_keep_target": {
+        "name": "Keep warm target"
+      },
       "h_target": {
         "name": "Target heating operation"
       },
+      "h1_target": {
+        "name": "Target heating 1"
+      },
+      "h2_target": {
+        "name": "Target heating 2"
+      },
       "c_target": {
         "name": "Target cooling operation"
+      },
+      "c1_target": {
+        "name": "Target cooling 1"
+      },
+      "c2_target": {
+        "name": "Target cooling 2"
       },
       "in_hp": {
         "name": "Power consumption heat pump (electric)"
@@ -215,6 +233,87 @@
       },
       "system_active": {
         "name": "Heat pump turned on"
+      },
+      "sw_version": {
+        "name": "Software version"
+      },
+      "hotwater_now": {
+        "name": "Hot water now"
+      },
+      "hk1_enabled": {
+        "name": "Heating curve 1 enabled"
+      },
+      "hk1_ta_p1": {
+        "name": "Heating curve 1 outside temperature low (P1)"
+      },
+      "hk1_ta_p2": {
+        "name": "Heating curve 1 outside temperature high (P2)"
+      },
+      "hk1_target_p1": {
+        "name": "Heating curve 1 heating temperature low (P1)"
+      },
+      "hk1_target_p2": {
+        "name": "Heating curve 1 heating temperature high (P2)"
+      },
+      "hk1_h_target_const": {
+        "name": "Heating curve 1 constant heating temperature"
+      },
+      "hk2_enabled": {
+        "name": "Heating curve 2 enabled"
+      },
+      "hk2_ta_p1": {
+        "name": "Heating curve 2 outside temperature low (P1)"
+      },
+      "hk2_ta_p2": {
+        "name": "Heating curve 2 outside temperature high (P2)"
+      },
+      "hk2_target_p1": {
+        "name": "Heating curve 2 heating temperature low (P1)"
+      },
+      "hk2_target_p2": {
+        "name": "Heating curve 2 heating temperature high (P2)"
+      },
+      "hk2_h_target_const": {
+        "name": "Heating curve 2 constant heating temperature"
+      },
+      "kk1_enabled": {
+        "name": "Cooling curve 1 aktiviert"
+      },
+      "kk1_ta_p1": {
+        "name": "Cooling curve 1 outside temperature low (P1)"
+      },
+      "kk1_ta_p2": {
+        "name": "Cooling curve 1 outside temperature high (P2)"
+      },
+      "kk1_target_p1": {
+        "name": "Cooling curve 1 cooling temperature low (P1)"
+      },
+      "kk1_target_p2": {
+        "name": "Cooling curve 1 cooling temperature high (P2)"
+      },
+      "kk1_c_target_const": {
+        "name": "Cooling curve 1 constant cooling temperature"
+      },
+      "kk2_enabled": {
+        "name": "Cooling curve 2 aktiviert"
+      },
+      "kk2_ta_p1": {
+        "name": "Cooling curve 2 outside temperature low (P1)"
+      },
+      "kk2_ta_p2": {
+        "name": "Cooling curve 2 outside temperature high (P2)"
+      },
+      "kk2_target_p1": {
+        "name": "Cooling curve 2 cooling temperature low (P1)"
+      },
+      "kk2_target_p2": {
+        "name": "Cooling curve 2 cooling temperature high (P2)"
+      },
+      "kk2_c_target_const": {
+        "name": "Cooling curve 2 constant cooling temperature"
+      },
+      "error": {
+        "name": "Error, system stopped"
       }
     }
   }
