@@ -7,15 +7,15 @@ def test_json_load_value_fixture():
     assert data.get("serial_number") == "FP-04-123456"
     settings = data.get("settings")
     assert isinstance(settings, list)
-    assert len(settings) == 31
+    assert len(settings) == 29
     telemetry = data.get("telemetry")
     assert isinstance(telemetry, list)
-    assert len(telemetry) == 46
+    assert len(telemetry) == 53
     t0 = telemetry[0]
     assert isinstance(t0, dict)
     assert t0.get("key") == "tvl"
     assert t0.get("input_factor") == "/10"
-    t45 = telemetry[45]
-    assert isinstance(t45, dict)
-    assert t45.get("key") == "day_backup6_in_h"
-    assert t45.get("input_factor") == "/100"
+    tLast = telemetry[52]
+    assert isinstance(tLast, dict)
+    assert tLast.get("key") == "mode_3"
+    assert tLast.get("value") == "3"
