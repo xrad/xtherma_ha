@@ -65,7 +65,7 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
         for state in hass.states.async_all("sensor")
         if state.entity_id.startswith("sensor.xtherma_fp")
     ]
-    assert len(our_sensors) == 46
+    assert len(our_sensors) == 52
 
     # check first sensor state
     state = our_sensors[0]

@@ -109,8 +109,8 @@
       "pk": {
         "name": "[PK] Umwälzpumpe eingeschaltet"
       },
-      "pk_amount": {
-        "name": "[PK] Umwälzpumpe Leistung"
+      "pkl": {
+        "name": "[PKL] Umwälzpumpe Leistung"
       },
       "pk1": {
         "name": "[PK1] Umwälzpumpe Kreis 1 eingeschaltet"
@@ -167,8 +167,19 @@
         "name": "Leistungsabgabe Zusatz-/Notheizung (thermisch)"
       },
       "mode_3": {
+        "name": "Betriebsmodus 3",
+        "state": {
+          "standby": "Standby",
+          "heating": "Heizbetrieb",
+          "cooling": "Kühlbetrieb",
+          "water": "Warmwasser",
+          "auto": "Automatikbetrieb"
+        }
+      },
+      "mode": {
         "name": "Betriebsmodus",
         "state": {
+          "n/a": "n/a",
           "standby": "Standby",
           "heating": "Heizbetrieb",
           "cooling": "Kühlbetrieb",
@@ -234,8 +245,8 @@
       "system_active": {
         "name": "Wärmepumpe eingeschaltet"
       },
-      "sw_version": {
-        "name": "Software Version"
+      "controller_v": {
+        "name": "Regler Version"
       },
       "hotwater_now": {
         "name": "Warmwasser sofort"
@@ -313,7 +324,10 @@
         "name": "Kühlkurve 1 Konstante Kühltemperatur"
       },
       "error": {
-        "name": "Fehler, Anlage gestoppt"
+        "name": "Anlage ungestört"
+      },
+      "enwg14": {
+        "name": "§14a EnWG Status"
       }
     }
   }

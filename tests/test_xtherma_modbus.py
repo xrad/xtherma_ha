@@ -17,9 +17,6 @@ from custom_components.xtherma_fp.const import (
     DOMAIN,
 )
 
-from homeassistant.components.sensor import (
-    SensorDeviceClass,
-)
 from custom_components.xtherma_fp.sensor_descriptors import MODBUS_SENSORS_COOLING_CURVE_1, MODBUS_SENSORS_COOLING_CURVE_2, MODBUS_SENSORS_GENERAL_STATE, MODBUS_SENSORS_HEATING_CONTROL, MODBUS_SENSORS_HEATING_CURVE_1, MODBUS_SENSORS_HEATING_CURVE_2, MODBUS_SENSORS_HEATING_STATE, MODBUS_SENSORS_HOT_WATER, MODBUS_SENSORS_HYDRAULIC_CIRCUIT, MODBUS_SENSORS_NETWORK, MODBUS_SENSORS_PERFORMANCE, MODBUS_SENSORS_POWER, MODBUS_SENSORS_TEMPERATURES
 from custom_components.xtherma_fp.xtherma_data import XthermaData
 from homeassistant.core import HomeAssistant
@@ -48,7 +45,7 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
         for state in hass.states.async_all("sensor")
         if state.entity_id.startswith("sensor.xtherma_fp")
     ]
-    assert len(our_sensor_states) == 76
+    assert len(our_sensor_states) == 82
 
     # check some entities
     state = _find_state(our_sensor_states, "sensor.xtherma_fp_system_active")
@@ -56,7 +53,7 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
     assert state.state == "on"
     assert state.attributes["device_class"] == BinarySensorDeviceClass.POWER
 
-    state = _find_state(our_sensor_states, "sensor.xtherma_fp_sw_version")
+    state = _find_state(our_sensor_states, "sensor.xtherma_fp_controller_v")
     assert state is not None
     assert state.state == "0.01"
 
@@ -66,7 +63,7 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
 
     state = _find_state(our_sensor_states, "sensor.xtherma_fp_error")
     assert state is not None
-    assert state.state == "off"
+    assert state.state == "on"
 
 from pymodbus.client import AsyncModbusTcpClient
 

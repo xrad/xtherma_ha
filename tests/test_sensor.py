@@ -10,6 +10,10 @@ from homeassistant.components.sensor import (
     SensorDeviceClass,
 )
 from custom_components.xtherma_fp.sensor_descriptors import MODBUS_SENSOR_DESCRIPTIONS, SENSOR_DESCRIPTIONS
+from homeassistant.components.sensor import (
+    SensorEntityDescription
+)
+from homeassistant.helpers.entity import EntityDescription
 
 
 async def _find_state(hass: HomeAssistant, id: str) -> State:
@@ -55,6 +59,25 @@ async def test_opmode_sensor_icon(hass, init_integration):
     assert entity.icon == "mdi:thermometer-water"
 
 
+def _get_all_sensor_descriptions() -> list[EntityDescription]:
+    keys: set[str] = set()
+    descs: list[EntityDescription] = []
+
+    all_descs: list[EntityDescription] = [
+        entity_description
+        for reg_desc in MODBUS_SENSOR_DESCRIPTIONS
+        for entity_description in reg_desc.descriptors
+        if isinstance(entity_description, EntityDescription)
+    ]
+    all_descs.extend(SENSOR_DESCRIPTIONS)
+
+    for entity_description in all_descs:
+        if isinstance(entity_description, EntityDescription):
+            if entity_description.key not in keys:
+                keys.add(entity_description.key)
+                descs.append(entity_description)
+    return descs
+
 async def test_enum_sensor_translation(hass, init_integration):
     """Ensure all enum sensor values are translated."""
     prefix = f"component.{DOMAIN}.entity.{Platform.SENSOR.value}"
@@ -67,13 +90,15 @@ async def test_enum_sensor_translation(hass, init_integration):
         }
 
         # collect all options of all enum sensors
+        sensor_descs = _get_all_sensor_descriptions()
         sensor_options = {
             f"{prefix}.{entity_description.key}.state.{option}"
-            for entity_description in SENSOR_DESCRIPTIONS
+            for entity_description in sensor_descs
+            if isinstance(entity_description,SensorEntityDescription)
             if entity_description.device_class == SensorDeviceClass.ENUM
+            if entity_description.options is not None
             for option in entity_description.options
         }
-
         assert sensor_options == translation_states
 
 

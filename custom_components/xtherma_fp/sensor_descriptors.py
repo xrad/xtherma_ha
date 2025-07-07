@@ -23,6 +23,7 @@ from homeassistant.const import (
     UnitOfTemperature,
     UnitOfVolumeFlowRate,
 )
+from homeassistant.helpers.entity import EntityDescription
 from homeassistant.helpers.typing import StateType
 
 type SensorIconProvider = Callable[[StateType | date | datetime | Decimal], str]
@@ -40,6 +41,11 @@ class XtSensorEntityDescription(XtModbusEntityDescription, SensorEntityDescripti
     icon_provider: SensorIconProvider | None = None
 
 
+@dataclass(kw_only=True, frozen=True)
+class XtVersionSensorEntityDescription(XtSensorEntityDescription):
+    """A version value sensor."""
+
+
 type BinaryIconProvider = Callable[[bool | None], str]
 
 
@@ -49,7 +55,6 @@ class XtBinarySensorEntityDescription(
     """A binary sensor."""
 
     icon_provider: BinaryIconProvider | None = None
-    low_active: bool = False
 
 
 def _electric_switch_icon(state: bool | None) -> str:  # noqa: FBT001
@@ -65,18 +70,37 @@ def _pump_on_off_icon(state: bool | None) -> str:  # noqa: FBT001
 
 def _error_icon(state: bool | None) -> str:  # noqa: FBT001
     if state:
-        return "mdi:alert"
-    return "mdi:check"
+        return "mdi:check"
+    return "mdi:alert"
 
 
-_opmode_options = ["standby", "heating", "cooling", "water", "auto"]
+_opmode_3_options = ["standby", "heating", "cooling", "water", "auto"]
 
-_opmode_icon_map = {
+_opmode_3_icon_map = {
     0: "mdi:power-standby",
     1: "mdi:heating-coil",
     2: "mdi:snowflake",
     3: "mdi:thermometer-water",
     4: "mdi:brightness-auto",
+}
+
+def _operation_mode_3_icon(state: StateType | date | datetime | Decimal) -> str:
+    if isinstance(state, str):
+        try:
+            index = _opmode_3_options.index(state)
+            return _opmode_3_icon_map.get(index, "mdi:cogs")
+        except ValueError:
+            pass
+    return "mdi:cogs"
+
+_opmode_options = ["n/a", "standby", "heating", "cooling", "water", "auto"]
+
+_opmode_icon_map = {
+    1: "mdi:power-standby",
+    2: "mdi:heating-coil",
+    3: "mdi:snowflake",
+    4: "mdi:thermometer-water",
+    5: "mdi:brightness-auto",
 }
 
 
@@ -263,6 +287,9 @@ _sensor_tr = XtSensorEntityDescription(
     factor="/10",
     icon=_icon_temperature,
 )
+_sensor_enwg14 = XtBinarySensorEntityDescription(
+    key="enwg14",
+)
 _sensor_evu = XtBinarySensorEntityDescription(
     key="evu",
     icon_provider=_electric_switch_icon,
@@ -272,8 +299,8 @@ _sensor_pk = XtBinarySensorEntityDescription(
     device_class=BinarySensorDeviceClass.RUNNING,
     icon_provider=_pump_on_off_icon,
 )
-_sensor_pk_amount = XtSensorEntityDescription(
-    key="pk_amount",
+_sensor_pkl = XtSensorEntityDescription(
+    key="pkl",
     factor="/10",
     native_unit_of_measurement=PERCENTAGE,
     device_class=None,
@@ -408,6 +435,12 @@ _sensor_out_backup = XtSensorEntityDescription(
 _sensor_mode_3 = XtSensorEntityDescription(
     key="mode_3",
     device_class=SensorDeviceClass.ENUM,
+    options=_opmode_3_options,
+    icon_provider=_operation_mode_3_icon,
+)
+_sensor_mode = XtSensorEntityDescription(
+    key="mode",
+    device_class=SensorDeviceClass.ENUM,
     options=_opmode_options,
     icon_provider=_operation_mode_icon,
 )
@@ -527,8 +560,8 @@ _sensor_system_active = XtBinarySensorEntityDescription(
     key="system_active",
     device_class=BinarySensorDeviceClass.POWER,
 )
-_sensor_sw_version = XtSensorEntityDescription(
-    key="sw_version",
+_sensor_controller_v = XtVersionSensorEntityDescription(
+    key="controller_v",
     icon="mdi:information-outline",
 )
 _sensor_hotwater_now = XtBinarySensorEntityDescription(
@@ -700,7 +733,6 @@ _sensor_error = XtBinarySensorEntityDescription(
     key="error",
     device_class=BinarySensorDeviceClass.RUNNING,
     icon_provider=_error_icon,
-    low_active=True,
 )
 
 
@@ -780,11 +812,11 @@ MODBUS_SENSORS_HOT_WATER = ModbusRegisterSet(
 MODBUS_SENSORS_NETWORK = ModbusRegisterSet(
     base=100,
     descriptors=[
-        _sensor_sw_version,
-        None,
+        _sensor_controller_v,
+        _sensor_mode,
         _sensor_error,
-        None,
-        None,
+        _sensor_enwg14,
+        _sensor_sg,
         _sensor_evu,
     ],
 )
@@ -809,6 +841,9 @@ MODBUS_SENSORS_HEATING_CONTROL = ModbusRegisterSet(
         _sensor_tk1,
         _sensor_tk2,
         _sensor_tw,
+        _sensor_tr,
+        _sensor_trl,
+        _sensor_tvl,
     ],
 )
 
@@ -817,7 +852,7 @@ MODBUS_SENSORS_HYDRAULIC_CIRCUIT = ModbusRegisterSet(
     descriptors=[
         _sensor_v,
         _sensor_pk,
-        _sensor_pk_amount,
+        _sensor_pkl,
         _sensor_pk1,
         _sensor_pk2,
         _sensor_pww,
@@ -886,7 +921,7 @@ MODBUS_SENSOR_DESCRIPTIONS: list[ModbusRegisterSet] = [
     MODBUS_SENSORS_POWER,
 ]
 
-SENSOR_DESCRIPTIONS = [
+SENSOR_DESCRIPTIONS: list[EntityDescription] = [
     _sensor_tvl,
     _sensor_trl,
     _sensor_tw,
@@ -903,7 +938,7 @@ SENSOR_DESCRIPTIONS = [
     _sensor_tr,
     _sensor_evu,
     _sensor_pk,
-    _sensor_pk_amount,
+    _sensor_pkl,
     _sensor_pk1,
     _sensor_pk2,
     _sensor_pww,
@@ -939,4 +974,5 @@ SENSOR_DESCRIPTIONS = [
     _sensor_day_backup3_in_h,
     _sensor_day_backup6_in_h,
     _sensor_error,
+    _sensor_controller_v,
 ]

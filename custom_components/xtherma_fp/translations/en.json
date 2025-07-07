@@ -109,8 +109,8 @@
       "pk": {
         "name": "[PK] Circulation pump enabled"
       },
-      "pk_amount": {
-        "name": "[PK] Circulation pump amount"
+      "pkl": {
+        "name": "[PKL] Circulation pump performance"
       },
       "pk1": {
         "name": "[PK1] Circulation pump circuit 1 enabled"
@@ -176,6 +176,17 @@
           "auto": "automatic"
         }
       },
+      "mode": {
+        "name": "Operating mode",
+        "state": {
+          "n/a": "n/a",
+          "standby": "stand-by",
+          "heating": "heating",
+          "cooling": "cooling",
+          "water": "warm water",
+          "auto": "automatic"
+        }
+      },
       "ta8": {
         "name": "[TA8] Outdoor temperature average (8h)"
       },
@@ -234,8 +245,8 @@
       "system_active": {
         "name": "Heat pump turned on"
       },
-      "sw_version": {
-        "name": "Software version"
+      "controller_v": {
+        "name": "Controller version"
       },
       "hotwater_now": {
         "name": "Hot water now"
@@ -313,7 +324,10 @@
         "name": "Cooling curve 2 constant cooling temperature"
       },
       "error": {
-        "name": "Error, system stopped"
+        "name": "System ok"
+      },
+      "enwg14": {
+        "name": "§14a EnWG state"
       }
     }
   }

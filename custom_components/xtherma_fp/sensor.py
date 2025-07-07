@@ -31,6 +31,7 @@ from .coordinator import XthermaDataUpdateCoordinator
 from .sensor_descriptors import (
     XtBinarySensorEntityDescription,
     XtSensorEntityDescription,
+    XtVersionSensorEntityDescription,
 )
 from .xtherma_data import XthermaData
 
@@ -48,7 +49,7 @@ def __build_sensor(
     if isinstance(desc, XtSensorEntityDescription):
         if desc.device_class == SensorDeviceClass.ENUM:
             return XthermaEnumSensor(coordinator, device_info, desc)
-        if "version" in desc.key:
+        if isinstance(desc,XtVersionSensorEntityDescription):
             return XthermaVersionSensor(coordinator, device_info, desc)
         return XthermaSensor(coordinator, device_info, desc)
     _LOGGER.error("Unsupported EntityDescription")
@@ -194,10 +195,7 @@ class XthermaBinarySensor(BinarySensorEntity):
         if self._coordinator.data:
             raw_value = self._coordinator.data.get(self.entity_description.key, None)
             if raw_value is not None:
-                bool_value = raw_value > 0
-                return (
-                    bool_value if not self.xt_description.low_active else not bool_value
-                )
+                return raw_value > 0
         return None
 
     @property
