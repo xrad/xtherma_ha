@@ -1,5 +1,6 @@
 from pytest_homeassistant_custom_component.common import load_json_value_fixture
 
+
 def test_json_load_value_fixture():
     data = load_json_value_fixture("rest_response.json")
     assert isinstance(data, dict)
@@ -17,5 +18,5 @@ def test_json_load_value_fixture():
     assert t0.get("input_factor") == "/10"
     tLast = telemetry[52]
     assert isinstance(tLast, dict)
-    assert tLast.get("key") == "mode_3"
+    assert tLast.get("key") == "mode"
     assert tLast.get("value") == "3"

@@ -36,6 +36,7 @@ _LOGGER = logging.getLogger(__name__)
 MODBUS_START_ADDRESS = 0
 MODBUS_NUM_REGISTERS = 10
 
+
 class XthermaClientModbus(XthermaClient):
     """Modbus access client."""
 
@@ -84,8 +85,7 @@ class XthermaClientModbus(XthermaClient):
     # negative.
     def _decode_int(self, raw_value: int, desc: EntityDescription) -> int:
         if (
-            desc.device_class == SensorDeviceClass.TEMPERATURE
-            and raw_value > 32767  # noqa: PLR2004
+            desc.device_class == SensorDeviceClass.TEMPERATURE and raw_value > 32767  # noqa: PLR2004
         ):
             return raw_value - 65536
         return raw_value
@@ -103,7 +103,7 @@ class XthermaClientModbus(XthermaClient):
                     count=len(reg_desc.descriptors),
                     slave=int(self._address),
                 )
-                for i,desc in enumerate(reg_desc.descriptors):
+                for i, desc in enumerate(reg_desc.descriptors):
                     if not desc:
                         _LOGGER.debug("no descriptor for %d.%d", reg_desc.base, i)
                     else:

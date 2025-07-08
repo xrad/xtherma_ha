@@ -61,6 +61,101 @@
   },
   "entity": {
     "sensor": {
+      "001": {
+        "name": "Wärmepumpe eingeschaltet"
+      },
+      "002": {
+        "name": "Betriebsmodus",
+        "state": {
+          "n/a": "n/a",
+          "standby": "Standby",
+          "heating": "Heizbetrieb",
+          "cooling": "Kühlbetrieb",
+          "water": "Warmwasser",
+          "auto": "Automatikbetrieb"
+        }
+      },
+      "003": {
+        "name": "Warmwasser sofort"
+      },
+      "310": {
+        "name": "Heizkurve 1 aktiviert"
+      },
+      "311": {
+        "name": "Heizkurve 1 Außentemperatur niedrig (P1)"
+      },
+      "312": {
+        "name": "Heizkurve 1 Außentemperatur hoch (P2)"
+      },
+      "315": {
+        "name": "Heizkurve 1 Heiztemperatur niedrig (P1)"
+      },
+      "316": {
+        "name": "Heizkurve 1 Heiztemperatur hoch (P2)"
+      },
+      "320": {
+        "name": "Heizkurve 1 Konstante Heiztemperatur"
+      },
+      "410": {
+        "name": "Heizkurve 2 aktiviert"
+      },
+      "411": {
+        "name": "Heizkurve 2 Außentemperatur niedrig (P1)"
+      },
+      "412": {
+        "name": "Heizkurve 2 Außentemperatur niedrig (P2)"
+      },
+      "415": {
+        "name": "Heizkurve 2 Heiztemperatur hoch (P1)"
+      },
+      "416": {
+        "name": "Heizkurve 2 Heiztemperatur hoch (P2)"
+      },
+      "420": {
+        "name": "Heizkurve 2 Konstante Heiztemperatur"
+      },
+      "350": {
+        "name": "Kühlkurve 1 aktiviert"
+      },
+      "351": {
+        "name": "Kühlkurve 1 Außentemperatur niedrig (P1)"
+      },
+      "352": {
+        "name": "Kühlkurve 1 Außentemperatur hoch (P2)"
+      },
+      "355": {
+        "name": "Kühlkurve 1 Kühltemperatur niedrig (P1)"
+      },
+      "356": {
+        "name": "Kühlkurve 1 Kühltemperatur hoch (P2)"
+      },
+      "360": {
+        "name": "Kühlkurve 1 Konstante Kühltemperatur"
+      },
+      "450": {
+        "name": "Kühlkurve 2 aktiviert"
+      },
+      "451": {
+        "name": "Kühlkurve 2 Außentemperatur niedrig (P1)"
+      },
+      "452": {
+        "name": "Kühlkurve 2 Außentemperatur hoch (P2)"
+      },
+      "455": {
+        "name": "Kühlkurve 2 Kühltemperatur niedrig (P1)"
+      },
+      "456": {
+        "name": "Kühlkurve 2 Kühltemperatur hoch (P2)"
+      },
+      "460": {
+        "name": "Kühlkurve 1 Konstante Kühltemperatur"
+      },
+      "501": {
+        "name": "Sollwert Warmwasserbereitung"
+      },
+      "522": {
+        "name": "Warmhalten Sollwert"
+      },
       "tvl": {
         "name": "[TVL] Vorlauftemperatur"
       },
@@ -90,6 +185,9 @@
       },
       "ta4": {
         "name": "[TA4] Außentemperatur Mittelwert 4h"
+      },
+      "ta8": {
+        "name": "[TA8] Außentemperatur Mittelwert 8h"
       },
       "ta24": {
         "name": "[TA24] Außentemperatur Mittelwert 24h"
@@ -121,12 +219,6 @@
       "pww": {
         "name": "[PWW] Zirkulationspumpe Warmwasser eingeschaltet"
       },
-      "hw_target": {
-        "name": "Sollwert Warmwasserbereitung"
-      },
-      "hw_keep_target": {
-        "name": "Warmhalten Sollwert"
-      },
       "h_target": {
         "name": "Sollwert Heizbetrieb"
       },
@@ -144,6 +236,9 @@
       },
       "c2_target": {
         "name": "Sollwert Kühlen 2"
+      },
+      "hw_target": {
+        "name": "Sollwert Warmwasserbereitung (aktuell)"
       },
       "in_hp": {
         "name": "Leistungsaufnahme Wärmepumpe (elektrisch)"
@@ -166,29 +261,15 @@
       "out_backup": {
         "name": "Leistungsabgabe Zusatz-/Notheizung (thermisch)"
       },
-      "mode_3": {
-        "name": "Betriebsmodus 3",
-        "state": {
-          "standby": "Standby",
-          "heating": "Heizbetrieb",
-          "cooling": "Kühlbetrieb",
-          "water": "Warmwasser",
-          "auto": "Automatikbetrieb"
-        }
-      },
       "mode": {
-        "name": "Betriebsmodus",
+        "name": "Betriebsmodus (aktuell)",
         "state": {
-          "n/a": "n/a",
           "standby": "Standby",
           "heating": "Heizbetrieb",
           "cooling": "Kühlbetrieb",
           "water": "Warmwasser",
           "auto": "Automatikbetrieb"
         }
-      },
-      "ta8": {
-        "name": "[TA8] Außentemperatur Mittelwert 8h"
       },
       "sg": {
         "name": "SG-Ready Status",
@@ -242,86 +323,8 @@
       "day_backup6_in_h": {
         "name": "Tag Heizbetrieb Zusatzheizung Stufe 2 (6 kW) elektrische Leistungsaufnahme"
       },
-      "system_active": {
-        "name": "Wärmepumpe eingeschaltet"
-      },
       "controller_v": {
         "name": "Regler Version"
-      },
-      "hotwater_now": {
-        "name": "Warmwasser sofort"
-      },
-      "hk1_enabled": {
-        "name": "Heizkurve 1 aktiviert"
-      },
-      "hk1_ta_p1": {
-        "name": "Heizkurve 1 Außentemperatur niedrig (P1)"
-      },
-      "hk1_ta_p2": {
-        "name": "Heizkurve 1 Außentemperatur hoch (P2)"
-      },
-      "hk1_target_p1": {
-        "name": "Heizkurve 1 Heiztemperatur niedrig (P1)"
-      },
-      "hk1_target_p2": {
-        "name": "Heizkurve 1 Heiztemperatur hoch (P2)"
-      },
-      "hk1_h_target_const": {
-        "name": "Heizkurve 1 Konstante Heiztemperatur"
-      },
-      "hk2_enabled": {
-        "name": "Heizkurve 2 aktiviert"
-      },
-      "hk2_ta_p1": {
-        "name": "Heizkurve 2 Außentemperatur niedrig (P1)"
-      },
-      "hk2_ta_p2": {
-        "name": "Heizkurve 2 Außentemperatur niedrig (P2)"
-      },
-      "hk2_target_p1": {
-        "name": "Heizkurve 2 Heiztemperatur hoch (P1)"
-      },
-      "hk2_target_p2": {
-        "name": "Heizkurve 2 Heiztemperatur hoch (P2)"
-      },
-      "hk2_h_target_const": {
-        "name": "Heizkurve 2 Konstante Heiztemperatur"
-      },
-      "kk1_enabled": {
-        "name": "Kühlkurve 1 aktiviert"
-      },
-      "kk1_ta_p1": {
-        "name": "Kühlkurve 1 Außentemperatur niedrig (P1)"
-      },
-      "kk1_ta_p2": {
-        "name": "Kühlkurve 1 Außentemperatur hoch (P2)"
-      },
-      "kk1_target_p1": {
-        "name": "Kühlkurve 1 Kühltemperatur niedrig (P1)"
-      },
-      "kk1_target_p2": {
-        "name": "Kühlkurve 1 Kühltemperatur hoch (P2)"
-      },
-      "kk1_c_target_const": {
-        "name": "Kühlkurve 1 Konstante Kühltemperatur"
-      },
-      "kk2_enabled": {
-        "name": "Kühlkurve 2 aktiviert"
-      },
-      "kk2_ta_p1": {
-        "name": "Kühlkurve 2 Außentemperatur niedrig (P1)"
-      },
-      "kk2_ta_p2": {
-        "name": "Kühlkurve 2 Außentemperatur hoch (P2)"
-      },
-      "kk2_target_p1": {
-        "name": "Kühlkurve 2 Kühltemperatur niedrig (P1)"
-      },
-      "kk2_target_p2": {
-        "name": "Kühlkurve 2 Kühltemperatur hoch (P2)"
-      },
-      "kk2_c_target_const": {
-        "name": "Kühlkurve 1 Konstante Kühltemperatur"
       },
       "error": {
         "name": "Anlage ungestört"

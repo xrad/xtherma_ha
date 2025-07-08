@@ -1,7 +1,6 @@
-from math import e
 from unittest.mock import Mock, patch
 import pytest
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock
 
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 from homeassistant.const import CONF_ADDRESS, CONF_HOST, CONF_PORT
@@ -17,12 +16,30 @@ from custom_components.xtherma_fp.const import (
     DOMAIN,
 )
 
-from custom_components.xtherma_fp.sensor_descriptors import MODBUS_SENSORS_COOLING_CURVE_1, MODBUS_SENSORS_COOLING_CURVE_2, MODBUS_SENSORS_GENERAL_STATE, MODBUS_SENSORS_HEATING_CONTROL, MODBUS_SENSORS_HEATING_CURVE_1, MODBUS_SENSORS_HEATING_CURVE_2, MODBUS_SENSORS_HEATING_STATE, MODBUS_SENSORS_HOT_WATER, MODBUS_SENSORS_HYDRAULIC_CIRCUIT, MODBUS_SENSORS_NETWORK, MODBUS_SENSORS_PERFORMANCE, MODBUS_SENSORS_POWER, MODBUS_SENSORS_TEMPERATURES
+from custom_components.xtherma_fp.sensor_descriptors import (
+    MODBUS_SENSORS_COOLING_CURVE_1,
+    MODBUS_SENSORS_COOLING_CURVE_2,
+    MODBUS_SENSORS_GENERAL_STATE,
+    MODBUS_SENSORS_HEATING_CONTROL,
+    MODBUS_SENSORS_HEATING_CURVE_2,
+    MODBUS_SENSORS_HEATING_STATE,
+    MODBUS_SENSORS_HOT_WATER,
+    MODBUS_SENSORS_HYDRAULIC_CIRCUIT,
+    MODBUS_SENSORS_NETWORK,
+    MODBUS_SENSORS_PERFORMANCE,
+    MODBUS_SENSORS_POWER,
+    MODBUS_SENSORS_TEMPERATURES,
+)
 from custom_components.xtherma_fp.xtherma_data import XthermaData
 from homeassistant.core import HomeAssistant
 from homeassistant.config_entries import ConfigEntry
 
-from tests.const import MOCK_MODBUS_ADDRESS, MOCK_MODBUS_HOST, MOCK_MODBUS_PORT, MOCK_SERIAL_NUMBER
+from tests.const import (
+    MOCK_MODBUS_ADDRESS,
+    MOCK_MODBUS_HOST,
+    MOCK_MODBUS_PORT,
+    MOCK_SERIAL_NUMBER,
+)
 
 
 def _verify_entry(entry: ConfigEntry):
@@ -45,10 +62,10 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
         for state in hass.states.async_all("sensor")
         if state.entity_id.startswith("sensor.xtherma_fp")
     ]
-    assert len(our_sensor_states) == 82
+    assert len(our_sensor_states) == 83
 
     # check some entities
-    state = _find_state(our_sensor_states, "sensor.xtherma_fp_system_active")
+    state = _find_state(our_sensor_states, "sensor.xtherma_fp_001")
     assert state is not None
     assert state.state == "on"
     assert state.attributes["device_class"] == BinarySensorDeviceClass.POWER
@@ -57,7 +74,7 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
     assert state is not None
     assert state.state == "0.01"
 
-    state = _find_state(our_sensor_states, "sensor.xtherma_fp_hk1_ta_p1")
+    state = _find_state(our_sensor_states, "sensor.xtherma_fp_311")
     assert state is not None
     assert state.state == "-1.0"
 
@@ -65,9 +82,11 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
     assert state is not None
     assert state.state == "on"
 
-from pymodbus.client import AsyncModbusTcpClient
 
-MODBUS_CLIENT_PATH = "custom_components.xtherma_fp.xtherma_client_modbus.AsyncModbusTcpClient"
+MODBUS_CLIENT_PATH = (
+    "custom_components.xtherma_fp.xtherma_client_modbus.AsyncModbusTcpClient"
+)
+
 
 @pytest.fixture
 async def mock_modbus_tcp_client(request):
@@ -84,6 +103,7 @@ async def mock_modbus_tcp_client(request):
         async def connect_side_effect():
             mock_connected_property.return_value = True
             return True
+
         mock_instance.connect = AsyncMock(side_effect=connect_side_effect)
 
         # Mock the `read_holding_registers` method.
@@ -94,39 +114,43 @@ async def mock_modbus_tcp_client(request):
             mock_read_holding_registers_result.isError = Mock(return_value=False)
             mock_read_holding_registers_result.exception_code = 0
             mock_results_queue.append(mock_read_holding_registers_result)
-        mock_instance.read_holding_registers = AsyncMock(side_effect = mock_results_queue)
+        mock_instance.read_holding_registers = AsyncMock(side_effect=mock_results_queue)
 
         # When `close` is called, it should change the `connected` property back to False.
         def close_side_effect():
             mock_connected_property.return_value = False
+
         # Mock the `close` method, as it might be called during component teardown or error handling.
         mock_instance.close = Mock(side_effect=close_side_effect)
 
         yield mock_instance
 
+
 @pytest.mark.parametrize(
-    "mock_modbus_tcp_client", # This refers to the fixture
+    "mock_modbus_tcp_client",  # This refers to the fixture
     [
-        ([
-            list(range(1, len(MODBUS_SENSORS_GENERAL_STATE.descriptors) + 1)),
-            [ 1, -1 + 65536, 9, 10, 20, 23 ],
-            list(range(1, len(MODBUS_SENSORS_COOLING_CURVE_1.descriptors) + 1)),
-            list(range(1, len(MODBUS_SENSORS_HEATING_CURVE_2.descriptors) + 1)),
-            list(range(1, len(MODBUS_SENSORS_COOLING_CURVE_2.descriptors) + 1)),
-            list(range(1, len(MODBUS_SENSORS_HOT_WATER.descriptors) + 1)),
-            list(range(1, len(MODBUS_SENSORS_NETWORK.descriptors) + 1)),
-            list(range(1, len(MODBUS_SENSORS_HEATING_STATE.descriptors) + 1)),
-            list(range(1, len(MODBUS_SENSORS_HEATING_CONTROL.descriptors) + 1)),
-            list(range(1, len(MODBUS_SENSORS_HYDRAULIC_CIRCUIT.descriptors) + 1)),
-            list(range(1, len(MODBUS_SENSORS_TEMPERATURES.descriptors) + 1)),
-            list(range(1, len(MODBUS_SENSORS_PERFORMANCE.descriptors) + 1)),
-            list(range(1, len(MODBUS_SENSORS_POWER.descriptors) + 1)),        ]),
+        (
+            [
+                list(range(1, len(MODBUS_SENSORS_GENERAL_STATE.descriptors) + 1)),
+                [1, -1 + 65536, 9, 10, 20, 23],
+                list(range(1, len(MODBUS_SENSORS_COOLING_CURVE_1.descriptors) + 1)),
+                list(range(1, len(MODBUS_SENSORS_HEATING_CURVE_2.descriptors) + 1)),
+                list(range(1, len(MODBUS_SENSORS_COOLING_CURVE_2.descriptors) + 1)),
+                list(range(1, len(MODBUS_SENSORS_HOT_WATER.descriptors) + 1)),
+                list(range(1, len(MODBUS_SENSORS_NETWORK.descriptors) + 1)),
+                list(range(1, len(MODBUS_SENSORS_HEATING_STATE.descriptors) + 1)),
+                list(range(1, len(MODBUS_SENSORS_HEATING_CONTROL.descriptors) + 1)),
+                list(range(1, len(MODBUS_SENSORS_HYDRAULIC_CIRCUIT.descriptors) + 1)),
+                list(range(1, len(MODBUS_SENSORS_TEMPERATURES.descriptors) + 1)),
+                list(range(1, len(MODBUS_SENSORS_PERFORMANCE.descriptors) + 1)),
+                list(range(1, len(MODBUS_SENSORS_POWER.descriptors) + 1)),
+            ]
+        ),
         # ([...]),x
         # ([...]),
     ],
-    indirect=True # This tells pytest to pass the parameter to the fixture
+    indirect=True,  # This tells pytest to pass the parameter to the fixture
 )
-
 @pytest.mark.asyncio
 async def test_async_setup_entry_modbus_ok(hass, mock_modbus_tcp_client):
     """Verify config entries for Modbus/TCP work."""
@@ -156,4 +180,3 @@ async def test_async_setup_entry_modbus_ok(hass, mock_modbus_tcp_client):
 
     # Verify sensors are initialized
     _verify_sensors(hass, entry)
-

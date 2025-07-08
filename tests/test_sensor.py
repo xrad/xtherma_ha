@@ -1,5 +1,3 @@
-import pytest
-
 from homeassistant.core import State, HomeAssistant
 from homeassistant.helpers.entity_platform import async_get_platforms
 from homeassistant.helpers.translation import async_get_translations
@@ -9,10 +7,11 @@ from custom_components.xtherma_fp.const import DOMAIN
 from homeassistant.components.sensor import (
     SensorDeviceClass,
 )
-from custom_components.xtherma_fp.sensor_descriptors import MODBUS_SENSOR_DESCRIPTIONS, SENSOR_DESCRIPTIONS
-from homeassistant.components.sensor import (
-    SensorEntityDescription
+from custom_components.xtherma_fp.sensor_descriptors import (
+    MODBUS_SENSOR_DESCRIPTIONS,
+    SENSOR_DESCRIPTIONS,
 )
+from homeassistant.components.sensor import SensorEntityDescription
 from homeassistant.helpers.entity import EntityDescription
 
 
@@ -53,7 +52,7 @@ async def test_opmode_sensor_icon(hass, init_integration):
     platforms = async_get_platforms(hass, DOMAIN)
     assert len(platforms) == 1
     platform = platforms[0]
-    state = await _find_state(hass, "mode_3")
+    state = await _find_state(hass, "mode")
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
     assert entity.icon == "mdi:thermometer-water"
@@ -78,11 +77,12 @@ def _get_all_sensor_descriptions() -> list[EntityDescription]:
                 descs.append(entity_description)
     return descs
 
+
 async def test_enum_sensor_translation(hass, init_integration):
     """Ensure all enum sensor values are translated."""
     prefix = f"component.{DOMAIN}.entity.{Platform.SENSOR.value}"
 
-    for lang in [ "en", "de" ]:
+    for lang in ["en", "de"]:
         # collect all sensor state translations
         translations = await async_get_translations(hass, lang, "entity", [DOMAIN])
         translation_states = {
@@ -94,7 +94,7 @@ async def test_enum_sensor_translation(hass, init_integration):
         sensor_options = {
             f"{prefix}.{entity_description.key}.state.{option}"
             for entity_description in sensor_descs
-            if isinstance(entity_description,SensorEntityDescription)
+            if isinstance(entity_description, SensorEntityDescription)
             if entity_description.device_class == SensorDeviceClass.ENUM
             if entity_description.options is not None
             for option in entity_description.options
@@ -106,7 +106,7 @@ async def test_sensor_name_translation(hass, init_integration):
     """Ensure all sensor names are translated."""
     prefix = f"component.{DOMAIN}.entity.{Platform.SENSOR.value}"
 
-    for lang in [ "en", "de" ]:
+    for lang in ["en", "de"]:
         # collect all sensor state translations
         translations = await async_get_translations(hass, lang, "entity", [DOMAIN])
         translation_states = {
@@ -168,7 +168,7 @@ async def test_enum_sensor_name(hass, init_integration):
     platforms = async_get_platforms(hass, DOMAIN)
     assert len(platforms) == 1
     platform = platforms[0]
-    state = await _find_state(hass, "mode_3")
+    state = await _find_state(hass, "mode")
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
-    assert entity.name == "Operating mode"
+    assert entity.name == "Operating mode (current)"

@@ -1,7 +1,6 @@
 import asyncio
 from datetime import timedelta
 from unittest.mock import patch
-import pytest
 
 from homeassistant.const import CONF_API_KEY
 
@@ -76,7 +75,7 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
 
     # check last sensor state
     state = our_sensors[len(our_sensors) - 1]
-    assert state.entity_id == "sensor.xtherma_fp_mode_3"
+    assert state.entity_id == "sensor.xtherma_fp_mode"
     assert state.state == "water"
 
 

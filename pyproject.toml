@@ -13,7 +13,7 @@ dynamic = ["dependencies"]
 fix = true
 extend-exclude = ["tests"]
 lint.select = ["ALL"]
-lint.extend-ignore = ["ANN001", "EXE002"]
+lint.extend-ignore = ["ANN001", "EXE002","FBT001"]
 lint.pydocstyle.convention = "google"
 format.docstring-code-format = true
 
