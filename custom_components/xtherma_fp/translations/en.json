@@ -67,7 +67,6 @@
       "002": {
         "name": "Operating mode",
         "state": {
-          "n/a": "n/a",
           "standby": "stand-by",
           "heating": "heating",
           "cooling": "cooling",

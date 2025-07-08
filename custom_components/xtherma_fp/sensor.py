@@ -52,7 +52,6 @@ def __build_sensor(
         if isinstance(desc,XtVersionSensorEntityDescription):
             return XthermaVersionSensor(coordinator, device_info, desc)
         return XthermaSensor(coordinator, device_info, desc)
-    _LOGGER.error("Unsupported EntityDescription")
     return None
 
 

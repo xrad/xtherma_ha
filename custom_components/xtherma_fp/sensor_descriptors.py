@@ -9,10 +9,16 @@ from homeassistant.components.binary_sensor import (
     BinarySensorDeviceClass,
     BinarySensorEntityDescription,
 )
+from homeassistant.components.number import (
+    NumberEntityDescription,
+)
 from homeassistant.components.sensor import (
     SensorDeviceClass,
     SensorEntityDescription,
     SensorStateClass,
+)
+from homeassistant.components.switch import (
+    SwitchEntityDescription,
 )
 from homeassistant.const import (
     PERCENTAGE,
@@ -28,14 +34,22 @@ from homeassistant.helpers.typing import StateType
 
 type SensorIconProvider = Callable[[StateType | date | datetime | Decimal], str]
 
+@dataclass(kw_only=True, frozen=True)
+class XtSwitchEntityDescription(SwitchEntityDescription):
+    """A switchable entity."""
+
+    icon_provider: SensorIconProvider | None = None
+
 
 @dataclass(kw_only=True, frozen=True)
-class XtModbusEntityDescription:
-    """Manage properties related to Modbus."""
+class XtNumberEntityDescription(NumberEntityDescription):
+    """A numeric input entity."""
+
+    icon_provider: SensorIconProvider | None = None
 
 
 @dataclass(kw_only=True, frozen=True)
-class XtSensorEntityDescription(XtModbusEntityDescription, SensorEntityDescription):
+class XtSensorEntityDescription(SensorEntityDescription):
     """A numeric value sensor."""
 
     factor: str | None = None
@@ -51,10 +65,7 @@ type BinaryIconProvider = Callable[[bool | None], str]
 
 
 @dataclass(kw_only=True, frozen=True)
-class XtBinarySensorEntityDescription(
-    XtModbusEntityDescription,
-    BinarySensorEntityDescription,
-):
+class XtBinarySensorEntityDescription(BinarySensorEntityDescription):
     """A binary sensor."""
 
     icon_provider: BinaryIconProvider | None = None
@@ -98,13 +109,13 @@ def _mode_icon(state: StateType | date | datetime | Decimal) -> str:
     return "mdi:cogs"
 
 
-_002_options = ["n/a", "standby", "heating", "cooling", "water", "auto"]
+_002_options = ["standby", "heating", "cooling", "water", "auto"]
 _002_icon_map = {
-    1: "mdi:power-standby",
-    2: "mdi:heating-coil",
-    3: "mdi:snowflake",
-    4: "mdi:thermometer-water",
-    5: "mdi:brightness-auto",
+    0: "mdi:power-standby",
+    1: "mdi:heating-coil",
+    2: "mdi:snowflake",
+    3: "mdi:thermometer-water",
+    4: "mdi:brightness-auto",
 }
 
 
