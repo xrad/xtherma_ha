@@ -260,6 +260,17 @@
       "mode": {
         "name": "Operating mode (current)",
         "state": {
+          "n/a": "",
+          "standby": "stand-by",
+          "heating": "heating",
+          "cooling": "cooling",
+          "water": "warm water",
+          "auto": "automatic"
+        }
+      },
+      "mode_3": {
+        "name": "Operating mode (current)",
+        "state": {
           "standby": "stand-by",
           "heating": "heating",
           "cooling": "cooling",

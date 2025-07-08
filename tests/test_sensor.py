@@ -52,7 +52,7 @@ async def test_opmode_sensor_icon(hass, init_integration):
     platforms = async_get_platforms(hass, DOMAIN)
     assert len(platforms) == 1
     platform = platforms[0]
-    state = await _find_state(hass, "mode")
+    state = await _find_state(hass, "mode_3")
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
     assert entity.icon == "mdi:thermometer-water"
@@ -168,7 +168,7 @@ async def test_enum_sensor_name(hass, init_integration):
     platforms = async_get_platforms(hass, DOMAIN)
     assert len(platforms) == 1
     platform = platforms[0]
-    state = await _find_state(hass, "mode")
+    state = await _find_state(hass, "mode_3")
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
     assert entity.name == "Operating mode (current)"

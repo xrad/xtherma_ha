@@ -263,6 +263,17 @@
       "mode": {
         "name": "Betriebsmodus (aktuell)",
         "state": {
+          "n/a": "",
+          "standby": "Standby",
+          "heating": "Heizbetrieb",
+          "cooling": "Kühlbetrieb",
+          "water": "Warmwasser",
+          "auto": "Automatikbetrieb"
+        }
+      },
+      "mode_3": {
+        "name": "Betriebsmodus (aktuell)",
+        "state": {
           "standby": "Standby",
           "heating": "Heizbetrieb",
           "cooling": "Kühlbetrieb",
