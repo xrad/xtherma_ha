@@ -1,4 +1,3 @@
-from custom_components.xtherma_fp.sensor_descriptors import SENSOR_DESCRIPTIONS
 from homeassistant.components.sensor import (
     SensorDeviceClass,
     SensorStateClass,
@@ -6,6 +5,8 @@ from homeassistant.components.sensor import (
 from homeassistant.const import (
     UnitOfTemperature,
 )
+
+from custom_components.xtherma_fp.sensor_descriptors import SENSOR_DESCRIPTIONS
 
 
 def test_xt_sensor_entity_description():

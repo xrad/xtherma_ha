@@ -1,8 +1,9 @@
 import pytest
-
 from homeassistant.const import CONF_API_KEY
-
-from pytest_homeassistant_custom_component.common import MockConfigEntry
+from pytest_homeassistant_custom_component.common import (
+    MockConfigEntry,
+    load_json_value_fixture,
+)
 
 from custom_components.xtherma_fp.const import (
     CONF_CONNECTION,
@@ -12,13 +13,12 @@ from custom_components.xtherma_fp.const import (
     FERNPORTAL_URL,
     VERSION,
 )
-from pytest_homeassistant_custom_component.common import load_json_value_fixture
 from tests.const import MOCK_API_KEY, MOCK_SERIAL_NUMBER
 
 
 @pytest.fixture(autouse=True)
 def auto_enable_custom_integrations(enable_custom_integrations):
-    yield
+    return
 
 
 @pytest.fixture

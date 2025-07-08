@@ -2,9 +2,19 @@ import asyncio
 from datetime import timedelta
 from unittest.mock import patch
 
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+)
+from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_API_KEY
-
-from pytest_homeassistant_custom_component.common import MockConfigEntry
+from homeassistant.core import HomeAssistant
+from pytest_homeassistant_custom_component.common import (
+    MockConfigEntry,
+    load_json_value_fixture,
+)
+from pytest_homeassistant_custom_component.test_util.aiohttp import (
+    MockLongPollSideEffect,
+)
 
 from custom_components.xtherma_fp.const import (
     CONF_CONNECTION,
@@ -13,17 +23,8 @@ from custom_components.xtherma_fp.const import (
     DOMAIN,
     FERNPORTAL_URL,
 )
-from pytest_homeassistant_custom_component.common import load_json_value_fixture
-from pytest_homeassistant_custom_component.test_util.aiohttp import (
-    MockLongPollSideEffect,
-)
-from homeassistant.components.sensor import (
-    SensorDeviceClass,
-)
 from custom_components.xtherma_fp.xtherma_data import XthermaData
 from tests.const import MOCK_API_KEY, MOCK_SERIAL_NUMBER
-from homeassistant.core import HomeAssistant
-from homeassistant.config_entries import ConfigEntry
 
 
 async def test_async_setup_entry_old(hass, aioclient_mock):
@@ -109,7 +110,6 @@ async def test_async_setup_entry_restapi_ok(hass, aioclient_mock):
 
 async def test_async_setup_entry_restapi_delay(hass, aioclient_mock):
     """Verify config entries for REST API work."""
-
     # set up mock responses to simulate that initial response is is invalid
     # and we have to wait for the next refresh
     mock_data = load_json_value_fixture("rest_response.json")

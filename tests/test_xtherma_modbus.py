@@ -1,13 +1,13 @@
-from unittest.mock import Mock, patch
-import pytest
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, Mock, patch
 
-from pytest_homeassistant_custom_component.common import MockConfigEntry
-from homeassistant.const import CONF_ADDRESS, CONF_HOST, CONF_PORT
+import pytest
 from homeassistant.components.binary_sensor import (
     BinarySensorDeviceClass,
 )
-from homeassistant.core import State
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.const import CONF_ADDRESS, CONF_HOST, CONF_PORT
+from homeassistant.core import HomeAssistant, State
+from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from custom_components.xtherma_fp.const import (
     CONF_CONNECTION,
@@ -15,7 +15,6 @@ from custom_components.xtherma_fp.const import (
     CONF_SERIAL_NUMBER,
     DOMAIN,
 )
-
 from custom_components.xtherma_fp.sensor_descriptors import (
     MODBUS_SENSORS_COOLING_CURVE_1,
     MODBUS_SENSORS_COOLING_CURVE_2,
@@ -31,9 +30,6 @@ from custom_components.xtherma_fp.sensor_descriptors import (
     MODBUS_SENSORS_TEMPERATURES,
 )
 from custom_components.xtherma_fp.xtherma_data import XthermaData
-from homeassistant.core import HomeAssistant
-from homeassistant.config_entries import ConfigEntry
-
 from tests.const import (
     MOCK_MODBUS_ADDRESS,
     MOCK_MODBUS_HOST,
@@ -154,7 +150,6 @@ async def mock_modbus_tcp_client(request):
 @pytest.mark.asyncio
 async def test_async_setup_entry_modbus_ok(hass, mock_modbus_tcp_client):
     """Verify config entries for Modbus/TCP work."""
-
     global _mock_registers
 
     # Create a mock config entry

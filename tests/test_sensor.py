@@ -1,18 +1,18 @@
-from homeassistant.core import State, HomeAssistant
-from homeassistant.helpers.entity_platform import async_get_platforms
-from homeassistant.helpers.translation import async_get_translations
-from homeassistant.const import Platform
-from custom_components.xtherma_fp.const import DOMAIN
-
 from homeassistant.components.sensor import (
     SensorDeviceClass,
+    SensorEntityDescription,
 )
+from homeassistant.const import Platform
+from homeassistant.core import HomeAssistant, State
+from homeassistant.helpers.entity import EntityDescription
+from homeassistant.helpers.entity_platform import async_get_platforms
+from homeassistant.helpers.translation import async_get_translations
+
+from custom_components.xtherma_fp.const import DOMAIN
 from custom_components.xtherma_fp.sensor_descriptors import (
     MODBUS_SENSOR_DESCRIPTIONS,
     SENSOR_DESCRIPTIONS,
 )
-from homeassistant.components.sensor import SensorEntityDescription
-from homeassistant.helpers.entity import EntityDescription
 
 
 async def _find_state(hass: HomeAssistant, id: str) -> State:
