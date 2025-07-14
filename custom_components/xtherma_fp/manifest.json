@@ -4,7 +4,7 @@
   "codeowners": [
     "@xrad"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "manifest_version": 1,
   "config_flow": true,
   "integration_type": "device"
