@@ -82,13 +82,13 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         result: dict[str, float] = {}
         try:
             _LOGGER.debug("Coordinator requesting new data")
-            telemetry = await self._client.async_get_data()
-            for entry in telemetry:
+            client_data = await self._client.async_get_data()
+            for entry in client_data:
                 key = entry.get(KEY_ENTRY_KEY, "").lower()
                 rawvalue = entry.get(KEY_ENTRY_VALUE, None)
                 inputfactor = entry.get(KEY_ENTRY_INPUT_FACTOR, None)
-                if not key or not rawvalue:
-                    _LOGGER.error("entry incomplete")
+                if key is None or rawvalue is None:
+                    _LOGGER.error("entry incomplete: %s", entry)
                     continue
                 value = self._apply_input_factor(rawvalue, inputfactor)
                 result[key] = value
@@ -121,9 +121,9 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
             msg = "Error communicating with API, unknown reason"
             raise UpdateFailed(msg) from err
         _LOGGER.debug(
-            "coordinator processed %d/%d telemetry values",
+            "coordinator processed %d/%d values",
             len(result),
-            len(telemetry),
+            len(client_data),
         )
         return result
 

@@ -11,6 +11,7 @@ from custom_components.xtherma_fp.sensor_descriptors import SENSOR_DESCRIPTIONS
 
 from .const import (
     FERNPORTAL_RATE_LIMIT_S,
+    KEY_SETTINGS,
     KEY_TELEMETRY,
 )
 from .xtherma_client_common import (
@@ -61,8 +62,13 @@ class XthermaClientRest(XthermaClient):
                 json_data: dict[str, Any] = await response.json()
                 telemetry = json_data.get(KEY_TELEMETRY)
                 if not isinstance(telemetry, list):
-                    _LOGGER.error("Telemetry from REST API is not a list")
+                    _LOGGER.error("Telemetry in REST API is not a list")
                     return []
+                settings = json_data.get(KEY_SETTINGS)
+                if not isinstance(settings, list):
+                    _LOGGER.error("Settings in REST API is not a list")
+                    return []
+                telemetry.extend(settings)
                 return telemetry
         except aiohttp.ClientResponseError as err:
             _LOGGER.debug("API error: %s", err)

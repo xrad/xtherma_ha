@@ -171,4 +171,16 @@ async def test_enum_sensor_name(hass, init_integration):
     state = await _find_state(hass, "mode")
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
-    assert entity.name == "Operating mode (current)"
+    assert entity.name == "Current operating mode"
+
+
+async def test_version_sensor(hass, init_integration):
+    """Check if enum sensors have a proper (translated) names."""
+    await hass.config.async_load()
+    platforms = async_get_platforms(hass, DOMAIN)
+    assert len(platforms) == 1
+    platform = platforms[0]
+    state = await _find_state(hass, "controller_v")
+    entity = platform.entities.get(state.entity_id)
+    assert entity is not None
+    assert entity.state == "2.39"

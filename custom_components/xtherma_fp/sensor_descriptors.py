@@ -735,6 +735,7 @@ _sensor_day_backup6_in_h = XtSensorEntityDescription(
 _sensor_controller_v = XtVersionSensorEntityDescription(
     key="controller_v",
     icon="mdi:information-outline",
+    factor="/100",
 )
 _sensor_mode = XtSensorEntityDescription(
     key="mode",
@@ -950,6 +951,35 @@ MODBUS_SENSOR_DESCRIPTIONS: list[ModbusRegisterSet] = [
 ]
 
 SENSOR_DESCRIPTIONS: list[EntityDescription] = [
+    _sensor_001,
+    _sensor_002,
+    _sensor_003,
+    _sensor_310,
+    _sensor_311,
+    _sensor_312,
+    _sensor_315,
+    _sensor_316,
+    _sensor_320,
+    _sensor_350,
+    _sensor_351,
+    _sensor_352,
+    _sensor_355,
+    _sensor_356,
+    _sensor_360,
+    _sensor_410,
+    _sensor_411,
+    _sensor_412,
+    _sensor_415,
+    _sensor_416,
+    _sensor_420,
+    _sensor_450,
+    _sensor_451,
+    _sensor_452,
+    _sensor_455,
+    _sensor_456,
+    _sensor_460,
+    _sensor_501,
+    _sensor_522,
     _sensor_tvl,
     _sensor_trl,
     _sensor_tw,

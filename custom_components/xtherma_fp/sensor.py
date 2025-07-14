@@ -284,7 +284,8 @@ class XthermaVersionSensor(XthermaSensor):
             value = self._coordinator.data.get(self.entity_description.key, None)
             if not isinstance(value, (int, float)):
                 return None
-            major = int(value // 100)
-            minor = int(value % 100)
+            # note: input factor (assume: /100) has already been applied
+            major = int(value)
+            minor = int((value - major) * 100)
             return f"{major}.{minor:02d}"
         return None

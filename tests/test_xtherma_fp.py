@@ -65,7 +65,7 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
         for state in hass.states.async_all("sensor")
         if state.entity_id.startswith("sensor.xtherma_fp")
     ]
-    assert len(our_sensors) == 53
+    assert len(our_sensors) == 82
 
     # check first sensor state
     state = our_sensors[0]
@@ -74,10 +74,15 @@ def _verify_sensors(hass: HomeAssistant, entry: ConfigEntry):
     assert state.attributes["device_class"] == SensorDeviceClass.TEMPERATURE
     assert state.attributes["unit_of_measurement"] == "°C"
 
-    # check last sensor state
-    state = our_sensors[len(our_sensors) - 1]
+    # check last telemetry sensor state
+    state = our_sensors[52]
     assert state.entity_id == "sensor.xtherma_fp_mode"
     assert state.state == "water"
+
+    # check last sensor state
+    state = our_sensors[len(our_sensors) - 1]
+    assert state.entity_id == "sensor.xtherma_fp_003"
+    assert state.state == "off"
 
 
 async def test_async_setup_entry_restapi_ok(hass, aioclient_mock):
