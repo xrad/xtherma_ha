@@ -258,18 +258,7 @@
         "name": "Heat output auxiliary/emergency heating (thermal)"
       },
       "mode": {
-        "name": "Operating mode (current)",
-        "state": {
-          "n/a": "",
-          "standby": "stand-by",
-          "heating": "heating",
-          "cooling": "cooling",
-          "water": "warm water",
-          "auto": "automatic"
-        }
-      },
-      "mode_3": {
-        "name": "Operating mode (current)",
+        "name": "Current operating mode",
         "state": {
           "standby": "stand-by",
           "heating": "heating",

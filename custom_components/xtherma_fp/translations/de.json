@@ -261,18 +261,7 @@
         "name": "Leistungsabgabe Zusatz-/Notheizung (thermisch)"
       },
       "mode": {
-        "name": "Betriebsmodus (aktuell)",
-        "state": {
-          "n/a": "",
-          "standby": "Standby",
-          "heating": "Heizbetrieb",
-          "cooling": "Kühlbetrieb",
-          "water": "Warmwasser",
-          "auto": "Automatikbetrieb"
-        }
-      },
-      "mode_3": {
-        "name": "Betriebsmodus (aktuell)",
+        "name": "Aktueller Betriebsmodus",
         "state": {
           "standby": "Standby",
           "heating": "Heizbetrieb",

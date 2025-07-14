@@ -88,32 +88,13 @@ def _error_icon(state: bool | None) -> str:
         return "mdi:check"
     return "mdi:alert"
 
-_mode_3_options = ["standby", "heating", "cooling", "water", "auto"]
-_mode_3_icon_map = {
+_mode_options = ["standby", "heating", "cooling", "water", "auto"]
+_mode_icon_map = {
     0: "mdi:power-standby",
     1: "mdi:heating-coil",
     2: "mdi:snowflake",
     3: "mdi:thermometer-water",
     4: "mdi:brightness-auto",
-}
-def _mode_3_icon(state: StateType | date | datetime | Decimal) -> str:
-    if isinstance(state, str):
-        try:
-            index = _mode_3_options.index(state)
-            return _mode_3_icon_map.get(index, "mdi:cogs")
-        except ValueError:
-            pass
-    return "mdi:cogs"
-
-
-_mode_options = ["n/a", "standby", "heating", "cooling", "water", "auto"]
-_mode_icon_map = {
-    0: "n/a",
-    1: "mdi:power-standby",
-    2: "mdi:heating-coil",
-    3: "mdi:snowflake",
-    4: "mdi:thermometer-water",
-    5: "mdi:brightness-auto",
 }
 def _mode_icon(state: StateType | date | datetime | Decimal) -> str:
     if isinstance(state, str):
@@ -761,12 +742,6 @@ _sensor_mode = XtSensorEntityDescription(
     options=_mode_options,
     icon_provider=_mode_icon,
 )
-_sensor_mode_3 = XtSensorEntityDescription(
-    key="mode_3",
-    device_class=SensorDeviceClass.ENUM,
-    options=_mode_3_options,
-    icon_provider=_mode_3_icon,
-)
 _sensor_error = XtBinarySensorEntityDescription(
     key="error",
     device_class=BinarySensorDeviceClass.RUNNING,
@@ -1009,7 +984,7 @@ SENSOR_DESCRIPTIONS: list[EntityDescription] = [
     _sensor_efficiency_total,
     _sensor_in_backup,
     _sensor_out_backup,
-    _sensor_mode_3,
+    _sensor_mode,
     _sensor_ta8,
     _sensor_sg,
     _sensor_day_hp_out_h,

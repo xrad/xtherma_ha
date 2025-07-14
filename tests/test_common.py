@@ -18,5 +18,5 @@ def test_json_load_value_fixture():
     assert t0.get("input_factor") == "/10"
     tLast = telemetry[52]
     assert isinstance(tLast, dict)
-    assert tLast.get("key") == "mode_3"
+    assert tLast.get("key") == "mode"
     assert tLast.get("value") == "3"
