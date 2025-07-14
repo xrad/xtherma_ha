@@ -90,15 +90,23 @@ class XthermaClientModbus(XthermaClient):
             return raw_value - 65536
         return raw_value
 
+    async def _get_client(self) -> AsyncModbusTcpClient:
+        if self._client is None or not self._client.connected:
+            _LOGGER.debug("not connected, try connecting")
+            await self.connect()
+            # the following check is only for safety and ruff, self.connect() will have
+            # alredy raised an exception if the reconnect fails
+            if self._client is None or not self._client.connected:
+                raise XthermaNotConnectedError
+        return self._client
+
     async def async_get_data(self) -> list[dict[str, Any]]:
         """Obtain fresh data."""
         result: list[dict[str, Any]] = []
-        if self._client is None or not self._client.connected:
-            _LOGGER.debug("not connected")
-            raise XthermaNotConnectedError
+        client = await self._get_client()
         try:
             for reg_desc in MODBUS_SENSOR_DESCRIPTIONS:
-                regs = await self._client.read_holding_registers(
+                regs = await client.read_holding_registers(
                     address=reg_desc.base,
                     count=len(reg_desc.descriptors),
                     slave=int(self._address),
