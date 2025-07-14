@@ -754,8 +754,8 @@ _sensor_sg = XtSensorEntityDescription(
     options=_sgready_options,
     icon_provider=_sgready_icon,
 )
-_sensor_enwg14 = XtBinarySensorEntityDescription(
-    key="enwg14",
+_sensor_14a = XtBinarySensorEntityDescription(
+    key="14a",
 )
 _sensor_evu = XtBinarySensorEntityDescription(
     key="evu",
@@ -844,7 +844,7 @@ MODBUS_SENSORS_NETWORK = ModbusRegisterSet(
         _sensor_controller_v,
         _sensor_mode,
         _sensor_error,
-        _sensor_enwg14,
+        _sensor_14a,
         _sensor_sg,
         _sensor_evu,
     ],
