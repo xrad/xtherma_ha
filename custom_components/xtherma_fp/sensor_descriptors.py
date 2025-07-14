@@ -773,7 +773,7 @@ class ModbusRegisterSet:
     ]
 
 
-MODBUS_SENSORS_GENERAL_STATE = ModbusRegisterSet(
+MODBUS_SENSORS_GENERAL_SYSTEM_STATE = ModbusRegisterSet(
     base=0,
     descriptors=[
         _sensor_001,
@@ -839,6 +839,17 @@ MODBUS_SENSORS_HOT_WATER = ModbusRegisterSet(
 )
 
 MODBUS_SENSORS_NETWORK = ModbusRegisterSet(
+    base=60,
+    descriptors=[
+        None,
+        None,
+        None,
+        None,
+        None,
+    ],
+)
+
+MODBUS_SENSORS_GENERAL_OPERATION = ModbusRegisterSet(
     base=100,
     descriptors=[
         _sensor_controller_v,
@@ -935,13 +946,14 @@ MODBUS_SENSORS_POWER = ModbusRegisterSet(
 )
 
 MODBUS_SENSOR_DESCRIPTIONS: list[ModbusRegisterSet] = [
-    MODBUS_SENSORS_GENERAL_STATE,
+    MODBUS_SENSORS_GENERAL_SYSTEM_STATE,
     MODBUS_SENSORS_HEATING_CURVE_1,
     MODBUS_SENSORS_COOLING_CURVE_1,
     MODBUS_SENSORS_HEATING_CURVE_2,
     MODBUS_SENSORS_COOLING_CURVE_2,
     MODBUS_SENSORS_HOT_WATER,
     MODBUS_SENSORS_NETWORK,
+    MODBUS_SENSORS_GENERAL_OPERATION,
     MODBUS_SENSORS_HEATING_STATE,
     MODBUS_SENSORS_HEATING_CONTROL,
     MODBUS_SENSORS_HYDRAULIC_CIRCUIT,

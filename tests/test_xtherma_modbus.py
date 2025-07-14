@@ -18,7 +18,8 @@ from custom_components.xtherma_fp.const import (
 from custom_components.xtherma_fp.sensor_descriptors import (
     MODBUS_SENSORS_COOLING_CURVE_1,
     MODBUS_SENSORS_COOLING_CURVE_2,
-    MODBUS_SENSORS_GENERAL_STATE,
+    MODBUS_SENSORS_GENERAL_SYSTEM_STATE,
+    MODBUS_SENSORS_GENERAL_OPERATION,
     MODBUS_SENSORS_HEATING_CONTROL,
     MODBUS_SENSORS_HEATING_CURVE_2,
     MODBUS_SENSORS_HEATING_STATE,
@@ -127,13 +128,14 @@ async def mock_modbus_tcp_client(request):
     [
         (
             [
-                list(range(1, len(MODBUS_SENSORS_GENERAL_STATE.descriptors) + 1)),
+                list(range(1, len(MODBUS_SENSORS_GENERAL_SYSTEM_STATE.descriptors) + 1)),
                 [1, -1 + 65536, 9, 10, 20, 23],
                 list(range(1, len(MODBUS_SENSORS_COOLING_CURVE_1.descriptors) + 1)),
                 list(range(1, len(MODBUS_SENSORS_HEATING_CURVE_2.descriptors) + 1)),
                 list(range(1, len(MODBUS_SENSORS_COOLING_CURVE_2.descriptors) + 1)),
                 list(range(1, len(MODBUS_SENSORS_HOT_WATER.descriptors) + 1)),
                 list(range(1, len(MODBUS_SENSORS_NETWORK.descriptors) + 1)),
+                list(range(1, len(MODBUS_SENSORS_GENERAL_OPERATION.descriptors) + 1)),
                 list(range(1, len(MODBUS_SENSORS_HEATING_STATE.descriptors) + 1)),
                 list(range(1, len(MODBUS_SENSORS_HEATING_CONTROL.descriptors) + 1)),
                 list(range(1, len(MODBUS_SENSORS_HYDRAULIC_CIRCUIT.descriptors) + 1)),
