@@ -44,6 +44,14 @@ from .xtherma_client_rest import (
 
 _LOGGER = logging.getLogger(__name__)
 
+_ALL_CONFIG_KEYS = [
+    CONF_CONNECTION,
+    CONF_SERIAL_NUMBER,
+    CONF_ADDRESS,
+    CONF_API_KEY,
+    CONF_HOST,
+    CONF_PORT,
+]
 
 async def _validate_connection(
     data: dict[str, Any],
@@ -166,7 +174,7 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
     def __init__(self) -> None:
         """Constructor."""
         # here we will collect inputs from the various pages
-        self._config_data: dict[str,str] = { }
+        self._config_data: dict[str, str] = {}
 
     async def async_step_user(
         self,
@@ -263,7 +271,9 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
                     vol.Coerce(int),
                     NumberSelector(
                         NumberSelectorConfig(
-                            min=1, max=255, mode=NumberSelectorMode.BOX,
+                            min=1,
+                            max=255,
+                            mode=NumberSelectorMode.BOX,
                         ),
                     ),
                 ),
@@ -300,17 +310,20 @@ class OptionsFlowHandler(OptionsFlow):
         """Manage the options."""
         errors: dict[str, str] = {}
         entry = self.config_entry
+        entry = self.config_entry
+
+        for key in _ALL_CONFIG_KEYS:
+            self._config_data[key] = entry.data.get(key, "")
 
         if user_input is not None:
             self._config_data.update(user_input)
-            self._config_data[CONF_SERIAL_NUMBER] = entry.data[CONF_SERIAL_NUMBER]
             connection_type = user_input[CONF_CONNECTION]
             if connection_type == CONF_CONNECTION_RESTAPI:
                 return await self.async_step_rest_api()
             if connection_type == CONF_CONNECTION_MODBUSTCP:
                 return await self.async_step_modbus_tcp()
 
-        def_connection = entry.data.get(CONF_CONNECTION, "")
+        def_connection = self._config_data[CONF_CONNECTION]
 
         schema = vol.Schema(
             {
@@ -345,7 +358,7 @@ class OptionsFlowHandler(OptionsFlow):
             await hass.config_entries.async_reload(entry.entry_id)
             return self.async_create_entry(data={})
 
-        def_api_key = entry.data.get(CONF_API_KEY, "")
+        def_api_key = self._config_data[CONF_API_KEY]
 
         schema = vol.Schema(
             {
@@ -379,9 +392,9 @@ class OptionsFlowHandler(OptionsFlow):
             await hass.config_entries.async_reload(entry.entry_id)
             return self.async_create_entry(data=self._config_data)
 
-        def_host = entry.data.get(CONF_HOST, "")
-        def_port = entry.data.get(CONF_PORT, 502)
-        def_address = entry.data.get(CONF_ADDRESS, 1)
+        def_host = self._config_data[CONF_HOST]
+        def_port = self._config_data[CONF_PORT]
+        def_address = self._config_data[CONF_ADDRESS]
 
         schema = vol.Schema(
             {
