@@ -44,15 +44,6 @@ from .xtherma_client_rest import (
 
 _LOGGER = logging.getLogger(__name__)
 
-_ALL_CONFIG_KEYS = [
-    CONF_CONNECTION,
-    CONF_SERIAL_NUMBER,
-    CONF_ADDRESS,
-    CONF_API_KEY,
-    CONF_HOST,
-    CONF_PORT,
-]
-
 async def _validate_connection(
     data: dict[str, Any],
     errors: dict[str, str],
@@ -312,8 +303,12 @@ class OptionsFlowHandler(OptionsFlow):
         entry = self.config_entry
         entry = self.config_entry
 
-        for key in _ALL_CONFIG_KEYS:
-            self._config_data[key] = entry.data.get(key, "")
+        self._config_data[CONF_CONNECTION] = entry.data.get(CONF_CONNECTION, "")
+        self._config_data[CONF_SERIAL_NUMBER] = entry.data.get(CONF_SERIAL_NUMBER, "")
+        self._config_data[CONF_HOST] = entry.data.get(CONF_HOST, "")
+        self._config_data[CONF_ADDRESS] = entry.data.get(CONF_ADDRESS, 1)
+        self._config_data[CONF_PORT] = entry.data.get(CONF_PORT, 501)
+        self._config_data[CONF_API_KEY] = entry.data.get(CONF_API_KEY, "")
 
         if user_input is not None:
             self._config_data.update(user_input)
