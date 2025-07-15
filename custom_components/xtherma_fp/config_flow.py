@@ -44,6 +44,10 @@ from .xtherma_client_rest import (
 
 _LOGGER = logging.getLogger(__name__)
 
+_DEF_MODBUS_PORT = 502
+_DEF_MODBUS_ADDRESS = 1
+
+
 async def _validate_connection(
     data: dict[str, Any],
     errors: dict[str, str],
@@ -254,11 +258,11 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
         schema = vol.Schema(
             {
                 vol.Required(CONF_HOST, default=""): str,
-                vol.Required(CONF_PORT, default=502): vol.All(
+                vol.Required(CONF_PORT, default=_DEF_MODBUS_PORT): vol.All(
                     vol.Coerce(int),
                     vol.Range(min=0, max=65535),
                 ),
-                vol.Required(CONF_ADDRESS, default=1): vol.All(
+                vol.Required(CONF_ADDRESS, default=_DEF_MODBUS_ADDRESS): vol.All(
                     vol.Coerce(int),
                     NumberSelector(
                         NumberSelectorConfig(
@@ -306,8 +310,8 @@ class OptionsFlowHandler(OptionsFlow):
         self._config_data[CONF_CONNECTION] = entry.data.get(CONF_CONNECTION, "")
         self._config_data[CONF_SERIAL_NUMBER] = entry.data.get(CONF_SERIAL_NUMBER, "")
         self._config_data[CONF_HOST] = entry.data.get(CONF_HOST, "")
-        self._config_data[CONF_ADDRESS] = entry.data.get(CONF_ADDRESS, 1)
-        self._config_data[CONF_PORT] = entry.data.get(CONF_PORT, 501)
+        self._config_data[CONF_ADDRESS] = entry.data.get(CONF_ADDRESS, _DEF_MODBUS_ADDRESS)
+        self._config_data[CONF_PORT] = entry.data.get(CONF_PORT, _DEF_MODBUS_PORT)
         self._config_data[CONF_API_KEY] = entry.data.get(CONF_API_KEY, "")
 
         if user_input is not None:
