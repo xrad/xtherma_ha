@@ -640,6 +640,7 @@ _sensor_day_hp_out_h = XtSensorEntityDescription(
     device_class=SensorDeviceClass.ENERGY,
     state_class=SensorStateClass.TOTAL_INCREASING,
     icon=_icon_thermal_power,
+    factor="/100",
 )
 _sensor_day_hp_out_c = XtSensorEntityDescription(
     key="day_hp_out_c",
@@ -647,6 +648,7 @@ _sensor_day_hp_out_c = XtSensorEntityDescription(
     device_class=SensorDeviceClass.ENERGY,
     state_class=SensorStateClass.TOTAL_INCREASING,
     icon=_icon_thermal_power,
+    factor="/100",
 )
 _sensor_day_hp_out_hw = XtSensorEntityDescription(
     key="day_hp_out_hw",
@@ -654,6 +656,7 @@ _sensor_day_hp_out_hw = XtSensorEntityDescription(
     device_class=SensorDeviceClass.ENERGY,
     state_class=SensorStateClass.TOTAL_INCREASING,
     icon=_icon_thermal_power,
+    factor="/100",
 )
 _sensor_day_backup3_out_h = XtSensorEntityDescription(
     key="day_backup3_out_h",
@@ -661,6 +664,7 @@ _sensor_day_backup3_out_h = XtSensorEntityDescription(
     device_class=SensorDeviceClass.ENERGY,
     state_class=SensorStateClass.TOTAL_INCREASING,
     icon=_icon_thermal_power,
+    factor="/100",
 )
 _sensor_day_backup6_out_h = XtSensorEntityDescription(
     key="day_backup6_out_h",
@@ -668,6 +672,7 @@ _sensor_day_backup6_out_h = XtSensorEntityDescription(
     device_class=SensorDeviceClass.ENERGY,
     state_class=SensorStateClass.TOTAL_INCREASING,
     icon=_icon_thermal_power,
+    factor="/100",
 )
 _sensor_day_backup6_out_hw = XtSensorEntityDescription(
     key="day_backup6_out_hw",
@@ -675,6 +680,7 @@ _sensor_day_backup6_out_hw = XtSensorEntityDescription(
     device_class=SensorDeviceClass.ENERGY,
     state_class=SensorStateClass.TOTAL_INCREASING,
     icon=_icon_thermal_power,
+    factor="/100",
 )
 _sensor_day_backup3_out_hw = XtSensorEntityDescription(
     key="day_backup3_out_hw",
@@ -682,6 +688,7 @@ _sensor_day_backup3_out_hw = XtSensorEntityDescription(
     device_class=SensorDeviceClass.ENERGY,
     state_class=SensorStateClass.TOTAL_INCREASING,
     icon=_icon_thermal_power,
+    factor="/100",
 )
 _sensor_day_hp_in_h = XtSensorEntityDescription(
     key="day_hp_in_h",
@@ -689,6 +696,7 @@ _sensor_day_hp_in_h = XtSensorEntityDescription(
     device_class=SensorDeviceClass.ENERGY,
     state_class=SensorStateClass.TOTAL_INCREASING,
     icon=_icon_electric_power,
+    factor="/100",
 )
 _sensor_day_hp_in_c = XtSensorEntityDescription(
     key="day_hp_in_c",
@@ -696,6 +704,7 @@ _sensor_day_hp_in_c = XtSensorEntityDescription(
     device_class=SensorDeviceClass.ENERGY,
     state_class=SensorStateClass.TOTAL_INCREASING,
     icon=_icon_electric_power,
+    factor="/100",
 )
 _sensor_day_hp_in_hw = XtSensorEntityDescription(
     key="day_hp_in_hw",
@@ -703,6 +712,7 @@ _sensor_day_hp_in_hw = XtSensorEntityDescription(
     device_class=SensorDeviceClass.ENERGY,
     state_class=SensorStateClass.TOTAL_INCREASING,
     icon=_icon_electric_power,
+    factor="/100",
 )
 _sensor_day_backup3_in_hw = XtSensorEntityDescription(
     key="day_backup3_in_hw",
@@ -710,6 +720,7 @@ _sensor_day_backup3_in_hw = XtSensorEntityDescription(
     device_class=SensorDeviceClass.ENERGY,
     state_class=SensorStateClass.TOTAL_INCREASING,
     icon=_icon_electric_power,
+    factor="/100",
 )
 _sensor_day_backup6_in_hw = XtSensorEntityDescription(
     key="day_backup6_in_hw",
@@ -717,6 +728,7 @@ _sensor_day_backup6_in_hw = XtSensorEntityDescription(
     device_class=SensorDeviceClass.ENERGY,
     state_class=SensorStateClass.TOTAL_INCREASING,
     icon=_icon_electric_power,
+    factor="/100",
 )
 _sensor_day_backup3_in_h = XtSensorEntityDescription(
     key="day_backup3_in_h",
@@ -724,6 +736,7 @@ _sensor_day_backup3_in_h = XtSensorEntityDescription(
     device_class=SensorDeviceClass.ENERGY,
     state_class=SensorStateClass.TOTAL_INCREASING,
     icon=_icon_electric_power,
+    factor="/100",
 )
 _sensor_day_backup6_in_h = XtSensorEntityDescription(
     key="day_backup6_in_h",
@@ -731,6 +744,7 @@ _sensor_day_backup6_in_h = XtSensorEntityDescription(
     device_class=SensorDeviceClass.ENERGY,
     state_class=SensorStateClass.TOTAL_INCREASING,
     icon=_icon_electric_power,
+    factor="/100",
 )
 _sensor_controller_v = XtVersionSensorEntityDescription(
     key="controller_v",
