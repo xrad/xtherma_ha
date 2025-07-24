@@ -583,6 +583,7 @@ _sensor_in_hp = XtSensorEntityDescription(
     native_unit_of_measurement=UnitOfPower.WATT,
     device_class=SensorDeviceClass.POWER,
     state_class=SensorStateClass.MEASUREMENT,
+    factor="*10",
     icon=_icon_electric_power,
 )
 _sensor_v = XtSensorEntityDescription(
@@ -598,6 +599,7 @@ _sensor_out_hp = XtSensorEntityDescription(
     native_unit_of_measurement=UnitOfPower.WATT,
     device_class=SensorDeviceClass.POWER,
     state_class=SensorStateClass.MEASUREMENT,
+    factor="*10",
     icon=_icon_thermal_power,
 )
 _sensor_efficiency_hp = XtSensorEntityDescription(
@@ -617,6 +619,7 @@ _sensor_in_backup = XtSensorEntityDescription(
     native_unit_of_measurement=UnitOfPower.WATT,
     device_class=SensorDeviceClass.POWER,
     state_class=SensorStateClass.MEASUREMENT,
+    factor="*100",
     icon=_icon_electric_power,
 )
 _sensor_out_backup = XtSensorEntityDescription(
@@ -624,6 +627,7 @@ _sensor_out_backup = XtSensorEntityDescription(
     native_unit_of_measurement=UnitOfPower.WATT,
     device_class=SensorDeviceClass.POWER,
     state_class=SensorStateClass.MEASUREMENT,
+    factor="*100",
     icon=_icon_thermal_power,
 )
 _sensor_ta8 = XtSensorEntityDescription(
