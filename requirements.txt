@@ -1,7 +1,7 @@
 colorlog==6.9.0
 homeassistant==2025.7.1
 pip>=21.3.1
-ruff==0.12.1
+ruff==0.12.7
 pymodbus>=3.8.6
 pre-commit>=4.2.0
 bleak==0.22.3
