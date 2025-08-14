@@ -11,7 +11,7 @@ dynamic = ["dependencies"]
 
 [tool.ruff]
 fix = true
-extend-exclude = ["tests"]
+extend-exclude = ["tests", "custom_components/xtherma_fp/vendor"]
 lint.select = ["ALL"]
 lint.extend-ignore = ["ANN001", "EXE002","FBT001"]
 lint.pydocstyle.convention = "google"

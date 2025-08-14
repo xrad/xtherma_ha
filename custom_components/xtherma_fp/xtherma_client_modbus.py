@@ -8,12 +8,6 @@ from homeassistant.components.sensor import (
     SensorDeviceClass,
 )
 from homeassistant.helpers.entity import EntityDescription
-from pymodbus.client import (
-    AsyncModbusTcpClient,
-)
-from pymodbus.exceptions import (
-    ModbusIOException,
-)
 
 from custom_components.xtherma_fp.const import (
     KEY_ENTRY_INPUT_FACTOR,
@@ -25,6 +19,10 @@ from custom_components.xtherma_fp.sensor_descriptors import (
     XtSensorEntityDescription,
 )
 
+from .vendor.pymodbus import (
+    AsyncModbusTcpClient,
+    ModbusIOException,
+)
 from .xtherma_client_common import (
     XthermaClient,
     XthermaModbusError,
