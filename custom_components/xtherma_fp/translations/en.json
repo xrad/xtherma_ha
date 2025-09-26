@@ -61,94 +61,6 @@
   },
   "entity": {
     "sensor": {
-      "001": {
-        "name": "Heat pump turned on"
-      },
-      "002": {
-        "name": "Operating mode",
-        "state": {
-          "standby": "stand-by",
-          "heating": "heating",
-          "cooling": "cooling",
-          "water": "warm water",
-          "auto": "automatic"
-        }
-      },
-      "003": {
-        "name": "Hot water now"
-      },
-      "310": {
-        "name": "Heating curve 1 enabled"
-      },
-      "311": {
-        "name": "Heating curve 1 outside temperature low (P1)"
-      },
-      "312": {
-        "name": "Heating curve 1 outside temperature high (P2)"
-      },
-      "315": {
-        "name": "Heating curve 1 heating temperature low (P1)"
-      },
-      "316": {
-        "name": "Heating curve 1 heating temperature high (P2)"
-      },
-      "320": {
-        "name": "Heating curve 1 constant heating temperature"
-      },
-      "410": {
-        "name": "Heating curve 2 enabled"
-      },
-      "411": {
-        "name": "Heating curve 2 outside temperature low (P1)"
-      },
-      "412": {
-        "name": "Heating curve 2 outside temperature high (P2)"
-      },
-      "415": {
-        "name": "Heating curve 2 heating temperature low (P1)"
-      },
-      "416": {
-        "name": "Heating curve 2 heating temperature high (P2)"
-      },
-      "420": {
-        "name": "Heating curve 2 constant heating temperature"
-      },
-      "350": {
-        "name": "Cooling curve 1 aktiviert"
-      },
-      "351": {
-        "name": "Cooling curve 1 outside temperature low (P1)"
-      },
-      "352": {
-        "name": "Cooling curve 1 outside temperature high (P2)"
-      },
-      "355": {
-        "name": "Cooling curve 1 cooling temperature low (P1)"
-      },
-      "356": {
-        "name": "Cooling curve 1 cooling temperature high (P2)"
-      },
-      "360": {
-        "name": "Cooling curve 1 constant cooling temperature"
-      },
-      "450": {
-        "name": "Cooling curve 2 aktiviert"
-      },
-      "451": {
-        "name": "Cooling curve 2 outside temperature low (P1)"
-      },
-      "452": {
-        "name": "Cooling curve 2 outside temperature high (P2)"
-      },
-      "455": {
-        "name": "Cooling curve 2 cooling temperature low (P1)"
-      },
-      "456": {
-        "name": "Cooling curve 2 cooling temperature high (P2)"
-      },
-      "460": {
-        "name": "Cooling curve 2 constant cooling temperature"
-      },
       "tvl": {
         "name": "[TVL] Flow temperature"
       },
@@ -208,12 +120,6 @@
       },
       "pww": {
         "name": "[PWW] Circulation pump hot water enabled"
-      },
-      "501": {
-        "name": "Target hot water production"
-      },
-      "522": {
-        "name": "Keep warm target"
       },
       "h_target": {
         "name": "Target heating operation"
@@ -330,6 +236,127 @@
       },
       "14a": {
         "name": "§14a EnWG state"
+      }
+    },
+    "switch": {
+      "001": {
+        "name": "Heat pump turned on"
+      },
+      "003": {
+        "name": "Hot water now"
+      },
+      "310": {
+        "name": "Heating curve 1 enabled"
+      },
+      "350": {
+        "name": "Cooling curve 1 active"
+      },
+      "410": {
+        "name": "Heating curve 2 enabled"
+      },
+      "450": {
+        "name": "Cooling curve 2 active"
+      },
+      "815": {
+        "name": "§14a EnWG request"
+      }
+    },
+    "number": {
+      "311": {
+        "name": "Heating curve 1 outside temperature low (P1)"
+      },
+      "312": {
+        "name": "Heating curve 1 outside temperature high (P2)"
+      },
+      "315": {
+        "name": "Heating curve 1 heating temperature low (P1)"
+      },
+      "316": {
+        "name": "Heating curve 1 heating temperature high (P2)"
+      },
+      "320": {
+        "name": "Heating curve 1 constant heating temperature"
+      },
+      "411": {
+        "name": "Heating curve 2 outside temperature low (P1)"
+      },
+      "412": {
+        "name": "Heating curve 2 outside temperature high (P2)"
+      },
+      "415": {
+        "name": "Heating curve 2 heating temperature low (P1)"
+      },
+      "416": {
+        "name": "Heating curve 2 heating temperature high (P2)"
+      },
+      "420": {
+        "name": "Heating curve 2 constant heating temperature"
+      },
+      "351": {
+        "name": "Cooling curve 1 outside temperature low (P1)"
+      },
+      "352": {
+        "name": "Cooling curve 1 outside temperature high (P2)"
+      },
+      "355": {
+        "name": "Cooling curve 1 cooling temperature low (P1)"
+      },
+      "356": {
+        "name": "Cooling curve 1 cooling temperature high (P2)"
+      },
+      "360": {
+        "name": "Cooling curve 1 constant cooling temperature"
+      },
+      "451": {
+        "name": "Cooling curve 2 outside temperature low (P1)"
+      },
+      "452": {
+        "name": "Cooling curve 2 outside temperature high (P2)"
+      },
+      "455": {
+        "name": "Cooling curve 2 cooling temperature low (P1)"
+      },
+      "456": {
+        "name": "Cooling curve 2 cooling temperature high (P2)"
+      },
+      "460": {
+        "name": "Cooling curve 2 constant cooling temperature"
+      },
+      "501": {
+        "name": "Target warm water production"
+      },
+      "522": {
+        "name": "Target keep water warm"
+      },
+      "811": {
+        "name": "SG-Ready raise heating temperature by"
+      },
+      "812": {
+        "name": "SG-Ready raise warm water temperature by"
+      },
+      "813": {
+        "name": "SG-Ready lower cooling temperature by"
+      }
+    },
+    "select": {
+      "002": {
+        "name": "Operating mode",
+        "state": {
+          "standby": "stand-by",
+          "heating": "heating",
+          "cooling": "cooling",
+          "water": "warm water",
+          "auto": "automatic"
+        }
+      },
+      "808": {
+        "name": "SG-Ready request",
+        "state": {
+          "off": "not active",
+          "normal": "normal operation",
+          "block": "blocking",
+          "raise": "raise temperatures"
+        }
       }
     }
   }

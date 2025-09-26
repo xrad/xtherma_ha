@@ -1,11 +1,16 @@
 """DataUpdater for Xtherma Fernportal cloud integration."""
 
+import asyncio
 import logging
+from dataclasses import dataclass
+from datetime import UTC, datetime, timedelta
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity import EntityDescription
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+
+from custom_components.xtherma_fp.entity_descriptors import XtSensorEntityDescription
 
 from .const import (
     DOMAIN,
@@ -17,6 +22,7 @@ from .xtherma_client_common import (
     XthermaModbusError,
     XthermaNotConnectedError,
     XthermaRestApiError,
+    XthermaWriteError,
 )
 from .xtherma_client_rest import (
     XthermaClient,
@@ -38,6 +44,23 @@ _FACTORS = {
     "/10": 0.1,
 }
 
+_RFACTORS = {
+    "*1000": .001,
+    "*100": .01,
+    "*10": .1,
+    "1000": .001,
+    "100": .01,
+    "10": .1,
+    "/1000": 1000,
+    "/100": 100,
+    "/10": 10,
+}
+
+
+@dataclass
+class _PendingWrite:
+    value: float
+    blocked_until: datetime
 
 class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
     """Regularly Fetches data from API client."""
@@ -52,6 +75,9 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
     ) -> None:
         """Class constructor."""
         self._client = client
+        self._write_lock: asyncio.Lock = asyncio.Lock()
+        self._write_task: asyncio.Task | None = None
+        self._last_write_time: datetime = datetime.now(UTC)
         update_interval = client.update_interval()
         super().__init__(
             hass=hass,
@@ -60,6 +86,7 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
             name=DOMAIN,
             update_interval=update_interval,
         )
+        self._pending_writes: dict[str, _PendingWrite] = {}
 
     async def close(self) -> None:
         """Terminate usage."""
@@ -85,16 +112,20 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
             client_data = await self._client.async_get_data()
             for entry in client_data:
                 key = entry.get(KEY_ENTRY_KEY, "").lower()
-                rawvalue = entry.get(KEY_ENTRY_VALUE, None)
-                inputfactor = entry.get(KEY_ENTRY_INPUT_FACTOR, None)
-                if key is None or rawvalue is None:
-                    _LOGGER.error("entry incomplete: %s", entry)
-                    continue
-                value = self._apply_input_factor(rawvalue, inputfactor)
-                result[key] = value
-                if _LOGGER.getEffectiveLevel() == logging.DEBUG:
-                    rawvalue = entry[KEY_ENTRY_VALUE]
-                    inputfactor = entry[KEY_ENTRY_INPUT_FACTOR]
+                pending_write = self._is_blocked(key)
+                if pending_write is not None:
+                    result[key] = pending_write
+                    _LOGGER.debug(
+                        'Skipping update of key="%s" due to pending write',
+                        key)
+                else:
+                    rawvalue = entry.get(KEY_ENTRY_VALUE, None)
+                    inputfactor = entry.get(KEY_ENTRY_INPUT_FACTOR, None)
+                    if key is None or rawvalue is None:
+                        _LOGGER.error("entry incomplete: %s", entry)
+                        continue
+                    value = self._apply_input_factor(rawvalue, inputfactor)
+                    result[key] = value
                     _LOGGER.debug(
                         'key="%s" raw="%s" value="%s" inputfactor="%s"',
                         key,
@@ -132,3 +163,46 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         if self._client is not None:
             return self._client.find_description(key)
         return None
+
+    def _block_for(self, key: str, seconds: int, value: float) -> None:
+        """Block reads for a specific register for N seconds."""
+        _LOGGER.error("Block reads of key %s for %d seconds", key, seconds)
+        self._pending_writes[key] = _PendingWrite(
+            blocked_until=datetime.now(UTC) + timedelta(seconds=seconds), value=value,
+        )
+
+    def _is_blocked(self, key: str) -> float | None:
+        """Test if device-side processing for key is in progress."""
+        # check if any keys are blocked
+        if not self._pending_writes:
+            return None
+        # check if our key might be blocked
+        pending = self._pending_writes.get(key)
+        if pending is None:
+            return None
+        now = datetime.now(UTC)
+        if now > pending.blocked_until:
+            # block time expired, delete key
+            self._pending_writes.pop(key)
+            return None
+        # key is actually blocked
+        return pending.value
+
+    def _reverse_apply_input_factor(self, value: float, inputfactor: str | None) -> int:
+        if not isinstance(inputfactor, str):
+            return int(value)
+        factor = _RFACTORS.get(inputfactor, 1.0)
+        return int(factor * value)
+
+    async def async_write(self, desc: EntityDescription, value: float) -> None:
+        """Add a write request to the queue."""
+        try:
+            if isinstance(desc, XtSensorEntityDescription):
+                int_value = self._reverse_apply_input_factor(value, desc.factor)
+            else:
+                int_value = int(value)
+            await self._client.async_put_data(desc=desc, value=int_value)
+            self._block_for(key=desc.key, seconds=30, value=value)
+        except XthermaWriteError:
+            _LOGGER.error("Could not write %s=%d", desc.key, value)  # noqa: TRY400
+            # TODO set error entity

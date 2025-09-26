@@ -6,11 +6,11 @@ from homeassistant.components.sensor import (
 from homeassistant.const import (
     UnitOfTemperature,
 )
-from custom_components.xtherma_fp.sensor_descriptors import SENSOR_DESCRIPTIONS, XtSensorEntityDescription
+from custom_components.xtherma_fp.entity_descriptors import ENTITY_DESCRIPTIONS, XtSensorEntityDescription
 
 
 def test_xt_sensor_entity_description():
-    desc_tvl = SENSOR_DESCRIPTIONS[29]
+    desc_tvl = ENTITY_DESCRIPTIONS[48]
     assert desc_tvl is not None
     assert isinstance(desc_tvl,SensorEntityDescription)
     assert desc_tvl.key == "tvl"

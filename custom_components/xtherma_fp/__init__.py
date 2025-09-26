@@ -13,12 +13,17 @@ from homeassistant.const import (
     Platform,
 )
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant.helpers.device_registry import (
+    DeviceInfo,
+)
 
 from .const import (
     CONF_CONNECTION,
     CONF_CONNECTION_RESTAPI,
     CONF_SERIAL_NUMBER,
+    DOMAIN,
     FERNPORTAL_URL,
+    MANUFACTURER,
     VERSION,
 )
 from .coordinator import XthermaDataUpdateCoordinator
@@ -32,7 +37,7 @@ if TYPE_CHECKING:
 
 _LOGGER = logging.getLogger(__name__)
 
-_PLATFORMS = [Platform.SENSOR]
+_PLATFORMS = [Platform.SENSOR, Platform.SWITCH, Platform.NUMBER, Platform.SELECT]
 
 
 async def async_setup_entry(
@@ -49,6 +54,13 @@ async def async_setup_entry(
 
     serial_number = entry.data[CONF_SERIAL_NUMBER]
     xtherma_data.serial_fp = serial_number
+
+    xtherma_data.device_info = DeviceInfo(
+        identifiers={(DOMAIN, xtherma_data.serial_fp)},
+        name="Xtherma Wärmepumpe",
+        manufacturer=MANUFACTURER,
+        model=xtherma_data.serial_fp,
+    )
 
     # create API client connector
     connection = entry.data.get(CONF_CONNECTION, CONF_CONNECTION_RESTAPI)
@@ -76,9 +88,10 @@ async def async_setup_entry(
     # so do this asynchronously
     xtherma_data.coordinator = XthermaDataUpdateCoordinator(hass, entry, client)
 
-    # If we just passed the config flow, we will not be able to immediately fetch
-    # fresh data (see https://github.com/Xtherma/Xtherma-API/issues/5)
-    # We will therefore ignore errors here.
+    # If we just passed the config flow, we used not be able to immediately fetch
+    # fresh data (see https://github.com/Xtherma/Xtherma-API/issues/5) This is no
+    # longer a problem, because rate limiting is now on a calls/per day basis.
+    # But we can leave this code for completeness.
     try:
         _LOGGER.debug("Attempting initial data fetch")
         await xtherma_data.coordinator.async_config_entry_first_refresh()

@@ -1,12 +1,13 @@
-"""The xtherma integration switches."""
+"""The xtherma integration numbers."""
 
 import logging
-from typing import Any
+from datetime import date, datetime
+from decimal import Decimal
 
-from homeassistant.components.persistent_notification import async_create
-from homeassistant.components.switch import (
-    SwitchEntity,
+from homeassistant.components.number import (
+    NumberEntity,
 )
+from homeassistant.components.persistent_notification import async_create
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.device_registry import (
@@ -14,6 +15,7 @@ from homeassistant.helpers.device_registry import (
 )
 from homeassistant.helpers.entity import Entity, EntityDescription
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.typing import StateType
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
 )
@@ -23,7 +25,7 @@ from .const import (
 )
 from .coordinator import XthermaDataUpdateCoordinator
 from .entity_descriptors import (
-    XtSwitchEntityDescription,
+    XtNumberEntityDescription,
 )
 from .xtherma_data import XthermaData
 
@@ -31,47 +33,47 @@ _LOGGER = logging.getLogger(__name__)
 
 
 # Create a sensor entity based on description.
-def __build_switch(
+def __build_number(
     desc: EntityDescription,
     coordinator: XthermaDataUpdateCoordinator,
     device_info: DeviceInfo,
 ) -> Entity | None:
-    if isinstance(desc, XtSwitchEntityDescription):
-        return XthermaSwitchEntity(coordinator, device_info, desc)
+    if isinstance(desc, XtNumberEntityDescription):
+        return XthermaNumberEntity(coordinator, device_info, desc)
     return None
 
 
 # Create and register sensor entities based on coordinator.data.
 # Call site must ensure there is data and sensors are not already
 # registerd.
-def _initialize_switches(
+def _initialize_numbers(
     xtherma_data: XthermaData,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    assert not xtherma_data.switches_initialized  # noqa: S101
+    assert not xtherma_data.numbers_initialized  # noqa: S101
 
     coordinator = xtherma_data.coordinator
 
     assert coordinator is not None  # noqa: S101
 
-    switches = []
+    numbers = []
     for key in coordinator.data:
         desc = coordinator.find_description(key)
         if not desc:
-            _LOGGER.error("No switch description found for key %s", key)
+            _LOGGER.error("No number description found for key %s", key)
         else:
-            switch = __build_switch(desc, coordinator, xtherma_data.device_info)
-            if switch:
-                _LOGGER.debug('Adding switch "%s"', desc.key)
-                switches.append(switch)
-    _LOGGER.debug("Created %d switches", len(switches))
-    async_add_entities(switches)
+            number = __build_number(desc, coordinator, xtherma_data.device_info)
+            if number:
+                _LOGGER.debug('Adding number "%s"', desc.key)
+                numbers.append(number)
+    _LOGGER.debug("Created %d numbers", len(numbers))
+    async_add_entities(numbers)
 
-    xtherma_data.switches_initialized = True
+    xtherma_data.numbers_initialized = True
 
 
 # Initialize sensor entities if there is valid data in coordinator.
-def _try_initialize_switches(
+def _try_initialize_numbers(
     hass: HomeAssistant,
     xtherma_data: XthermaData,
     async_add_entities: AddEntitiesCallback,
@@ -79,7 +81,7 @@ def _try_initialize_switches(
     coordinator = xtherma_data.coordinator
     assert coordinator is not None  # noqa: S101
     if coordinator.data:
-        _initialize_switches(xtherma_data, async_add_entities)
+        _initialize_numbers(xtherma_data, async_add_entities)
     else:
         _LOGGER.debug("Data coordinator has no data yet, wait for next refresh")
         async_create(
@@ -97,7 +99,7 @@ async def async_setup_entry(
     """HA calls this to initialize sensor platform."""
     xtherma_data: XthermaData = config_entry.runtime_data
 
-    _LOGGER.debug("Setup switch platform")
+    _LOGGER.debug("Setup number platform")
 
     assert xtherma_data.coordinator is not None  # noqa: S101
 
@@ -105,12 +107,12 @@ async def async_setup_entry(
     # have data in the coordinator to initialize the sensors.
     # If not (eg. because we just completed the config flow or the integration was
     # restarted too rapidly) we will try again in the listener.
-    _try_initialize_switches(hass, xtherma_data, async_add_entities)
+    _try_initialize_numbers(hass, xtherma_data, async_add_entities)
 
     @callback
     def _async_update_data() -> None:
-        if not xtherma_data.switches_initialized:
-            _try_initialize_switches(hass, xtherma_data, async_add_entities)
+        if not xtherma_data.numbers_initialized:
+            _try_initialize_numbers(hass, xtherma_data, async_add_entities)
 
     # Note: data coordinators only fetch data as long as there is at least one
     # listener
@@ -120,17 +122,17 @@ async def async_setup_entry(
     return True
 
 
-class XthermaSwitchEntity(CoordinatorEntity, SwitchEntity):
-    """Xtherma Switch Input."""
+class XthermaNumberEntity(CoordinatorEntity, NumberEntity):
+    """Xtherma Number Input."""
 
     # keep this for type safe access to custom members
-    xt_description: XtSwitchEntityDescription
+    xt_description: XtNumberEntityDescription
 
     def __init__(
         self,
         coordinator: XthermaDataUpdateCoordinator,
         device_info: DeviceInfo,
-        description: XtSwitchEntityDescription,
+        description: XtNumberEntityDescription,
     ) -> None:
         """Class Constructor."""
         super().__init__(coordinator)
@@ -145,27 +147,22 @@ class XthermaSwitchEntity(CoordinatorEntity, SwitchEntity):
         self.translation_key = description.key
 
     @property
-    def is_on(self) -> bool | None:
-        """Return true if the binary sensor is on."""
+    def native_value(self) -> StateType | date | datetime | Decimal:
+        """Return the value reported by the sensor."""
         if self._coordinator.data:
-            raw_value = self._coordinator.data.get(self.entity_description.key, None)
-            if raw_value is not None:
-                return raw_value > 0
+            return self._coordinator.data.get(self.entity_description.key, None)
         return None
 
     @property
     def icon(self) -> str | None:
         """Return the icon to use in the frontend, if any."""
         if self.xt_description.icon_provider:
-            return self.xt_description.icon_provider(self.is_on)
+            return self.xt_description.icon_provider(self.native_value)
         return super().icon
 
-    async def async_turn_on(self, **kwargs: Any) -> None:  # noqa: ANN401, ARG002
-        """Turn the entity on."""
-        await self._coordinator.async_write(self.xt_description, 1)
-        await self._coordinator.async_request_refresh()
-
-    async def async_turn_off(self, **kwargs: Any) -> None:  # noqa: ANN401, ARG002
-        """Turn the entity off."""
-        await self._coordinator.async_write(self.xt_description, 0)
+    async def async_set_native_value(self, value: float) -> None:
+        """Set value."""
+        await self._coordinator.async_write(self.xt_description, value=value)
+        # self._attr_is_on = True  # noqa: ERA001
+        # self.async_write_ha_state()  # noqa: ERA001
         await self._coordinator.async_request_refresh()

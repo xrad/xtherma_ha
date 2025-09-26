@@ -56,6 +56,22 @@ class XthermaTimeoutError(Exception):
         super().__init__("timeout")
 
 
+class XthermaWriteError(Exception):
+    """Exception indicating a write error."""
+
+    def __init__(self, code) -> None:
+        """Class constructor."""
+        super().__init__(f"write error {code}")
+
+
+class XthermaModbusBusyError(Exception):
+    """Exception indicating a Modbus busy on write error."""
+
+    def __init__(self) -> None:
+        """Class constructor."""
+        super().__init__("Modbusy device busy")
+
+
 class XthermaClient:
     """Base class for Xtherma clients."""
 
@@ -77,6 +93,11 @@ class XthermaClient:
     @abstractmethod
     async def async_get_data(self) -> list[dict[str, Any]]:
         """Obtain fresh data."""
+        raise NotImplementedError
+
+    @abstractmethod
+    async def async_put_data(self, value: int, desc: EntityDescription) -> None:
+        """Write data."""
         raise NotImplementedError
 
     @abstractmethod

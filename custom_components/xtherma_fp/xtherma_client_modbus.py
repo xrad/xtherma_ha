@@ -4,6 +4,9 @@ import logging
 from datetime import timedelta
 from typing import Any
 
+from homeassistant.components.number import (
+    NumberDeviceClass,
+)
 from homeassistant.components.sensor import (
     SensorDeviceClass,
 )
@@ -14,25 +17,23 @@ from custom_components.xtherma_fp.const import (
     KEY_ENTRY_KEY,
     KEY_ENTRY_VALUE,
 )
-from custom_components.xtherma_fp.sensor_descriptors import (
-    MODBUS_SENSOR_DESCRIPTIONS,
+from custom_components.xtherma_fp.entity_descriptors import (
+    MODBUS_ENTITY_DESCRIPTIONS,
     XtSensorEntityDescription,
 )
 
-from .vendor.pymodbus import (
-    AsyncModbusTcpClient,
-    ModbusIOException,
-)
+from .vendor.pymodbus import AsyncModbusTcpClient, ExceptionResponse, ModbusIOException
 from .xtherma_client_common import (
     XthermaClient,
+    XthermaModbusBusyError,
     XthermaModbusError,
     XthermaNotConnectedError,
+    XthermaWriteError,
 )
 
 _LOGGER = logging.getLogger(__name__)
 
-MODBUS_START_ADDRESS = 0
-MODBUS_NUM_REGISTERS = 10
+_MODBUS_MAX_VALUE: int = 65535
 
 
 class XthermaClientModbus(XthermaClient):
@@ -50,6 +51,8 @@ class XthermaClientModbus(XthermaClient):
         self._host = host
         self._port = port
         self._address = address
+        self._desc_cache: dict[str, EntityDescription] = {}
+        self._desc_regset_cache: dict[str, int] = {}
 
     async def connect(self) -> None:
         """Connect client to server endpoint."""
@@ -77,16 +80,29 @@ class XthermaClientModbus(XthermaClient):
 
     def update_interval(self) -> timedelta:
         """Return update interval for data coordinator."""
-        return timedelta(seconds=60)
+        return timedelta(seconds=20)
 
     # apply two's complement for negative values. For now, only temperatures can be
     # negative.
     def _decode_int(self, raw_value: int, desc: EntityDescription) -> int:
         if (
-            desc.device_class == SensorDeviceClass.TEMPERATURE and raw_value > 32767  # noqa: PLR2004
+            desc.device_class
+            in (SensorDeviceClass.TEMPERATURE, NumberDeviceClass.TEMPERATURE)
+            and raw_value > _MODBUS_MAX_VALUE // 2
         ):
-            return raw_value - 65536
+            return - ((raw_value - 1) ^ _MODBUS_MAX_VALUE)
         return raw_value
+
+    # apply two's complement for negative values. For now, only temperatures can be
+    # negative.
+    def _encode_int(self, signed_value: int, desc: EntityDescription) -> int:
+        if (
+            desc.device_class in (SensorDeviceClass.TEMPERATURE,
+                                  NumberDeviceClass.TEMPERATURE)
+            and signed_value < 0
+        ):
+            return ((- signed_value) ^ _MODBUS_MAX_VALUE) + 1
+        return signed_value
 
     async def _get_client(self) -> AsyncModbusTcpClient:
         if self._client is None or not self._client.connected:
@@ -103,7 +119,7 @@ class XthermaClientModbus(XthermaClient):
         result: list[dict[str, Any]] = []
         client = await self._get_client()
         try:
-            for reg_desc in MODBUS_SENSOR_DESCRIPTIONS:
+            for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
                 regs = await client.read_holding_registers(
                     address=reg_desc.base,
                     count=len(reg_desc.descriptors),
@@ -134,10 +150,51 @@ class XthermaClientModbus(XthermaClient):
                 raise XthermaModbusError
             return result
 
-    def find_description(self, key) -> EntityDescription | None:
+    async def async_put_data(self, value: int, desc: EntityDescription) -> None:
+        """Write data."""
+        client = await self._get_client()
+        try:
+            address = self._get_register_address(desc.key)
+            encoded_value = self._encode_int(value, desc)
+            _LOGGER.debug(
+                'Writing "%s" = %d @ address %d', desc.name, encoded_value, address,
+            )
+            regs = await client.write_register(
+                address=address,
+                value=encoded_value,
+                slave=int(self._address),
+            )
+        except Exception as err:
+            _LOGGER.exception("Exception error")
+            raise XthermaModbusError from err
+        else:
+            if regs.isError():
+                exc_code = regs.exception_code
+                if exc_code == ExceptionResponse.SLAVE_BUSY:
+                    _LOGGER.error("Device busy")
+                    raise XthermaModbusBusyError
+                _LOGGER.error("Modbus write error %s", exc_code)
+                raise XthermaWriteError(exc_code)
+
+    def _get_register_address(self, key: str) -> int:
+        if not self._desc_regset_cache:
+            for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
+                address = reg_desc.base
+                for desc in reg_desc.descriptors:
+                    if desc is not None and desc.key == key:
+                        self._desc_regset_cache[key.lower()] = address
+                    address += 1
+        address = self._desc_regset_cache.get(key.lower())
+        if address is None:
+            _LOGGER.error("Unknown register %s", key)
+            raise XthermaModbusError
+        return address
+
+    def find_description(self, key: str) -> EntityDescription | None:
         """Find entity description for a given key."""
-        for reg_desc in MODBUS_SENSOR_DESCRIPTIONS:
-            for desc in reg_desc.descriptors:
-                if desc is not None and desc.key.lower() == key.lower():
-                    return desc
-        return None
+        if not self._desc_cache:
+            for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
+                for desc in reg_desc.descriptors:
+                    if desc is not None:
+                        self._desc_cache[desc.key.lower()] = desc
+        return self._desc_cache.get(key.lower())

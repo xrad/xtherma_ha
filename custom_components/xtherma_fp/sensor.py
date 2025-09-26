@@ -21,14 +21,17 @@ from homeassistant.helpers.device_registry import (
 from homeassistant.helpers.entity import Entity, EntityDescription
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import StateType
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
+from homeassistant.helpers.update_coordinator import (
+    CoordinatorEntity,
+    DataUpdateCoordinator,
+)
 
 from .const import (
     DOMAIN,
     MANUFACTURER,
 )
 from .coordinator import XthermaDataUpdateCoordinator
-from .sensor_descriptors import (
+from .entity_descriptors import (
     XtBinarySensorEntityDescription,
     XtSensorEntityDescription,
     XtVersionSensorEntityDescription,
@@ -68,23 +71,15 @@ def _initialize_sensors(
 
     assert coordinator is not None  # noqa: S101
 
-    _LOGGER.debug(f"Initialize {len(coordinator.data)} sensors")  # noqa: G004
-    device_info = DeviceInfo(
-        identifiers={(DOMAIN, xtherma_data.serial_fp)},
-        name="Xtherma Wärmepumpe",
-        manufacturer=MANUFACTURER,
-        model=xtherma_data.serial_fp,
-    )
-
     sensors = []
     for key in coordinator.data:
         desc = coordinator.find_description(key)
         if not desc:
             _LOGGER.error("No sensor description found for key %s", key)
         else:
-            _LOGGER.debug('Adding sensor "%s"', desc.key)
-            sensor = __build_sensor(desc, coordinator, device_info)
+            sensor = __build_sensor(desc, coordinator, xtherma_data.device_info)
             if sensor:
+                _LOGGER.debug('Adding sensor "%s"', desc.key)
                 sensors.append(sensor)
     _LOGGER.debug("Created %d sensors", len(sensors))
     async_add_entities(sensors)
@@ -165,7 +160,7 @@ async def async_setup_entry(
     return True
 
 
-class XthermaBinarySensor(BinarySensorEntity):
+class XthermaBinarySensor(CoordinatorEntity, BinarySensorEntity):
     """Xtherma Binary Sensor."""
 
     # keep this for type safe access to custom members
@@ -178,6 +173,7 @@ class XthermaBinarySensor(BinarySensorEntity):
         description: XtBinarySensorEntityDescription,
     ) -> None:
         """Class Constructor."""
+        super().__init__(coordinator)
         self._coordinator = coordinator
         self.entity_description = description
         self.xt_description = description
@@ -198,11 +194,6 @@ class XthermaBinarySensor(BinarySensorEntity):
         return None
 
     @property
-    def available(self) -> bool:
-        """Return True if entity is available."""
-        return self._coordinator.last_update_success
-
-    @property
     def icon(self) -> str | None:
         """Return the icon to use in the frontend, if any."""
         if self.xt_description.icon_provider:
@@ -210,7 +201,7 @@ class XthermaBinarySensor(BinarySensorEntity):
         return super().icon
 
 
-class XthermaSensor(SensorEntity):
+class XthermaSensor(CoordinatorEntity, SensorEntity):
     """Xtherma Value Sensor."""
 
     # keep this for type safe access to custom members
@@ -223,6 +214,7 @@ class XthermaSensor(SensorEntity):
         description: XtSensorEntityDescription,
     ) -> None:
         """Class Constructor."""
+        super().__init__(coordinator)
         self._coordinator = coordinator
         self.entity_description = description
         self.xt_description = description
@@ -242,11 +234,6 @@ class XthermaSensor(SensorEntity):
         if self._coordinator.data:
             return self._coordinator.data.get(self.entity_description.key, None)
         return None
-
-    @property
-    def available(self) -> bool:
-        """Return True if entity is available."""
-        return self._coordinator.last_update_success
 
     @property
     def icon(self) -> str | None:

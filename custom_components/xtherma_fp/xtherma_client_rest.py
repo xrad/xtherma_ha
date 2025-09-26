@@ -7,7 +7,7 @@ from typing import Any
 import aiohttp
 from homeassistant.helpers.entity import EntityDescription
 
-from custom_components.xtherma_fp.sensor_descriptors import SENSOR_DESCRIPTIONS
+from custom_components.xtherma_fp.entity_descriptors import ENTITY_DESCRIPTIONS
 
 from .const import (
     FERNPORTAL_RATE_LIMIT_S,
@@ -39,6 +39,7 @@ class XthermaClientRest(XthermaClient):
         self._url = f"{url}/{serial_number}"
         self._api_key = api_key
         self._session = session
+        self._desc_cache: dict[str, EntityDescription] = {}
 
     def update_interval(self) -> timedelta:
         """Return update interval for data coordinator."""
@@ -84,9 +85,17 @@ class XthermaClientRest(XthermaClient):
             raise XthermaGeneralError from err
         return []
 
+    async def async_put_data(self, value: int, desc: EntityDescription) -> None:
+        """Write data."""
+        del value
+        del desc
+        error = "Cannot write values using REST API connection"
+        _LOGGER.debug(error)
+        raise XthermaGeneralError(error)
+
     def find_description(self, key) -> EntityDescription | None:
         """Find entity description for a given key."""
-        for desc in SENSOR_DESCRIPTIONS:
-            if desc is not None and desc.key.lower() == key.lower():
-                return desc
-        return None
+        if not self._desc_cache:
+            for desc in ENTITY_DESCRIPTIONS:
+                self._desc_cache[desc.key.lower()] = desc
+        return self._desc_cache.get(key.lower())

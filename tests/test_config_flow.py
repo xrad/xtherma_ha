@@ -4,7 +4,6 @@ import asyncio
 
 from homeassistant.const import CONF_API_KEY
 from homeassistant.data_entry_flow import FlowResultType
-from pytest_homeassistant_custom_component.common import load_json_value_fixture
 
 from custom_components.xtherma_fp.const import (
     CONF_CONNECTION,
@@ -13,6 +12,7 @@ from custom_components.xtherma_fp.const import (
     FERNPORTAL_URL,
 )
 from tests.const import MOCK_API_KEY, MOCK_SERIAL_NUMBER
+from tests.helpers import load_mock_data
 
 
 async def test_config_common_bad_arguments(hass):
@@ -38,7 +38,7 @@ async def test_config_common_bad_arguments(hass):
 
 async def test_rest_api_good_serial_number(hass, aioclient_mock):
     """Test giving an valid data to REST API config flow."""
-    mock_data = load_json_value_fixture("rest_response.json")
+    mock_data = load_mock_data("rest_response.json")
     aioclient_mock.get(
         f"{FERNPORTAL_URL}/{MOCK_SERIAL_NUMBER}",
         json=mock_data,
@@ -71,7 +71,7 @@ async def test_rest_api_good_serial_number(hass, aioclient_mock):
 
 async def test_rest_error_404(hass, aioclient_mock):
     """Test forcing network errors to REST API config flow."""
-    mock_data = load_json_value_fixture("rest_response.json")
+    mock_data = load_mock_data("rest_response.json")
     aioclient_mock.get(
         f"{FERNPORTAL_URL}/{MOCK_SERIAL_NUMBER}",
         json=mock_data,
@@ -106,7 +106,7 @@ async def test_rest_error_404(hass, aioclient_mock):
 
 async def test_rest_error_429(hass, aioclient_mock):
     """Test forcing network errors to REST API config flow."""
-    mock_data = load_json_value_fixture("rest_response.json")
+    mock_data = load_mock_data("rest_response.json")
     aioclient_mock.get(
         f"{FERNPORTAL_URL}/{MOCK_SERIAL_NUMBER}",
         json=mock_data,
