@@ -84,24 +84,15 @@ async def async_setup_entry(
         )
 
     # create data coordinator
-    # first refresh may take some time, especially if the config flow just ran,
-    # so do this asynchronously
     xtherma_data.coordinator = XthermaDataUpdateCoordinator(hass, entry, client)
-
-    # If we just passed the config flow, we used not be able to immediately fetch
-    # fresh data (see https://github.com/Xtherma/Xtherma-API/issues/5) This is no
-    # longer a problem, because rate limiting is now on a calls/per day basis.
-    # But we can leave this code for completeness.
-    try:
-        _LOGGER.debug("Attempting initial data fetch")
-        await xtherma_data.coordinator.async_config_entry_first_refresh()
-    except Exception:  # noqa: BLE001
-        _LOGGER.debug(
-            "Data fetch failed, probably due to rate limiting. Will try again.",
-        )
 
     # initialize platforms
     await hass.config_entries.async_forward_entry_setups(entry, _PLATFORMS)
+
+    try:
+        await xtherma_data.coordinator.async_config_entry_first_refresh()
+    except Exception:  # noqa: BLE001
+        _LOGGER.error("initial refresh failed")  # noqa: TRY400
 
     return True
 

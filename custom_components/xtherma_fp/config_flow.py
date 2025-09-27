@@ -24,7 +24,7 @@ from homeassistant.helpers.selector import (
     SelectSelectorMode,
 )
 
-from custom_components.xtherma_fp.xtherma_client_common import XthermaNotConnectedError
+from custom_components.xtherma_fp.xtherma_client_common import XthermaBusyError, XthermaError, XthermaNotConnectedError
 
 from .const import (
     CONF_CONNECTION,
@@ -37,8 +37,6 @@ from .const import (
 from .xtherma_client_modbus import XthermaClientModbus
 from .xtherma_client_rest import (
     XthermaClientRest,
-    XthermaGeneralError,
-    XthermaRateLimitError,
     XthermaTimeoutError,
 )
 
@@ -92,13 +90,13 @@ async def _validate_rest_api(
         await client.connect()
         await client.async_get_data()
         await client.disconnect()
-    except XthermaRateLimitError:
+    except XthermaBusyError:
         _LOGGER.debug("RateLimitError")
         errors["base"] = "rate_limit"
     except XthermaTimeoutError:
         _LOGGER.debug("TimeoutError")
         errors["base"] = "timeout"
-    except XthermaGeneralError:
+    except XthermaError:
         _LOGGER.debug("GeneralError")
         errors["base"] = "cannot_connect"
     except Exception:  # noqa: BLE001

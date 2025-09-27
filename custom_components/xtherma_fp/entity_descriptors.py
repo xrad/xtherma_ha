@@ -1153,6 +1153,12 @@ ENTITY_DESCRIPTIONS: list[EntityDescription] = [
     # ------- warm water
     _sensor_501,
     _sensor_522,
+    # ------- network
+    _sensor_808,
+    # _sensor_811,
+    # _sensor_812,
+    # _sensor_813,
+    _sensor_815,
     # ------- general
     _sensor_controller_v,
     _sensor_mode,

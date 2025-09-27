@@ -22,13 +22,13 @@ from custom_components.xtherma_fp.entity_descriptors import (
     XtSensorEntityDescription,
 )
 
-from .vendor.pymodbus import AsyncModbusTcpClient, ExceptionResponse, ModbusIOException
+from .vendor.pymodbus import AsyncModbusTcpClient, ExceptionResponse, ModbusException
 from .xtherma_client_common import (
+    XthermaBusyError,
     XthermaClient,
-    XthermaModbusBusyError,
+    XthermaError,
     XthermaModbusError,
     XthermaNotConnectedError,
-    XthermaWriteError,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -51,7 +51,6 @@ class XthermaClientModbus(XthermaClient):
         self._host = host
         self._port = port
         self._address = address
-        self._desc_cache: dict[str, EntityDescription] = {}
         self._desc_regset_cache: dict[str, int] = {}
 
     async def connect(self) -> None:
@@ -138,12 +137,12 @@ class XthermaClientModbus(XthermaClient):
                         else:
                             entry[KEY_ENTRY_INPUT_FACTOR] = None
                         result.append(entry)
-        except ModbusIOException as err:
+        except ModbusException as err:
             _LOGGER.error("Modbus error: %s", err.string)  # noqa: TRY400
             raise XthermaModbusError from err
         except Exception as err:
             _LOGGER.exception("Exception error")
-            raise XthermaModbusError from err
+            raise XthermaError from err
         else:
             if regs.isError():
                 _LOGGER.error("Modbus error %s", regs.exception_code)
@@ -157,7 +156,7 @@ class XthermaClientModbus(XthermaClient):
             address = self._get_register_address(desc.key)
             encoded_value = self._encode_int(value, desc)
             _LOGGER.debug(
-                'Writing "%s" = %d @ address %d', desc.name, encoded_value, address,
+                'Writing "%s" = %d @ address %d', desc.key, encoded_value, address,
             )
             regs = await client.write_register(
                 address=address,
@@ -172,9 +171,9 @@ class XthermaClientModbus(XthermaClient):
                 exc_code = regs.exception_code
                 if exc_code == ExceptionResponse.SLAVE_BUSY:
                     _LOGGER.error("Device busy")
-                    raise XthermaModbusBusyError
+                    raise XthermaBusyError
                 _LOGGER.error("Modbus write error %s", exc_code)
-                raise XthermaWriteError(exc_code)
+                raise XthermaModbusError
 
     def _get_register_address(self, key: str) -> int:
         if not self._desc_regset_cache:
@@ -190,11 +189,11 @@ class XthermaClientModbus(XthermaClient):
             raise XthermaModbusError
         return address
 
-    def find_description(self, key: str) -> EntityDescription | None:
-        """Find entity description for a given key."""
-        if not self._desc_cache:
-            for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
-                for desc in reg_desc.descriptors:
-                    if desc is not None:
-                        self._desc_cache[desc.key.lower()] = desc
-        return self._desc_cache.get(key.lower())
+    def get_entity_descriptions(self) -> list[EntityDescription]:
+        """Get all entity descriptions."""
+        return [
+            desc
+            for reg_desc in MODBUS_ENTITY_DESCRIPTIONS
+            for desc in reg_desc.descriptors
+            if desc is not None
+        ]

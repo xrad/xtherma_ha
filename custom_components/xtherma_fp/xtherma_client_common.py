@@ -7,28 +7,20 @@ from typing import Any
 from homeassistant.helpers.entity import EntityDescription
 
 
-class XthermaRateLimitError(Exception):
-    """Exception indicating REST API was accessed to frequently."""
+class XthermaBusyError(Exception):
+    """Exception indicating busy on read or write."""
 
     def __init__(self) -> None:
         """Class constructor."""
         super().__init__("API is busy")
 
 
-class XthermaGeneralError(Exception):
-    """Exception indicating a general error."""
+class XthermaError(Exception):
+    """Exception indicating a unspecified error."""
 
     def __init__(self, msg: str = "General error") -> None:
         """Class constructor."""
         super().__init__(msg)
-
-
-class XthermaModbusError(Exception):
-    """Exception indicating a modbus error."""
-
-    def __init__(self) -> None:
-        """Class constructor."""
-        super().__init__("Modbus error")
 
 
 class XthermaNotConnectedError(Exception):
@@ -40,12 +32,28 @@ class XthermaNotConnectedError(Exception):
 
 
 class XthermaRestApiError(Exception):
-    """Exception indicating a rest api error."""
+    """Exception indicating a REST API error."""
 
     def __init__(self, code: int) -> None:
         """Class constructor."""
-        super().__init__("General error")
+        super().__init__()
         self.code = code
+
+
+class XthermaModbusError(Exception):
+    """Exception indicating a Modbus error."""
+
+    def __init__(self) -> None:
+        """Class constructor."""
+        super().__init__()
+
+
+class XthermaReadOnlyError(Exception):
+    """Exception indicating a communication timeout."""
+
+    def __init__(self) -> None:
+        """Class constructor."""
+        super().__init__()
 
 
 class XthermaTimeoutError(Exception):
@@ -54,22 +62,6 @@ class XthermaTimeoutError(Exception):
     def __init__(self) -> None:
         """Class constructor."""
         super().__init__("timeout")
-
-
-class XthermaWriteError(Exception):
-    """Exception indicating a write error."""
-
-    def __init__(self, code) -> None:
-        """Class constructor."""
-        super().__init__(f"write error {code}")
-
-
-class XthermaModbusBusyError(Exception):
-    """Exception indicating a Modbus busy on write error."""
-
-    def __init__(self) -> None:
-        """Class constructor."""
-        super().__init__("Modbusy device busy")
 
 
 class XthermaClient:
@@ -101,6 +93,6 @@ class XthermaClient:
         raise NotImplementedError
 
     @abstractmethod
-    def find_description(self, name) -> EntityDescription | None:
-        """Find entity description for a given key."""
+    def get_entity_descriptions(self) -> list[EntityDescription]:
+        """Get all entity descriptions."""
         raise NotImplementedError

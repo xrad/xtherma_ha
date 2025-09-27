@@ -3,8 +3,9 @@ from homeassistant.components.number import (
 )
 import pytest
 
-from custom_components.xtherma_fp.xtherma_client_common import XthermaGeneralError
+from custom_components.xtherma_fp.xtherma_client_common import XthermaReadOnlyError
 from tests.helpers import find_number_state, get_number_platform, load_rest_response
+from homeassistant.exceptions import HomeAssistantError
 
 
 async def test_number_icon(hass, init_integration):
@@ -23,7 +24,7 @@ async def test_set_number_rest(hass, init_integration):
     assert entity is not None
     assert isinstance(entity, NumberEntity)
     # init_integration uses REST-API, which cannot write
-    with pytest.raises(XthermaGeneralError):
+    with pytest.raises(HomeAssistantError):
         await entity.async_set_native_value(entity.native_min_value)
 
 

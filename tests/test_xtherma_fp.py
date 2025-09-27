@@ -78,10 +78,7 @@ def verify_integration_switches(hass: HomeAssistant, entry: ConfigEntry):
         for state in hass.states.async_all(Platform.SWITCH)
         if state.entity_id.startswith("switch.xtherma_fp")
     ]
-    if entry.data[CONF_CONNECTION] == CONF_CONNECTION_RESTAPI:
-        assert len(our_switches) == 6
-    else:
-        assert len(our_switches) == 7
+    assert len(our_switches) == 7
 
 
 def verify_integration_numbers(hass: HomeAssistant, entry: ConfigEntry):
@@ -108,10 +105,7 @@ def verify_integration_selects(hass: HomeAssistant, entry: ConfigEntry):
         for state in hass.states.async_all(Platform.SELECT)
         if state.entity_id.startswith("select.xtherma_fp")
     ]
-    if entry.data[CONF_CONNECTION] == CONF_CONNECTION_RESTAPI:
-        assert len(our_selects) == 1
-    else:
-        assert len(our_selects) == 2
+    assert len(our_selects) == 2
 
 
 async def test_async_setup_entry_restapi_ok(hass, aioclient_mock):
@@ -144,54 +138,3 @@ async def test_async_setup_entry_restapi_ok(hass, aioclient_mock):
     verify_integration_numbers(hass, entry)
 
     verify_integration_selects(hass, entry)
-
-
-async def test_async_setup_entry_restapi_delay(hass, aioclient_mock):
-    """Verify config entries for REST API work."""
-    # set up mock responses to simulate that initial response is is invalid
-    # and we have to wait for the next refresh
-    mock_data = load_mock_data("rest_response.json")
-    url = f"{FERNPORTAL_URL}/{MOCK_SERIAL_NUMBER}"
-    side_effect = MockLongPollSideEffect()
-    side_effect.queue_response(status=429)
-    side_effect.queue_response(json=mock_data)
-    aioclient_mock.get(url, side_effect=side_effect)
-
-    # Create a mock config entry
-    entry = MockConfigEntry(
-        domain=DOMAIN,
-        data={
-            CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
-            CONF_API_KEY: MOCK_API_KEY,
-            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
-        },
-        entry_id="test_entry_xtherma",
-    )
-    entry.add_to_hass(hass)
-
-    # patch code to shorten update interval to 1 second for testing
-    with patch(
-        "custom_components.xtherma_fp.XthermaClientRest.update_interval",
-        return_value=timedelta(seconds=1),
-    ):
-        # Call async_setup_entry()
-        assert await hass.config_entries.async_setup(entry.entry_id)
-        await hass.async_block_till_done()
-
-        # Verify setup worked
-        assert isinstance(entry.runtime_data, XthermaData)
-
-        # Verify sensors are not yet initialized
-        xtherma_data: XthermaData = entry.runtime_data
-        assert not xtherma_data.sensors_initialized
-
-        # wait a bit more than one second for next coordinator update
-        await asyncio.sleep(1.5)
-
-        verify_integration_sensors(hass, entry)
-
-        verify_integration_switches(hass, entry)
-
-        verify_integration_numbers(hass, entry)
-
-        verify_integration_selects(hass, entry)

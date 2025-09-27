@@ -10,7 +10,7 @@ from custom_components.xtherma_fp.entity_descriptors import ENTITY_DESCRIPTIONS,
 
 
 def test_xt_sensor_entity_description():
-    desc_tvl = ENTITY_DESCRIPTIONS[48]
+    desc_tvl = ENTITY_DESCRIPTIONS[50]
     assert desc_tvl is not None
     assert isinstance(desc_tvl,SensorEntityDescription)
     assert desc_tvl.key == "tvl"

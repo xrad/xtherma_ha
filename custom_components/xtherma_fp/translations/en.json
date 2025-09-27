@@ -359,5 +359,31 @@
         }
       }
     }
+  },
+  "exceptions": {
+    "read_only_error": {
+      "message": "Cannot change {entity_id} when using REST-API connection."
+    },
+    "write_busy_error": {
+      "message": "Changed too frequently {entity_id}, retry later."
+    },
+    "modbus_error": {
+      "message": "Modbus error {error}."
+    },
+    "rest_api_error": {
+      "message": "REST-API error {error}."
+    },
+    "timeout_error": {
+      "message": "Timeout error."
+    },
+    "read_busy_error": {
+      "message": "Read data too frequently."
+    },
+    "not_connected_error": {
+      "message": "Not connected to server."
+    },
+    "general_error": {
+      "message": "General error {error}."
+    }
   }
 }

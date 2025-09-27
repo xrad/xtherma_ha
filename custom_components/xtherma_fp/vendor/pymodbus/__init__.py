@@ -6,13 +6,13 @@ from pathlib import Path
 sys.path.insert(0, str((Path(__file__).parent / "pymodbus-3.9.2").absolute()))
 
 from pymodbus.client import AsyncModbusTcpClient
-from pymodbus.exceptions import ModbusIOException
+from pymodbus.exceptions import ModbusException
 from pymodbus.pdu import ExceptionResponse
 
 sys.path.pop(0)
 
 __all__ = [
     "AsyncModbusTcpClient",
-    "ModbusIOException",
+    "ModbusException",
     "ExceptionResponse"
 ]

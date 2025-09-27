@@ -359,5 +359,31 @@
         }
       }
     }
+  },
+  "exceptions": {
+    "read_only_error": {
+      "message": "Der Wert {entity_id} kann nicht über REST-API Verbindnung geändert werden."
+    },
+    "write_busy_error": {
+      "message": "Der Wert {entity_id} wurde zu häufig geändert, bitte warten."
+    },
+    "modbus_error": {
+      "message": "Modbus Fehler {error} beim Ändern des Werts {entity_id}."
+    },
+    "rest_api_error": {
+      "message": "REST-API error {error}."
+    },
+    "timeout_error": {
+      "message": "Zeitüberschreitung."
+    },
+    "read_busy_error": {
+      "message": "Daten zu häufig gelesen."
+    },
+    "not_connected_error": {
+      "message": "Nicht mit dem Server verbunden."
+    },
+    "general_error": {
+      "message": "General error {error}."
+    }
   }
 }

@@ -2,12 +2,12 @@
 
 import logging
 
-from homeassistant.components.persistent_notification import async_create
 from homeassistant.components.select import (
     SelectEntity,
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.device_registry import (
     DeviceInfo,
 )
@@ -20,7 +20,7 @@ from homeassistant.helpers.update_coordinator import (
 from .const import (
     DOMAIN,
 )
-from .coordinator import XthermaDataUpdateCoordinator
+from .coordinator import XthermaDataUpdateCoordinator, read_coordinator_value
 from .entity_descriptors import (
     XtSelectEntityDescription,
 )
@@ -54,42 +54,19 @@ def _initialize_selects(
     assert coordinator is not None  # noqa: S101
 
     selects = []
-    for key in coordinator.data:
-        desc = coordinator.find_description(key)
-        if not desc:
-            _LOGGER.error("No select description found for key %s", key)
-        else:
-            select = __build_select(desc, coordinator, xtherma_data.device_info)
-            if select:
-                _LOGGER.debug('Adding select "%s"', desc.key)
-                selects.append(select)
+    for desc in coordinator.get_entity_descriptions():
+        select = __build_select(desc, coordinator, xtherma_data.device_info)
+        if select:
+            _LOGGER.debug('Adding select "%s"', desc.key)
+            selects.append(select)
     _LOGGER.debug("Created %d selects", len(selects))
     async_add_entities(selects)
 
     xtherma_data.selects_initialized = True
 
 
-# Initialize sensor entities if there is valid data in coordinator.
-def _try_initialize_selects(
-    hass: HomeAssistant,
-    xtherma_data: XthermaData,
-    async_add_entities: AddEntitiesCallback,
-) -> None:
-    coordinator = xtherma_data.coordinator
-    assert coordinator is not None  # noqa: S101
-    if coordinator.data:
-        _initialize_selects(xtherma_data, async_add_entities)
-    else:
-        _LOGGER.debug("Data coordinator has no data yet, wait for next refresh")
-        async_create(
-            hass,
-            "Xtherma",
-            "Data coordinator has no data yet, wait for next refresh",
-        )
-
-
 async def async_setup_entry(
-    hass: HomeAssistant,
+    hass: HomeAssistant,  # noqa: ARG001
     config_entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> bool:
@@ -98,23 +75,7 @@ async def async_setup_entry(
 
     _LOGGER.debug("Setup select platform")
 
-    assert xtherma_data.coordinator is not None  # noqa: S101
-
-    # Normally, __init__.py will have done an initial fetch and we should
-    # have data in the coordinator to initialize the sensors.
-    # If not (eg. because we just completed the config flow or the integration was
-    # restarted too rapidly) we will try again in the listener.
-    _try_initialize_selects(hass, xtherma_data, async_add_entities)
-
-    @callback
-    def _async_update_data() -> None:
-        if not xtherma_data.selects_initialized:
-            _try_initialize_selects(hass, xtherma_data, async_add_entities)
-
-    # Note: data coordinators only fetch data as long as there is at least one
-    # listener
-    remove_fn = xtherma_data.coordinator.async_add_listener(_async_update_data)
-    config_entry.async_on_unload(remove_fn)
+    _initialize_selects(xtherma_data, async_add_entities)
 
     return True
 
@@ -143,19 +104,16 @@ class XthermaSelectEntity(CoordinatorEntity, SelectEntity):
             self._attr_options = description.options
         self._attr_device_info = device_info
         self._attr_unique_id = f"{DOMAIN}_{description.key}"
-        self.entity_id = f"sensor.{self._attr_unique_id}"
+        self.entity_id = f"select.{self._attr_unique_id}"
         self.translation_key = description.key
 
-    @property
-    def current_option(self) -> str | None:
-        """Return the option corresponding to the index in coordinator.data."""
-        if self._coordinator.data:
-            index = self._coordinator.data.get(self.entity_description.key, None)
-            if type(index) is float:
-                new_index = int(index) % len(self.options)
-                self._attr_current_option = self.options[new_index]
-                return self._attr_current_option
-        return None
+    @callback
+    def _handle_coordinator_update(self) -> None:
+        """Handle updated data from the coordinator."""
+        value = read_coordinator_value(self._coordinator, self.entity_description.key)
+        new_index = int(value) % len(self.options)
+        self._attr_current_option = self.options[new_index]
+        self.async_write_ha_state()
 
     @property
     def icon(self) -> str | None:
@@ -166,6 +124,13 @@ class XthermaSelectEntity(CoordinatorEntity, SelectEntity):
 
     async def async_select_option(self, option: str) -> None:
         """Set value."""
-        index = self.options.index(option)
-        await self._coordinator.async_write(self.xt_description, value=index)
-        await self._coordinator.async_request_refresh()
+        try:
+            index = self.options.index(option)
+            await self._coordinator.async_write(self, value=index)
+            self._attr_current_option = option
+            self.async_write_ha_state()
+        except HomeAssistantError:
+            self._attr_force_update = True
+            self.async_write_ha_state()
+            self._attr_force_update = False
+            raise

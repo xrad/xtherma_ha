@@ -3,8 +3,9 @@ from homeassistant.components.switch import (
 )
 import pytest
 
-from custom_components.xtherma_fp.xtherma_client_common import XthermaGeneralError
+from custom_components.xtherma_fp.xtherma_client_common import XthermaReadOnlyError
 from tests.helpers import find_switch_state, get_switch_platform, load_modbus_regs_from_json
+from homeassistant.exceptions import HomeAssistantError
 
 
 async def test_binary_switch_icon(hass, init_integration):
@@ -23,7 +24,7 @@ async def test_set_switch_rest(hass, init_integration):
     assert entity is not None
     assert isinstance(entity, SwitchEntity)
     # init_integration uses REST-API, which cannot write
-    with pytest.raises(XthermaGeneralError):
+    with pytest.raises(HomeAssistantError):
         await entity.async_turn_off()
 
 def _modbus_data_from_json():

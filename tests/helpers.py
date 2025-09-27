@@ -91,11 +91,6 @@ def load_mock_data(filename: str) -> JsonValueType:
     settings = mock_data[KEY_SETTINGS]
     assert(isinstance(settings, list))
     settings.append(
-        { KEY_ENTRY_KEY: "808",
-          KEY_ENTRY_VALUE: "0"
-        },
-    )
-    settings.append(
         { KEY_ENTRY_KEY: "811",
           KEY_ENTRY_VALUE: "1"
         },
@@ -108,11 +103,6 @@ def load_mock_data(filename: str) -> JsonValueType:
     settings.append(
         { KEY_ENTRY_KEY: "813",
           KEY_ENTRY_VALUE: "3"
-        },
-    )
-    settings.append(
-        { KEY_ENTRY_KEY: "815",
-          KEY_ENTRY_VALUE: "0"
         },
     )
     return mock_data
@@ -139,7 +129,7 @@ def load_modbus_regs_from_json(filename: str) -> list[list[int]]:
             if entry is None:
                 continue
             value = int(str(entry[KEY_ENTRY_VALUE]))
-            print(f"{desc.key} {reg_desc.base}+{i} {reg_desc.base+i} = {value}")
+            # print(f"{desc.key} {reg_desc.base}+{i} {reg_desc.base+i} = {value}")
             regs[i] = value
         regs_list.append(regs)
     return regs_list

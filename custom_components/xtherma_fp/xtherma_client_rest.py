@@ -15,9 +15,10 @@ from .const import (
     KEY_TELEMETRY,
 )
 from .xtherma_client_common import (
+    XthermaBusyError,
     XthermaClient,
-    XthermaGeneralError,
-    XthermaRateLimitError,
+    XthermaError,
+    XthermaReadOnlyError,
     XthermaRestApiError,
     XthermaTimeoutError,
 )
@@ -39,7 +40,6 @@ class XthermaClientRest(XthermaClient):
         self._url = f"{url}/{serial_number}"
         self._api_key = api_key
         self._session = session
-        self._desc_cache: dict[str, EntityDescription] = {}
 
     def update_interval(self) -> timedelta:
         """Return update interval for data coordinator."""
@@ -74,28 +74,23 @@ class XthermaClientRest(XthermaClient):
         except aiohttp.ClientResponseError as err:
             _LOGGER.debug("API error: %s", err)
             if err.status == 429:  # noqa: PLR2004
-                raise XthermaRateLimitError from err
+                raise XthermaBusyError from err
             raise XthermaRestApiError(err.status) from err
         except TimeoutError as err:
             _LOGGER.debug("API request timed out")
             raise XthermaTimeoutError from err
         except Exception as err:
             _LOGGER.debug("Unknown API error %s", err)
-            _LOGGER.exception("Unknown API error")
-            raise XthermaGeneralError from err
+            raise XthermaError from err
         return []
 
     async def async_put_data(self, value: int, desc: EntityDescription) -> None:
         """Write data."""
         del value
         del desc
-        error = "Cannot write values using REST API connection"
-        _LOGGER.debug(error)
-        raise XthermaGeneralError(error)
+        _LOGGER.debug("Cannot write values using REST API connection")
+        raise XthermaReadOnlyError
 
-    def find_description(self, key) -> EntityDescription | None:
-        """Find entity description for a given key."""
-        if not self._desc_cache:
-            for desc in ENTITY_DESCRIPTIONS:
-                self._desc_cache[desc.key.lower()] = desc
-        return self._desc_cache.get(key.lower())
+    def get_entity_descriptions(self) -> list[EntityDescription]:
+        """Get all entity descriptions."""
+        return ENTITY_DESCRIPTIONS
