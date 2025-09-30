@@ -1155,9 +1155,9 @@ ENTITY_DESCRIPTIONS: list[EntityDescription] = [
     _sensor_522,
     # ------- network
     _sensor_808,
-    # _sensor_811,
-    # _sensor_812,
-    # _sensor_813,
+    _sensor_811,
+    _sensor_812,
+    _sensor_813,
     _sensor_815,
     # ------- general
     _sensor_controller_v,

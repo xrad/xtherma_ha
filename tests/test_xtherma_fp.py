@@ -90,10 +90,7 @@ def verify_integration_numbers(hass: HomeAssistant, entry: ConfigEntry):
         for state in hass.states.async_all(Platform.NUMBER)
         if state.entity_id.startswith("number.xtherma_fp")
     ]
-    if entry.data[CONF_CONNECTION] == CONF_CONNECTION_RESTAPI:
-        assert len(our_numbers) == 22
-    else:
-        assert len(our_numbers) == 25
+    assert len(our_numbers) == 25
 
 
 def verify_integration_selects(hass: HomeAssistant, entry: ConfigEntry):

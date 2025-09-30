@@ -86,25 +86,6 @@ def find_entry(values: list[dict], key: str) -> dict[str, Any] | None:
 
 def load_mock_data(filename: str) -> JsonValueType:
     mock_data = load_json_value_fixture(filename)
-    # explicitly add values which are not in rest api
-    assert(isinstance(mock_data, dict))
-    settings = mock_data[KEY_SETTINGS]
-    assert(isinstance(settings, list))
-    settings.append(
-        { KEY_ENTRY_KEY: "811",
-          KEY_ENTRY_VALUE: "1"
-        },
-    )
-    settings.append(
-        { KEY_ENTRY_KEY: "812",
-          KEY_ENTRY_VALUE: "2"
-        },
-    )
-    settings.append(
-        { KEY_ENTRY_KEY: "813",
-          KEY_ENTRY_VALUE: "3"
-        },
-    )
     return mock_data
 
 
