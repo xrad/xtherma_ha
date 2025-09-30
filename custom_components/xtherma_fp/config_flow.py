@@ -24,7 +24,11 @@ from homeassistant.helpers.selector import (
     SelectSelectorMode,
 )
 
-from custom_components.xtherma_fp.xtherma_client_common import XthermaBusyError, XthermaError, XthermaNotConnectedError
+from custom_components.xtherma_fp.xtherma_client_common import (
+    XthermaBusyError,
+    XthermaError,
+    XthermaNotConnectedError,
+)
 
 from .const import (
     CONF_CONNECTION,
@@ -308,7 +312,8 @@ class OptionsFlowHandler(OptionsFlow):
         self._config_data[CONF_CONNECTION] = entry.data.get(CONF_CONNECTION, "")
         self._config_data[CONF_SERIAL_NUMBER] = entry.data.get(CONF_SERIAL_NUMBER, "")
         self._config_data[CONF_HOST] = entry.data.get(CONF_HOST, "")
-        self._config_data[CONF_ADDRESS] = entry.data.get(CONF_ADDRESS, _DEF_MODBUS_ADDRESS)
+        self._config_data[CONF_ADDRESS] = entry.data.get(CONF_ADDRESS,
+                                                         _DEF_MODBUS_ADDRESS)
         self._config_data[CONF_PORT] = entry.data.get(CONF_PORT, _DEF_MODBUS_PORT)
         self._config_data[CONF_API_KEY] = entry.data.get(CONF_API_KEY, "")
 
