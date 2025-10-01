@@ -19,6 +19,7 @@ from custom_components.xtherma_fp.const import (
 )
 from custom_components.xtherma_fp.entity_descriptors import (
     MODBUS_ENTITY_DESCRIPTIONS,
+    ModbusRegisterSet,
     XtSensorEntityDescription,
 )
 
@@ -53,6 +54,7 @@ class XthermaClientModbus(XthermaClient):
         self._port = port
         self._address = address
         self._desc_regset_cache: dict[str, int] = {}
+        self._last_update: list[dict[str, Any]] = []
 
     async def connect(self) -> None:
         """Connect client to server endpoint."""
@@ -114,30 +116,17 @@ class XthermaClientModbus(XthermaClient):
                 raise XthermaNotConnectedError
         return self._client
 
-    async def async_get_data(self) -> list[dict[str, Any]]:
-        """Obtain fresh data."""
-        result: list[dict[str, Any]] = []
-        client = await self._get_client()
+    async def _read_bank(
+        self,
+        client: AsyncModbusTcpClient,
+        reg_desc: ModbusRegisterSet,
+    ) -> None:
         try:
-            for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
-                regs = await client.read_holding_registers(
-                    address=reg_desc.base,
-                    count=len(reg_desc.descriptors),
-                    slave=int(self._address),
-                )
-                for i, desc in enumerate(reg_desc.descriptors):
-                    if not desc:
-                        _LOGGER.debug("no descriptor for %d.%d", reg_desc.base, i)
-                    else:
-                        entry = {}
-                        entry[KEY_ENTRY_KEY] = desc.key
-                        value = self._decode_int(regs.registers[i], desc)
-                        entry[KEY_ENTRY_VALUE] = str(value)
-                        if isinstance(desc, XtSensorEntityDescription):
-                            entry[KEY_ENTRY_INPUT_FACTOR] = desc.factor
-                        else:
-                            entry[KEY_ENTRY_INPUT_FACTOR] = None
-                        result.append(entry)
+            regs = await client.read_holding_registers(
+                address=reg_desc.base,
+                count=len(reg_desc.descriptors),
+                slave=int(self._address),
+            )
         except ModbusException as err:
             _LOGGER.error("Modbus error: %s", err.string)  # noqa: TRY400
             raise XthermaModbusError from err
@@ -148,7 +137,27 @@ class XthermaClientModbus(XthermaClient):
             if regs.isError():
                 _LOGGER.error("Modbus error %s", regs.exception_code)
                 raise XthermaModbusError
-            return result
+            for i, desc in enumerate(reg_desc.descriptors):
+                if not desc:
+                    _LOGGER.debug("no descriptor for %d.%d", reg_desc.base, i)
+                else:
+                    entry = {}
+                    entry[KEY_ENTRY_KEY] = desc.key
+                    value = self._decode_int(regs.registers[i], desc)
+                    entry[KEY_ENTRY_VALUE] = str(value)
+                    if isinstance(desc, XtSensorEntityDescription):
+                        entry[KEY_ENTRY_INPUT_FACTOR] = desc.factor
+                    else:
+                        entry[KEY_ENTRY_INPUT_FACTOR] = None
+                    self._last_update.append(entry)
+
+    async def async_get_data(self) -> list[dict[str, Any]]:
+        """Obtain fresh data."""
+        self._last_update = []
+        client = await self._get_client()
+        for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
+            await self._read_bank(client, reg_desc)
+        return self._last_update
 
     async def async_put_data(self, value: int, desc: EntityDescription) -> None:
         """Write data."""
