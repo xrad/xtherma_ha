@@ -34,6 +34,7 @@ from .xtherma_client_common import (
 _LOGGER = logging.getLogger(__name__)
 
 _MODBUS_MAX_VALUE: int = 65535
+_MODBUS_UPDATE_PERIOD_S: int = 30
 
 
 class XthermaClientModbus(XthermaClient):
@@ -79,7 +80,7 @@ class XthermaClientModbus(XthermaClient):
 
     def update_interval(self) -> timedelta:
         """Return update interval for data coordinator."""
-        return timedelta(seconds=20)
+        return timedelta(seconds=_MODBUS_UPDATE_PERIOD_S)
 
     # apply two's complement for negative values. For now, only temperatures can be
     # negative.
