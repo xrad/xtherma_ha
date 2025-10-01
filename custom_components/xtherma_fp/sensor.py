@@ -48,7 +48,7 @@ def __build_sensor(
     if isinstance(desc, XtSensorEntityDescription):
         if desc.device_class == SensorDeviceClass.ENUM:
             return XthermaEnumSensor(coordinator, device_info, desc)
-        if isinstance(desc,XtVersionSensorEntityDescription):
+        if isinstance(desc, XtVersionSensorEntityDescription):
             return XthermaVersionSensor(coordinator, device_info, desc)
         return XthermaSensor(coordinator, device_info, desc)
     return None
@@ -212,6 +212,7 @@ class XthermaEnumSensor(XthermaSensor):
         index = int(value) % len(options)
         self._attr_native_value = options[index]
         self.async_write_ha_state()
+
 
 class XthermaVersionSensor(XthermaSensor):
     """Xtherma Version Value Sensor."""

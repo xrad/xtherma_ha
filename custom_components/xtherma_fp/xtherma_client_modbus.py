@@ -89,18 +89,18 @@ class XthermaClientModbus(XthermaClient):
             in (SensorDeviceClass.TEMPERATURE, NumberDeviceClass.TEMPERATURE)
             and raw_value > _MODBUS_MAX_VALUE // 2
         ):
-            return - ((raw_value - 1) ^ _MODBUS_MAX_VALUE)
+            return -((raw_value - 1) ^ _MODBUS_MAX_VALUE)
         return raw_value
 
     # apply two's complement for negative values. For now, only temperatures can be
     # negative.
     def _encode_int(self, signed_value: int, desc: EntityDescription) -> int:
         if (
-            desc.device_class in (SensorDeviceClass.TEMPERATURE,
-                                  NumberDeviceClass.TEMPERATURE)
+            desc.device_class
+            in (SensorDeviceClass.TEMPERATURE, NumberDeviceClass.TEMPERATURE)
             and signed_value < 0
         ):
-            return ((- signed_value) ^ _MODBUS_MAX_VALUE) + 1
+            return ((-signed_value) ^ _MODBUS_MAX_VALUE) + 1
         return signed_value
 
     async def _get_client(self) -> AsyncModbusTcpClient:
@@ -156,7 +156,10 @@ class XthermaClientModbus(XthermaClient):
             address = self._get_register_address(desc.key)
             encoded_value = self._encode_int(value, desc)
             _LOGGER.debug(
-                'Writing "%s" = %d @ address %d', desc.key, encoded_value, address,
+                'Writing "%s" = %d @ address %d',
+                desc.key,
+                encoded_value,
+                address,
             )
             regs = await client.write_register(
                 address=address,

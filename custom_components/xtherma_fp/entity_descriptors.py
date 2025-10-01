@@ -47,14 +47,16 @@ class XtBinaryEntityDescription:
 
 @dataclass(kw_only=True, frozen=True)
 class XtSwitchEntityDescription(
-    SwitchEntityDescription, XtBinaryEntityDescription,
+    SwitchEntityDescription,
+    XtBinaryEntityDescription,
 ):
     """A switchable input entity."""
 
 
 @dataclass(kw_only=True, frozen=True)
 class XtBinarySensorEntityDescription(
-    BinarySensorEntityDescription, XtBinaryEntityDescription,
+    BinarySensorEntityDescription,
+    XtBinaryEntityDescription,
 ):
     """A binary value sensor."""
 
@@ -108,6 +110,7 @@ def _error_icon(state: bool | None) -> str:
         return "mdi:check"
     return "mdi:alert"
 
+
 _mode_options = ["standby", "heating", "cooling", "water", "auto"]
 _mode_icon_map = {
     0: "mdi:power-standby",
@@ -116,6 +119,8 @@ _mode_icon_map = {
     3: "mdi:thermometer-water",
     4: "mdi:brightness-auto",
 }
+
+
 def _mode_icon(state: StateType | date | datetime | Decimal) -> str:
     if isinstance(state, str):
         try:
@@ -134,6 +139,8 @@ _002_icon_map = {
     3: "mdi:thermometer-water",
     4: "mdi:brightness-auto",
 }
+
+
 def _002_icon(state: StateType) -> str:
     if isinstance(state, str):
         try:
@@ -175,6 +182,8 @@ _sgready_icon_map = {
     3: "mdi:thermometer-plus",  # Temperaturen anheben
     4: "mdi:home-thermometer",  # Anlaufbefehl
 }
+
+
 def _sgready_icon(state: StateType | date | datetime | Decimal) -> str:
     if isinstance(state, str):
         try:
@@ -192,6 +201,8 @@ _808_icon_map = {
     2: "mdi:circle-double",  # Sperre
     3: "mdi:thermometer-plus",  # Temperaturen anheben
 }
+
+
 def _808_icon(state: StateType) -> str:
     if isinstance(state, str):
         try:

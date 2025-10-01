@@ -45,12 +45,12 @@ _FACTORS = {
 }
 
 _RFACTORS = {
-    "*1000": .001,
-    "*100": .01,
-    "*10": .1,
-    "1000": .001,
-    "100": .01,
-    "10": .1,
+    "*1000": 0.001,
+    "*100": 0.01,
+    "*10": 0.1,
+    "1000": 0.001,
+    "100": 0.01,
+    "10": 0.1,
     "/1000": 1000,
     "/100": 100,
     "/10": 10,
@@ -61,10 +61,12 @@ _RFACTORS = {
 # the old value.
 _WRITE_SETTLE_TIME_S = 30
 
+
 @dataclass
 class _PendingWrite:
     value: float
     blocked_until: datetime
+
 
 class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
     """Regularly Fetches data from API client."""
@@ -99,9 +101,9 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         _LOGGER.debug("Coordinator _async_setup")
         await self._client.connect()
 
-    def _apply_input_factor(self, rawvalue: str, inputfactor: str|None) -> float:
+    def _apply_input_factor(self, rawvalue: str, inputfactor: str | None) -> float:
         value = float(rawvalue)
-        if not isinstance(inputfactor,str):
+        if not isinstance(inputfactor, str):
             return value
         factor = _FACTORS.get(inputfactor, 1.0)
         return factor * value
@@ -118,7 +120,8 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
                     result[key] = pending_write
                     _LOGGER.debug(
                         'Skipping update of key="%s" due to pending write',
-                        key)
+                        key,
+                    )
                 else:
                     rawvalue = entry.get(KEY_ENTRY_VALUE, None)
                     inputfactor = entry.get(KEY_ENTRY_INPUT_FACTOR, None)
@@ -187,7 +190,8 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         """Block reads for a specific register for N seconds."""
         _LOGGER.debug("Block reads of key %s for %d seconds", key, seconds)
         self._pending_writes[key] = _PendingWrite(
-            blocked_until=datetime.now(UTC) + timedelta(seconds=seconds), value=value,
+            blocked_until=datetime.now(UTC) + timedelta(seconds=seconds),
+            value=value,
         )
 
     def _is_blocked(self, key: str) -> float | None:
@@ -248,6 +252,7 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
                     "entity_id": entity.entity_id,
                 },
             ) from err
+
 
 def read_coordinator_value(coordinator: DataUpdateCoordinator, key: str) -> int | float:
     """Read a value from us."""
