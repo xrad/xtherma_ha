@@ -367,8 +367,11 @@
     "write_busy_error": {
       "message": "Der Wert {entity_id} wurde zu häufig geändert, bitte warten."
     },
-    "modbus_error": {
-      "message": "Modbus Fehler {error} beim Ändern des Werts {entity_id}."
+    "modbus_read_error": {
+      "message": "Modbus Lesefehler {error}."
+    },
+    "modbus_write_error": {
+      "message": "Modbus Schreibfehler {error} beim Ändern des Werts {entity_id}."
     },
     "rest_api_error": {
       "message": "REST-API error {error}."

@@ -365,10 +365,13 @@
       "message": "Cannot change {entity_id} when using REST-API connection."
     },
     "write_busy_error": {
-      "message": "Changed too frequently {entity_id}, retry later."
+      "message": "Wrote {entity_id} too frequently, retry later."
     },
-    "modbus_error": {
-      "message": "Modbus error {error}."
+    "modbus_read_error": {
+      "message": "Modbus read error {error}."
+    },
+    "modbus_write_error": {
+      "message": "Modbus write error {error} changing the value of {entity_id}."
     },
     "rest_api_error": {
       "message": "REST-API error {error}."

@@ -160,7 +160,7 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         except XthermaModbusError as err:
             raise UpdateFailed(
                 translation_domain=DOMAIN,
-                translation_key="modbus_error",
+                translation_key="modbus_read_error",
                 translation_placeholders={
                     "error": str(err),
                 },
@@ -242,9 +242,10 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         except XthermaModbusError as err:
             raise HomeAssistantError(
                 translation_domain=DOMAIN,
-                translation_key="modbus_error",
+                translation_key="modbus_write_error",
                 translation_placeholders={
                     "error": str(err),
+                    "entity_id": entity.entity_id,
                 },
             ) from err
 
