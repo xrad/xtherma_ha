@@ -193,8 +193,8 @@ class XthermaClientModbus(XthermaClient):
             for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
                 address = reg_desc.base
                 for desc in reg_desc.descriptors:
-                    if desc is not None and desc.key == key:
-                        self._desc_regset_cache[key.lower()] = address
+                    if desc is not None:
+                        self._desc_regset_cache[desc.key.lower()] = address
                     address += 1
         address = self._desc_regset_cache.get(key.lower())
         if address is None:
