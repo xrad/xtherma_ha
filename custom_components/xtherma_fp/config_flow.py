@@ -3,14 +3,12 @@
 from __future__ import annotations
 
 import logging
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import voluptuous as vol
 from homeassistant.config_entries import (
-    ConfigEntry,
     ConfigFlow,
     ConfigFlowResult,
-    OptionsFlow,
 )
 from homeassistant.const import (
     CONF_ADDRESS,
@@ -49,6 +47,9 @@ from .xtherma_client_rest import (
     XthermaClientRest,
     XthermaTimeoutError,
 )
+
+if TYPE_CHECKING:
+    from homeassistant.core import HomeAssistant
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -289,51 +290,22 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
             errors=errors,
         )
 
-    @staticmethod
-    @callback
-    def async_get_options_flow(
-        config_entry: ConfigEntry,
-    ) -> OptionsFlowHandler:
-        """Create the options flow."""
-        return OptionsFlowHandler()
-
-
-class OptionsFlowHandler(OptionsFlow):
-    """Reconfigure integration."""
-
-    def __init__(self) -> None:
-        """Constructor."""
-        # here we will collect inputs from the various pages
-        self._config_data: dict[str, str] = {}
-
-    async def async_step_init(
+    async def async_step_reconfigure(
         self,
         user_input: dict[str, Any] | None = None,
     ) -> ConfigFlowResult:
-        """Manage the options."""
+        """Reconfigure an existing entry."""
         errors: dict[str, str] = {}
-        entry = self.config_entry
-        entry = self.config_entry
-
-        self._config_data[CONF_CONNECTION] = entry.data.get(CONF_CONNECTION, "")
-        self._config_data[CONF_SERIAL_NUMBER] = entry.data.get(CONF_SERIAL_NUMBER, "")
-        self._config_data[CONF_HOST] = entry.data.get(CONF_HOST, "")
-        self._config_data[CONF_ADDRESS] = entry.data.get(
-            CONF_ADDRESS,
-            _DEF_MODBUS_ADDRESS,
-        )
-        self._config_data[CONF_PORT] = entry.data.get(CONF_PORT, _DEF_MODBUS_PORT)
-        self._config_data[CONF_API_KEY] = entry.data.get(CONF_API_KEY, "")
+        reconfigure_entry = self._get_reconfigure_entry()
 
         if user_input is not None:
-            self._config_data.update(user_input)
             connection_type = user_input[CONF_CONNECTION]
             if connection_type == CONF_CONNECTION_RESTAPI:
-                return await self.async_step_rest_api()
+                return await self.async_step_reconfigure_rest_api()
             if connection_type == CONF_CONNECTION_MODBUSTCP:
-                return await self.async_step_modbus_tcp()
+                return await self.async_step_reconfigure_modbus_tcp()
 
-        def_connection = self._config_data[CONF_CONNECTION]
+        def_connection = reconfigure_entry.data[CONF_CONNECTION]
 
         schema = vol.Schema(
             {
@@ -350,25 +322,27 @@ class OptionsFlowHandler(OptionsFlow):
             },
         )
 
-        return self.async_show_form(step_id="init", data_schema=schema, errors=errors)
+        return self.async_show_form(
+            step_id="reconfigure",
+            data_schema=schema,
+            errors=errors,
+        )
 
-    async def async_step_rest_api(
+    async def async_step_reconfigure_rest_api(
         self,
         user_input: dict[str, Any] | None = None,
     ) -> ConfigFlowResult:
         """Process rest api config step."""
         errors: dict[str, str] = {}
-
-        hass = self.hass
-        entry = self.config_entry
+        reconfigure_entry = self._get_reconfigure_entry()
 
         if user_input is not None:
-            self._config_data.update(user_input)
-            hass.config_entries.async_update_entry(entry, data=self._config_data)
-            await hass.config_entries.async_reload(entry.entry_id)
-            return self.async_create_entry(data={})
+            return self.async_update_reload_and_abort(
+                reconfigure_entry,
+                data_updates=user_input,
+            )
 
-        def_api_key = self._config_data[CONF_API_KEY]
+        def_api_key = reconfigure_entry.data.get(CONF_API_KEY)
 
         schema = vol.Schema(
             {
@@ -381,30 +355,28 @@ class OptionsFlowHandler(OptionsFlow):
         )
 
         return self.async_show_form(
-            step_id="rest_api",
+            step_id="reconfigure_rest_api",
             data_schema=schema,
             errors=errors,
         )
 
-    async def async_step_modbus_tcp(
+    async def async_step_reconfigure_modbus_tcp(
         self,
         user_input: dict[str, Any] | None = None,
     ) -> ConfigFlowResult:
         """Process modbus tcp config step."""
         errors: dict[str, str] = {}
-
-        hass = self.hass
-        entry = self.config_entry
+        reconfigure_entry = self._get_reconfigure_entry()
 
         if user_input is not None:
-            self._config_data.update(user_input)
-            hass.config_entries.async_update_entry(entry, data=self._config_data)
-            await hass.config_entries.async_reload(entry.entry_id)
-            return self.async_create_entry(data=self._config_data)
+            return self.async_update_reload_and_abort(
+                reconfigure_entry,
+                data_updates=user_input,
+            )
 
-        def_host = self._config_data[CONF_HOST]
-        def_port = self._config_data[CONF_PORT]
-        def_address = self._config_data[CONF_ADDRESS]
+        def_host = reconfigure_entry.data.get(CONF_HOST)
+        def_port = reconfigure_entry.data.get(CONF_PORT, _DEF_MODBUS_PORT)
+        def_address = reconfigure_entry.data.get(CONF_ADDRESS, _DEF_MODBUS_ADDRESS)
 
         schema = vol.Schema(
             {
@@ -423,7 +395,7 @@ class OptionsFlowHandler(OptionsFlow):
         )
 
         return self.async_show_form(
-            step_id="modbus_tcp",
+            step_id="reconfigure_modbus_tcp",
             data_schema=schema,
             errors=errors,
         )
