@@ -17,9 +17,6 @@ from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
 )
 
-from .const import (
-    DOMAIN,
-)
 from .coordinator import XthermaDataUpdateCoordinator, read_coordinator_value
 from .entity_descriptors import (
     XtNumberEntityDescription,
@@ -100,7 +97,7 @@ class XthermaNumberEntity(CoordinatorEntity, NumberEntity):
         self._attr_has_entity_name = True
         self._attr_device_info = device_info
         self._attr_device_class = description.device_class
-        self._attr_unique_id = f"{DOMAIN}_{description.key}"
+        self._attr_unique_id = f"{device_info['model'].lower()}-{description.key}"
         self.entity_id = f"number.{self._attr_unique_id}"
         self.translation_key = description.key
 
