@@ -16,28 +16,28 @@ from pytest_homeassistant_custom_component.common import (
 from custom_components.xtherma_fp.entity_descriptors import MODBUS_ENTITY_DESCRIPTIONS
 
 def find_sensor_state(hass: HomeAssistant, id: str) -> State:
-    full_id = f"sensor.xtherma_fp_{id}"
+    full_id = f"sensor.fp_04_123456_{id}"
     state = hass.states.get(full_id)
     assert state is not None
     return state
 
 
 def find_switch_state(hass: HomeAssistant, id: str) -> State:
-    full_id = f"switch.xtherma_fp_{id}"
+    full_id = f"switch.fp_04_123456_{id}"
     state = hass.states.get(full_id)
     assert state is not None
     return state
 
 
 def find_number_state(hass: HomeAssistant, id: str) -> State:
-    full_id = f"number.xtherma_fp_{id}"
+    full_id = f"number.fp_04_123456_{id}"
     state = hass.states.get(full_id)
     assert state is not None
     return state
 
 
 def find_select_state(hass: HomeAssistant, id: str) -> State:
-    full_id = f"select.xtherma_fp_{id}"
+    full_id = f"select.fp_04_123456_{id}"
     state = hass.states.get(full_id)
     assert state is not None
     return state
