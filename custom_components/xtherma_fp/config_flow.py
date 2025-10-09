@@ -166,16 +166,15 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
     VERSION = 1
     MINOR_VERSION = 0
 
-    def __init__(self) -> None:
-        """Constructor."""
-        # here we will collect inputs from the various pages
-        self._config_data: dict[str, str] = {}
+    _config_data: dict[str, str]
+    _reconfigure_data: dict[str, str]
 
     async def async_step_user(
         self,
         user_input: dict[str, Any] | None = None,
     ) -> ConfigFlowResult:
         """Process user step."""
+        self._config_data = {}
         errors: dict[str, str] = {}
 
         if user_input is not None:
@@ -297,15 +296,17 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
         """Reconfigure an existing entry."""
         errors: dict[str, str] = {}
         reconfigure_entry = self._get_reconfigure_entry()
+        self._reconfigure_data = reconfigure_entry.data.copy()
 
         if user_input is not None:
+            self._reconfigure_data.update(user_input)
             connection_type = user_input[CONF_CONNECTION]
             if connection_type == CONF_CONNECTION_RESTAPI:
                 return await self.async_step_reconfigure_rest_api()
             if connection_type == CONF_CONNECTION_MODBUSTCP:
                 return await self.async_step_reconfigure_modbus_tcp()
 
-        def_connection = reconfigure_entry.data[CONF_CONNECTION]
+        def_connection = self._reconfigure_data[CONF_CONNECTION]
 
         schema = vol.Schema(
             {
@@ -334,15 +335,18 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
     ) -> ConfigFlowResult:
         """Process rest api config step."""
         errors: dict[str, str] = {}
-        reconfigure_entry = self._get_reconfigure_entry()
 
         if user_input is not None:
-            return self.async_update_reload_and_abort(
-                reconfigure_entry,
-                data_updates=user_input,
+            errors |= await _validate_rest_api(
+                self.hass, self._reconfigure_data, user_input
             )
+            if not errors:
+                self._reconfigure_data.update(user_input)
+                return self.async_update_reload_and_abort(
+                    self._get_reconfigure_entry(), data_updates=self._reconfigure_data
+                )
 
-        def_api_key = reconfigure_entry.data.get(CONF_API_KEY)
+        def_api_key = self._reconfigure_data.get(CONF_API_KEY)
 
         schema = vol.Schema(
             {
@@ -366,17 +370,17 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
     ) -> ConfigFlowResult:
         """Process modbus tcp config step."""
         errors: dict[str, str] = {}
-        reconfigure_entry = self._get_reconfigure_entry()
-
         if user_input is not None:
-            return self.async_update_reload_and_abort(
-                reconfigure_entry,
-                data_updates=user_input,
-            )
+            errors |= await _validate_modbus_tcp(self.hass, user_input)
+            if not errors:
+                self._reconfigure_data.update(user_input)
+                return self.async_update_reload_and_abort(
+                    self._get_reconfigure_entry(), data_updates=self._reconfigure_data
+                )
 
-        def_host = reconfigure_entry.data.get(CONF_HOST)
-        def_port = reconfigure_entry.data.get(CONF_PORT, _DEF_MODBUS_PORT)
-        def_address = reconfigure_entry.data.get(CONF_ADDRESS, _DEF_MODBUS_ADDRESS)
+        def_host = self._reconfigure_data.get(CONF_HOST)
+        def_port = self._reconfigure_data.get(CONF_PORT, _DEF_MODBUS_PORT)
+        def_address = self._reconfigure_data.get(CONF_ADDRESS, _DEF_MODBUS_ADDRESS)
 
         schema = vol.Schema(
             {
