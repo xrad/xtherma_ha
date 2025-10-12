@@ -52,34 +52,29 @@ _DEF_MODBUS_ADDRESS = 1
 
 async def _validate_connection(
     data: dict[str, Any],
-    errors: dict[str, str],
-) -> bool:
+) -> dict[str, str]:
     _LOGGER.debug("validate connection settings")
+    errors = {}
 
     serial_number = data.get(CONF_SERIAL_NUMBER)
-    if not serial_number:
+    if serial_number is None or not serial_number.startswith("FP-"):
         errors["base"] = "bad_arguments"
-        return False
 
-    if not serial_number.startswith("FP-"):
-        errors["base"] = "bad_arguments"
-        return False
-
-    return True
+    return errors
 
 
 async def _validate_rest_api(
     hass: HomeAssistant,
     previous_data: dict[str, Any],
     data: dict[str, Any],
-    errors: dict[str, str],
-) -> bool:
+) -> dict[str, str]:
     _LOGGER.debug("validate REST-API settings")
+    errors = {}
 
     api_key = data.get(CONF_API_KEY)
     if not api_key:
         errors["base"] = "bad_arguments"
-        return False
+        return errors
 
     serial_number = previous_data.get(CONF_SERIAL_NUMBER, "")
 
@@ -106,32 +101,31 @@ async def _validate_rest_api(
     except Exception:  # noqa: BLE001
         _LOGGER.debug("Unexpected exception")
         errors["base"] = "unknown"
+
+    if errors:
+        _LOGGER.debug("validation unsuccessful (%s)", errors["base"])
     else:
         _LOGGER.debug("validation successful")
-        return True
 
-    _LOGGER.debug("validation unsuccessful (%s)", errors["base"])
-    return False
+    return errors
 
 
 async def _validate_modbus_tcp(
     hass: HomeAssistant,  # noqa: ARG001
     data: dict[str, Any],
-    errors: dict[str, str],
-) -> bool:
+) -> dict[str, str]:
     """Check values in data dict."""
     _LOGGER.debug("validate Modbus/TCP settings")
+    errors = {}
 
     host = data.get(CONF_HOST)
     port = data.get(CONF_PORT)
     address = data.get(CONF_ADDRESS)
-    if not host or not port or not address:
+    if not (
+        host and port and address and int(port) == port and int(address) == address
+    ):
         errors["base"] = "bad_arguments"
-        return False
-
-    if int(port) != port or int(address) != address:
-        errors["base"] = "bad_arguments"
-        return False
+        return errors
 
     try:
         client = XthermaClientModbus(
@@ -150,12 +144,13 @@ async def _validate_modbus_tcp(
     except Exception as e:  # noqa: BLE001
         _LOGGER.debug("Unexpected exception %s", e)
         errors["base"] = "unknown"
+
+    if errors:
+        _LOGGER.debug("validation unsuccessful (%s)", errors["base"])
     else:
         _LOGGER.debug("validation successful")
-        return True
 
-    _LOGGER.debug("validation unsuccessful (%s)", errors["base"])
-    return False
+    return errors
 
 
 async def _get_title() -> str:
@@ -180,16 +175,15 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
         """Process user step."""
         errors: dict[str, str] = {}
 
-        if user_input is not None and await _validate_connection(
-            user_input,
-            errors,
-        ):
-            self._config_data.update(user_input)
-            connection_type = user_input[CONF_CONNECTION]
-            if connection_type == CONF_CONNECTION_RESTAPI:
-                return await self.async_step_rest_api()
-            if connection_type == CONF_CONNECTION_MODBUSTCP:
-                return await self.async_step_modbus_tcp()
+        if user_input is not None:
+            errors |= await _validate_connection(user_input)
+            if not errors:
+                self._config_data.update(user_input)
+                connection_type = user_input[CONF_CONNECTION]
+                if connection_type == CONF_CONNECTION_RESTAPI:
+                    return await self.async_step_rest_api()
+                if connection_type == CONF_CONNECTION_MODBUSTCP:
+                    return await self.async_step_modbus_tcp()
 
         schema = vol.Schema(
             {
@@ -219,15 +213,16 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
         """Process rest api config step."""
         errors: dict[str, str] = {}
 
-        if user_input is not None and await _validate_rest_api(
-            self.hass,
-            self._config_data,
-            user_input,
-            errors,
-        ):
-            self._config_data.update(user_input)
-            title = await _get_title()
-            return self.async_create_entry(title=title, data=self._config_data)
+        if user_input is not None:
+            errors |= await _validate_rest_api(
+                self.hass,
+                self._config_data,
+                user_input,
+            )
+            if not errors:
+                self._config_data.update(user_input)
+                title = await _get_title()
+                return self.async_create_entry(title=title, data=self._config_data)
 
         schema = vol.Schema(
             {
@@ -248,14 +243,15 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
         """Process modbus tcp config step."""
         errors: dict[str, str] = {}
 
-        if user_input is not None and await _validate_modbus_tcp(
-            self.hass,
-            user_input,
-            errors,
-        ):
-            self._config_data.update(user_input)
-            title = await _get_title()
-            return self.async_create_entry(title=title, data=self._config_data)
+        if user_input is not None:
+            errors |= await _validate_modbus_tcp(
+                self.hass,
+                user_input,
+            )
+            if not errors:
+                self._config_data.update(user_input)
+                title = await _get_title()
+                return self.async_create_entry(title=title, data=self._config_data)
 
         schema = vol.Schema(
             {
