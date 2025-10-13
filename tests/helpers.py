@@ -2,6 +2,7 @@ from typing import Any
 import warnings
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant, State
+from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.entity_platform import async_get_platforms, EntityPlatform
 from homeassistant.util.json import (
     JsonValueType,
@@ -15,29 +16,29 @@ from pytest_homeassistant_custom_component.common import (
 
 from custom_components.xtherma_fp.entity_descriptors import MODBUS_ENTITY_DESCRIPTIONS
 
-def find_sensor_state(hass: HomeAssistant, id: str) -> State:
-    full_id = f"sensor.fp_04_123456_{id}"
+def find_sensor_state(hass: HomeAssistant, entry: ConfigEntry, id: str) -> State:
+    full_id = f"sensor.{entry.entry_id}_{id}"
     state = hass.states.get(full_id)
     assert state is not None
     return state
 
 
-def find_switch_state(hass: HomeAssistant, id: str) -> State:
-    full_id = f"switch.fp_04_123456_{id}"
+def find_switch_state(hass: HomeAssistant, entry: ConfigEntry, id: str) -> State:
+    full_id = f"switch.{entry.entry_id}_{id}"
     state = hass.states.get(full_id)
     assert state is not None
     return state
 
 
-def find_number_state(hass: HomeAssistant, id: str) -> State:
-    full_id = f"number.fp_04_123456_{id}"
+def find_number_state(hass: HomeAssistant, entry: ConfigEntry, id: str) -> State:
+    full_id = f"number.{entry.entry_id}_{id}"
     state = hass.states.get(full_id)
     assert state is not None
     return state
 
 
-def find_select_state(hass: HomeAssistant, id: str) -> State:
-    full_id = f"select.fp_04_123456_{id}"
+def find_select_state(hass: HomeAssistant, entry: ConfigEntry, id: str) -> State:
+    full_id = f"select.{entry.entry_id}_{id}"
     state = hass.states.get(full_id)
     assert state is not None
     return state

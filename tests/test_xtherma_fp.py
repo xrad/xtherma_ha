@@ -64,7 +64,7 @@ def verify_integration_sensors(hass: HomeAssistant, entry: ConfigEntry):
     our_sensors = [
         state
         for state in hass.states.async_all(Platform.SENSOR)
-        if state.entity_id.startswith("sensor.fp_04_123456")
+        if state.entity_id.startswith(f"sensor.{entry.entry_id}")
     ]
     assert len(our_sensors) == 54
 
@@ -76,7 +76,7 @@ def verify_integration_switches(hass: HomeAssistant, entry: ConfigEntry):
     our_switches = [
         state
         for state in hass.states.async_all(Platform.SWITCH)
-        if state.entity_id.startswith("switch.fp_04_123456")
+        if state.entity_id.startswith(f"switch.{entry.entry_id}")
     ]
     assert len(our_switches) == 7
 
@@ -88,7 +88,7 @@ def verify_integration_numbers(hass: HomeAssistant, entry: ConfigEntry):
     our_numbers = [
         state
         for state in hass.states.async_all(Platform.NUMBER)
-        if state.entity_id.startswith("number.fp_04_123456")
+        if state.entity_id.startswith(f"number.{entry.entry_id}")
     ]
     assert len(our_numbers) == 25
 
@@ -100,7 +100,7 @@ def verify_integration_selects(hass: HomeAssistant, entry: ConfigEntry):
     our_selects = [
         state
         for state in hass.states.async_all(Platform.SELECT)
-        if state.entity_id.startswith("select.fp_04_123456")
+        if state.entity_id.startswith(f"select.{entry.entry_id}")
     ]
     assert len(our_selects) == 2
 
