@@ -5,7 +5,6 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
-import homeassistant.helpers.device_registry as dr
 import homeassistant.helpers.entity_registry as er
 from homeassistant.const import (
     CONF_ADDRESS,
@@ -16,6 +15,7 @@ from homeassistant.const import (
 )
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant.helpers.device_registry import DeviceInfo
 
 from .const import (
     CONF_CONNECTION,
@@ -54,7 +54,7 @@ async def async_setup_entry(
     serial_number = entry.data[CONF_SERIAL_NUMBER]
     xtherma_data.serial_fp = serial_number
 
-    xtherma_data.device_info = dr.DeviceInfo(
+    xtherma_data.device_info = DeviceInfo(
         identifiers={(DOMAIN, xtherma_data.serial_fp)},
         name="Xtherma Wärmepumpe",
         manufacturer=MANUFACTURER,
@@ -130,22 +130,18 @@ async def async_migrate_entities(
     config_entry: ConfigEntry,
 ) -> None:
     """Migrate entity registry."""
-    device_registry = dr.async_get(hass)
 
     @callback
     def update_unique_id(entity_entry: er.RegistryEntry) -> dict[str, str] | None:
         """Update unique ID of entity entry."""
-        device_id = entity_entry.device_id
+        if entity_entry.unique_id.startswith(DOMAIN):
+            return {
+                "new_unique_id": entity_entry.unique_id.replace(
+                    f"{DOMAIN}_",
+                    f"{config_entry.entry_id}-",
+                ),
+            }
 
-        if entity_entry.unique_id.startswith(DOMAIN) and device_id is not None:
-            device = device_registry.async_get(device_id)
-            if device is not None and device.model is not None:
-                return {
-                    "new_unique_id": entity_entry.unique_id.replace(
-                        f"{DOMAIN}_",
-                        f"{str(device.model).lower()}-",
-                    ),
-                }
         return None
 
     await er.async_migrate_entries(hass, config_entry.entry_id, update_unique_id)

@@ -100,7 +100,7 @@ class XthermaSelectEntity(CoordinatorEntity, SelectEntity):
         else:
             self._attr_options = description.options
         self._attr_device_info = device_info
-        self._attr_unique_id = f"{device_info['model'].lower()}-{description.key}"
+        self._attr_unique_id = f"{coordinator.config_entry.entry_id}-{description.key}"
         self.entity_id = f"select.{self._attr_unique_id}"
         self.translation_key = description.key
 
