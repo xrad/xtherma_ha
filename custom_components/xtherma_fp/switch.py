@@ -3,9 +3,7 @@
 import logging
 from typing import Any
 
-from homeassistant.components.switch import (
-    SwitchEntity,
-)
+from homeassistant.components.switch import SwitchEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.exceptions import HomeAssistantError
@@ -103,7 +101,6 @@ class XthermaSwitchEntity(CoordinatorEntity, SwitchEntity):
         self._attr_device_info = device_info
         self._attr_device_class = description.device_class
         self._attr_unique_id = f"{coordinator.config_entry.entry_id}-{description.key}"
-        self.entity_id = f"switch.{self._attr_unique_id}"
         self.translation_key = description.key
         """
         Avoid the "unknown" state which will make the frontend render this as two icon

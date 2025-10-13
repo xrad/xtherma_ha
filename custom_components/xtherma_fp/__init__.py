@@ -56,7 +56,7 @@ async def async_setup_entry(
 
     xtherma_data.device_info = DeviceInfo(
         identifiers={(DOMAIN, xtherma_data.serial_fp)},
-        name="Xtherma Wärmepumpe",
+        name=entry.title,
         manufacturer=MANUFACTURER,
         model=xtherma_data.serial_fp,
     )
@@ -145,3 +145,21 @@ async def async_migrate_entities(
         return None
 
     await er.async_migrate_entries(hass, config_entry.entry_id, update_unique_id)
+
+    registry = er.async_get(hass)
+    for entity_entry in registry.entities.get_entries_for_config_entry_id(
+        config_entry.entry_id,
+    ):
+        if entity_entry.suggested_object_id is not None:
+            _LOGGER.debug(
+                "remove suggested_object_id from entity entry %s",
+                entity_entry.unique_id,
+            )
+            registry.async_remove(entity_entry.entity_id)
+            registry.async_get_or_create(
+                entity_entry.domain,
+                entity_entry.platform,
+                entity_entry.unique_id,
+                config_entry=config_entry,
+                device_id=entity_entry.device_id,
+            )
