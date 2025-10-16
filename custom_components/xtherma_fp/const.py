@@ -39,3 +39,6 @@ KEY_ENTRY_MAPPING = "mapping"
 KEY_ENTRY_UNIT = "unit"
 KEY_ENTRY_OUTPUT_FACTOR = "output_factor"
 KEY_ENTRY_INPUT_FACTOR = "input_factor"
+
+# additional entity state attributes
+EXTRA_STATE_ATTRIBUTE_PARAMETER = "parameter"

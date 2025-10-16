@@ -16,30 +16,25 @@ from pytest_homeassistant_custom_component.common import (
 
 from custom_components.xtherma_fp.entity_descriptors import MODBUS_ENTITY_DESCRIPTIONS
 
-def get_sensor_platform(hass: HomeAssistant) -> EntityPlatform:
+
+def get_platform(hass: HomeAssistant, domain: str) -> EntityPlatform:
     platforms = async_get_platforms(hass, DOMAIN)
-    assert len(platforms) == 4
     for platform in platforms:
-        if platform.domain == Platform.SENSOR:
+        if platform.domain == domain:
             return platform
-    fail("We have no sensor platfom")
+    fail(f"We have no platfom {domain}")
+
+
+def get_sensor_platform(hass: HomeAssistant) -> EntityPlatform:
+    return get_platform(hass, Platform.SENSOR)
+
 
 def get_switch_platform(hass: HomeAssistant) -> EntityPlatform:
-    platforms = async_get_platforms(hass, DOMAIN)
-    assert len(platforms) == 4
-    for platform in platforms:
-        if platform.domain == Platform.SWITCH:
-            return platform
-    fail("We have no switch platfom")
+    return get_platform(hass, Platform.SWITCH)
 
 
 def get_number_platform(hass: HomeAssistant) -> EntityPlatform:
-    platforms = async_get_platforms(hass, DOMAIN)
-    assert len(platforms) == 4
-    for platform in platforms:
-        if platform.domain == Platform.NUMBER:
-            return platform
-    fail("We have no number platfom")
+    return get_platform(hass, Platform.NUMBER)
 
 
 def get_select_platform(hass: HomeAssistant) -> EntityPlatform:

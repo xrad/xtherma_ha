@@ -21,6 +21,7 @@ from homeassistant.helpers.update_coordinator import (
 
 from .const import (
     DOMAIN,
+    EXTRA_STATE_ATTRIBUTE_PARAMETER,
     MANUFACTURER,
 )
 from .coordinator import XthermaDataUpdateCoordinator, read_coordinator_value
@@ -136,6 +137,9 @@ class XthermaBinarySensor(CoordinatorEntity, BinarySensorEntity):
         self._attr_device_info = device_info
         self._attr_device_class = description.device_class
         self._attr_unique_id = f"{coordinator.config_entry.entry_id}-{description.key}"
+        self._attr_extra_state_attributes = {
+            EXTRA_STATE_ATTRIBUTE_PARAMETER: self.xt_description.key,
+        }
         self.translation_key = description.key
 
     @callback
@@ -178,6 +182,9 @@ class XthermaSensor(CoordinatorEntity, SensorEntity):
         self._attr_options = description.options
         self._factor = description.factor
         self._attr_unique_id = f"{coordinator.config_entry.entry_id}-{description.key}"
+        self._attr_extra_state_attributes = {
+            EXTRA_STATE_ATTRIBUTE_PARAMETER: self.xt_description.key,
+        }
         self.translation_key = description.key
 
     @callback

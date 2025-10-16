@@ -6,13 +6,6 @@ from homeassistant.helpers.entity_platform import async_get_platforms, EntityPla
 from custom_components.xtherma_fp.const import DOMAIN
 
 
-async def get_platform(hass: HomeAssistant, domain: str) -> EntityPlatform:
-    platforms = async_get_platforms(hass, DOMAIN)
-    for platform in platforms:
-        if platform.domain == domain:
-            return platform
-    raise Exception("Platform %s not found", domain)
-
 def test_json_load_value_fixture():
     data = load_json_value_fixture("rest_response.json")
     assert isinstance(data, dict)

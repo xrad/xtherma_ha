@@ -6,6 +6,11 @@ from homeassistant.const import Platform
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_API_KEY, CONF_NAME
 from homeassistant.core import HomeAssistant
+import homeassistant.helpers.entity_registry as er
+from homeassistant.helpers.entity_platform import async_get_platforms, EntityPlatform
+from homeassistant.helpers.entity import Entity
+
+from pytest import fail
 from pytest_homeassistant_custom_component.common import (
     MockConfigEntry,
     load_json_value_fixture,
@@ -13,17 +18,19 @@ from pytest_homeassistant_custom_component.common import (
 from pytest_homeassistant_custom_component.test_util.aiohttp import (
     MockLongPollSideEffect,
 )
+from sqlalchemy import desc
 
 from custom_components.xtherma_fp.const import (
     CONF_CONNECTION,
     CONF_CONNECTION_RESTAPI,
     CONF_SERIAL_NUMBER,
     DOMAIN,
+    EXTRA_STATE_ATTRIBUTE_PARAMETER,
     FERNPORTAL_URL,
 )
 from custom_components.xtherma_fp.xtherma_data import XthermaData
 from tests.const import MOCK_API_KEY, MOCK_SERIAL_NUMBER, MOCK_NAME
-from tests.helpers import load_mock_data
+from tests.helpers import get_platform, load_mock_data
 
 
 async def test_async_setup_entry_old(hass, aioclient_mock):
@@ -105,6 +112,18 @@ def verify_integration_selects(hass: HomeAssistant, entry: ConfigEntry):
     assert len(our_selects) == 2
 
 
+def verify_parameter_keys(hass: HomeAssistant, entry: ConfigEntry):
+
+    entity_reg = er.async_get(hass)
+    entries = er.async_entries_for_config_entry(entity_reg, entry.entry_id)
+    for reg_entity in entries:
+        domain = reg_entity.entity_id.split(".")[0]
+        platform = get_platform(hass, domain)
+        entity = platform.entities.get(reg_entity.entity_id)
+        assert entity is not None
+        key = entity._attr_extra_state_attributes.get(EXTRA_STATE_ATTRIBUTE_PARAMETER)
+        assert key == entity.entity_description.key
+
 async def test_async_setup_entry_restapi_ok(hass, aioclient_mock):
     """Verify config entries for REST API work."""
     mock_data = load_mock_data("rest_response.json")
@@ -137,3 +156,5 @@ async def test_async_setup_entry_restapi_ok(hass, aioclient_mock):
     verify_integration_numbers(hass, entry)
 
     verify_integration_selects(hass, entry)
+
+    verify_parameter_keys(hass, entry)

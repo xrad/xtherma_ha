@@ -11,7 +11,7 @@ from tests.const import (
     MOCK_CONFIG_ENTRY_ID,
 )
 from tests.helpers import load_modbus_regs_from_json
-from tests.test_xtherma_fp import verify_integration_entry, verify_integration_numbers, verify_integration_selects, verify_integration_sensors, verify_integration_switches
+from tests.test_xtherma_fp import verify_integration_entry, verify_integration_numbers, verify_integration_selects, verify_integration_sensors, verify_integration_switches, verify_parameter_keys
 
 def _get_config_entry(hass: HomeAssistant) -> ConfigEntry:
     entry = hass.config_entries.async_get_entry(MOCK_CONFIG_ENTRY_ID)
@@ -46,3 +46,5 @@ async def test_async_setup_entry_modbus_ok(hass, init_modbus_integration):
     verify_integration_numbers(hass, entry)
 
     verify_integration_selects(hass, entry)
+
+    verify_parameter_keys(hass, entry)
