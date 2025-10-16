@@ -1,5 +1,6 @@
 """Constants for tests."""
 
+MOCK_NAME = "Xtherma"
 MOCK_API_KEY = "FakeApiKey"
 MOCK_SERIAL_NUMBER = "FP-04-123456"
 MOCK_MODBUS_HOST = "127.0.0.1"

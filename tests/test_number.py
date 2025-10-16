@@ -1,24 +1,28 @@
+from token import NUMBER
 from homeassistant.components.number import (
     NumberEntity,
 )
 import pytest
 
 from custom_components.xtherma_fp.xtherma_client_common import XthermaReadOnlyError
-from tests.helpers import find_number_state, get_number_platform, load_rest_response
+from tests.helpers import get_number_platform, load_rest_response
 from homeassistant.exceptions import HomeAssistantError
+
+NUMBER_ENTITY_ID_451 = "number.test_entry_xtherma_config_cooling_curve_2_outside_temperature_low_p1"
+NUMBER_ENTITY_ID_MODBUS_451 = "number.test_entry_xtherma_modbus_config_cooling_curve_2_outside_temperature_low_p1"
+NUMBER_ENTITY_ID_MODBUS_411 = "number.test_entry_xtherma_modbus_config_heating_curve_2_outside_temperature_low_p1"
 
 
 async def test_number_icon(hass, init_integration):
     platform = get_number_platform(hass)
-    state = find_number_state(hass, init_integration, "451")
-    entity = platform.entities.get(state.entity_id)
+    entity = platform.entities.get(NUMBER_ENTITY_ID_451)
     assert entity is not None
     assert entity.icon == "mdi:thermometer"
 
 
 async def test_set_number_rest(hass, init_integration):
     platform = get_number_platform(hass)
-    state = find_number_state(hass, init_integration, "451")
+    state = hass.states.get(NUMBER_ENTITY_ID_451)
     assert state.state == "33.0"
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
@@ -36,7 +40,7 @@ async def test_set_number_rest(hass, init_integration):
 # check writing positive values
 async def test_set_number_modbus(hass, init_modbus_integration, mock_modbus_tcp_client):
     platform = get_number_platform(hass)
-    state = find_number_state(hass, init_modbus_integration, "451")
+    state = hass.states.get(NUMBER_ENTITY_ID_MODBUS_451)
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
     assert isinstance(entity, NumberEntity)
@@ -56,7 +60,7 @@ async def test_set_number_modbus(hass, init_modbus_integration, mock_modbus_tcp_
 )
 async def test_set_negative_number_modbus(hass, init_modbus_integration, mock_modbus_tcp_client):
     platform = get_number_platform(hass)
-    state = find_number_state(hass, init_modbus_integration, "411")
+    state = hass.states.get(NUMBER_ENTITY_ID_MODBUS_411)
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
     assert isinstance(entity, NumberEntity)
