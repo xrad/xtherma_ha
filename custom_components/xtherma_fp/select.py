@@ -17,9 +17,6 @@ from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
 )
 
-from .const import (
-    DOMAIN,
-)
 from .coordinator import XthermaDataUpdateCoordinator, read_coordinator_value
 from .entity_descriptors import (
     XtSelectEntityDescription,
@@ -103,7 +100,7 @@ class XthermaSelectEntity(CoordinatorEntity, SelectEntity):
         else:
             self._attr_options = description.options
         self._attr_device_info = device_info
-        self._attr_unique_id = f"{DOMAIN}_{description.key}"
+        self._attr_unique_id = f"{coordinator.config_entry.entry_id}-{description.key}"
         self.entity_id = f"select.{self._attr_unique_id}"
         self.translation_key = description.key
 

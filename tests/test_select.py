@@ -10,7 +10,7 @@ from homeassistant.exceptions import HomeAssistantError
 
 async def test_select_entity(hass, init_integration):
     platform = get_select_platform(hass)
-    state = find_select_state(hass, "002")
+    state = find_select_state(hass, init_integration, "002")
     assert state.state == "auto"
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
@@ -19,7 +19,7 @@ async def test_select_entity(hass, init_integration):
 
 async def test_set_select_rest(hass, init_integration):
     platform = get_select_platform(hass)
-    state = find_select_state(hass, "002")
+    state = find_select_state(hass, init_integration, "002")
     assert state.state == "auto"
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
@@ -44,7 +44,7 @@ def _modbus_data_from_json():
 
 async def test_set_select_modbus(hass, init_modbus_integration, mock_modbus_tcp_client):
     platform = get_select_platform(hass)
-    state = find_select_state(hass, "002")
+    state = find_select_state(hass, init_modbus_integration, "002")
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
     assert isinstance(entity, SelectEntity)

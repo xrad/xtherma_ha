@@ -138,7 +138,7 @@ class XthermaBinarySensor(CoordinatorEntity, BinarySensorEntity):
         self._attr_has_entity_name = True
         self._attr_device_info = device_info
         self._attr_device_class = description.device_class
-        self._attr_unique_id = f"{DOMAIN}_{description.key}"
+        self._attr_unique_id = f"{coordinator.config_entry.entry_id}-{description.key}"
         self.entity_id = f"sensor.{self._attr_unique_id}"
         self.translation_key = description.key
 
@@ -181,7 +181,7 @@ class XthermaSensor(CoordinatorEntity, SensorEntity):
         self._attr_state_class = description.state_class
         self._attr_options = description.options
         self._factor = description.factor
-        self._attr_unique_id = f"{DOMAIN}_{description.key}"
+        self._attr_unique_id = f"{coordinator.config_entry.entry_id}-{description.key}"
         self.entity_id = f"sensor.{self._attr_unique_id}"
         self.translation_key = description.key
 

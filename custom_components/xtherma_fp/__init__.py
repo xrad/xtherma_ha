@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
+import homeassistant.helpers.entity_registry as er
 from homeassistant.const import (
     CONF_ADDRESS,
     CONF_API_KEY,
@@ -12,10 +13,9 @@ from homeassistant.const import (
     CONF_PORT,
     Platform,
 )
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
-from homeassistant.helpers.device_registry import (
-    DeviceInfo,
-)
+from homeassistant.helpers.device_registry import DeviceInfo
 
 from .const import (
     CONF_CONNECTION,
@@ -33,7 +33,6 @@ from .xtherma_data import XthermaData
 
 if TYPE_CHECKING:
     from homeassistant.config_entries import ConfigEntry
-    from homeassistant.core import HomeAssistant
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -83,6 +82,9 @@ async def async_setup_entry(
             address=address,
         )
 
+    # migrate entities
+    await async_migrate_entities(hass, entry)
+
     # create data coordinator
     xtherma_data.coordinator = XthermaDataUpdateCoordinator(hass, entry, client)
 
@@ -121,3 +123,25 @@ async def async_migrate_entry(_: HomeAssistant, config_entry: ConfigEntry) -> bo
         )
 
     return True
+
+
+async def async_migrate_entities(
+    hass: HomeAssistant,
+    config_entry: ConfigEntry,
+) -> None:
+    """Migrate entity registry."""
+
+    @callback
+    def update_unique_id(entity_entry: er.RegistryEntry) -> dict[str, str] | None:
+        """Update unique ID of entity entry."""
+        if entity_entry.unique_id.startswith(DOMAIN):
+            return {
+                "new_unique_id": entity_entry.unique_id.replace(
+                    f"{DOMAIN}_",
+                    f"{config_entry.entry_id}-",
+                ),
+            }
+
+        return None
+
+    await er.async_migrate_entries(hass, config_entry.entry_id, update_unique_id)

@@ -10,7 +10,7 @@ from homeassistant.exceptions import HomeAssistantError
 
 async def test_number_icon(hass, init_integration):
     platform = get_number_platform(hass)
-    state = find_number_state(hass, "451")
+    state = find_number_state(hass, init_integration, "451")
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
     assert entity.icon == "mdi:thermometer"
@@ -18,7 +18,7 @@ async def test_number_icon(hass, init_integration):
 
 async def test_set_number_rest(hass, init_integration):
     platform = get_number_platform(hass)
-    state = find_number_state(hass, "451")
+    state = find_number_state(hass, init_integration, "451")
     assert state.state == "33.0"
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
@@ -36,7 +36,7 @@ async def test_set_number_rest(hass, init_integration):
 # check writing positive values
 async def test_set_number_modbus(hass, init_modbus_integration, mock_modbus_tcp_client):
     platform = get_number_platform(hass)
-    state = find_number_state(hass, "451")
+    state = find_number_state(hass, init_modbus_integration, "451")
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
     assert isinstance(entity, NumberEntity)
@@ -56,7 +56,7 @@ async def test_set_number_modbus(hass, init_modbus_integration, mock_modbus_tcp_
 )
 async def test_set_negative_number_modbus(hass, init_modbus_integration, mock_modbus_tcp_client):
     platform = get_number_platform(hass)
-    state = find_number_state(hass, "411")
+    state = find_number_state(hass, init_modbus_integration, "411")
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
     assert isinstance(entity, NumberEntity)
