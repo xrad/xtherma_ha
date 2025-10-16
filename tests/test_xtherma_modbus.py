@@ -10,7 +10,7 @@ from custom_components.xtherma_fp.xtherma_data import XthermaData
 from tests.const import (
     MOCK_CONFIG_ENTRY_ID,
 )
-from tests.helpers import find_sensor_state, load_modbus_regs_from_json
+from tests.helpers import load_modbus_regs_from_json
 from tests.test_xtherma_fp import verify_integration_entry, verify_integration_numbers, verify_integration_selects, verify_integration_sensors, verify_integration_switches
 
 def _get_config_entry(hass: HomeAssistant) -> ConfigEntry:

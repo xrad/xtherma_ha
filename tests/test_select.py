@@ -4,13 +4,16 @@ from homeassistant.components.select import (
 import pytest
 
 from custom_components.xtherma_fp.xtherma_client_common import XthermaReadOnlyError
-from tests.helpers import find_select_state, get_select_platform, load_modbus_regs_from_json
+from tests.helpers import get_select_platform, load_modbus_regs_from_json
 from homeassistant.exceptions import HomeAssistantError
+
+SELECT_ENTITY_ID_002 = "select.test_entry_xtherma_config_operating_mode"
+SELECT_ENTITY_ID_MODBUS_002 = "select.test_entry_xtherma_modbus_config_operating_mode"
 
 
 async def test_select_entity(hass, init_integration):
     platform = get_select_platform(hass)
-    state = find_select_state(hass, init_integration, "002")
+    state = hass.states.get(SELECT_ENTITY_ID_002)
     assert state.state == "auto"
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
@@ -19,7 +22,7 @@ async def test_select_entity(hass, init_integration):
 
 async def test_set_select_rest(hass, init_integration):
     platform = get_select_platform(hass)
-    state = find_select_state(hass, init_integration, "002")
+    state = hass.states.get(SELECT_ENTITY_ID_002)
     assert state.state == "auto"
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
@@ -41,10 +44,9 @@ def _modbus_data_from_json():
     _modbus_data_from_json(),
     indirect=True,  # This tells pytest to pass the parameter to the fixture
 )
-
 async def test_set_select_modbus(hass, init_modbus_integration, mock_modbus_tcp_client):
     platform = get_select_platform(hass)
-    state = find_select_state(hass, init_modbus_integration, "002")
+    state = hass.states.get(SELECT_ENTITY_ID_MODBUS_002)
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
     assert isinstance(entity, SelectEntity)

@@ -5,10 +5,7 @@ import logging
 from homeassistant.components.binary_sensor import (
     BinarySensorEntity,
 )
-from homeassistant.components.sensor import (
-    SensorDeviceClass,
-    SensorEntity,
-)
+from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers import device_registry
@@ -139,7 +136,6 @@ class XthermaBinarySensor(CoordinatorEntity, BinarySensorEntity):
         self._attr_device_info = device_info
         self._attr_device_class = description.device_class
         self._attr_unique_id = f"{coordinator.config_entry.entry_id}-{description.key}"
-        self.entity_id = f"sensor.{self._attr_unique_id}"
         self.translation_key = description.key
 
     @callback
@@ -182,7 +178,6 @@ class XthermaSensor(CoordinatorEntity, SensorEntity):
         self._attr_options = description.options
         self._factor = description.factor
         self._attr_unique_id = f"{coordinator.config_entry.entry_id}-{description.key}"
-        self.entity_id = f"sensor.{self._attr_unique_id}"
         self.translation_key = description.key
 
     @callback

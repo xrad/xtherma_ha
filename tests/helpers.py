@@ -16,34 +16,6 @@ from pytest_homeassistant_custom_component.common import (
 
 from custom_components.xtherma_fp.entity_descriptors import MODBUS_ENTITY_DESCRIPTIONS
 
-def find_sensor_state(hass: HomeAssistant, entry: ConfigEntry, id: str) -> State:
-    full_id = f"sensor.{entry.entry_id}_{id}"
-    state = hass.states.get(full_id)
-    assert state is not None
-    return state
-
-
-def find_switch_state(hass: HomeAssistant, entry: ConfigEntry, id: str) -> State:
-    full_id = f"switch.{entry.entry_id}_{id}"
-    state = hass.states.get(full_id)
-    assert state is not None
-    return state
-
-
-def find_number_state(hass: HomeAssistant, entry: ConfigEntry, id: str) -> State:
-    full_id = f"number.{entry.entry_id}_{id}"
-    state = hass.states.get(full_id)
-    assert state is not None
-    return state
-
-
-def find_select_state(hass: HomeAssistant, entry: ConfigEntry, id: str) -> State:
-    full_id = f"select.{entry.entry_id}_{id}"
-    state = hass.states.get(full_id)
-    assert state is not None
-    return state
-
-
 def get_sensor_platform(hass: HomeAssistant) -> EntityPlatform:
     platforms = async_get_platforms(hass, DOMAIN)
     assert len(platforms) == 4

@@ -12,7 +12,13 @@ from homeassistant.config_entries import (
     ConfigFlowResult,
     OptionsFlow,
 )
-from homeassistant.const import CONF_ADDRESS, CONF_API_KEY, CONF_HOST, CONF_PORT
+from homeassistant.const import (
+    CONF_ADDRESS,
+    CONF_API_KEY,
+    CONF_HOST,
+    CONF_NAME,
+    CONF_PORT,
+)
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers import aiohttp_client
 from homeassistant.helpers.selector import (
@@ -153,10 +159,6 @@ async def _validate_modbus_tcp(
     return errors
 
 
-async def _get_title() -> str:
-    return "Xtherma"
-
-
 class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
     """Process config flow."""
 
@@ -187,6 +189,10 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
 
         schema = vol.Schema(
             {
+                vol.Required(
+                    CONF_NAME,
+                    msg="Entry name",
+                ): str,
                 vol.Required(
                     CONF_SERIAL_NUMBER,
                     msg="Serial Number (FP-XX-XXXXXX)",
@@ -221,8 +227,10 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
             )
             if not errors:
                 self._config_data.update(user_input)
-                title = await _get_title()
-                return self.async_create_entry(title=title, data=self._config_data)
+                return self.async_create_entry(
+                    title=self._config_data[CONF_NAME],
+                    data=self._config_data,
+                )
 
         schema = vol.Schema(
             {
@@ -250,8 +258,10 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
             )
             if not errors:
                 self._config_data.update(user_input)
-                title = await _get_title()
-                return self.async_create_entry(title=title, data=self._config_data)
+                return self.async_create_entry(
+                    title=self._config_data[CONF_NAME],
+                    data=self._config_data,
+                )
 
         schema = vol.Schema(
             {

@@ -2,9 +2,7 @@
 
 import logging
 
-from homeassistant.components.select import (
-    SelectEntity,
-)
+from homeassistant.components.select import SelectEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.exceptions import HomeAssistantError
@@ -101,7 +99,6 @@ class XthermaSelectEntity(CoordinatorEntity, SelectEntity):
             self._attr_options = description.options
         self._attr_device_info = device_info
         self._attr_unique_id = f"{coordinator.config_entry.entry_id}-{description.key}"
-        self.entity_id = f"select.{self._attr_unique_id}"
         self.translation_key = description.key
 
     @callback

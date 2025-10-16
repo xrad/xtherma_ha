@@ -4,14 +4,15 @@
     "step": {
       "user": {
         "data": {
-          "connection": "Which connection to create?"
+          "connection": "Which connection to create?",
+          "serial_number": "Serial number (Fernportal module)",
+          "name": "Name of integration entry"
         }
       },
       "rest_api": {
         "description": "Provide credentials to access Fernportal",
         "data": {
-          "api_key": "API Token",
-          "serial_number": "SN Fernportal-Module"
+          "api_key": "API Token"
         }
       },
       "modbus_tcp": {

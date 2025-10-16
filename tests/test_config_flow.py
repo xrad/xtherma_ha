@@ -4,7 +4,7 @@ import asyncio
 import pytest
 from unittest.mock import patch
 
-from homeassistant.const import CONF_API_KEY, CONF_HOST, CONF_PORT, CONF_ADDRESS
+from homeassistant.const import CONF_NAME, CONF_API_KEY, CONF_HOST, CONF_PORT, CONF_ADDRESS
 from homeassistant.data_entry_flow import FlowResultType
 
 from custom_components.xtherma_fp.const import (
@@ -13,16 +13,17 @@ from custom_components.xtherma_fp.const import (
     CONF_SERIAL_NUMBER,
     FERNPORTAL_URL,
 )
-from tests.const import MOCK_API_KEY, MOCK_SERIAL_NUMBER, MOCK_MODBUS_HOST, MOCK_MODBUS_PORT, MOCK_MODBUS_ADDRESS
+from tests.const import MOCK_NAME, MOCK_API_KEY, MOCK_SERIAL_NUMBER, MOCK_MODBUS_HOST, MOCK_MODBUS_PORT, MOCK_MODBUS_ADDRESS
 from tests.helpers import load_mock_data
 
 from custom_components.xtherma_fp.config_flow import _validate_connection, _validate_rest_api, _validate_modbus_tcp
 from custom_components.xtherma_fp.xtherma_client_common import XthermaBusyError, XthermaError, XthermaNotConnectedError, XthermaTimeoutError
 
 
-MOCK_REST_DATA = {CONF_API_KEY: MOCK_API_KEY}
+MOCK_REST_DATA = {CONF_NAME: MOCK_NAME, CONF_API_KEY: MOCK_API_KEY}
 
 MOCK_MODBUS_DATA = {
+    CONF_NAME: MOCK_NAME,
     CONF_HOST: MOCK_MODBUS_HOST,
     CONF_PORT: MOCK_MODBUS_PORT,
     CONF_ADDRESS: MOCK_MODBUS_ADDRESS,
@@ -39,6 +40,7 @@ async def test_config_common_bad_arguments(hass):
 
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"], user_input={
+            CONF_NAME: MOCK_NAME,
             CONF_SERIAL_NUMBER: "SerialNumbersMustBeginWithFP",
             CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
         },
@@ -67,6 +69,7 @@ async def test_rest_api_good_serial_number(hass, aioclient_mock):
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"], user_input={
             CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+            CONF_NAME: MOCK_NAME,
             CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
         },
     )
@@ -101,6 +104,7 @@ async def test_rest_error_404(hass, aioclient_mock):
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"], user_input={
             CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+            CONF_NAME: MOCK_NAME,
             CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
         },
     )
@@ -136,6 +140,7 @@ async def test_rest_error_429(hass, aioclient_mock):
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"], user_input={
             CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+            CONF_NAME: MOCK_NAME,
             CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
         },
     )
@@ -168,6 +173,7 @@ async def test_rest_error_timeout(hass, aioclient_mock):
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"], user_input={
             CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+            CONF_NAME: MOCK_NAME,
             CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
         },
     )

@@ -2,9 +2,7 @@
 
 import logging
 
-from homeassistant.components.number import (
-    NumberEntity,
-)
+from homeassistant.components.number import NumberEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.exceptions import HomeAssistantError
@@ -98,7 +96,6 @@ class XthermaNumberEntity(CoordinatorEntity, NumberEntity):
         self._attr_device_info = device_info
         self._attr_device_class = description.device_class
         self._attr_unique_id = f"{coordinator.config_entry.entry_id}-{description.key}"
-        self.entity_id = f"number.{self._attr_unique_id}"
         self.translation_key = description.key
 
     @callback

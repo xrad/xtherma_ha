@@ -49,7 +49,7 @@ async def init_integration(hass, aioclient_mock) -> MockConfigEntry:
         },
         entry_id=MOCK_CONFIG_ENTRY_ID,
         version=VERSION,
-        title="test_entry_xtherma config",
+        title="test_entry_xtherma_config",
         source="user",
     )
     entry.add_to_hass(hass)
@@ -124,7 +124,7 @@ async def init_modbus_integration(hass, mock_modbus_tcp_client) -> MockConfigEnt
         },
         entry_id=MOCK_CONFIG_ENTRY_ID,
         version=VERSION,
-        title="test_entry_xtherma modbus config",
+        title="test_entry_xtherma_modbus_config",
         source="user",
     )
     entry.add_to_hass(hass)

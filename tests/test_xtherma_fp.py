@@ -4,7 +4,7 @@ from unittest.mock import patch
 from homeassistant.const import Platform
 
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_API_KEY
+from homeassistant.const import CONF_API_KEY, CONF_NAME
 from homeassistant.core import HomeAssistant
 from pytest_homeassistant_custom_component.common import (
     MockConfigEntry,
@@ -22,7 +22,7 @@ from custom_components.xtherma_fp.const import (
     FERNPORTAL_URL,
 )
 from custom_components.xtherma_fp.xtherma_data import XthermaData
-from tests.const import MOCK_API_KEY, MOCK_SERIAL_NUMBER
+from tests.const import MOCK_API_KEY, MOCK_SERIAL_NUMBER, MOCK_NAME
 from tests.helpers import load_mock_data
 
 
@@ -64,7 +64,7 @@ def verify_integration_sensors(hass: HomeAssistant, entry: ConfigEntry):
     our_sensors = [
         state
         for state in hass.states.async_all(Platform.SENSOR)
-        if state.entity_id.startswith(f"sensor.{entry.entry_id}")
+        if state.entity_id.startswith(f"sensor.{entry.title}")
     ]
     assert len(our_sensors) == 54
 
@@ -76,7 +76,7 @@ def verify_integration_switches(hass: HomeAssistant, entry: ConfigEntry):
     our_switches = [
         state
         for state in hass.states.async_all(Platform.SWITCH)
-        if state.entity_id.startswith(f"switch.{entry.entry_id}")
+        if state.entity_id.startswith(f"switch.{entry.title}")
     ]
     assert len(our_switches) == 7
 
@@ -88,7 +88,7 @@ def verify_integration_numbers(hass: HomeAssistant, entry: ConfigEntry):
     our_numbers = [
         state
         for state in hass.states.async_all(Platform.NUMBER)
-        if state.entity_id.startswith(f"number.{entry.entry_id}")
+        if state.entity_id.startswith(f"number.{entry.title}")
     ]
     assert len(our_numbers) == 25
 
@@ -100,7 +100,7 @@ def verify_integration_selects(hass: HomeAssistant, entry: ConfigEntry):
     our_selects = [
         state
         for state in hass.states.async_all(Platform.SELECT)
-        if state.entity_id.startswith(f"select.{entry.entry_id}")
+        if state.entity_id.startswith(f"select.{entry.title}")
     ]
     assert len(our_selects) == 2
 
@@ -116,9 +116,11 @@ async def test_async_setup_entry_restapi_ok(hass, aioclient_mock):
         data={
             CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
             CONF_API_KEY: MOCK_API_KEY,
+            CONF_NAME: MOCK_NAME,
             CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
         },
         entry_id="test_entry_xtherma",
+        title="test_entry_xtherma_config",
     )
     entry.add_to_hass(hass)
 
