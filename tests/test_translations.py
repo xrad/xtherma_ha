@@ -1,6 +1,5 @@
-from homeassistant.helpers.translation import async_get_translations
-from homeassistant.const import Platform
-from homeassistant.helpers.entity import EntityDescription
+"""Tests for Xtherma translations."""
+
 from homeassistant.components.binary_sensor import (
     BinarySensorEntityDescription,
 )
@@ -17,12 +16,16 @@ from homeassistant.components.sensor import (
 from homeassistant.components.switch import (
     SwitchEntityDescription,
 )
+from homeassistant.const import Platform
+from homeassistant.helpers.entity import EntityDescription
+from homeassistant.helpers.translation import async_get_translations
 
 from custom_components.xtherma_fp.const import DOMAIN
 from custom_components.xtherma_fp.entity_descriptors import (
-    MODBUS_ENTITY_DESCRIPTIONS,
     ENTITY_DESCRIPTIONS,
+    MODBUS_ENTITY_DESCRIPTIONS,
 )
+
 
 async def test_sensor_name_translation(hass, init_integration):
     """Ensure all sensor names are translated."""
@@ -30,10 +33,11 @@ async def test_sensor_name_translation(hass, init_integration):
 
     for lang in ["en", "de"]:
         # collect all entity translations
-        all_entity_translations = await async_get_translations(hass, lang, "entity", [DOMAIN])
+        all_entity_translations = await async_get_translations(
+            hass, lang, "entity", [DOMAIN]
+        )
         domain_entity_translations = {
-            k for k in all_entity_translations
-            if k.startswith((prefix)) and ".name" in k
+            k for k in all_entity_translations if k.startswith(prefix) and ".name" in k
         }
 
         # collect all options of all sensors
@@ -44,16 +48,18 @@ async def test_sensor_name_translation(hass, init_integration):
         entity_names_rest = {
             f"{prefix}.{entity_description.key}.name"
             for entity_description in ENTITY_DESCRIPTIONS
-            if isinstance(entity_description,entity_classes)
+            if isinstance(entity_description, entity_classes)
         }
         entity_names_modbus = {
             f"{prefix}.{entity_description.key}.name"
             for reg_desc in MODBUS_ENTITY_DESCRIPTIONS
             for entity_description in reg_desc.descriptors
-            if isinstance(entity_description,entity_classes)
+            if isinstance(entity_description, entity_classes)
         }
 
-        assert entity_names_rest.union(entity_names_modbus) == domain_entity_translations
+        assert (
+            entity_names_rest.union(entity_names_modbus) == domain_entity_translations
+        )
 
 
 def _get_all_entity_descriptions() -> list[EntityDescription]:
@@ -69,10 +75,12 @@ def _get_all_entity_descriptions() -> list[EntityDescription]:
     all_descs.extend(ENTITY_DESCRIPTIONS)
 
     for entity_description in all_descs:
-        if isinstance(entity_description, EntityDescription):
-            if entity_description.key not in keys:
-                keys.add(entity_description.key)
-                descs.append(entity_description)
+        if (
+            isinstance(entity_description, EntityDescription)
+            and entity_description.key not in keys
+        ):
+            keys.add(entity_description.key)
+            descs.append(entity_description)
     return descs
 
 
@@ -106,29 +114,30 @@ async def test_switch_name_translation(hass, init_integration):
 
     for lang in ["en", "de"]:
         # collect all entity translations
-        all_entity_translations = await async_get_translations(hass, lang, "entity", [DOMAIN])
+        all_entity_translations = await async_get_translations(
+            hass, lang, "entity", [DOMAIN]
+        )
         domain_entity_translations = {
-            k for k in all_entity_translations
-            if k.startswith((prefix)) and ".name" in k
+            k for k in all_entity_translations if k.startswith(prefix) and ".name" in k
         }
 
         # collect all options of all switches
-        entity_classes = (
-            SwitchEntityDescription,
-        )
+        entity_classes = (SwitchEntityDescription,)
         entity_names_rest = {
             f"{prefix}.{entity_description.key}.name"
             for entity_description in ENTITY_DESCRIPTIONS
-            if isinstance(entity_description,entity_classes)
+            if isinstance(entity_description, entity_classes)
         }
         entity_names_modbus = {
             f"{prefix}.{entity_description.key}.name"
             for reg_desc in MODBUS_ENTITY_DESCRIPTIONS
             for entity_description in reg_desc.descriptors
-            if isinstance(entity_description,entity_classes)
+            if isinstance(entity_description, entity_classes)
         }
 
-        assert entity_names_rest.union(entity_names_modbus) == domain_entity_translations
+        assert (
+            entity_names_rest.union(entity_names_modbus) == domain_entity_translations
+        )
 
 
 async def test_number_name_translation(hass, init_integration):
@@ -137,29 +146,30 @@ async def test_number_name_translation(hass, init_integration):
 
     for lang in ["en", "de"]:
         # collect all entity translations
-        all_entity_translations = await async_get_translations(hass, lang, "entity", [DOMAIN])
+        all_entity_translations = await async_get_translations(
+            hass, lang, "entity", [DOMAIN]
+        )
         domain_entity_translations = {
-            k for k in all_entity_translations
-            if k.startswith((prefix)) and ".name" in k
+            k for k in all_entity_translations if k.startswith(prefix) and ".name" in k
         }
 
         # collect all options of all switches
-        entity_classes = (
-            NumberEntityDescription,
-        )
+        entity_classes = (NumberEntityDescription,)
         entity_names_rest = {
             f"{prefix}.{entity_description.key}.name"
             for entity_description in ENTITY_DESCRIPTIONS
-            if isinstance(entity_description,entity_classes)
+            if isinstance(entity_description, entity_classes)
         }
         entity_names_modbus = {
             f"{prefix}.{entity_description.key}.name"
             for reg_desc in MODBUS_ENTITY_DESCRIPTIONS
             for entity_description in reg_desc.descriptors
-            if isinstance(entity_description,entity_classes)
+            if isinstance(entity_description, entity_classes)
         }
 
-        assert entity_names_rest.union(entity_names_modbus) == domain_entity_translations
+        assert (
+            entity_names_rest.union(entity_names_modbus) == domain_entity_translations
+        )
 
 
 async def test_select_name_translation(hass, init_integration):
@@ -168,29 +178,30 @@ async def test_select_name_translation(hass, init_integration):
 
     for lang in ["en", "de"]:
         # collect all entity translations
-        all_entity_translations = await async_get_translations(hass, lang, "entity", [DOMAIN])
+        all_entity_translations = await async_get_translations(
+            hass, lang, "entity", [DOMAIN]
+        )
         domain_entity_translations = {
-            k for k in all_entity_translations
-            if k.startswith((prefix)) and ".name" in k
+            k for k in all_entity_translations if k.startswith(prefix) and ".name" in k
         }
 
         # collect all options of all switches
-        entity_classes = (
-            SelectEntityDescription,
-        )
+        entity_classes = (SelectEntityDescription,)
         entity_names_rest = {
             f"{prefix}.{entity_description.key}.name"
             for entity_description in ENTITY_DESCRIPTIONS
-            if isinstance(entity_description,entity_classes)
+            if isinstance(entity_description, entity_classes)
         }
         entity_names_modbus = {
             f"{prefix}.{entity_description.key}.name"
             for reg_desc in MODBUS_ENTITY_DESCRIPTIONS
             for entity_description in reg_desc.descriptors
-            if isinstance(entity_description,entity_classes)
+            if isinstance(entity_description, entity_classes)
         }
 
-        assert entity_names_rest.union(entity_names_modbus) == domain_entity_translations
+        assert (
+            entity_names_rest.union(entity_names_modbus) == domain_entity_translations
+        )
 
 
 async def test_select_options_translation(hass, init_integration):

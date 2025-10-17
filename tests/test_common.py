@@ -1,9 +1,6 @@
+"""Common tests."""
+
 from pytest_homeassistant_custom_component.common import load_json_value_fixture
-
-from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity_platform import async_get_platforms, EntityPlatform
-
-from custom_components.xtherma_fp.const import DOMAIN
 
 
 def test_json_load_value_fixture():
@@ -21,7 +18,7 @@ def test_json_load_value_fixture():
     assert isinstance(t0, dict)
     assert t0.get("key") == "tvl"
     assert t0.get("input_factor") == "/10"
-    tLast = telemetry[53]
-    assert isinstance(tLast, dict)
-    assert tLast.get("key") == "mode"
-    assert tLast.get("value") == "3"
+    tlast = telemetry[53]
+    assert isinstance(tlast, dict)
+    assert tlast.get("key") == "mode"
+    assert tlast.get("value") == "3"

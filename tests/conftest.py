@@ -1,17 +1,23 @@
-import os
+"""Set up some common test helper things."""
+
 import sys
+from pathlib import Path
 from unittest.mock import AsyncMock, Mock, patch
+
 import pytest
 
-from tests.helpers import load_mock_data
-
-VENDOR_DIR = os.path.join(
-    os.path.dirname(__file__), "..", "custom_components", "xtherma_fp", "vendor", "pymodbus"
+VENDOR_DIR = (
+    Path(__file__).parent
+    / ".."
+    / "custom_components"
+    / "xtherma_fp"
+    / "vendor"
+    / "pymodbus"
 )
-print(os.path.abspath(VENDOR_DIR))
-sys.path.insert(0, os.path.abspath(VENDOR_DIR))
+print(Path.resolve(VENDOR_DIR))  # noqa: T201
+sys.path.insert(0, Path.resolve(VENDOR_DIR))
 
-from homeassistant.const import CONF_API_KEY, CONF_HOST, CONF_PORT, CONF_ADDRESS
+from homeassistant.const import CONF_ADDRESS, CONF_API_KEY, CONF_HOST, CONF_PORT
 from pytest_homeassistant_custom_component.common import (
     MockConfigEntry,
 )
@@ -25,7 +31,16 @@ from custom_components.xtherma_fp.const import (
     FERNPORTAL_URL,
     VERSION,
 )
-from tests.const import MOCK_API_KEY, MOCK_CONFIG_ENTRY_ID, MOCK_MODBUS_ADDRESS, MOCK_MODBUS_HOST, MOCK_MODBUS_PORT, MOCK_SERIAL_NUMBER
+from tests.const import (
+    MOCK_API_KEY,
+    MOCK_CONFIG_ENTRY_ID,
+    MOCK_MODBUS_ADDRESS,
+    MOCK_MODBUS_HOST,
+    MOCK_MODBUS_PORT,
+    MOCK_SERIAL_NUMBER,
+)
+from tests.helpers import load_mock_data
+
 
 @pytest.fixture(autouse=True)
 def auto_enable_custom_integrations(enable_custom_integrations):
@@ -69,10 +84,10 @@ MODBUS_CLIENT_PATH = (
 @pytest.fixture
 async def mock_modbus_tcp_client(request):
     """Stub out Modbus calls."""
-    with patch(MODBUS_CLIENT_PATH) as MockModbusClient:
+    with patch(MODBUS_CLIENT_PATH) as mock_modbus_client:
         # Configure the mock instance that will be returned when AsyncModbusTcpClient() is called.
         # This `mock_client_instance` represents the actual client object created by your component.
-        mock_instance = MockModbusClient.return_value
+        mock_instance = mock_modbus_client.return_value
 
         mock_connected_property = Mock(return_value=False)
         type(mock_instance).connected = property(lambda self: mock_connected_property())
@@ -103,12 +118,15 @@ async def mock_modbus_tcp_client(request):
         mock_write_register_result = AsyncMock()
         mock_write_register_result.isError = Mock(return_value=False)
         mock_write_register_result.exception_code = 0
-        mock_instance.write_register = AsyncMock(return_value=mock_write_register_result)
+        mock_instance.write_register = AsyncMock(
+            return_value=mock_write_register_result
+        )
 
         # Mock the `close` method, as it might be called during component teardown or error handling.
         mock_instance.close = Mock(side_effect=close_side_effect)
 
         yield mock_instance
+
 
 @pytest.fixture
 async def init_modbus_integration(hass, mock_modbus_tcp_client) -> MockConfigEntry:
@@ -134,4 +152,3 @@ async def init_modbus_integration(hass, mock_modbus_tcp_client) -> MockConfigEnt
     await hass.async_block_till_done()
 
     return entry
-
