@@ -1,0 +1,64 @@
+{
+  "version": "2.0.0",
+  "inputs": [
+    {
+      "id": "preCommitCommand",
+      "type": "pickString",
+      "description": "Choose pre-commit command",
+      "options": ["install", "uninstall"]
+    }
+  ],
+  "tasks": [
+    {
+      "label": "Run all checks",
+      "type": "shell",
+      "command": "pre-commit run --all-files",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Pytest",
+      "type": "shell",
+      "command": "${command:python.interpreterPath} -m pytest --timeout=10 tests",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Install Dev Requirements",
+      "type": "shell",
+      "command": "pip install -r requirements.txt -r dev-requirements.txt",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Pre-commit",
+      "type": "shell",
+      "command": "pre-commit ${input:preCommitCommand}",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+    },
+  ]
+}
