@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
+import homeassistant.helpers.device_registry as dr
 import homeassistant.helpers.entity_registry as er
 from homeassistant.const import (
     CONF_ADDRESS,
@@ -15,7 +16,6 @@ from homeassistant.const import (
 )
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
-from homeassistant.helpers.device_registry import DeviceInfo
 
 from .const import (
     CONF_CONNECTION,
@@ -54,8 +54,8 @@ async def async_setup_entry(
     serial_number = entry.data[CONF_SERIAL_NUMBER]
     xtherma_data.serial_fp = serial_number
 
-    xtherma_data.device_info = DeviceInfo(
-        identifiers={(DOMAIN, xtherma_data.serial_fp)},
+    xtherma_data.device_info = dr.DeviceInfo(
+        identifiers={(DOMAIN, entry.entry_id)},
         name=entry.title,
         manufacturer=MANUFACTURER,
         model=xtherma_data.serial_fp,
@@ -83,6 +83,7 @@ async def async_setup_entry(
         )
 
     # migrate entities
+    await async_migrate_devices(hass, entry)
     await async_migrate_entities(hass, entry)
 
     # create data coordinator
@@ -125,6 +126,21 @@ async def async_migrate_entry(_: HomeAssistant, config_entry: ConfigEntry) -> bo
     return True
 
 
+async def async_migrate_devices(
+    hass: HomeAssistant,
+    config_entry: ConfigEntry,
+) -> None:
+    """Migrate device registry."""
+    registry = dr.async_get(hass)
+    for device_entry in dr.async_entries_for_config_entry(
+        registry, config_entry.entry_id
+    ):
+        if device_entry.identifiers != {(DOMAIN, config_entry.entry_id)}:
+            registry.async_update_device(
+                device_entry.id, new_identifiers={(DOMAIN, config_entry.entry_id)}
+            )
+
+
 async def async_migrate_entities(
     hass: HomeAssistant,
     config_entry: ConfigEntry,
@@ -147,7 +163,8 @@ async def async_migrate_entities(
     await er.async_migrate_entries(hass, config_entry.entry_id, update_unique_id)
 
     registry = er.async_get(hass)
-    for entity_entry in registry.entities.get_entries_for_config_entry_id(
+    for entity_entry in er.async_entries_for_config_entry(
+        registry,
         config_entry.entry_id,
     ):
         if entity_entry.suggested_object_id is not None:
