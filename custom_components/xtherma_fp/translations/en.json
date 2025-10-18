@@ -22,6 +22,29 @@
           "port": "port number",
           "address": "modbus address"
         }
+      },
+      "reconfigure": {
+        "title": "Reconfigure Xtherma device",
+        "description": "Reconfigure connection to Xtherma device",
+        "data": {
+          "connection":"Connection type:"
+        }
+      },
+      "reconfigure_rest_api": {
+        "title": "Reconfigure REST API",
+        "description": "Reconfigure connection using REST API",
+        "data": {
+          "api_key": "API Token"
+        }
+      },
+      "reconfigure_modbus_tcp": {
+        "title": "Reconfigure Modbus/TCP",
+        "description": "Reconfigure connection using Modbus/TCP",
+        "data": {
+          "host": "IP address",
+          "port": "port number",
+          "address": "modbus address"
+        }
       }
     },
     "error": {
@@ -38,25 +61,6 @@
       "options": {
         "rest_api": "Fernportal REST API - cloud",
         "modbus_tcp": "Modbus TCP - local"
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "rest_api": {
-        "description": "Provide credentials to access Fernportal",
-        "data": {
-          "api_key": "API Token",
-          "serial_number": "SN Fernportal-Module"
-        }
-      },
-      "modbus_tcp": {
-        "description": "Connection to Modbus/TCP",
-        "data": {
-          "host": "IP address",
-          "port": "port number",
-          "address": "modbus address"
-        }
       }
     }
   },
