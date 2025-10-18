@@ -22,6 +22,29 @@
           "port": "Portnummer",
           "address": "Modbus Addresse"
         }
+      },
+      "reconfigure": {
+        "title": "Xtherma Gerät neu konfigurieren",
+        "description": "Verbindung zum Xtherma Gerät neu konfigurieren.",
+        "data": {
+          "connection":"Verbindungstyp:"
+        }
+      },
+      "reconfigure_rest_api": {
+        "title": "Fernportal neu konfigurieren",
+        "description": "Zugangsdaten für das Fernportal neu konfigurieren.",
+        "data": {
+          "api_key": "API Token"
+        }
+      },
+      "reconfigure_modbus_tcp": {
+        "title": " Modbus/TCP neu konfigurieren",
+        "description": "Zugangsdaten für Modbus/TCP neu konfigurieren.",
+        "data": {
+          "host": "IP Addresse",
+          "port": "Portnummer",
+          "address": "Modbus Addresse"
+        }
       }
     },
     "error": {
@@ -38,25 +61,6 @@
       "options": {
         "rest_api": "Fernportal REST API - Cloud",
         "modbus_tcp": "Modbus TCP - Lokal"
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "rest_api": {
-        "description": "Zugangsdaten für das Fernportal",
-        "data": {
-          "api_key": "API Token",
-          "serial_number": "SN Fernportal-Modul"
-        }
-      },
-      "modbus_tcp": {
-        "description": "Zugangsdaten für Modbus/TCP",
-        "data": {
-          "host": "IP Addresse",
-          "port": "Portnummer",
-          "address": "Modbus Addresse"
-        }
       }
     }
   },

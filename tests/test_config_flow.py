@@ -4,6 +4,7 @@ import asyncio
 from unittest.mock import patch
 
 import pytest
+from homeassistant.config_entries import ConfigEntryState
 from homeassistant.const import (
     CONF_ADDRESS,
     CONF_API_KEY,
@@ -20,6 +21,7 @@ from custom_components.xtherma_fp.config_flow import (
 )
 from custom_components.xtherma_fp.const import (
     CONF_CONNECTION,
+    CONF_CONNECTION_MODBUSTCP,
     CONF_CONNECTION_RESTAPI,
     CONF_SERIAL_NUMBER,
     FERNPORTAL_URL,
@@ -220,6 +222,150 @@ async def test_rest_error_timeout(hass, aioclient_mock):
     assert result["type"] is FlowResultType.FORM
     assert result["step_id"] == "rest_api"
     assert result["errors"] == {"base": "timeout"}
+
+
+async def test_step_reconfigure_rest_api(hass, init_integration):
+    """Test for reconfiguring to rest api."""
+    entry = init_integration
+    assert entry.state is ConfigEntryState.LOADED
+    assert entry.data == entry.data | {
+        CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+        CONF_API_KEY: MOCK_API_KEY,
+    }
+
+    reconfigure_result = await entry.start_reconfigure_flow(hass)
+    assert reconfigure_result["type"] is FlowResultType.FORM
+    assert reconfigure_result["step_id"] == "reconfigure"
+
+    reconfigure_result = await hass.config_entries.flow.async_configure(
+        reconfigure_result["flow_id"],
+        {CONF_CONNECTION: CONF_CONNECTION_RESTAPI},
+    )
+    assert reconfigure_result["type"] is FlowResultType.FORM
+
+    with patch(
+        "custom_components.xtherma_fp.config_flow._validate_rest_api", return_value={}
+    ):
+        reconfigure_result = await hass.config_entries.flow.async_configure(
+            reconfigure_result["flow_id"],
+            {
+                CONF_API_KEY: MOCK_API_KEY + "_changed",
+            },
+        )
+    assert reconfigure_result["type"] is FlowResultType.ABORT
+    assert reconfigure_result["reason"] == "reconfigure_successful"
+
+    assert entry.data == entry.data | {
+        CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+        CONF_API_KEY: MOCK_API_KEY + "_changed",
+    }
+
+
+async def test_step_reconfigure_rest_api_errors(hass, init_integration):
+    """Test for reconfiguring to rest api with errors."""
+    errors = {"base": "any_error"}
+
+    entry = init_integration
+    assert entry.state is ConfigEntryState.LOADED
+    assert entry.data == entry.data | {
+        CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+        CONF_API_KEY: MOCK_API_KEY,
+    }
+
+    reconfigure_result = await entry.start_reconfigure_flow(hass)
+    assert reconfigure_result["type"] is FlowResultType.FORM
+    assert reconfigure_result["step_id"] == "reconfigure"
+
+    reconfigure_result = await hass.config_entries.flow.async_configure(
+        reconfigure_result["flow_id"],
+        {CONF_CONNECTION: CONF_CONNECTION_RESTAPI},
+    )
+    assert reconfigure_result["type"] is FlowResultType.FORM
+
+    with patch(
+        "custom_components.xtherma_fp.config_flow._validate_rest_api",
+        return_value=errors,
+    ):
+        reconfigure_result = await hass.config_entries.flow.async_configure(
+            reconfigure_result["flow_id"],
+            {
+                CONF_API_KEY: MOCK_API_KEY + "_changed",
+            },
+        )
+    assert reconfigure_result["type"] is FlowResultType.FORM
+    assert reconfigure_result["errors"] == errors
+
+
+async def test_step_reconfigure_modbus(hass, init_integration):
+    """Test for reconfiguring to modbus."""
+    entry = init_integration
+    assert entry.state is ConfigEntryState.LOADED
+    assert entry.data[CONF_CONNECTION] == CONF_CONNECTION_RESTAPI
+
+    reconfigure_result = await entry.start_reconfigure_flow(hass)
+    assert reconfigure_result["type"] is FlowResultType.FORM
+    assert reconfigure_result["step_id"] == "reconfigure"
+
+    reconfigure_result = await hass.config_entries.flow.async_configure(
+        reconfigure_result["flow_id"],
+        {CONF_CONNECTION: CONF_CONNECTION_MODBUSTCP},
+    )
+    assert reconfigure_result["type"] is FlowResultType.FORM
+
+    with patch(
+        "custom_components.xtherma_fp.config_flow._validate_modbus_tcp", return_value={}
+    ):
+        reconfigure_result = await hass.config_entries.flow.async_configure(
+            reconfigure_result["flow_id"],
+            {
+                CONF_HOST: MOCK_MODBUS_HOST,
+                CONF_PORT: MOCK_MODBUS_PORT,
+                CONF_ADDRESS: MOCK_MODBUS_ADDRESS,
+            },
+        )
+    assert reconfigure_result["type"] is FlowResultType.ABORT
+    assert reconfigure_result["reason"] == "reconfigure_successful"
+
+    assert entry.data == entry.data | {
+        CONF_CONNECTION: CONF_CONNECTION_MODBUSTCP,
+        CONF_HOST: MOCK_MODBUS_HOST,
+        CONF_PORT: MOCK_MODBUS_PORT,
+        CONF_ADDRESS: MOCK_MODBUS_ADDRESS,
+    }
+
+
+async def test_step_reconfigure_modbus_errors(hass, init_integration):
+    """Test for reconfiguring to modbus with errors."""
+    errors = {"base": "any_error"}
+
+    entry = init_integration
+    assert entry.state is ConfigEntryState.LOADED
+    assert entry.data[CONF_CONNECTION] == CONF_CONNECTION_RESTAPI
+
+    reconfigure_result = await entry.start_reconfigure_flow(hass)
+    assert reconfigure_result["type"] is FlowResultType.FORM
+    assert reconfigure_result["step_id"] == "reconfigure"
+
+    reconfigure_result = await hass.config_entries.flow.async_configure(
+        reconfigure_result["flow_id"],
+        {CONF_CONNECTION: CONF_CONNECTION_MODBUSTCP},
+    )
+    assert reconfigure_result["type"] is FlowResultType.FORM
+
+    with patch(
+        "custom_components.xtherma_fp.config_flow._validate_modbus_tcp",
+        return_value=errors,
+    ):
+        reconfigure_result = await hass.config_entries.flow.async_configure(
+            reconfigure_result["flow_id"],
+            {
+                CONF_HOST: MOCK_MODBUS_HOST,
+                CONF_PORT: MOCK_MODBUS_PORT,
+                CONF_ADDRESS: MOCK_MODBUS_ADDRESS,
+            },
+        )
+    assert reconfigure_result["type"] is FlowResultType.FORM
+    assert reconfigure_result["errors"] == errors
 
 
 @pytest.mark.parametrize(
