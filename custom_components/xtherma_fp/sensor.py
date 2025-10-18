@@ -8,7 +8,6 @@ from homeassistant.components.binary_sensor import (
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
-from homeassistant.helpers import device_registry
 from homeassistant.helpers.device_registry import (
     DeviceInfo,
 )
@@ -20,9 +19,7 @@ from homeassistant.helpers.update_coordinator import (
 )
 
 from .const import (
-    DOMAIN,
     EXTRA_STATE_ATTRIBUTE_PARAMETER,
-    MANUFACTURER,
 )
 from .coordinator import XthermaDataUpdateCoordinator, read_coordinator_value
 from .entity_descriptors import (
@@ -78,26 +75,6 @@ def _initialize_sensors(
     xtherma_data.sensors_initialized = True
 
 
-def _delete_legacy_device(hass: HomeAssistant) -> None:
-    _LOGGER.debug("Looking for legacy device in device registry")
-    dev_reg = device_registry.async_get(hass)
-    id_to_delete: str | None = None
-    for device in dev_reg.devices.values():
-        if device.manufacturer == MANUFACTURER and len(device.identifiers) == 1:
-            (id1, id2) = device.identifiers.copy().pop()
-            if id1 == DOMAIN and not id2:
-                _LOGGER.debug(
-                    "Deleting device = %s %s %s",
-                    device.name,
-                    device.id,
-                    list(device.identifiers),
-                )
-                id_to_delete = device.id
-                break
-    if id_to_delete:
-        dev_reg.async_remove_device(id_to_delete)
-
-
 async def async_setup_entry(
     hass: HomeAssistant,
     config_entry: ConfigEntry,
@@ -107,9 +84,6 @@ async def async_setup_entry(
     xtherma_data: XthermaData = config_entry.runtime_data
 
     _LOGGER.debug("Setup sensor platform")
-
-    # initial versions created DeviceInfo with a bad identifier - find and remove
-    _delete_legacy_device(hass)
 
     _initialize_sensors(xtherma_data, async_add_entities)
 
