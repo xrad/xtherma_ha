@@ -94,7 +94,7 @@ async def test_version_sensor(hass, init_integration):
     state = hass.states.get(SENSOR_ENTITY_ID_CONTROLLER_V)
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
-    assert entity.state == "2.39"
+    assert entity.state == "2.43"
 
 
 def load_and_prep_rest_response():
