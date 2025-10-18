@@ -54,6 +54,9 @@
       "cannot_connect": "Anmeldung am Fernportal nicht möglich",
       "cannot_connect_modbus": "Anmeldung am Modbus Server nicht möglich",
       "unknown": "Unbekannter Fehler"
+    },
+    "abort": {
+      "reconfigure_successful": "Neukonfiguration erfolgreich."
     }
   },
   "selector": {
