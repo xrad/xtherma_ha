@@ -163,7 +163,7 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
                 translation_domain=DOMAIN,
                 translation_key="rest_api_error",
                 translation_placeholders={
-                    "error": str(err),
+                    "error": str(err.code),
                 },
             ) from err
         except XthermaModbusError as err:
