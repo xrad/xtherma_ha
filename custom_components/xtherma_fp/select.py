@@ -110,6 +110,8 @@ class XthermaSelectEntity(CoordinatorEntity, SelectEntity):
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
         value = read_coordinator_value(self._coordinator, self.entity_description.key)
+        if value is None:
+            return
         new_index = int(value) % len(self.options)
         self._attr_current_option = self.options[new_index]
         self.async_write_ha_state()

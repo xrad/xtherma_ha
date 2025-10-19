@@ -121,6 +121,8 @@ class XthermaSwitchEntity(CoordinatorEntity, SwitchEntity):
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
         value = read_coordinator_value(self._coordinator, self.entity_description.key)
+        if value is None:
+            return
         self._attr_is_on = value > 0
         self.async_write_ha_state()
 

@@ -120,6 +120,8 @@ class XthermaBinarySensor(CoordinatorEntity, BinarySensorEntity):
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
         value = read_coordinator_value(self._coordinator, self.entity_description.key)
+        if value is None:
+            return
         self._attr_is_on = value > 0
         self.async_write_ha_state()
 
@@ -185,6 +187,8 @@ class XthermaEnumSensor(XthermaSensor):
         if options is None:
             return
         value = read_coordinator_value(self._coordinator, self.entity_description.key)
+        if value is None:
+            return
         index = int(value) % len(options)
         self._attr_native_value = options[index]
         self.async_write_ha_state()
@@ -197,6 +201,8 @@ class XthermaVersionSensor(XthermaSensor):
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
         value = read_coordinator_value(self._coordinator, self.entity_description.key)
+        if value is None:
+            return
         # note: input factor (assume: /100) has already been applied
         major = int(value)
         minor = int((value - major) * 100)

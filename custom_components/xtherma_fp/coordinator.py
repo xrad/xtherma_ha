@@ -260,13 +260,15 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
             ) from err
 
 
-def read_coordinator_value(coordinator: DataUpdateCoordinator, key: str) -> int | float:
+def read_coordinator_value(
+    coordinator: DataUpdateCoordinator, key: str
+) -> int | float | None:
     """Read a value from us."""
     if coordinator.data is None:
-        msg = "No data in coordinator"
-        raise HomeAssistantError(msg)
+        return None
     value = coordinator.data.get(key, None)
     if not isinstance(value, (int, float)):
         msg = "Illegal data in coordinator key=%s value=<%s>"
-        raise HomeAssistantError(msg, key, value)
+        _LOGGER.error(msg)
+        return None
     return value
