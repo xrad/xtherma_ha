@@ -1,5 +1,6 @@
 """Set up some common test helper things."""
 
+import asyncio
 import sys
 from pathlib import Path
 from unittest.mock import AsyncMock, Mock, patch
@@ -48,11 +49,29 @@ def auto_enable_custom_integrations(enable_custom_integrations):
 
 
 @pytest.fixture
-async def init_integration(hass, aioclient_mock) -> MockConfigEntry:
+async def init_integration(
+    hass, aioclient_mock, request: pytest.FixtureRequest
+) -> MockConfigEntry:
     """Integration using REST API."""
+    param = getattr(request, "param", None)
+    http_error = None
+    timeout_error = None
+    if param is not None:
+        http_error = param.get("http_error")
+        timeout_error = param.get("timeout_error")
+
     mock_data = load_mock_data("rest_response.json")
     url = f"{FERNPORTAL_URL}/{MOCK_SERIAL_NUMBER}"
-    aioclient_mock.get(url, json=mock_data)
+    if http_error is not None:
+        aioclient_mock.get(url, status=http_error)
+    elif timeout_error is not None:
+
+        def raise_timeout(*args, **kwargs):
+            raise asyncio.exceptions.TimeoutError
+
+        aioclient_mock.get(url, side_effect=raise_timeout)
+    else:
+        aioclient_mock.get(url, json=mock_data)
 
     # Create a mock config entry
     entry = MockConfigEntry(
@@ -69,8 +88,7 @@ async def init_integration(hass, aioclient_mock) -> MockConfigEntry:
     )
     entry.add_to_hass(hass)
 
-    # Call async_setup_entry()
-    assert await hass.config_entries.async_setup(entry.entry_id)
+    await hass.config_entries.async_setup(entry.entry_id)
     await hass.async_block_till_done()
 
     return entry
@@ -157,7 +175,7 @@ async def init_modbus_integration(hass, mock_modbus_tcp_client) -> MockConfigEnt
     entry.add_to_hass(hass)
 
     # Call async_setup_entry()
-    assert await hass.config_entries.async_setup(entry.entry_id)
+    await hass.config_entries.async_setup(entry.entry_id)
     await hass.async_block_till_done()
 
     return entry

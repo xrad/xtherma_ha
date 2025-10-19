@@ -6,6 +6,7 @@ from homeassistant.components.number import (
 )
 from homeassistant.exceptions import HomeAssistantError
 
+from custom_components.xtherma_fp.xtherma_client_common import XthermaReadOnlyError
 from tests.helpers import get_number_platform, load_rest_response
 
 NUMBER_ENTITY_ID_451 = (
@@ -34,8 +35,9 @@ async def test_set_number_rest(hass, init_integration):
     assert entity is not None
     assert isinstance(entity, NumberEntity)
     # init_integration uses REST-API, which cannot write
-    with pytest.raises(HomeAssistantError):
+    with pytest.raises(HomeAssistantError) as exc_info:
         await entity.async_set_native_value(entity.native_min_value)
+    assert isinstance(exc_info.value.__cause__, XthermaReadOnlyError)
 
 
 @pytest.mark.parametrize(

@@ -36,10 +36,9 @@ async def test_set_switch_rest(hass, init_integration):
     assert entity is not None
     assert isinstance(entity, SwitchEntity)
     # init_integration uses REST-API, which cannot write
-    with pytest.raises(HomeAssistantError):
+    with pytest.raises(HomeAssistantError) as exc_info:
         await entity.async_turn_off()
-
-
+    assert isinstance(exc_info.value.__cause__, XthermaReadOnlyError)
 
 
 @pytest.mark.parametrize(

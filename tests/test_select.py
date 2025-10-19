@@ -6,6 +6,7 @@ from homeassistant.components.select import (
 )
 from homeassistant.exceptions import HomeAssistantError
 
+from custom_components.xtherma_fp.xtherma_client_common import XthermaReadOnlyError
 from tests.helpers import get_select_platform, load_modbus_regs_from_json
 
 SELECT_ENTITY_ID_002 = "select.test_entry_xtherma_config_operating_mode"
@@ -29,8 +30,9 @@ async def test_set_select_rest(hass, init_integration):
     assert entity is not None
     assert isinstance(entity, SelectEntity)
     # init_integration uses REST-API, which cannot write
-    with pytest.raises(HomeAssistantError):
+    with pytest.raises(HomeAssistantError) as exc_info:
         await entity.async_select_option(entity.options[0])
+    assert isinstance(exc_info.value.__cause__, XthermaReadOnlyError)
 
 
 def _modbus_data_from_json():
