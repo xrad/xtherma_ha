@@ -7,12 +7,20 @@ from typing import Any
 from homeassistant.helpers.entity import EntityDescription
 
 
-class XthermaBusyError(Exception):
-    """Exception indicating busy on read or write."""
+class XthermaModbusBusyError(Exception):
+    """Exception indicating busy on Modbus read or write."""
 
     def __init__(self) -> None:
         """Class constructor."""
-        super().__init__("API is busy")
+        super().__init__("Modbus is busy")
+
+
+class XthermaRestBusyError(Exception):
+    """Exception indicating busy on REST API read."""
+
+    def __init__(self) -> None:
+        """Class constructor."""
+        super().__init__("REST API is busy")
 
 
 class XthermaError(Exception):
@@ -49,7 +57,7 @@ class XthermaModbusError(Exception):
 
 
 class XthermaReadOnlyError(Exception):
-    """Exception indicating a communication timeout."""
+    """Exception indicating a data is read-only."""
 
     def __init__(self) -> None:
         """Class constructor."""

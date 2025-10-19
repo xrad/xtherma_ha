@@ -25,9 +25,9 @@ from custom_components.xtherma_fp.entity_descriptors import (
 
 from .vendor.pymodbus import AsyncModbusTcpClient, ExceptionResponse, ModbusException
 from .xtherma_client_common import (
-    XthermaBusyError,
     XthermaClient,
     XthermaError,
+    XthermaModbusBusyError,
     XthermaModbusError,
     XthermaNotConnectedError,
 )
@@ -128,7 +128,7 @@ class XthermaClientModbus(XthermaClient):
                 slave=int(self._address),
             )
         except ModbusException as err:
-            _LOGGER.error("Modbus error: %s", err.string)  # noqa: TRY400
+            _LOGGER.error("Modbus exception: %s", err.string)  # noqa: TRY400
             raise XthermaModbusError from err
         except Exception as err:
             _LOGGER.exception("Exception error")
@@ -136,6 +136,10 @@ class XthermaClientModbus(XthermaClient):
         else:
             if regs.isError():
                 _LOGGER.error("Modbus error %s", regs.exception_code)
+                exc_code = regs.exception_code
+                if exc_code == ExceptionResponse.SLAVE_BUSY:
+                    _LOGGER.error("Device busy")
+                    raise XthermaModbusBusyError
                 raise XthermaModbusError
             for i, desc in enumerate(reg_desc.descriptors):
                 if not desc:
@@ -184,7 +188,7 @@ class XthermaClientModbus(XthermaClient):
                 exc_code = regs.exception_code
                 if exc_code == ExceptionResponse.SLAVE_BUSY:
                     _LOGGER.error("Device busy")
-                    raise XthermaBusyError
+                    raise XthermaModbusBusyError
                 _LOGGER.error("Modbus write error %s", exc_code)
                 raise XthermaModbusError
 

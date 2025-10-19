@@ -29,9 +29,9 @@ from homeassistant.helpers.selector import (
 )
 
 from custom_components.xtherma_fp.xtherma_client_common import (
-    XthermaBusyError,
     XthermaError,
     XthermaNotConnectedError,
+    XthermaRestBusyError,
 )
 
 from .const import (
@@ -96,7 +96,7 @@ async def _validate_rest_api(
         await client.connect()
         await client.async_get_data()
         await client.disconnect()
-    except XthermaBusyError:
+    except XthermaRestBusyError:
         _LOGGER.debug("RateLimitError")
         errors["base"] = "rate_limit"
     except XthermaTimeoutError:

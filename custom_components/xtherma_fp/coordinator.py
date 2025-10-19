@@ -19,11 +19,12 @@ from .const import (
     KEY_ENTRY_VALUE,
 )
 from .xtherma_client_common import (
-    XthermaBusyError,
+    XthermaModbusBusyError,
     XthermaModbusError,
     XthermaNotConnectedError,
     XthermaReadOnlyError,
     XthermaRestApiError,
+    XthermaRestBusyError,
 )
 from .xtherma_client_rest import (
     XthermaClient,
@@ -108,7 +109,7 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         factor = _FACTORS.get(inputfactor, 1.0)
         return factor * value
 
-    async def _async_update_data(self) -> dict[str, float]:
+    async def _async_update_data(self) -> dict[str, float]:  # noqa: C901
         result: dict[str, float] = {}
         try:
             _LOGGER.debug("Coordinator requesting new data")
@@ -137,10 +138,15 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
                         value,
                         inputfactor,
                     )
-        except XthermaBusyError as err:
+        except XthermaModbusBusyError as err:
             raise UpdateFailed(
                 translation_domain=DOMAIN,
-                translation_key="read_busy_error",
+                translation_key="modbus_read_busy_error",
+            ) from err
+        except XthermaRestBusyError as err:
+            raise UpdateFailed(
+                translation_domain=DOMAIN,
+                translation_key="rest_read_busy_error",
             ) from err
         except XthermaTimeoutError as err:
             raise UpdateFailed(
@@ -230,15 +236,15 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
         except XthermaReadOnlyError as err:
             raise HomeAssistantError(
                 translation_domain=DOMAIN,
-                translation_key="read_only_error",
+                translation_key="rest_read_only_error",
                 translation_placeholders={
                     "entity_id": entity.entity_id,
                 },
             ) from err
-        except XthermaBusyError as err:
+        except XthermaModbusBusyError as err:
             raise HomeAssistantError(
                 translation_domain=DOMAIN,
-                translation_key="write_busy_error",
+                translation_key="modbus_write_busy_error",
                 translation_placeholders={
                     "entity_id": entity.entity_id,
                 },

@@ -369,11 +369,14 @@
     }
   },
   "exceptions": {
-    "read_only_error": {
+    "rest_read_only_error": {
       "message": "Der Wert {entity_id} kann nicht über REST-API Verbindnung geändert werden."
     },
-    "write_busy_error": {
-      "message": "Der Wert {entity_id} wurde zu häufig geändert, bitte warten."
+    "modbus_write_busy_error": {
+      "message": "Modbus: der Wert {entity_id} wurde zu häufig geändert, bitte warten."
+    },
+    "modbus_read_busy_error": {
+      "message": "Modbus Schnittstelle ist beschäftigt."
     },
     "modbus_read_error": {
       "message": "Modbus Lesefehler {error}."
@@ -387,7 +390,7 @@
     "timeout_error": {
       "message": "Zeitüberschreitung."
     },
-    "read_busy_error": {
+    "rest_read_busy_error": {
       "message": "Daten zu häufig gelesen."
     },
     "not_connected_error": {

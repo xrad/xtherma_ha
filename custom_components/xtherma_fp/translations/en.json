@@ -369,11 +369,14 @@
     }
   },
   "exceptions": {
-    "read_only_error": {
+    "rest_read_only_error": {
       "message": "Cannot change {entity_id} when using REST-API connection."
     },
-    "write_busy_error": {
-      "message": "Wrote {entity_id} too frequently, retry later."
+    "modbus_write_busy_error": {
+      "message": "Modbus: wrote {entity_id} too frequently, retry later."
+    },
+    "modbus_read_busy_error": {
+      "message": "Modbus interface is busy."
     },
     "modbus_read_error": {
       "message": "Modbus read error {error}."
@@ -387,7 +390,7 @@
     "timeout_error": {
       "message": "Timeout error."
     },
-    "read_busy_error": {
+    "rest_read_busy_error": {
       "message": "Read data too frequently."
     },
     "not_connected_error": {

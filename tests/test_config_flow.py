@@ -27,9 +27,9 @@ from custom_components.xtherma_fp.const import (
     FERNPORTAL_URL,
 )
 from custom_components.xtherma_fp.xtherma_client_common import (
-    XthermaBusyError,
     XthermaError,
     XthermaNotConnectedError,
+    XthermaRestBusyError,
     XthermaTimeoutError,
 )
 from tests.const import (
@@ -387,7 +387,7 @@ async def test_validate_connection(data, expected_errors):
     ("data", "side_effect", "expected_errors"),
     [
         ({}, None, {"base": "bad_arguments"}),
-        (MOCK_REST_DATA, XthermaBusyError, {"base": "rate_limit"}),
+        (MOCK_REST_DATA, XthermaRestBusyError, {"base": "rate_limit"}),
         (MOCK_REST_DATA, XthermaTimeoutError, {"base": "timeout"}),
         (MOCK_REST_DATA, XthermaError, {"base": "cannot_connect"}),
         (MOCK_REST_DATA, Exception, {"base": "unknown"}),

@@ -15,11 +15,11 @@ from .const import (
     KEY_TELEMETRY,
 )
 from .xtherma_client_common import (
-    XthermaBusyError,
     XthermaClient,
     XthermaError,
     XthermaReadOnlyError,
     XthermaRestApiError,
+    XthermaRestBusyError,
     XthermaTimeoutError,
 )
 
@@ -74,7 +74,7 @@ class XthermaClientRest(XthermaClient):
         except aiohttp.ClientResponseError as err:
             _LOGGER.debug("API error: %s", err)
             if err.status == 429:  # noqa: PLR2004
-                raise XthermaBusyError from err
+                raise XthermaRestBusyError from err
             raise XthermaRestApiError(err.status) from err
         except TimeoutError as err:
             _LOGGER.debug("API request timed out")
