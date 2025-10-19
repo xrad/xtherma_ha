@@ -89,11 +89,18 @@ async def async_setup_entry(
     # create data coordinator
     xtherma_data.coordinator = XthermaDataUpdateCoordinator(hass, entry, client)
 
-    await xtherma_data.coordinator.async_config_entry_first_refresh()
+    # Try updating data from the client. This can fail, and an exception
+    # will be thrown, causing HA to retry this entire setup after a while.
+    try:
+        await xtherma_data.coordinator.async_config_entry_first_refresh()
+    except:
+        await xtherma_data.coordinator.close()
+        raise
 
     # initialize platforms
     await hass.config_entries.async_forward_entry_setups(entry, _PLATFORMS)
 
+    # make sure entities immediately have a valid state
     xtherma_data.coordinator.async_update_listeners()
 
     return True
