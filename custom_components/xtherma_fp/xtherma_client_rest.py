@@ -1,5 +1,6 @@
 """Client to access Fernportal REST API."""
 
+import asyncio
 import logging
 from datetime import UTC, datetime, timedelta
 from typing import Any
@@ -11,6 +12,7 @@ from custom_components.xtherma_fp.entity_descriptors import ENTITY_DESCRIPTIONS
 
 from .const import (
     FERNPORTAL_RATE_LIMIT_S,
+    FERNPORTAL_TIMEOUT_S,
     KEY_SETTINGS,
     KEY_TELEMETRY,
 )
@@ -58,7 +60,10 @@ class XthermaClientRest(XthermaClient):
         """Obtain fresh data."""
         headers = {"Authorization": f"Bearer {self._api_key}"}
         try:
-            async with self._session.get(self._url, headers=headers) as response:
+            timeout = aiohttp.ClientTimeout(total=FERNPORTAL_TIMEOUT_S)
+            async with self._session.get(
+                self._url, timeout=timeout, headers=headers
+            ) as response:
                 response.raise_for_status()
                 json_data: dict[str, Any] = await response.json()
                 telemetry = json_data.get(KEY_TELEMETRY)
@@ -76,7 +81,7 @@ class XthermaClientRest(XthermaClient):
             if err.status == 429:  # noqa: PLR2004
                 raise XthermaRestBusyError from err
             raise XthermaRestApiError(err.status) from err
-        except TimeoutError as err:
+        except asyncio.exceptions.TimeoutError as err:
             _LOGGER.debug("API request timed out")
             raise XthermaTimeoutError from err
         except Exception as err:

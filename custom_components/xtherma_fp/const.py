@@ -22,6 +22,9 @@ FERNPORTAL_URL = "https://fernportal.xtherma.de/api/device"
 # Fernportal is rate limited to 1500 requests per day, one per minute
 FERNPORTAL_RATE_LIMIT_S = 61
 
+# timeout in seconds before we stop trying to get a response
+FERNPORTAL_TIMEOUT_S = 10
+
 # keys in the response data
 
 # element on top level
