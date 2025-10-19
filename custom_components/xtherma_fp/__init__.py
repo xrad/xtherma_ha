@@ -92,10 +92,7 @@ async def async_setup_entry(
     # initialize platforms
     await hass.config_entries.async_forward_entry_setups(entry, _PLATFORMS)
 
-    try:
-        await xtherma_data.coordinator.async_config_entry_first_refresh()
-    except Exception:  # noqa: BLE001
-        _LOGGER.error("initial refresh failed")  # noqa: TRY400
+    await xtherma_data.coordinator.async_config_entry_first_refresh()
 
     return True
 
