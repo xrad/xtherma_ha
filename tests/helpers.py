@@ -58,8 +58,29 @@ def load_mock_data(filename: str) -> JsonValueType:
     return load_json_value_fixture(filename)
 
 
-def load_modbus_regs_from_json(filename: str) -> list[list[int]]:
-    """Integration using Modbus."""
+def load_modbus_regs_from_json(filename: str) -> list[dict[str, Any]]:
+    """Read and return a complete Modbus register read-out from Json.
+
+    The Json file can be directly based on the REST-API response.
+    Beware of keys which are not not defined in the REST-API but
+    exist for Modbus.
+
+    Each register "bank" will be read with its own call to read_holding_registers
+    so there is also to option to inject an exception code for the read.
+
+    Returns:
+        [
+            # Modbus registers 0..2
+            { "registers": [reg 0, reg 1, reg 2],
+              "exc_code": None
+            },
+            # Modbus registers 10..15
+            { "registers": [reg 10, reg 11, reg 12, ...],
+              "exc_code": None
+            }
+            ...
+        ]
+    """
     # Create a mock config entry
     mock_data = load_mock_data(filename)
     assert isinstance(mock_data, dict)
@@ -69,7 +90,7 @@ def load_modbus_regs_from_json(filename: str) -> list[list[int]]:
     assert isinstance(settings, list)
     all_values = telemetry
     all_values.extend(settings)
-    regs_list = []
+    regs_list: list[dict[str, Any]] = []
     for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
         regs = [0] * len(reg_desc.descriptors)
         for i, desc in enumerate(reg_desc.descriptors):
@@ -80,11 +101,16 @@ def load_modbus_regs_from_json(filename: str) -> list[list[int]]:
                 continue
             value = int(str(entry[KEY_ENTRY_VALUE]))
             regs[i] = value
-        regs_list.append(regs)
+        regs_list.append(
+            {
+                "registers": regs,
+                "exc_code": None,
+            }
+        )
     return regs_list
 
 
-def load_rest_response():
+def load_rest_response() -> list[list[dict[str, Any]]]:
     """Return a list of complete Modbus register read-outs.
 
     Currently returns only one read-out based on our standard REST API response.

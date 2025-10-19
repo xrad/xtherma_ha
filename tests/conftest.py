@@ -82,7 +82,7 @@ MODBUS_CLIENT_PATH = (
 
 
 @pytest.fixture
-async def mock_modbus_tcp_client(request):
+async def mock_modbus_tcp_client(request: pytest.FixtureRequest):
     """Stub out Modbus calls."""
     with patch(MODBUS_CLIENT_PATH) as mock_modbus_client:
         # Configure the mock instance that will be returned when AsyncModbusTcpClient() is called.
@@ -102,11 +102,20 @@ async def mock_modbus_tcp_client(request):
 
         # Mock the `read_holding_registers` method.
         mock_results_queue = []
+        assert isinstance(request.param, list)
         for registers_for_this_call in request.param:
+            assert isinstance(registers_for_this_call, dict)
+            reg_list = registers_for_this_call.get("registers")
+            assert registers_for_this_call is not None
+            exc_code = registers_for_this_call.get("exc_code")
             mock_read_holding_registers_result = AsyncMock()
-            mock_read_holding_registers_result.registers = registers_for_this_call
-            mock_read_holding_registers_result.isError = Mock(return_value=False)
-            mock_read_holding_registers_result.exception_code = 0
+            mock_read_holding_registers_result.registers = reg_list
+            if exc_code is not None:
+                mock_read_holding_registers_result.isError = Mock(return_value=True)
+                mock_read_holding_registers_result.exception_code = exc_code
+            else:
+                mock_read_holding_registers_result.isError = Mock(return_value=False)
+                mock_read_holding_registers_result.exception_code = 0
             mock_results_queue.append(mock_read_holding_registers_result)
         mock_instance.read_holding_registers = AsyncMock(side_effect=mock_results_queue)
 

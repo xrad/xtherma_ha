@@ -1,5 +1,6 @@
 """Tests for the Xtherma sensor platform."""
 
+from typing import Any
 import pytest
 from homeassistant.components.sensor import (
     SensorEntity,
@@ -97,10 +98,10 @@ async def test_version_sensor(hass, init_integration):
     assert entity.state == "2.43"
 
 
-def load_and_prep_rest_response():
+def load_and_prep_rest_response() -> list[list[dict[str, Any]]]:
     regs_list = load_modbus_regs_from_json("rest_response.json")
     # change "ta" register #140 to be -20 °C in 2s complement
-    regs_list[11][0] = ((20 * 10) ^ 65535) + 1
+    regs_list[11]['registers'][0] = ((20 * 10) ^ 65535) + 1
     return [regs_list]
 
 
