@@ -7,7 +7,7 @@ from homeassistant.core import HomeAssistant
 from tests.const import (
     MOCK_CONFIG_ENTRY_ID,
 )
-from tests.helpers import load_modbus_regs_from_json
+from tests.helpers import load_rest_response
 from tests.test_xtherma_fp import (
     verify_integration_entry,
     verify_integration_numbers,
@@ -24,14 +24,9 @@ def _get_config_entry(hass: HomeAssistant) -> ConfigEntry:
     return entry
 
 
-def _modbus_data_from_json():
-    regs_list = load_modbus_regs_from_json("rest_response.json")
-    return [regs_list]
-
-
 @pytest.mark.parametrize(
     "mock_modbus_tcp_client",  # This refers to the fixture
-    _modbus_data_from_json(),
+    load_rest_response(),
     indirect=True,  # This tells pytest to pass the parameter to the fixture
 )
 @pytest.mark.asyncio

@@ -6,7 +6,11 @@ from homeassistant.components.switch import (
 )
 from homeassistant.exceptions import HomeAssistantError
 
-from tests.helpers import get_switch_platform, load_modbus_regs_from_json
+from custom_components.xtherma_fp.xtherma_client_common import XthermaReadOnlyError
+from tests.helpers import (
+    get_switch_platform,
+    load_rest_response,
+)
 
 SWITCH_ENTITY_ID_450 = "switch.test_entry_xtherma_config_cooling_curve_2_active"
 SWITCH_ENTITY_ID_MODBUS_450 = (
@@ -36,14 +40,11 @@ async def test_set_switch_rest(hass, init_integration):
         await entity.async_turn_off()
 
 
-def _modbus_data_from_json():
-    regs_list = load_modbus_regs_from_json("rest_response.json")
-    return [regs_list]
 
 
 @pytest.mark.parametrize(
     "mock_modbus_tcp_client",  # This refers to the fixture
-    _modbus_data_from_json(),
+    load_rest_response(),
     indirect=True,  # This tells pytest to pass the parameter to the fixture
 )
 async def test_set_switch_modbus(hass, init_modbus_integration, mock_modbus_tcp_client):
@@ -63,7 +64,7 @@ async def test_set_switch_modbus(hass, init_modbus_integration, mock_modbus_tcp_
 
 @pytest.mark.parametrize(
     "mock_modbus_tcp_client",  # This refers to the fixture
-    _modbus_data_from_json(),
+    load_rest_response(),
     indirect=True,  # This tells pytest to pass the parameter to the fixture
 )
 async def test_set_multiple_switches_modbus(
