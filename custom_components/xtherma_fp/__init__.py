@@ -89,10 +89,12 @@ async def async_setup_entry(
     # create data coordinator
     xtherma_data.coordinator = XthermaDataUpdateCoordinator(hass, entry, client)
 
+    await xtherma_data.coordinator.async_config_entry_first_refresh()
+
     # initialize platforms
     await hass.config_entries.async_forward_entry_setups(entry, _PLATFORMS)
 
-    await xtherma_data.coordinator.async_config_entry_first_refresh()
+    xtherma_data.coordinator.async_update_listeners()
 
     return True
 
