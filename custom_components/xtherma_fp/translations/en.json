@@ -160,10 +160,10 @@
         "name": "Heat output heat pump (thermal)"
       },
       "efficiency_hp": {
-        "name": "Coefficient of performance (COP) heat pump"
+        "name": "Coefficient of performance heat pump"
       },
       "efficiency_total": {
-        "name": "Overall system COP (incl. auxiliary heating)"
+        "name": "Overall coefficient of performance (incl. auxiliary heating)"
       },
       "in_backup": {
         "name": "Power consumption auxiliary/emergency heating (electric)"
