@@ -1,6 +1,6 @@
 """Helpers for tests."""
 
-from typing import Any
+from typing import Any, cast
 
 import pytest
 from homeassistant.const import Platform
@@ -48,7 +48,7 @@ def get_select_platform(hass: HomeAssistant) -> EntityPlatform:
     return get_platform(hass, Platform.SELECT)
 
 
-def find_entry(values: list[dict], key: str) -> dict[str, Any] | None:
+def find_entry(values: list[dict], key: str) -> dict[str, Any]:
     for entry in values:
         if entry[KEY_ENTRY_KEY] == key:
             return entry
@@ -77,6 +77,15 @@ def load_mock_data(filename: str) -> JsonValueType:
     return mock_data
 
 
+def flatten_mock_data(mock_data: JsonValueType) -> list[dict[str, Any]]:
+    mock_data = cast("dict[str, Any]", mock_data)
+    telemetry = cast("list[dict[str, int|str]]", mock_data[KEY_TELEMETRY])
+    settings = cast("list[dict[str, int|str]]", mock_data[KEY_SETTINGS])
+    all_values = telemetry
+    all_values.extend(settings)
+    return all_values
+
+
 def load_modbus_regs_from_json(filename: str) -> list[dict[str, Any]]:
     """Read and return a complete Modbus register read-out from Json.
 
@@ -100,15 +109,8 @@ def load_modbus_regs_from_json(filename: str) -> list[dict[str, Any]]:
             ...
         ]
     """
-    # Create a mock config entry
     mock_data = load_mock_data(filename)
-    assert isinstance(mock_data, dict)
-    telemetry = mock_data[KEY_TELEMETRY]
-    settings = mock_data[KEY_SETTINGS]
-    assert isinstance(telemetry, list)
-    assert isinstance(settings, list)
-    all_values = telemetry
-    all_values.extend(settings)
+    all_values = flatten_mock_data(mock_data)
     regs_list: list[dict[str, Any]] = []
     for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
         regs = [0] * len(reg_desc.descriptors)
@@ -116,8 +118,6 @@ def load_modbus_regs_from_json(filename: str) -> list[dict[str, Any]]:
             if desc is None:
                 continue
             entry = find_entry(all_values, desc.key)
-            if entry is None:
-                continue
             value = int(str(entry[KEY_ENTRY_VALUE]))
             regs[i] = value
         regs_list.append(

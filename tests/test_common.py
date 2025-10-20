@@ -2,6 +2,13 @@
 
 from pytest_homeassistant_custom_component.common import load_json_value_fixture
 
+from custom_components.xtherma_fp.const import KEY_ENTRY_INPUT_FACTOR
+from custom_components.xtherma_fp.entity_descriptors import (
+    MODBUS_ENTITY_DESCRIPTIONS,
+    XtNumericEntityDescription,
+)
+from tests.helpers import find_entry, flatten_mock_data, load_mock_data
+
 
 def test_json_load_value_fixture():
     data = load_json_value_fixture("rest_response.json")
@@ -22,3 +29,19 @@ def test_json_load_value_fixture():
     assert isinstance(tlast, dict)
     assert tlast.get("key") == "mode"
     assert tlast.get("value") == "3"
+
+
+def test_input_factors():
+    """Verify that input_factors in REST response match Modbus descriptors."""
+    mock_data = load_mock_data("rest_response.json")
+    all_values = flatten_mock_data(mock_data)
+    for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
+        for desc in reg_desc.descriptors:
+            if not isinstance(desc, XtNumericEntityDescription):
+                continue
+            entry = find_entry(all_values, desc.key)
+            input_factor = entry.get(KEY_ENTRY_INPUT_FACTOR)
+            if input_factor == "":
+                assert desc.factor is None
+            else:
+                assert input_factor == desc.factor
