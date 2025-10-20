@@ -762,7 +762,7 @@ _sensor_in_backup = XtSensorEntityDescription(
     native_unit_of_measurement=UnitOfPower.WATT,
     device_class=SensorDeviceClass.POWER,
     state_class=SensorStateClass.MEASUREMENT,
-    factor="*100",
+    factor="*10",
     icon=_icon_electric_power,
 )
 _sensor_out_backup = XtSensorEntityDescription(
@@ -770,7 +770,7 @@ _sensor_out_backup = XtSensorEntityDescription(
     native_unit_of_measurement=UnitOfPower.WATT,
     device_class=SensorDeviceClass.POWER,
     state_class=SensorStateClass.MEASUREMENT,
-    factor="*100",
+    factor="*10",
     icon=_icon_thermal_power,
 )
 _sensor_in_total = XtSensorEntityDescription(
