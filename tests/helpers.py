@@ -15,6 +15,7 @@ from pytest_homeassistant_custom_component.common import (
 
 from custom_components.xtherma_fp.const import (
     DOMAIN,
+    KEY_ENTRY_INPUT_FACTOR,
     KEY_ENTRY_KEY,
     KEY_ENTRY_VALUE,
     KEY_SETTINGS,
@@ -55,7 +56,25 @@ def find_entry(values: list[dict], key: str) -> dict[str, Any] | None:
 
 
 def load_mock_data(filename: str) -> JsonValueType:
-    return load_json_value_fixture(filename)
+    mock_data = load_json_value_fixture(filename)
+    assert isinstance(mock_data, dict)
+    settings = mock_data[KEY_SETTINGS]
+    assert isinstance(settings, list)
+    settings.append(
+        {
+            KEY_ENTRY_KEY: "in_total",
+            KEY_ENTRY_VALUE: "0",
+            KEY_ENTRY_INPUT_FACTOR: "*10",
+        },
+    )
+    settings.append(
+        {
+            KEY_ENTRY_KEY: "out_total",
+            KEY_ENTRY_VALUE: "0",
+            KEY_ENTRY_INPUT_FACTOR: "*10",
+        },
+    )
+    return mock_data
 
 
 def load_modbus_regs_from_json(filename: str) -> list[dict[str, Any]]:

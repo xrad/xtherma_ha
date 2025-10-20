@@ -10,6 +10,8 @@ from pytest_homeassistant_custom_component.common import (
 )
 
 from custom_components.xtherma_fp.const import (
+    CONF_CONNECTION,
+    CONF_CONNECTION_RESTAPI,
     CONF_SERIAL_NUMBER,
     DOMAIN,
     EXTRA_STATE_ATTRIBUTE_PARAMETER,
@@ -60,7 +62,10 @@ def verify_integration_sensors(hass: HomeAssistant, entry: ConfigEntry):
         for state in hass.states.async_all(Platform.SENSOR)
         if state.entity_id.startswith(f"sensor.{entry.title}")
     ]
-    assert len(our_sensors) == 54
+    if entry.data[CONF_CONNECTION] == CONF_CONNECTION_RESTAPI:
+        assert len(our_sensors) == 54
+    else:
+        assert len(our_sensors) == 56
 
 
 def verify_integration_switches(hass: HomeAssistant, entry: ConfigEntry):

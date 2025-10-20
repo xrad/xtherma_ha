@@ -773,6 +773,22 @@ _sensor_out_backup = XtSensorEntityDescription(
     factor="*100",
     icon=_icon_thermal_power,
 )
+_sensor_in_total = XtSensorEntityDescription(
+    key="in_total",
+    native_unit_of_measurement=UnitOfPower.WATT,
+    device_class=SensorDeviceClass.POWER,
+    state_class=SensorStateClass.MEASUREMENT,
+    factor="*10",
+    icon=_icon_electric_power,
+)
+_sensor_out_total = XtSensorEntityDescription(
+    key="out_total",
+    native_unit_of_measurement=UnitOfPower.WATT,
+    device_class=SensorDeviceClass.POWER,
+    state_class=SensorStateClass.MEASUREMENT,
+    factor="*10",
+    icon=_icon_thermal_power,
+)
 _sensor_ta8 = XtSensorEntityDescription(
     key="ta8",
     native_unit_of_measurement=UnitOfTemperature.CELSIUS,
@@ -1086,8 +1102,10 @@ _MODBUS_TELEMETRY_PERFORMANCE_LIVE = ModbusRegisterSet(
         _sensor_in_hp,
         _sensor_efficiency_hp,
         _sensor_efficiency_total,
-        _sensor_in_backup,
         _sensor_out_backup,
+        _sensor_in_backup,
+        _sensor_out_total,
+        _sensor_in_total,
     ],
 )
 

@@ -171,6 +171,12 @@
       "out_backup": {
         "name": "Heat output auxiliary/emergency heating (thermal)"
       },
+      "in_total": {
+        "name": "Overall system power consumption (electric)"
+      },
+      "out_total": {
+        "name": "Overall system heat output (thermisch)"
+      },
       "mode": {
         "name": "Current operating mode",
         "state": {
