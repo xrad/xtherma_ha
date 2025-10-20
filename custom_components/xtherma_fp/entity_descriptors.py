@@ -85,8 +85,6 @@ class XtNumberEntityDescription(NumberEntityDescription, XtNumericEntityDescript
 class XtSensorEntityDescription(SensorEntityDescription, XtNumericEntityDescription):
     """A numeric value sensor."""
 
-    factor: str | None = None
-
 
 @dataclass(kw_only=True, frozen=True)
 class XtVersionSensorEntityDescription(XtSensorEntityDescription):
