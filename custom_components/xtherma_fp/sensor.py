@@ -15,13 +15,12 @@ from homeassistant.helpers.entity import Entity, EntityDescription
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
-    DataUpdateCoordinator,
 )
 
 from .const import (
     EXTRA_STATE_ATTRIBUTE_PARAMETER,
 )
-from .coordinator import XthermaDataUpdateCoordinator, read_coordinator_value
+from .coordinator import XthermaDataUpdateCoordinator
 from .entity_descriptors import (
     XtBinarySensorEntityDescription,
     XtSensorEntityDescription,
@@ -98,7 +97,7 @@ class XthermaBinarySensor(CoordinatorEntity, BinarySensorEntity):
 
     def __init__(
         self,
-        coordinator: DataUpdateCoordinator,
+        coordinator: XthermaDataUpdateCoordinator,
         device_info: DeviceInfo,
         description: XtBinarySensorEntityDescription,
     ) -> None:
@@ -119,7 +118,7 @@ class XthermaBinarySensor(CoordinatorEntity, BinarySensorEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        value = read_coordinator_value(self._coordinator, self.entity_description.key)
+        value = self._coordinator.read_value(self.entity_description.key)
         if value is None:
             return
         self._attr_is_on = value > 0
@@ -141,7 +140,7 @@ class XthermaSensor(CoordinatorEntity, SensorEntity):
 
     def __init__(
         self,
-        coordinator: DataUpdateCoordinator,
+        coordinator: XthermaDataUpdateCoordinator,
         device_info: DeviceInfo,
         description: XtSensorEntityDescription,
     ) -> None:
@@ -166,7 +165,7 @@ class XthermaSensor(CoordinatorEntity, SensorEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        value = read_coordinator_value(self._coordinator, self.entity_description.key)
+        value = self._coordinator.read_value(self.entity_description.key)
         self._attr_native_value = value
         self.async_write_ha_state()
 
@@ -186,7 +185,7 @@ class XthermaEnumSensor(XthermaSensor):
         options = self._attr_options
         if options is None:
             return
-        value = read_coordinator_value(self._coordinator, self.entity_description.key)
+        value = self._coordinator.read_value(self.entity_description.key)
         if value is None:
             return
         index = int(value) % len(options)
@@ -200,7 +199,7 @@ class XthermaVersionSensor(XthermaSensor):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        value = read_coordinator_value(self._coordinator, self.entity_description.key)
+        value = self._coordinator.read_value(self.entity_description.key)
         if value is None:
             return
         # note: input factor (assume: /100) has already been applied

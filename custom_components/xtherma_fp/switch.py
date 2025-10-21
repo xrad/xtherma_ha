@@ -18,7 +18,7 @@ from homeassistant.helpers.update_coordinator import (
 
 from custom_components.xtherma_fp.const import EXTRA_STATE_ATTRIBUTE_PARAMETER
 
-from .coordinator import XthermaDataUpdateCoordinator, read_coordinator_value
+from .coordinator import XthermaDataUpdateCoordinator
 from .entity_descriptors import (
     XtSwitchEntityDescription,
 )
@@ -120,7 +120,7 @@ class XthermaSwitchEntity(CoordinatorEntity, SwitchEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        value = read_coordinator_value(self._coordinator, self.entity_description.key)
+        value = self._coordinator.read_value(self.entity_description.key)
         if value is None:
             return
         self._attr_is_on = value > 0

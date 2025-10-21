@@ -259,16 +259,15 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
                 },
             ) from err
 
-
-def read_coordinator_value(
-    coordinator: DataUpdateCoordinator, key: str
-) -> int | float | None:
-    """Read a value from us."""
-    if coordinator.data is None:
-        return None
-    value = coordinator.data.get(key, None)
-    if not isinstance(value, (int, float)):
-        msg = "Illegal data in coordinator key=%s value=<%s>"
-        _LOGGER.error(msg)
-        return None
-    return value
+    def read_value(self, key: str) -> int | float | None:
+        """Read a value from us."""
+        if self.data is None:
+            return None
+        if not self.last_update_success:
+            return None
+        value = self.data.get(key, None)
+        if not isinstance(value, (int, float)):
+            msg = "Illegal data in coordinator key=%s value=<%s>"
+            _LOGGER.error(msg)
+            return None
+        return value
