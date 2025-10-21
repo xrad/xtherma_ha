@@ -16,6 +16,7 @@ from custom_components.xtherma_fp.const import (
     KEY_ENTRY_INPUT_FACTOR,
     KEY_ENTRY_KEY,
     KEY_ENTRY_VALUE,
+    MODBUS_TIMEOUT_S,
 )
 from custom_components.xtherma_fp.entity_descriptors import (
     MODBUS_ENTITY_DESCRIPTIONS,
@@ -58,7 +59,11 @@ class XthermaClientModbus(XthermaClient):
 
     async def connect(self) -> None:
         """Connect client to server endpoint."""
-        self._client = AsyncModbusTcpClient(host=self._host, port=self._port)
+        self._client = AsyncModbusTcpClient(
+            host=self._host,
+            port=self._port,
+            timeout=float(MODBUS_TIMEOUT_S),
+        )
         try:
             _LOGGER.debug("connecting client")
             result = await self._client.connect()
