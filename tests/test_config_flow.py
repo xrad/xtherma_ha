@@ -40,7 +40,7 @@ from tests.const import (
     MOCK_NAME,
     MOCK_SERIAL_NUMBER,
 )
-from tests.helpers import load_mock_data
+from tests.helpers import load_mock_data, provide_rest_data
 
 MOCK_REST_DATA = {CONF_NAME: MOCK_NAME, CONF_API_KEY: MOCK_API_KEY}
 
@@ -224,6 +224,7 @@ async def test_rest_error_timeout(hass, aioclient_mock):
     assert result["errors"] == {"base": "timeout"}
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_step_reconfigure_rest_api(hass, init_integration):
     """Test for reconfiguring to rest api."""
     entry = init_integration
@@ -261,6 +262,7 @@ async def test_step_reconfigure_rest_api(hass, init_integration):
     }
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_step_reconfigure_rest_api_errors(hass, init_integration):
     """Test for reconfiguring to rest api with errors."""
     errors = {"base": "any_error"}
@@ -296,6 +298,7 @@ async def test_step_reconfigure_rest_api_errors(hass, init_integration):
     assert reconfigure_result["errors"] == errors
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_step_reconfigure_modbus(hass, init_integration):
     """Test for reconfiguring to modbus."""
     entry = init_integration
@@ -334,6 +337,7 @@ async def test_step_reconfigure_modbus(hass, init_integration):
     }
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_step_reconfigure_modbus_errors(hass, init_integration):
     """Test for reconfiguring to modbus with errors."""
     errors = {"base": "any_error"}

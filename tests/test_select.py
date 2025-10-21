@@ -7,12 +7,17 @@ from homeassistant.components.select import (
 from homeassistant.exceptions import HomeAssistantError
 
 from custom_components.xtherma_fp.xtherma_client_common import XthermaReadOnlyError
-from tests.helpers import get_select_platform, load_modbus_regs_from_json
+from tests.helpers import (
+    get_select_platform,
+    provide_modbus_data,
+    provide_rest_data,
+)
 
 SELECT_ENTITY_ID_002 = "select.test_entry_xtherma_config_operating_mode"
 SELECT_ENTITY_ID_MODBUS_002 = "select.test_entry_xtherma_modbus_config_operating_mode"
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_select_entity(hass, init_integration):
     platform = get_select_platform(hass)
     state = hass.states.get(SELECT_ENTITY_ID_002)
@@ -22,6 +27,7 @@ async def test_select_entity(hass, init_integration):
     assert entity.icon == "mdi:brightness-auto"
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_set_select_rest(hass, init_integration):
     platform = get_select_platform(hass)
     state = hass.states.get(SELECT_ENTITY_ID_002)
@@ -35,14 +41,9 @@ async def test_set_select_rest(hass, init_integration):
     assert isinstance(exc_info.value.__cause__, XthermaReadOnlyError)
 
 
-def _modbus_data_from_json():
-    regs_list = load_modbus_regs_from_json("rest_response.json")
-    return [regs_list]
-
-
 @pytest.mark.parametrize(
     "mock_modbus_tcp_client",  # This refers to the fixture
-    _modbus_data_from_json(),
+    provide_modbus_data(),
     indirect=True,  # This tells pytest to pass the parameter to the fixture
 )
 async def test_set_select_modbus(hass, init_modbus_integration, mock_modbus_tcp_client):

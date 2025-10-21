@@ -1,5 +1,6 @@
 """Tests for Xtherma translations."""
 
+import pytest
 from homeassistant.components.binary_sensor import (
     BinarySensorEntityDescription,
 )
@@ -25,8 +26,10 @@ from custom_components.xtherma_fp.entity_descriptors import (
     ENTITY_DESCRIPTIONS,
     MODBUS_ENTITY_DESCRIPTIONS,
 )
+from tests.helpers import provide_rest_data
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_sensor_name_translation(hass, init_integration):
     """Ensure all sensor names are translated."""
     prefix = f"component.{DOMAIN}.entity.{Platform.SENSOR.value}"
@@ -84,6 +87,7 @@ def _get_all_entity_descriptions() -> list[EntityDescription]:
     return descs
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_enum_sensor_translation(hass, init_integration):
     """Ensure all enum sensor values are translated."""
     prefix = f"component.{DOMAIN}.entity.{Platform.SENSOR.value}"
@@ -108,6 +112,7 @@ async def test_enum_sensor_translation(hass, init_integration):
         assert sensor_options == translation_states
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_switch_name_translation(hass, init_integration):
     """Ensure all switch names are translated."""
     prefix = f"component.{DOMAIN}.entity.{Platform.SWITCH.value}"
@@ -140,6 +145,7 @@ async def test_switch_name_translation(hass, init_integration):
         )
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_number_name_translation(hass, init_integration):
     """Ensure all number names are translated."""
     prefix = f"component.{DOMAIN}.entity.{Platform.NUMBER.value}"
@@ -172,6 +178,7 @@ async def test_number_name_translation(hass, init_integration):
         )
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_select_name_translation(hass, init_integration):
     """Ensure all select names are translated."""
     prefix = f"component.{DOMAIN}.entity.{Platform.SELECT.value}"
@@ -204,6 +211,7 @@ async def test_select_name_translation(hass, init_integration):
         )
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_select_options_translation(hass, init_integration):
     """Ensure all select options are translated."""
     prefix = f"component.{DOMAIN}.entity.{Platform.SELECT.value}"

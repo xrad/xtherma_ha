@@ -22,6 +22,13 @@ from custom_components.xtherma_fp.const import (
     KEY_TELEMETRY,
 )
 from custom_components.xtherma_fp.entity_descriptors import MODBUS_ENTITY_DESCRIPTIONS
+from tests.conftest import (
+    MockModbusParam,
+    MockModbusParamExceptionCode,
+    MockRestParam,
+    MockRestParamHttpError,
+    MockRestParamTimeoutError,
+)
 
 
 def get_platform(hass: HomeAssistant, domain: str) -> EntityPlatform:
@@ -77,7 +84,24 @@ def load_mock_data(filename: str) -> JsonValueType:
     return mock_data
 
 
-def flatten_mock_data(mock_data: JsonValueType) -> list[dict[str, Any]]:
+def provide_rest_data(
+    http_error: MockRestParamHttpError = None,
+    timeout_error: MockRestParamTimeoutError = None,
+) -> list[MockRestParam]:
+    """Load and return canned REST response.
+
+    Currently returns only one REST API response.
+    """
+    response = load_mock_data("rest_response.json")
+    result: MockRestParam = {
+        "response": response,
+        "http_error": http_error,
+        "timeout_error": timeout_error,
+    }
+    return [result]
+
+
+def _flatten_mock_data(mock_data: JsonValueType) -> list[dict[str, Any]]:
     mock_data = cast("dict[str, Any]", mock_data)
     telemetry = cast("list[dict[str, int|str]]", mock_data[KEY_TELEMETRY])
     settings = cast("list[dict[str, int|str]]", mock_data[KEY_SETTINGS])
@@ -86,32 +110,12 @@ def flatten_mock_data(mock_data: JsonValueType) -> list[dict[str, Any]]:
     return all_values
 
 
-def load_modbus_regs_from_json(filename: str) -> list[dict[str, Any]]:
-    """Read and return a complete Modbus register read-out from Json.
-
-    The Json file can be directly based on the REST-API response.
-    Beware of keys which are not not defined in the REST-API but
-    exist for Modbus.
-
-    Each register "bank" will be read with its own call to read_holding_registers
-    so there is also to option to inject an exception code for the read.
-
-    Returns:
-        [
-            # Modbus registers 0..2
-            { "registers": [reg 0, reg 1, reg 2],
-              "exc_code": None
-            },
-            # Modbus registers 10..15
-            { "registers": [reg 10, reg 11, reg 12, ...],
-              "exc_code": None
-            }
-            ...
-        ]
-    """
+def _load_modbus_data_from_json(
+    filename: str, exc_code: MockModbusParamExceptionCode = None
+) -> MockModbusParam:
     mock_data = load_mock_data(filename)
-    all_values = flatten_mock_data(mock_data)
-    regs_list: list[dict[str, Any]] = []
+    all_values = _flatten_mock_data(mock_data)
+    regs_list: MockModbusParam = []
     for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
         regs = [0] * len(reg_desc.descriptors)
         for i, desc in enumerate(reg_desc.descriptors):
@@ -123,16 +127,18 @@ def load_modbus_regs_from_json(filename: str) -> list[dict[str, Any]]:
         regs_list.append(
             {
                 "registers": regs,
-                "exc_code": None,
+                "exc_code": exc_code,
             }
         )
     return regs_list
 
 
-def load_rest_response() -> list[list[dict[str, Any]]]:
+def provide_modbus_data(
+    exc_code: MockModbusParamExceptionCode = None,
+) -> list[MockModbusParam]:
     """Return a list of complete Modbus register read-outs.
 
     Currently returns only one read-out based on our standard REST API response.
     """
-    regs_list = load_modbus_regs_from_json("rest_response.json")
+    regs_list = _load_modbus_data_from_json("rest_response.json", exc_code=exc_code)
     return [regs_list]

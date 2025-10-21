@@ -1,13 +1,18 @@
 """Tests for the Xtherma sensor platform."""
 
-from typing import Any
+from typing import cast
 
 import pytest
 from homeassistant.components.sensor import (
     SensorEntity,
 )
 
-from tests.helpers import get_sensor_platform, load_modbus_regs_from_json
+from tests.conftest import MockModbusParam, MockModbusParamRegisters
+from tests.helpers import (
+    get_sensor_platform,
+    provide_modbus_data,
+    provide_rest_data,
+)
 
 SENSOR_ENTITY_ID_PK = "sensor.test_entry_xtherma_config_pk_circulation_pump_enabled"
 SENSOR_ENTITY_ID_PWW = (
@@ -22,6 +27,7 @@ SENSOR_ENTITY_ID_MODBUS_TA = (
 )
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_binary_sensor_state(hass, init_integration):
     pk = hass.states.get(SENSOR_ENTITY_ID_PK)
     assert pk.state == "off"
@@ -29,6 +35,7 @@ async def test_binary_sensor_state(hass, init_integration):
     assert pww.state == "on"
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_binary_sensor_icon(hass, init_integration):
     platform = get_sensor_platform(hass)
     pk = hass.states.get(SENSOR_ENTITY_ID_PK)
@@ -43,6 +50,7 @@ async def test_binary_sensor_icon(hass, init_integration):
     assert e_pww.icon == "mdi:pump"
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_opmode_sensor_icon(hass, init_integration):
     platform = get_sensor_platform(hass)
     state = hass.states.get(SENSOR_ENTITY_ID_MODE)
@@ -51,6 +59,7 @@ async def test_opmode_sensor_icon(hass, init_integration):
     assert entity.icon == "mdi:thermometer-water"
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_sgready_sensor_icon(hass, init_integration):
     platform = get_sensor_platform(hass)
     state = hass.states.get(SENSOR_ENTITY_ID_SG)
@@ -59,6 +68,7 @@ async def test_sgready_sensor_icon(hass, init_integration):
     assert entity.icon == "mdi:cancel"
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_sensor_name(hass, init_integration):
     """Check if regular sensors have proper (translated) names."""
     await hass.config.async_load()
@@ -69,6 +79,7 @@ async def test_sensor_name(hass, init_integration):
     assert entity.name == "[LD1] Fan 1 speed"
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_binary_sensor_name(hass, init_integration):
     """Check if binary sensors have a proper (translated) names."""
     await hass.config.async_load()
@@ -79,6 +90,7 @@ async def test_binary_sensor_name(hass, init_integration):
     assert entity.name == "[PWW] Circulation pump hot water enabled"
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_enum_sensor_name(hass, init_integration):
     """Check if enum sensors have a proper (translated) names."""
     await hass.config.async_load()
@@ -89,6 +101,7 @@ async def test_enum_sensor_name(hass, init_integration):
     assert entity.name == "Current operating mode"
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_version_sensor(hass, init_integration):
     """Check if enum sensors have a proper (translated) names."""
     await hass.config.async_load()
@@ -99,10 +112,14 @@ async def test_version_sensor(hass, init_integration):
     assert entity.state == "2.43"
 
 
-def _test_get_negative_number_modbus_regs() -> list[list[dict[str, Any]]]:
-    regs_list = load_modbus_regs_from_json("rest_response.json")
+def _test_get_negative_number_modbus_regs() -> list[MockModbusParam]:
+    param = provide_modbus_data()
+    regs_list = param[0]
     # change "ta" register #140 to be -20 °C in 2s complement
-    regs_list[11]["registers"][0] = ((20 * 10) ^ 65535) + 1
+    regs: MockModbusParamRegisters = cast(
+        "MockModbusParamRegisters", regs_list[11]["registers"]
+    )
+    regs[0] = ((20 * 10) ^ 65535) + 1
     return [regs_list]
 
 
@@ -112,9 +129,7 @@ def _test_get_negative_number_modbus_regs() -> list[list[dict[str, Any]]]:
     indirect=True,  # This tells pytest to pass the parameter to the fixture
 )
 # check reading negative values from 2s complement
-async def test_get_negative_number_modbus(
-    hass, init_modbus_integration, mock_modbus_tcp_client
-):
+async def test_get_negative_number_modbus(hass, init_modbus_integration):
     platform = get_sensor_platform(hass)
     state = hass.states.get(SENSOR_ENTITY_ID_MODBUS_TA)
     entity = platform.entities.get(state.entity_id)

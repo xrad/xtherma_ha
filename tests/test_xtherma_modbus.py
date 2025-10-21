@@ -1,13 +1,15 @@
 """Tests for the Xtherma Modbus API."""
 
-from typing import Any
+from typing import TYPE_CHECKING
 
 import pytest
+from homeassistant.helpers.update_coordinator import UpdateFailed
 from pymodbus.pdu.pdu import ExceptionResponse
 
+from tests.conftest import MockModbusParam
 from tests.helpers import (
-    load_modbus_regs_from_json,
-    load_rest_response,
+    get_sensor_platform,
+    provide_modbus_data,
 )
 from tests.test_xtherma_fp import (
     verify_integration_entry,
@@ -18,11 +20,16 @@ from tests.test_xtherma_fp import (
     verify_parameter_keys,
 )
 
+if TYPE_CHECKING:
+    from custom_components.xtherma_fp.xtherma_data import XthermaData
+
+SENSOR_ENTITY_ID_MODE = "sensor.test_entry_xtherma_modbus_config_current_operating_mode"
+
 
 @pytest.mark.parametrize(
-    "mock_modbus_tcp_client",  # This refers to the fixture
-    load_rest_response(),
-    indirect=True,  # This tells pytest to pass the parameter to the fixture
+    "mock_modbus_tcp_client",
+    provide_modbus_data(),
+    indirect=True,
 )
 @pytest.mark.asyncio
 async def test_async_setup_entry_modbus_ok(hass, init_modbus_integration):
@@ -43,17 +50,10 @@ async def test_async_setup_entry_modbus_ok(hass, init_modbus_integration):
     verify_parameter_keys(hass, entry)
 
 
-def _test_modbus_setup_entry_read_busy_regs() -> list[list[dict[str, Any]]]:
-    regs_list = load_modbus_regs_from_json("rest_response.json")
-    for regs in regs_list:
-        regs["exc_code"] = ExceptionResponse.SLAVE_BUSY
-    return [regs_list]
-
-
 @pytest.mark.parametrize(
-    "mock_modbus_tcp_client",  # This refers to the fixture
-    _test_modbus_setup_entry_read_busy_regs(),
-    indirect=True,  # This tells pytest to pass the parameter to the fixture
+    "mock_modbus_tcp_client",
+    provide_modbus_data(exc_code=ExceptionResponse.SLAVE_BUSY),
+    indirect=True,
 )
 @pytest.mark.asyncio
 async def test_modbus_setup_entry_read_busy(hass, init_modbus_integration):
@@ -61,3 +61,52 @@ async def test_modbus_setup_entry_read_busy(hass, init_modbus_integration):
     entry = init_modbus_integration
     assert entry.state.value == "setup_retry"
     assert entry.reason == "Modbus interface is busy"
+
+
+def _test_modbus_runtime_read_busy() -> list[MockModbusParam]:
+    # prepare register set for 2 update cyles:
+    # 1. ok (for config entry setup)
+    # 2. busy (for first regular update)
+    param_setup: list[MockModbusParam] = provide_modbus_data()
+    param_runtime: list[MockModbusParam] = provide_modbus_data()
+    for regs in param_runtime[0]:
+        regs["exc_code"] = ExceptionResponse.SLAVE_BUSY
+    return [param_setup[0] + param_runtime[0]]
+
+
+@pytest.mark.parametrize(
+    "mock_modbus_tcp_client",
+    _test_modbus_runtime_read_busy(),
+    indirect=True,
+)
+@pytest.mark.asyncio
+async def test_modbus_runtime_read_busy(hass, init_modbus_integration):
+    """Test busy modbus at runtime setup."""
+    entry = init_modbus_integration
+    assert entry.state.value == "loaded"
+
+    # get coordinator and verify last update was ok
+    xtherma_data: XthermaData = entry.runtime_data
+    assert xtherma_data is not None
+    assert xtherma_data.coordinator is not None
+    coordinator = xtherma_data.coordinator
+    assert coordinator.last_update_success
+
+    platform = get_sensor_platform(hass)
+    state = hass.states.get(SENSOR_ENTITY_ID_MODE)
+    entity = platform.entities.get(state.entity_id)
+    assert entity is not None
+    assert entity.state == "water"
+    xtherma_data: XthermaData = entry.runtime_data
+    assert xtherma_data is not None
+    assert xtherma_data.coordinator is not None
+    await xtherma_data.coordinator.async_request_refresh()
+
+    # check last update was not ok
+    assert not coordinator.last_update_success
+    assert isinstance(coordinator.last_exception, UpdateFailed)
+    assert coordinator.last_exception.translation_key == "modbus_read_busy_error"
+    # verify that last state is still valid
+    entity = platform.entities.get(state.entity_id)
+    assert entity is not None
+    assert entity.state == "water"

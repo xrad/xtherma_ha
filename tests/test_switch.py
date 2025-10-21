@@ -9,7 +9,8 @@ from homeassistant.exceptions import HomeAssistantError
 from custom_components.xtherma_fp.xtherma_client_common import XthermaReadOnlyError
 from tests.helpers import (
     get_switch_platform,
-    load_rest_response,
+    provide_modbus_data,
+    provide_rest_data,
 )
 
 SWITCH_ENTITY_ID_450 = "switch.test_entry_xtherma_config_cooling_curve_2_active"
@@ -21,6 +22,7 @@ SWITCH_ENTITY_ID_MODBUS_350 = (
 )
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_binary_switch_icon(hass, init_integration):
     platform = get_switch_platform(hass)
     entity = platform.entities.get(SWITCH_ENTITY_ID_450)
@@ -28,6 +30,7 @@ async def test_binary_switch_icon(hass, init_integration):
     assert entity.icon == "mdi:snowflake"
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_set_switch_rest(hass, init_integration):
     platform = get_switch_platform(hass)
     state = hass.states.get(SWITCH_ENTITY_ID_450)
@@ -43,7 +46,7 @@ async def test_set_switch_rest(hass, init_integration):
 
 @pytest.mark.parametrize(
     "mock_modbus_tcp_client",  # This refers to the fixture
-    load_rest_response(),
+    provide_modbus_data(),
     indirect=True,  # This tells pytest to pass the parameter to the fixture
 )
 async def test_set_switch_modbus(hass, init_modbus_integration, mock_modbus_tcp_client):
@@ -63,7 +66,7 @@ async def test_set_switch_modbus(hass, init_modbus_integration, mock_modbus_tcp_
 
 @pytest.mark.parametrize(
     "mock_modbus_tcp_client",  # This refers to the fixture
-    load_rest_response(),
+    provide_modbus_data(),
     indirect=True,  # This tells pytest to pass the parameter to the fixture
 )
 async def test_set_multiple_switches_modbus(

@@ -7,7 +7,7 @@ from homeassistant.components.number import (
 from homeassistant.exceptions import HomeAssistantError
 
 from custom_components.xtherma_fp.xtherma_client_common import XthermaReadOnlyError
-from tests.helpers import get_number_platform, load_rest_response
+from tests.helpers import get_number_platform, provide_modbus_data, provide_rest_data
 
 NUMBER_ENTITY_ID_451 = (
     "number.test_entry_xtherma_config_cooling_curve_2_outside_temperature_low_p1"
@@ -20,6 +20,7 @@ NUMBER_ENTITY_ID_MODBUS_411 = (
 )
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_number_icon(hass, init_integration):
     platform = get_number_platform(hass)
     entity = platform.entities.get(NUMBER_ENTITY_ID_451)
@@ -27,6 +28,7 @@ async def test_number_icon(hass, init_integration):
     assert entity.icon == "mdi:thermometer"
 
 
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_set_number_rest(hass, init_integration):
     platform = get_number_platform(hass)
     state = hass.states.get(NUMBER_ENTITY_ID_451)
@@ -42,7 +44,7 @@ async def test_set_number_rest(hass, init_integration):
 
 @pytest.mark.parametrize(
     "mock_modbus_tcp_client",  # This refers to the fixture
-    load_rest_response(),
+    provide_modbus_data(),
     indirect=True,  # This tells pytest to pass the parameter to the fixture
 )
 # check writing positive values
@@ -64,7 +66,7 @@ async def test_set_number_modbus(hass, init_modbus_integration, mock_modbus_tcp_
 # check writing negative values as 2s complement
 @pytest.mark.parametrize(
     "mock_modbus_tcp_client",  # This refers to the fixture
-    load_rest_response(),
+    provide_modbus_data(),
     indirect=True,  # This tells pytest to pass the parameter to the fixture
 )
 async def test_set_negative_number_modbus(
