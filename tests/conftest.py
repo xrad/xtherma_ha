@@ -1,23 +1,10 @@
 """Set up some common test helper things."""
 
 import asyncio
-import sys
-from pathlib import Path
+from typing import cast
 from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
-
-VENDOR_DIR = (
-    Path(__file__).parent
-    / ".."
-    / "custom_components"
-    / "xtherma_fp"
-    / "vendor"
-    / "pymodbus"
-)
-print(Path.resolve(VENDOR_DIR))  # noqa: T201
-sys.path.insert(0, Path.resolve(VENDOR_DIR))
-
 from homeassistant.const import CONF_ADDRESS, CONF_API_KEY, CONF_HOST, CONF_PORT
 from pytest_homeassistant_custom_component.common import (
     MockConfigEntry,
