@@ -178,6 +178,9 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
             raise UpdateFailed(
                 translation_domain=DOMAIN,
                 translation_key="general_error",
+                translation_placeholders={
+                    "error": str(err),
+                },
             ) from err
         _LOGGER.debug(
             "coordinator processed %d/%d values",
