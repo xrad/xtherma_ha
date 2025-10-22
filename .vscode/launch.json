@@ -18,12 +18,21 @@
             "justMyCode": false
         },
         {
-        "name": "Home Assistant: Debug Current Test File",
-        "type": "debugpy",
-        "request": "launch",
-        "module": "pytest",
-        "console": "integratedTerminal",
-        "args": ["-vv", "${file}"]
+            "name": "Home Assistant: Debug Current Test File",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "console": "integratedTerminal",
+            "args": ["-vv", "${file}"],
         },
+        {
+            "name": "Python: Debug Tests",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "purpose": ["debug-test"],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }
     ]
 }
