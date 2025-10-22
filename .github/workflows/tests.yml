@@ -36,3 +36,16 @@ jobs:
       - name: Run pytest
         run: |
           python -m pytest --timeout=10 tests
+
+  hacs:
+    runs-on: "ubuntu-latest"
+    name: HACS
+    steps:
+      - name: Check out the repository
+        uses: "actions/checkout@v5"
+
+      - name: HACS validation
+        uses: "hacs/action@22.5.0"
+        with:
+          category: "integration"
+          ignore: "topics"
