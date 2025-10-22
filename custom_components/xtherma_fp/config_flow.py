@@ -235,6 +235,10 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
         errors: dict[str, str] = {}
 
         if user_input is not None:
+            self._async_abort_entries_match(
+                {CONF_SERIAL_NUMBER: user_input[CONF_SERIAL_NUMBER]}
+            )
+
             errors |= await _validate_connection(user_input)
             if not errors:
                 self._config_data.update(user_input)
@@ -282,6 +286,10 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
         errors: dict[str, str] = {}
 
         if user_input is not None:
+            self._async_abort_entries_match(
+                {CONF_HOST: user_input[CONF_HOST], CONF_PORT: user_input[CONF_PORT]}
+            )
+
             errors |= await _validate_modbus_tcp(
                 self.hass,
                 user_input,
@@ -309,6 +317,10 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
         self._reconfigure_data = reconfigure_entry.data.copy()
 
         if user_input is not None:
+            self._async_abort_entries_match(
+                {CONF_SERIAL_NUMBER: user_input[CONF_SERIAL_NUMBER]}
+            )
+
             self._reconfigure_data.update(user_input)
             connection_type = user_input[CONF_CONNECTION]
             if connection_type == CONF_CONNECTION_RESTAPI:
@@ -356,6 +368,10 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
         """Process modbus tcp config step."""
         errors: dict[str, str] = {}
         if user_input is not None:
+            self._async_abort_entries_match(
+                {CONF_HOST: user_input[CONF_HOST], CONF_PORT: user_input[CONF_PORT]}
+            )
+
             errors |= await _validate_modbus_tcp(self.hass, user_input)
             if not errors:
                 self._reconfigure_data.update(user_input)

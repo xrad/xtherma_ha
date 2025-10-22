@@ -27,6 +27,7 @@
         "title": "Xtherma Gerät neu konfigurieren",
         "description": "Verbindung zum Xtherma Gerät neu konfigurieren.",
         "data": {
+          "serial_number": "Seriennummer (Fernportal Modul)",
           "connection":"Verbindungstyp:"
         }
       },
@@ -56,7 +57,8 @@
       "unknown": "Unbekannter Fehler"
     },
     "abort": {
-      "reconfigure_successful": "Neukonfiguration erfolgreich."
+      "reconfigure_successful": "Neukonfiguration erfolgreich.",
+      "already_configured": "Ein Gerät mit derselben Seriennummer oder denselben Verbindungsparametern ist bereits konfiguriert."
     }
   },
   "selector": {

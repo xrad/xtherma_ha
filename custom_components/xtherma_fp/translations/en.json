@@ -27,6 +27,7 @@
         "title": "Reconfigure Xtherma device",
         "description": "Reconfigure connection to Xtherma device",
         "data": {
+          "serial_number": "Serial number (Fernportal module)",
           "connection":"Connection type:"
         }
       },
@@ -56,7 +57,8 @@
       "unknown": "Unknown Error"
     },
     "abort": {
-      "reconfigure_successful": "Reconfigure successful."
+      "reconfigure_successful": "Reconfigure successful.",
+      "already_configured": "Device using the same serial number or connection parameters is already configured."
     }
   },
   "selector": {
