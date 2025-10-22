@@ -4,7 +4,10 @@ import asyncio
 from unittest.mock import patch
 
 import pytest
-from homeassistant.config_entries import ConfigEntryState
+from homeassistant.config_entries import (
+    SOURCE_USER,
+    ConfigEntryState,
+)
 from homeassistant.const import (
     CONF_ADDRESS,
     CONF_API_KEY,
@@ -14,6 +17,7 @@ from homeassistant.const import (
 )
 from homeassistant.data_entry_flow import FlowResultType
 
+from custom_components.xtherma_fp import DOMAIN
 from custom_components.xtherma_fp.config_flow import (
     _validate_connection,
     _validate_modbus_tcp,
@@ -40,7 +44,7 @@ from tests.const import (
     MOCK_NAME,
     MOCK_SERIAL_NUMBER,
 )
-from tests.helpers import load_mock_data, provide_rest_data
+from tests.helpers import load_mock_data, provide_modbus_data, provide_rest_data
 
 MOCK_REST_DATA = {CONF_NAME: MOCK_NAME, CONF_API_KEY: MOCK_API_KEY}
 
@@ -56,11 +60,11 @@ async def test_config_common_bad_arguments(hass):
     """Test giving bad config dat to REST API config flow."""
     result = await hass.config_entries.flow.async_init(
         "xtherma_fp",
-        context={"source": "user"},
+        context={"source": SOURCE_USER},
     )
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "user"
+    assert result["step_id"] == SOURCE_USER
 
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"],
@@ -72,7 +76,7 @@ async def test_config_common_bad_arguments(hass):
     )
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "user"
+    assert result["step_id"] == SOURCE_USER
     assert result["errors"] == {"base": "bad_arguments"}
 
 
@@ -86,11 +90,11 @@ async def test_rest_api_good_serial_number(hass, aioclient_mock):
 
     result = await hass.config_entries.flow.async_init(
         "xtherma_fp",
-        context={"source": "user"},
+        context={"source": SOURCE_USER},
     )
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "user"
+    assert result["step_id"] == SOURCE_USER
 
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"],
@@ -123,11 +127,11 @@ async def test_rest_error_404(hass, aioclient_mock):
 
     result = await hass.config_entries.flow.async_init(
         "xtherma_fp",
-        context={"source": "user"},
+        context={"source": SOURCE_USER},
     )
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "user"
+    assert result["step_id"] == SOURCE_USER
 
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"],
@@ -161,11 +165,11 @@ async def test_rest_error_429(hass, aioclient_mock):
 
     result = await hass.config_entries.flow.async_init(
         "xtherma_fp",
-        context={"source": "user"},
+        context={"source": SOURCE_USER},
     )
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "user"
+    assert result["step_id"] == SOURCE_USER
 
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"],
@@ -197,11 +201,11 @@ async def test_rest_error_timeout(hass, aioclient_mock):
 
     result = await hass.config_entries.flow.async_init(
         "xtherma_fp",
-        context={"source": "user"},
+        context={"source": SOURCE_USER},
     )
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "user"
+    assert result["step_id"] == SOURCE_USER
 
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"],
@@ -225,6 +229,33 @@ async def test_rest_error_timeout(hass, aioclient_mock):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
+async def test_step_user_abort_entries_match(hass, init_integration):
+    """Test for matching configuration parameters in step_user."""
+    config_data = init_integration.data.copy()
+
+    result = await hass.config_entries.flow.async_init(
+        DOMAIN,
+        context={"source": SOURCE_USER},
+        data=config_data,
+    )
+
+    assert result["type"] == FlowResultType.ABORT
+    assert result["reason"] == "already_configured"
+
+
+@pytest.mark.parametrize("mock_modbus_tcp_client", provide_modbus_data(), indirect=True)
+async def test_step_modbus_tcp_abort_entries_match(hass, init_modbus_integration):
+    """Test for matching configuration parameters in step_modbus_tcp."""
+    config_data = init_modbus_integration.data.copy()
+
+    result = await hass.config_entries.flow.async_init(
+        DOMAIN, context={"source": "modbus_tcp"}, data=config_data
+    )
+    assert result["type"] == FlowResultType.ABORT
+    assert result["reason"] == "already_configured"
+
+
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_step_reconfigure_rest_api(hass, init_integration):
     """Test for reconfiguring to rest api."""
     entry = init_integration
@@ -240,7 +271,10 @@ async def test_step_reconfigure_rest_api(hass, init_integration):
 
     reconfigure_result = await hass.config_entries.flow.async_configure(
         reconfigure_result["flow_id"],
-        {CONF_CONNECTION: CONF_CONNECTION_RESTAPI},
+        {
+            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
+            CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+        },
     )
     assert reconfigure_result["type"] is FlowResultType.FORM
 
@@ -280,7 +314,10 @@ async def test_step_reconfigure_rest_api_errors(hass, init_integration):
 
     reconfigure_result = await hass.config_entries.flow.async_configure(
         reconfigure_result["flow_id"],
-        {CONF_CONNECTION: CONF_CONNECTION_RESTAPI},
+        {
+            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
+            CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+        },
     )
     assert reconfigure_result["type"] is FlowResultType.FORM
 
@@ -311,7 +348,10 @@ async def test_step_reconfigure_modbus(hass, init_integration):
 
     reconfigure_result = await hass.config_entries.flow.async_configure(
         reconfigure_result["flow_id"],
-        {CONF_CONNECTION: CONF_CONNECTION_MODBUSTCP},
+        {
+            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
+            CONF_CONNECTION: CONF_CONNECTION_MODBUSTCP,
+        },
     )
     assert reconfigure_result["type"] is FlowResultType.FORM
 
@@ -352,7 +392,10 @@ async def test_step_reconfigure_modbus_errors(hass, init_integration):
 
     reconfigure_result = await hass.config_entries.flow.async_configure(
         reconfigure_result["flow_id"],
-        {CONF_CONNECTION: CONF_CONNECTION_MODBUSTCP},
+        {
+            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
+            CONF_CONNECTION: CONF_CONNECTION_MODBUSTCP,
+        },
     )
     assert reconfigure_result["type"] is FlowResultType.FORM
 

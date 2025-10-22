@@ -57,6 +57,63 @@ _DEF_MODBUS_PORT = 502
 _DEF_MODBUS_ADDRESS = 1
 
 
+CONNECTION_DATA = {
+    vol.Required(
+        CONF_SERIAL_NUMBER,
+        msg="Serial Number (FP-XX-XXXXXX)",
+    ): str,
+    vol.Required(CONF_CONNECTION): SelectSelector(
+        SelectSelectorConfig(
+            options=[
+                CONF_CONNECTION_RESTAPI,
+                CONF_CONNECTION_MODBUSTCP,
+            ],
+            mode=SelectSelectorMode.LIST,
+            translation_key=CONF_CONNECTION,
+        ),
+    ),
+}
+
+
+USER_DATA = {
+    vol.Required(
+        CONF_NAME,
+        msg="Entry name",
+    ): str,
+    **CONNECTION_DATA,
+}
+
+CONNECTION_SCHEMA = vol.Schema(CONNECTION_DATA)
+
+USER_SCHEMA = vol.Schema(USER_DATA)
+
+REST_API_SCHEMA = vol.Schema(
+    {
+        vol.Required(CONF_API_KEY, msg="API Key"): str,
+    },
+)
+
+MODBUS_SCHEMA = vol.Schema(
+    {
+        vol.Required(CONF_HOST, default=""): str,
+        vol.Required(CONF_PORT, default=_DEF_MODBUS_PORT): vol.All(
+            vol.Coerce(int),
+            vol.Range(min=0, max=65535),
+        ),
+        vol.Required(CONF_ADDRESS, default=_DEF_MODBUS_ADDRESS): vol.All(
+            vol.Coerce(int),
+            NumberSelector(
+                NumberSelectorConfig(
+                    min=1,
+                    max=255,
+                    mode=NumberSelectorMode.BOX,
+                ),
+            ),
+        ),
+    },
+)
+
+
 async def _validate_connection(
     data: dict[str, Any],
 ) -> dict[str, str]:
@@ -178,6 +235,10 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
         errors: dict[str, str] = {}
 
         if user_input is not None:
+            self._async_abort_entries_match(
+                {CONF_SERIAL_NUMBER: user_input[CONF_SERIAL_NUMBER]}
+            )
+
             errors |= await _validate_connection(user_input)
             if not errors:
                 self._config_data.update(user_input)
@@ -187,30 +248,9 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
                 if connection_type == CONF_CONNECTION_MODBUSTCP:
                     return await self.async_step_modbus_tcp()
 
-        schema = vol.Schema(
-            {
-                vol.Required(
-                    CONF_NAME,
-                    msg="Entry name",
-                ): str,
-                vol.Required(
-                    CONF_SERIAL_NUMBER,
-                    msg="Serial Number (FP-XX-XXXXXX)",
-                ): str,
-                vol.Required(CONF_CONNECTION): SelectSelector(
-                    SelectSelectorConfig(
-                        options=[
-                            CONF_CONNECTION_RESTAPI,
-                            CONF_CONNECTION_MODBUSTCP,
-                        ],
-                        mode=SelectSelectorMode.LIST,
-                        translation_key=CONF_CONNECTION,
-                    ),
-                ),
-            },
+        return self.async_show_form(
+            step_id="user", data_schema=USER_SCHEMA, errors=errors
         )
-
-        return self.async_show_form(step_id="user", data_schema=schema, errors=errors)
 
     async def async_step_rest_api(
         self,
@@ -232,15 +272,9 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
                     data=self._config_data,
                 )
 
-        schema = vol.Schema(
-            {
-                vol.Required(CONF_API_KEY, msg="API Key"): str,
-            },
-        )
-
         return self.async_show_form(
             step_id="rest_api",
-            data_schema=schema,
+            data_schema=REST_API_SCHEMA,
             errors=errors,
         )
 
@@ -252,6 +286,10 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
         errors: dict[str, str] = {}
 
         if user_input is not None:
+            self._async_abort_entries_match(
+                {CONF_HOST: user_input[CONF_HOST], CONF_PORT: user_input[CONF_PORT]}
+            )
+
             errors |= await _validate_modbus_tcp(
                 self.hass,
                 user_input,
@@ -263,29 +301,9 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
                     data=self._config_data,
                 )
 
-        schema = vol.Schema(
-            {
-                vol.Required(CONF_HOST, default=""): str,
-                vol.Required(CONF_PORT, default=_DEF_MODBUS_PORT): vol.All(
-                    vol.Coerce(int),
-                    vol.Range(min=0, max=65535),
-                ),
-                vol.Required(CONF_ADDRESS, default=_DEF_MODBUS_ADDRESS): vol.All(
-                    vol.Coerce(int),
-                    NumberSelector(
-                        NumberSelectorConfig(
-                            min=1,
-                            max=255,
-                            mode=NumberSelectorMode.BOX,
-                        ),
-                    ),
-                ),
-            },
-        )
-
         return self.async_show_form(
             step_id="modbus_tcp",
-            data_schema=schema,
+            data_schema=MODBUS_SCHEMA,
             errors=errors,
         )
 
@@ -299,6 +317,10 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
         self._reconfigure_data = reconfigure_entry.data.copy()
 
         if user_input is not None:
+            self._async_abort_entries_match(
+                {CONF_SERIAL_NUMBER: user_input[CONF_SERIAL_NUMBER]}
+            )
+
             self._reconfigure_data.update(user_input)
             connection_type = user_input[CONF_CONNECTION]
             if connection_type == CONF_CONNECTION_RESTAPI:
@@ -306,26 +328,11 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
             if connection_type == CONF_CONNECTION_MODBUSTCP:
                 return await self.async_step_reconfigure_modbus_tcp()
 
-        def_connection = self._reconfigure_data[CONF_CONNECTION]
-
-        schema = vol.Schema(
-            {
-                vol.Required(CONF_CONNECTION, default=def_connection): SelectSelector(
-                    SelectSelectorConfig(
-                        options=[
-                            CONF_CONNECTION_RESTAPI,
-                            CONF_CONNECTION_MODBUSTCP,
-                        ],
-                        mode=SelectSelectorMode.LIST,
-                        translation_key=CONF_CONNECTION,
-                    ),
-                ),
-            },
-        )
-
         return self.async_show_form(
             step_id="reconfigure",
-            data_schema=schema,
+            data_schema=self.add_suggested_values_to_schema(
+                CONNECTION_SCHEMA, self._reconfigure_data
+            ),
             errors=errors,
         )
 
@@ -346,21 +353,11 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
                     self._get_reconfigure_entry(), data_updates=self._reconfigure_data
                 )
 
-        def_api_key = self._reconfigure_data.get(CONF_API_KEY)
-
-        schema = vol.Schema(
-            {
-                vol.Required(
-                    CONF_API_KEY,
-                    msg="API Key",
-                    default=def_api_key,
-                ): str,
-            },
-        )
-
         return self.async_show_form(
             step_id="reconfigure_rest_api",
-            data_schema=schema,
+            data_schema=self.add_suggested_values_to_schema(
+                REST_API_SCHEMA, self._reconfigure_data
+            ),
             errors=errors,
         )
 
@@ -371,6 +368,10 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
         """Process modbus tcp config step."""
         errors: dict[str, str] = {}
         if user_input is not None:
+            self._async_abort_entries_match(
+                {CONF_HOST: user_input[CONF_HOST], CONF_PORT: user_input[CONF_PORT]}
+            )
+
             errors |= await _validate_modbus_tcp(self.hass, user_input)
             if not errors:
                 self._reconfigure_data.update(user_input)
@@ -378,28 +379,10 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
                     self._get_reconfigure_entry(), data_updates=self._reconfigure_data
                 )
 
-        def_host = self._reconfigure_data.get(CONF_HOST)
-        def_port = self._reconfigure_data.get(CONF_PORT, _DEF_MODBUS_PORT)
-        def_address = self._reconfigure_data.get(CONF_ADDRESS, _DEF_MODBUS_ADDRESS)
-
-        schema = vol.Schema(
-            {
-                vol.Required(CONF_HOST, default=def_host): str,
-                vol.Required(CONF_PORT, default=def_port): vol.All(
-                    vol.Coerce(int),
-                    vol.Range(min=0, max=65535),
-                ),
-                vol.Required(
-                    CONF_ADDRESS,
-                    default=def_address,
-                ): NumberSelector(
-                    NumberSelectorConfig(min=1, max=255, mode=NumberSelectorMode.BOX),
-                ),
-            },
-        )
-
         return self.async_show_form(
             step_id="reconfigure_modbus_tcp",
-            data_schema=schema,
+            data_schema=self.add_suggested_values_to_schema(
+                MODBUS_SCHEMA, self._reconfigure_data
+            ),
             errors=errors,
         )
