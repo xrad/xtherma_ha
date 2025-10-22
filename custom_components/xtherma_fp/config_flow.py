@@ -58,6 +58,10 @@ _DEF_MODBUS_ADDRESS = 1
 
 
 CONNECTION_DATA = {
+    vol.Required(
+        CONF_SERIAL_NUMBER,
+        msg="Serial Number (FP-XX-XXXXXX)",
+    ): str,
     vol.Required(CONF_CONNECTION): SelectSelector(
         SelectSelectorConfig(
             options=[
@@ -75,10 +79,6 @@ USER_DATA = {
     vol.Required(
         CONF_NAME,
         msg="Entry name",
-    ): str,
-    vol.Required(
-        CONF_SERIAL_NUMBER,
-        msg="Serial Number (FP-XX-XXXXXX)",
     ): str,
     **CONNECTION_DATA,
 }
