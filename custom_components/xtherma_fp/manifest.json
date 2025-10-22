@@ -1,10 +1,12 @@
 {
   "domain": "xtherma_fp",
   "name": "Xtherma Integration",
+  "documentation": "https://github.com/Xtherma/xtherma_ha",
+  "issue_tracker": "https://github.com/Xtherma/xtherma_ha/issues",
   "codeowners": [
     "@xrad"
   ],
-  "version": "1.2.1",
+  "version": "1.2.2",
   "manifest_version": 1,
   "config_flow": true,
   "integration_type": "device"
