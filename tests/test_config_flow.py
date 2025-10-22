@@ -240,7 +240,10 @@ async def test_step_reconfigure_rest_api(hass, init_integration):
 
     reconfigure_result = await hass.config_entries.flow.async_configure(
         reconfigure_result["flow_id"],
-        {CONF_CONNECTION: CONF_CONNECTION_RESTAPI},
+        {
+            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
+            CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+        },
     )
     assert reconfigure_result["type"] is FlowResultType.FORM
 
@@ -280,7 +283,10 @@ async def test_step_reconfigure_rest_api_errors(hass, init_integration):
 
     reconfigure_result = await hass.config_entries.flow.async_configure(
         reconfigure_result["flow_id"],
-        {CONF_CONNECTION: CONF_CONNECTION_RESTAPI},
+        {
+            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
+            CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+        },
     )
     assert reconfigure_result["type"] is FlowResultType.FORM
 
@@ -311,7 +317,10 @@ async def test_step_reconfigure_modbus(hass, init_integration):
 
     reconfigure_result = await hass.config_entries.flow.async_configure(
         reconfigure_result["flow_id"],
-        {CONF_CONNECTION: CONF_CONNECTION_MODBUSTCP},
+        {
+            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
+            CONF_CONNECTION: CONF_CONNECTION_MODBUSTCP,
+        },
     )
     assert reconfigure_result["type"] is FlowResultType.FORM
 
@@ -352,7 +361,10 @@ async def test_step_reconfigure_modbus_errors(hass, init_integration):
 
     reconfigure_result = await hass.config_entries.flow.async_configure(
         reconfigure_result["flow_id"],
-        {CONF_CONNECTION: CONF_CONNECTION_MODBUSTCP},
+        {
+            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
+            CONF_CONNECTION: CONF_CONNECTION_MODBUSTCP,
+        },
     )
     assert reconfigure_result["type"] is FlowResultType.FORM
 
