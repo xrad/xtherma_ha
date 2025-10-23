@@ -13,14 +13,9 @@ from homeassistant.helpers.device_registry import (
 )
 from homeassistant.helpers.entity import Entity, EntityDescription
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.update_coordinator import (
-    CoordinatorEntity,
-)
 
-from .const import (
-    EXTRA_STATE_ATTRIBUTE_PARAMETER,
-)
 from .coordinator import XthermaDataUpdateCoordinator
+from .entity import XthermaEntity
 from .entity_descriptors import (
     XtBinarySensorEntityDescription,
     XtSensorEntityDescription,
@@ -89,31 +84,11 @@ async def async_setup_entry(
     return True
 
 
-class XthermaBinarySensor(CoordinatorEntity, BinarySensorEntity):
+class XthermaBinarySensor(XthermaEntity, BinarySensorEntity):
     """Xtherma Binary Sensor."""
 
     # keep this for type safe access to custom members
     xt_description: XtBinarySensorEntityDescription
-
-    def __init__(
-        self,
-        coordinator: XthermaDataUpdateCoordinator,
-        device_info: DeviceInfo,
-        description: XtBinarySensorEntityDescription,
-    ) -> None:
-        """Class Constructor."""
-        super().__init__(coordinator)
-        self._coordinator = coordinator
-        self.entity_description = description
-        self.xt_description = description
-        self._attr_has_entity_name = True
-        self._attr_device_info = device_info
-        self._attr_device_class = description.device_class
-        self._attr_unique_id = f"{coordinator.config_entry.entry_id}-{description.key}"
-        self._attr_extra_state_attributes = {
-            EXTRA_STATE_ATTRIBUTE_PARAMETER: self.xt_description.key,
-        }
-        self.translation_key = description.key
 
     @callback
     def _handle_coordinator_update(self) -> None:
@@ -132,7 +107,7 @@ class XthermaBinarySensor(CoordinatorEntity, BinarySensorEntity):
         return super().icon
 
 
-class XthermaSensor(CoordinatorEntity, SensorEntity):
+class XthermaSensor(XthermaEntity, SensorEntity):
     """Xtherma Value Sensor."""
 
     # keep this for type safe access to custom members
@@ -145,22 +120,11 @@ class XthermaSensor(CoordinatorEntity, SensorEntity):
         description: XtSensorEntityDescription,
     ) -> None:
         """Class Constructor."""
-        super().__init__(coordinator)
-        self._coordinator = coordinator
-        self.entity_description = description
-        self.xt_description = description
-        self._attr_has_entity_name = True
-        self._attr_device_info = device_info
+        super().__init__(coordinator, device_info, description)
         self._attr_native_unit_of_measurement = description.native_unit_of_measurement
-        self._attr_device_class = description.device_class
         self._attr_state_class = description.state_class
         self._attr_options = description.options
         self._factor = description.factor
-        self._attr_unique_id = f"{coordinator.config_entry.entry_id}-{description.key}"
-        self._attr_extra_state_attributes = {
-            EXTRA_STATE_ATTRIBUTE_PARAMETER: self.xt_description.key,
-        }
-        self.translation_key = description.key
 
     @callback
     def _handle_coordinator_update(self) -> None:

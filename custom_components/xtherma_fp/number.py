@@ -11,13 +11,9 @@ from homeassistant.helpers.device_registry import (
 )
 from homeassistant.helpers.entity import Entity, EntityDescription
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.update_coordinator import (
-    CoordinatorEntity,
-)
-
-from custom_components.xtherma_fp.const import EXTRA_STATE_ATTRIBUTE_PARAMETER
 
 from .coordinator import XthermaDataUpdateCoordinator
+from .entity import XthermaEntity
 from .entity_descriptors import (
     XtNumberEntityDescription,
 )
@@ -77,31 +73,11 @@ async def async_setup_entry(
     return True
 
 
-class XthermaNumberEntity(CoordinatorEntity, NumberEntity):
+class XthermaNumberEntity(XthermaEntity, NumberEntity):
     """Xtherma Number Input."""
 
     # keep this for type safe access to custom members
     xt_description: XtNumberEntityDescription
-
-    def __init__(
-        self,
-        coordinator: XthermaDataUpdateCoordinator,
-        device_info: DeviceInfo,
-        description: XtNumberEntityDescription,
-    ) -> None:
-        """Class Constructor."""
-        super().__init__(coordinator)
-        self._coordinator = coordinator
-        self.entity_description = description
-        self.xt_description = description
-        self._attr_has_entity_name = True
-        self._attr_device_info = device_info
-        self._attr_device_class = description.device_class
-        self._attr_unique_id = f"{coordinator.config_entry.entry_id}-{description.key}"
-        self._attr_extra_state_attributes = {
-            EXTRA_STATE_ATTRIBUTE_PARAMETER: self.xt_description.key,
-        }
-        self.translation_key = description.key
 
     @callback
     def _handle_coordinator_update(self) -> None:
