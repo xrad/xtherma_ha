@@ -95,7 +95,7 @@ class XthermaSelectEntity(XthermaCoordinatorEntity, SelectEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        value = self._coordinator.read_value(self.entity_description.key)
+        value = self.coordinator.read_value(self.entity_description.key)
         if value is None:
             return
         new_index = int(value) % len(self.options)
@@ -113,7 +113,7 @@ class XthermaSelectEntity(XthermaCoordinatorEntity, SelectEntity):
         """Set value."""
         try:
             index = self.options.index(option)
-            await self._coordinator.async_write(self, value=index)
+            await self.coordinator.async_write(self, value=index)
             self._attr_current_option = option
             self.async_write_ha_state()
         except HomeAssistantError:

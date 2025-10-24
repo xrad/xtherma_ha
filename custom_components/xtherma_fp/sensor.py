@@ -93,7 +93,7 @@ class XthermaBinarySensor(XthermaCoordinatorEntity, BinarySensorEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        value = self._coordinator.read_value(self.entity_description.key)
+        value = self.coordinator.read_value(self.entity_description.key)
         if value is None:
             return
         self._attr_is_on = value > 0
@@ -129,7 +129,7 @@ class XthermaSensor(XthermaCoordinatorEntity, SensorEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        value = self._coordinator.read_value(self.entity_description.key)
+        value = self.coordinator.read_value(self.entity_description.key)
         self._attr_native_value = value
         self.async_write_ha_state()
 
@@ -149,7 +149,7 @@ class XthermaEnumSensor(XthermaSensor):
         options = self._attr_options
         if options is None:
             return
-        value = self._coordinator.read_value(self.entity_description.key)
+        value = self.coordinator.read_value(self.entity_description.key)
         if value is None:
             return
         index = int(value) % len(options)
@@ -163,7 +163,7 @@ class XthermaVersionSensor(XthermaSensor):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        value = self._coordinator.read_value(self.entity_description.key)
+        value = self.coordinator.read_value(self.entity_description.key)
         if value is None:
             return
         # note: input factor (assume: /100) has already been applied

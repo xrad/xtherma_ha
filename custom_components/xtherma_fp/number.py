@@ -82,7 +82,7 @@ class XthermaNumberEntity(XthermaCoordinatorEntity, NumberEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        value = self._coordinator.read_value(self.entity_description.key)
+        value = self.coordinator.read_value(self.entity_description.key)
         self._attr_native_value = value
         self.async_write_ha_state()
 
@@ -96,7 +96,7 @@ class XthermaNumberEntity(XthermaCoordinatorEntity, NumberEntity):
     async def async_set_native_value(self, value: float) -> None:
         """Set value."""
         try:
-            await self._coordinator.async_write(self, value=value)
+            await self.coordinator.async_write(self, value=value)
             self._attr_native_value = value
             self.async_write_ha_state()
         except HomeAssistantError:

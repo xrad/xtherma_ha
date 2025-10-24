@@ -105,7 +105,7 @@ class XthermaSwitchEntity(XthermaCoordinatorEntity, SwitchEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        value = self._coordinator.read_value(self.entity_description.key)
+        value = self.coordinator.read_value(self.entity_description.key)
         if value is None:
             return
         self._attr_is_on = value > 0
@@ -121,7 +121,7 @@ class XthermaSwitchEntity(XthermaCoordinatorEntity, SwitchEntity):
     async def async_turn_on(self, **kwargs: Any) -> None:  # noqa: ANN401
         """Turn the entity on."""
         try:
-            await self._coordinator.async_write(self, 1)
+            await self.coordinator.async_write(self, 1)
             self._attr_is_on = True
             self.async_write_ha_state()
         except HomeAssistantError:
@@ -133,7 +133,7 @@ class XthermaSwitchEntity(XthermaCoordinatorEntity, SwitchEntity):
     async def async_turn_off(self, **kwargs: Any) -> None:  # noqa: ANN401
         """Turn the entity off."""
         try:
-            await self._coordinator.async_write(self, 0)
+            await self.coordinator.async_write(self, 0)
             self._attr_is_on = False
             self.async_write_ha_state()
         except Exception:
