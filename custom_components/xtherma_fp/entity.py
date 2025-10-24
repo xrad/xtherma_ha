@@ -17,8 +17,8 @@ from .coordinator import XthermaDataUpdateCoordinator
 _LOGGER = logging.getLogger(__name__)
 
 
-class XthermaEntity(CoordinatorEntity):
-    """Parent class for all entities assiciated with the Xtherma component."""
+class XthermaCoordinatorEntity(CoordinatorEntity):
+    """Parent class for all entities assiciated with the Xtherma component that use a coordinator."""
 
     xt_description: EntityDescription
 
@@ -28,7 +28,7 @@ class XthermaEntity(CoordinatorEntity):
         device_info: DeviceInfo,
         description: EntityDescription,
     ) -> None:
-        """Initialize the Xtherma entity."""
+        """Initialize the Xtherma coordinator entity."""
         super().__init__(coordinator)
         self._coordinator = coordinator
         self.entity_description = description

@@ -13,7 +13,7 @@ from homeassistant.helpers.entity import Entity, EntityDescription
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .coordinator import XthermaDataUpdateCoordinator
-from .entity import XthermaEntity
+from .entity import XthermaCoordinatorEntity
 from .entity_descriptors import (
     XtSelectEntityDescription,
 )
@@ -73,7 +73,7 @@ async def async_setup_entry(
     return True
 
 
-class XthermaSelectEntity(XthermaEntity, SelectEntity):
+class XthermaSelectEntity(XthermaCoordinatorEntity, SelectEntity):
     """Xtherma Select Input."""
 
     # keep this for type safe access to custom members

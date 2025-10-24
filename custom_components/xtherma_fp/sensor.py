@@ -15,7 +15,7 @@ from homeassistant.helpers.entity import Entity, EntityDescription
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .coordinator import XthermaDataUpdateCoordinator
-from .entity import XthermaEntity
+from .entity import XthermaCoordinatorEntity
 from .entity_descriptors import (
     XtBinarySensorEntityDescription,
     XtSensorEntityDescription,
@@ -84,7 +84,7 @@ async def async_setup_entry(
     return True
 
 
-class XthermaBinarySensor(XthermaEntity, BinarySensorEntity):
+class XthermaBinarySensor(XthermaCoordinatorEntity, BinarySensorEntity):
     """Xtherma Binary Sensor."""
 
     # keep this for type safe access to custom members
@@ -107,7 +107,7 @@ class XthermaBinarySensor(XthermaEntity, BinarySensorEntity):
         return super().icon
 
 
-class XthermaSensor(XthermaEntity, SensorEntity):
+class XthermaSensor(XthermaCoordinatorEntity, SensorEntity):
     """Xtherma Value Sensor."""
 
     # keep this for type safe access to custom members
