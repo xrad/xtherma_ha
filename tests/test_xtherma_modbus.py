@@ -6,6 +6,7 @@ import pytest
 from homeassistant.helpers.update_coordinator import UpdateFailed
 from pymodbus.pdu.pdu import ExceptionResponse
 
+from custom_components.xtherma_fp.const import DOMAIN
 from tests.conftest import MockModbusParam
 from tests.helpers import (
     get_sensor_platform,
@@ -80,8 +81,10 @@ def _test_modbus_runtime_read_busy() -> list[MockModbusParam]:
     indirect=True,
 )
 @pytest.mark.asyncio
-async def test_modbus_runtime_read_busy(hass, init_modbus_integration):
+async def test_modbus_runtime_read_busy(hass, init_modbus_integration, caplog):
     """Test busy modbus at runtime setup."""
+    caplog.set_level("ERROR")
+
     entry = init_modbus_integration
     assert entry.state.value == "loaded"
 
@@ -110,3 +113,10 @@ async def test_modbus_runtime_read_busy(hass, init_modbus_integration):
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
     assert entity.state == "water"
+
+    assert any(
+        rec.levelname == "ERROR"
+        and "Modbus interface is busy" in rec.message
+        and "custom_components." + DOMAIN in rec.name
+        for rec in caplog.records
+    )
