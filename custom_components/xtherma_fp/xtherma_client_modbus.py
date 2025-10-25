@@ -133,18 +133,18 @@ class XthermaClientModbus(XthermaClient):
                 slave=int(self._address),
             )
         except ModbusException as err:
-            _LOGGER.error("Modbus exception: %s", err.string)  # noqa: TRY400
+            _LOGGER.debug("Modbus exception: %s", err.string)
             raise XthermaModbusError from err
         except Exception as err:
             _LOGGER.exception("Exception error")
             raise XthermaError from err
         else:
             if regs.isError():
-                _LOGGER.error("Modbus error %s", regs.exception_code)
                 exc_code = regs.exception_code
                 if exc_code == ExceptionResponse.SLAVE_BUSY:
-                    _LOGGER.error("Device busy")
+                    _LOGGER.debug("Modbus device busy")
                     raise XthermaModbusBusyError
+                _LOGGER.debug("Modbus error %s", regs.exception_code)
                 raise XthermaModbusError
             for i, desc in enumerate(reg_desc.descriptors):
                 if not desc:
