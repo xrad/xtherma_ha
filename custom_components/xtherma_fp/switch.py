@@ -6,52 +6,15 @@ from typing import Any
 from homeassistant.components.switch import SwitchEntity
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.exceptions import HomeAssistantError
-from homeassistant.helpers.device_registry import (
-    DeviceInfo,
-)
-from homeassistant.helpers.entity import Entity, EntityDescription
+from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from . import XthermaConfigEntry, XthermaData
+from . import XthermaConfigEntry
 from .coordinator import XthermaDataUpdateCoordinator
 from .entity import XthermaCoordinatorEntity
-from .entity_descriptors import (
-    XtSwitchEntityDescription,
-)
+from .entity_descriptors import XtSwitchEntityDescription
 
 _LOGGER = logging.getLogger(__name__)
-
-
-# Create a sensor entity based on description.
-def __build_switch(
-    desc: EntityDescription,
-    coordinator: XthermaDataUpdateCoordinator,
-    device_info: DeviceInfo,
-) -> Entity | None:
-    if isinstance(desc, XtSwitchEntityDescription):
-        return XthermaSwitchEntity(coordinator, device_info, desc)
-    return None
-
-
-# Create and register sensor entities based on coordinator.data.
-# Call site must ensure there is data and sensors are not already
-# registerd.
-def _initialize_switches(
-    xtherma_data: XthermaData,
-    async_add_entities: AddEntitiesCallback,
-) -> None:
-    coordinator = xtherma_data.coordinator
-
-    switches = []
-    for desc in coordinator.get_entity_descriptions():
-        switch = __build_switch(desc, coordinator, xtherma_data.device_info)
-        if switch:
-            _LOGGER.debug('Adding switch "%s"', desc.key)
-            switches.append(switch)
-    _LOGGER.debug("Created %d switches", len(switches))
-    async_add_entities(switches)
-
-    xtherma_data.switches_initialized = True
 
 
 async def async_setup_entry(
@@ -60,15 +23,22 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> bool:
     """HA calls this to initialize sensor platform."""
-    xtherma_data: XthermaData = config_entry.runtime_data
-
     _LOGGER.debug("Setup switch platform")
+    xtherma_data = config_entry.runtime_data
+    coordinator = xtherma_data.coordinator
 
-    # Normally, __init__.py will have done an initial fetch and we should
-    # have data in the coordinator to initialize the sensors.
-    # If not (eg. because we just completed the config flow or the integration was
-    # restarted too rapidly) we will try again in the listener.
-    _initialize_switches(xtherma_data, async_add_entities)
+    switches = []
+    for desc in coordinator.get_entity_descriptions():
+        if not isinstance(desc, XtSwitchEntityDescription):
+            continue
+        _LOGGER.debug('Adding switch "%s"', desc.key)
+        switches.append(
+            XthermaSwitchEntity(coordinator, xtherma_data.device_info, desc)
+        )
+    _LOGGER.debug("Created %d switches", len(switches))
+    async_add_entities(switches)
+
+    xtherma_data.switches_initialized = True
 
     return True
 

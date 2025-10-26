@@ -5,52 +5,15 @@ import logging
 from homeassistant.components.select import SelectEntity
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.exceptions import HomeAssistantError
-from homeassistant.helpers.device_registry import (
-    DeviceInfo,
-)
-from homeassistant.helpers.entity import Entity, EntityDescription
+from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from . import XthermaConfigEntry, XthermaData
+from . import XthermaConfigEntry
 from .coordinator import XthermaDataUpdateCoordinator
 from .entity import XthermaCoordinatorEntity
-from .entity_descriptors import (
-    XtSelectEntityDescription,
-)
+from .entity_descriptors import XtSelectEntityDescription
 
 _LOGGER = logging.getLogger(__name__)
-
-
-# Create a sensor entity based on description.
-def __build_select(
-    desc: EntityDescription,
-    coordinator: XthermaDataUpdateCoordinator,
-    device_info: DeviceInfo,
-) -> Entity | None:
-    if isinstance(desc, XtSelectEntityDescription):
-        return XthermaSelectEntity(coordinator, device_info, desc)
-    return None
-
-
-# Create and register sensor entities based on coordinator.data.
-# Call site must ensure there is data and sensors are not already
-# registered.
-def _initialize_selects(
-    xtherma_data: XthermaData,
-    async_add_entities: AddEntitiesCallback,
-) -> None:
-    coordinator = xtherma_data.coordinator
-
-    selects = []
-    for desc in coordinator.get_entity_descriptions():
-        select = __build_select(desc, coordinator, xtherma_data.device_info)
-        if select:
-            _LOGGER.debug('Adding select "%s"', desc.key)
-            selects.append(select)
-    _LOGGER.debug("Created %d selects", len(selects))
-    async_add_entities(selects)
-
-    xtherma_data.selects_initialized = True
 
 
 async def async_setup_entry(
@@ -59,11 +22,20 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> bool:
     """HA calls this to initialize sensor platform."""
-    xtherma_data: XthermaData = config_entry.runtime_data
-
     _LOGGER.debug("Setup select platform")
+    xtherma_data = config_entry.runtime_data
+    coordinator = xtherma_data.coordinator
 
-    _initialize_selects(xtherma_data, async_add_entities)
+    selects = []
+    for desc in coordinator.get_entity_descriptions():
+        if not isinstance(desc, XtSelectEntityDescription):
+            continue
+        _LOGGER.debug('Adding select "%s"', desc.key)
+        selects.append(XthermaSelectEntity(coordinator, xtherma_data.device_info, desc))
+    _LOGGER.debug("Created %d selects", len(selects))
+    async_add_entities(selects)
+
+    xtherma_data.selects_initialized = True
 
     return True
 
