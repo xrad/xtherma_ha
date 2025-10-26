@@ -8,14 +8,13 @@ from typing import Any
 import aiohttp
 from homeassistant.helpers.entity import EntityDescription
 
-from custom_components.xtherma_fp.entity_descriptors import ENTITY_DESCRIPTIONS
-
 from .const import (
     FERNPORTAL_RATE_LIMIT_S,
     FERNPORTAL_TIMEOUT_S,
     KEY_SETTINGS,
     KEY_TELEMETRY,
 )
+from .entity_descriptors import ENTITY_DESCRIPTIONS
 from .xtherma_client_common import (
     XthermaClient,
     XthermaError,

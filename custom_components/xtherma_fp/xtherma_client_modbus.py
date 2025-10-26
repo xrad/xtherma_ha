@@ -12,18 +12,17 @@ from homeassistant.components.sensor import (
 )
 from homeassistant.helpers.entity import EntityDescription
 
-from custom_components.xtherma_fp.const import (
+from .const import (
     KEY_ENTRY_INPUT_FACTOR,
     KEY_ENTRY_KEY,
     KEY_ENTRY_VALUE,
     MODBUS_TIMEOUT_S,
 )
-from custom_components.xtherma_fp.entity_descriptors import (
+from .entity_descriptors import (
     MODBUS_ENTITY_DESCRIPTIONS,
     ModbusRegisterSet,
     XtSensorEntityDescription,
 )
-
 from .vendor.pymodbus import AsyncModbusTcpClient, ExceptionResponse, ModbusException
 from .xtherma_client_common import (
     XthermaClient,

@@ -28,12 +28,6 @@ from homeassistant.helpers.selector import (
     SelectSelectorMode,
 )
 
-from custom_components.xtherma_fp.xtherma_client_common import (
-    XthermaError,
-    XthermaNotConnectedError,
-    XthermaRestBusyError,
-)
-
 from .const import (
     CONF_CONNECTION,
     CONF_CONNECTION_MODBUSTCP,
@@ -41,6 +35,11 @@ from .const import (
     CONF_SERIAL_NUMBER,
     DOMAIN,
     FERNPORTAL_URL,
+)
+from .xtherma_client_common import (
+    XthermaError,
+    XthermaNotConnectedError,
+    XthermaRestBusyError,
 )
 from .xtherma_client_modbus import XthermaClientModbus
 from .xtherma_client_rest import (
