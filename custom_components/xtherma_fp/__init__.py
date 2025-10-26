@@ -34,6 +34,8 @@ from .xtherma_client_rest import XthermaClientRest
 if TYPE_CHECKING:
     from homeassistant.config_entries import ConfigEntry
 
+type XthermaConfigEntry = ConfigEntry[XthermaData]
+
 _LOGGER = logging.getLogger(__name__)
 
 _PLATFORMS = [Platform.SENSOR, Platform.SWITCH, Platform.NUMBER, Platform.SELECT]
@@ -54,7 +56,7 @@ class XthermaData:
 
 async def async_setup_entry(
     hass: HomeAssistant,
-    entry: ConfigEntry,
+    entry: XthermaConfigEntry,
 ) -> bool:
     """Initialize integration."""
     _LOGGER.debug("Setup integration")
@@ -120,7 +122,7 @@ async def async_setup_entry(
     return True
 
 
-async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+async def async_unload_entry(hass: HomeAssistant, entry: XthermaConfigEntry) -> bool:
     """Unload integration."""
     _LOGGER.debug("Unload integration")
     xtherma_data: XthermaData = entry.runtime_data
@@ -130,7 +132,9 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     return await hass.config_entries.async_unload_platforms(entry, _PLATFORMS)
 
 
-async def async_migrate_entry(_: HomeAssistant, config_entry: ConfigEntry) -> bool:
+async def async_migrate_entry(
+    _: HomeAssistant, config_entry: XthermaConfigEntry
+) -> bool:
     """Migrate config entry."""
     if config_entry.version > VERSION:
         _LOGGER.error("Downgrade not supported")
@@ -148,7 +152,7 @@ async def async_migrate_entry(_: HomeAssistant, config_entry: ConfigEntry) -> bo
 
 async def async_migrate_devices(
     hass: HomeAssistant,
-    config_entry: ConfigEntry,
+    config_entry: XthermaConfigEntry,
 ) -> None:
     """Migrate device registry."""
     registry = dr.async_get(hass)
@@ -163,7 +167,7 @@ async def async_migrate_devices(
 
 async def async_migrate_entities(
     hass: HomeAssistant,
-    config_entry: ConfigEntry,
+    config_entry: XthermaConfigEntry,
 ) -> None:
     """Migrate entity registry."""
 

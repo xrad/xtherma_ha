@@ -3,7 +3,6 @@
 import logging
 
 from homeassistant.components.number import NumberEntity
-from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.device_registry import (
@@ -12,7 +11,7 @@ from homeassistant.helpers.device_registry import (
 from homeassistant.helpers.entity import Entity, EntityDescription
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from . import XthermaData
+from . import XthermaConfigEntry, XthermaData
 from .coordinator import XthermaDataUpdateCoordinator
 from .entity import XthermaCoordinatorEntity
 from .entity_descriptors import (
@@ -60,7 +59,7 @@ def _initialize_numbers(
 
 async def async_setup_entry(
     hass: HomeAssistant,
-    config_entry: ConfigEntry,
+    config_entry: XthermaConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> bool:
     """HA calls this to initialize sensor platform."""
