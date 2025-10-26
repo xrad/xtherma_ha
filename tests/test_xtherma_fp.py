@@ -2,14 +2,13 @@
 
 import homeassistant.helpers.entity_registry as er
 import pytest
-from homeassistant.config_entries import ConfigEntry
+from homeassistant.config_entries import ConfigEntry, ConfigEntryState
 from homeassistant.const import CONF_API_KEY, Platform
 from homeassistant.core import HomeAssistant
 from pytest_homeassistant_custom_component.common import (
     MockConfigEntry,
 )
 
-from custom_components.xtherma_fp import XthermaData
 from custom_components.xtherma_fp.const import (
     CONF_CONNECTION,
     CONF_CONNECTION_RESTAPI,
@@ -43,20 +42,11 @@ async def test_restapi_setup_entry_old(hass, aioclient_mock):
     assert await hass.config_entries.async_setup(entry.entry_id)
     await hass.async_block_till_done()
 
-    # Verify setup worked
-    verify_integration_entry(entry)
-
-
-def verify_integration_entry(entry: ConfigEntry):
-    assert isinstance(entry.runtime_data, XthermaData)
-    xtherma_data: XthermaData = entry.runtime_data
-    assert xtherma_data.sensors_initialized
+    assert len(hass.config_entries.async_entries(DOMAIN)) == 1
+    assert entry.state is ConfigEntryState.LOADED
 
 
 def verify_integration_sensors(hass: HomeAssistant, entry: ConfigEntry):
-    xtherma_data: XthermaData = entry.runtime_data
-    assert xtherma_data.sensors_initialized
-
     our_sensors = [
         state
         for state in hass.states.async_all(Platform.SENSOR)
@@ -69,9 +59,6 @@ def verify_integration_sensors(hass: HomeAssistant, entry: ConfigEntry):
 
 
 def verify_integration_switches(hass: HomeAssistant, entry: ConfigEntry):
-    xtherma_data: XthermaData = entry.runtime_data
-    assert xtherma_data.switches_initialized
-
     our_switches = [
         state
         for state in hass.states.async_all(Platform.SWITCH)
@@ -81,9 +68,6 @@ def verify_integration_switches(hass: HomeAssistant, entry: ConfigEntry):
 
 
 def verify_integration_numbers(hass: HomeAssistant, entry: ConfigEntry):
-    xtherma_data: XthermaData = entry.runtime_data
-    assert xtherma_data.numbers_initialized
-
     our_numbers = [
         state
         for state in hass.states.async_all(Platform.NUMBER)
@@ -93,9 +77,6 @@ def verify_integration_numbers(hass: HomeAssistant, entry: ConfigEntry):
 
 
 def verify_integration_selects(hass: HomeAssistant, entry: ConfigEntry):
-    xtherma_data: XthermaData = entry.runtime_data
-    assert xtherma_data.selects_initialized
-
     our_selects = [
         state
         for state in hass.states.async_all(Platform.SELECT)
@@ -122,7 +103,8 @@ async def test_restapi_setup_entry_ok(hass, init_integration):
     """Verify config entries for REST API work."""
     entry = init_integration
 
-    verify_integration_entry(entry)
+    assert len(hass.config_entries.async_entries(DOMAIN)) == 1
+    assert entry.state is ConfigEntryState.LOADED
 
     verify_integration_sensors(hass, entry)
 

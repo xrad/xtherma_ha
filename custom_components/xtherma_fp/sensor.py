@@ -7,13 +7,10 @@ from homeassistant.components.binary_sensor import (
 )
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
 from homeassistant.core import HomeAssistant, callback
-from homeassistant.helpers.device_registry import (
-    DeviceInfo,
-)
-from homeassistant.helpers.entity import Entity, EntityDescription
+from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from . import XthermaConfigEntry, XthermaData
+from . import XthermaConfigEntry
 from .coordinator import XthermaDataUpdateCoordinator
 from .entity import XthermaCoordinatorEntity
 from .entity_descriptors import (
@@ -25,57 +22,38 @@ from .entity_descriptors import (
 _LOGGER = logging.getLogger(__name__)
 
 
-# Create a sensor entity based on description.
-def __build_sensor(
-    desc: EntityDescription,
-    coordinator: XthermaDataUpdateCoordinator,
-    device_info: DeviceInfo,
-) -> Entity | None:
-    if isinstance(desc, XtBinarySensorEntityDescription):
-        return XthermaBinarySensor(coordinator, device_info, desc)
-    if isinstance(desc, XtSensorEntityDescription):
-        if desc.device_class == SensorDeviceClass.ENUM:
-            return XthermaEnumSensor(coordinator, device_info, desc)
-        if isinstance(desc, XtVersionSensorEntityDescription):
-            return XthermaVersionSensor(coordinator, device_info, desc)
-        return XthermaSensor(coordinator, device_info, desc)
-    return None
-
-
-# Create and register sensor entities based on coordinator.data.
-# Call site must ensure there is data and sensors are not already
-# registerd.
-def _initialize_sensors(
-    xtherma_data: XthermaData,
-    async_add_entities: AddEntitiesCallback,
-) -> None:
-    coordinator = xtherma_data.coordinator
-
-    sensors = []
-    descriptions = coordinator.get_entity_descriptions()
-    for desc in descriptions:
-        sensor = __build_sensor(desc, coordinator, xtherma_data.device_info)
-        if sensor:
-            _LOGGER.debug('Adding sensor "%s"', desc.key)
-            sensors.append(sensor)
-    _LOGGER.debug("Created %d sensors", len(sensors))
-    async_add_entities(sensors)
-
-    xtherma_data.sensors_initialized = True
-
-
 async def async_setup_entry(
     hass: HomeAssistant,
     config_entry: XthermaConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> bool:
     """HA calls this to initialize sensor platform."""
-    xtherma_data: XthermaData = config_entry.runtime_data
-
     _LOGGER.debug("Setup sensor platform")
+    xtherma_data = config_entry.runtime_data
+    coordinator = xtherma_data.coordinator
 
-    _initialize_sensors(xtherma_data, async_add_entities)
+    sensors = []
+    descriptions = coordinator.get_entity_descriptions()
+    for desc in descriptions:
+        if isinstance(desc, XtBinarySensorEntityDescription):
+            sensor = XthermaBinarySensor(coordinator, xtherma_data.device_info, desc)
+        elif isinstance(desc, XtSensorEntityDescription):
+            if desc.device_class == SensorDeviceClass.ENUM:
+                sensor = XthermaEnumSensor(coordinator, xtherma_data.device_info, desc)
+            elif isinstance(desc, XtVersionSensorEntityDescription):
+                sensor = XthermaVersionSensor(
+                    coordinator, xtherma_data.device_info, desc
+                )
+            else:
+                sensor = XthermaSensor(coordinator, xtherma_data.device_info, desc)
+        else:
+            continue
 
+        _LOGGER.debug('Adding sensor "%s"', desc.key)
+        sensors.append(sensor)
+
+    _LOGGER.debug("Created %d sensors", len(sensors))
+    async_add_entities(sensors)
     return True
 
 

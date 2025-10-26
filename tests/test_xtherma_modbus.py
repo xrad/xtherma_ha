@@ -3,6 +3,7 @@
 from typing import TYPE_CHECKING
 
 import pytest
+from homeassistant.config_entries import ConfigEntryState
 from homeassistant.helpers.update_coordinator import UpdateFailed
 from pymodbus.pdu.pdu import ExceptionResponse
 
@@ -13,7 +14,6 @@ from tests.helpers import (
     provide_modbus_data,
 )
 from tests.test_xtherma_fp import (
-    verify_integration_entry,
     verify_integration_numbers,
     verify_integration_selects,
     verify_integration_sensors,
@@ -22,7 +22,7 @@ from tests.test_xtherma_fp import (
 )
 
 if TYPE_CHECKING:
-    from custom_components.xtherma_fp.xtherma_data import XthermaData
+    from custom_components.xtherma_fp import XthermaData
 
 SENSOR_ENTITY_ID_MODE = "sensor.test_entry_xtherma_modbus_config_current_operating_mode"
 
@@ -36,9 +36,9 @@ SENSOR_ENTITY_ID_MODE = "sensor.test_entry_xtherma_modbus_config_current_operati
 async def test_async_setup_entry_modbus_ok(hass, init_modbus_integration):
     # Verify setup worked
     entry = init_modbus_integration
-    assert entry.state.value == "loaded"
 
-    verify_integration_entry(entry)
+    assert len(hass.config_entries.async_entries(DOMAIN)) == 1
+    assert entry.state is ConfigEntryState.LOADED
 
     verify_integration_sensors(hass, entry)
 
