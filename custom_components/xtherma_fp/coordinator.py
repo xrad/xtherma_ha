@@ -3,6 +3,7 @@
 import logging
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
+from typing import TYPE_CHECKING
 
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import HomeAssistantError
@@ -11,7 +12,6 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, Upda
 
 from custom_components.xtherma_fp.entity_descriptors import XtSensorEntityDescription
 
-from . import XthermaConfigEntry
 from .const import (
     DOMAIN,
     KEY_ENTRY_INPUT_FACTOR,
@@ -30,6 +30,9 @@ from .xtherma_client_rest import (
     XthermaClient,
     XthermaTimeoutError,
 )
+
+if TYPE_CHECKING:
+    from . import XthermaConfigEntry
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -77,7 +80,7 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
     def __init__(
         self,
         hass: HomeAssistant,
-        config_entry: XthermaConfigEntry,
+        config_entry: "XthermaConfigEntry",
         client: XthermaClient,
     ) -> None:
         """Class constructor."""
