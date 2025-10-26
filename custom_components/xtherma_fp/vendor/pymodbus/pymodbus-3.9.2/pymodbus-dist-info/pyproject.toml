@@ -268,7 +268,6 @@ line-length = 88
 ignore = [
     "E501",  # line too long
     "E731",  # lambda expressions
-    "S101",  # Use of `assert`
     "S311",  # PRNG for cryptography
     "S104",  # binding on all interfaces
     "RUF012",  # typing.ClassVar

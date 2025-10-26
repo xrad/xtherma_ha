@@ -6,7 +6,6 @@ from homeassistant.components.binary_sensor import (
     BinarySensorEntity,
 )
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
-from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.device_registry import (
     DeviceInfo,
@@ -14,6 +13,7 @@ from homeassistant.helpers.device_registry import (
 from homeassistant.helpers.entity import Entity, EntityDescription
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
+from . import XthermaConfigEntry, XthermaData
 from .coordinator import XthermaDataUpdateCoordinator
 from .entity import XthermaCoordinatorEntity
 from .entity_descriptors import (
@@ -21,7 +21,6 @@ from .entity_descriptors import (
     XtSensorEntityDescription,
     XtVersionSensorEntityDescription,
 )
-from .xtherma_data import XthermaData
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -50,11 +49,7 @@ def _initialize_sensors(
     xtherma_data: XthermaData,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    assert not xtherma_data.sensors_initialized  # noqa: S101
-
     coordinator = xtherma_data.coordinator
-
-    assert coordinator is not None  # noqa: S101
 
     sensors = []
     descriptions = coordinator.get_entity_descriptions()
@@ -71,7 +66,7 @@ def _initialize_sensors(
 
 async def async_setup_entry(
     hass: HomeAssistant,
-    config_entry: ConfigEntry,
+    config_entry: XthermaConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> bool:
     """HA calls this to initialize sensor platform."""

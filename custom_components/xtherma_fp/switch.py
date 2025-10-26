@@ -4,7 +4,6 @@ import logging
 from typing import Any
 
 from homeassistant.components.switch import SwitchEntity
-from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.device_registry import (
@@ -13,12 +12,12 @@ from homeassistant.helpers.device_registry import (
 from homeassistant.helpers.entity import Entity, EntityDescription
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
+from . import XthermaConfigEntry, XthermaData
 from .coordinator import XthermaDataUpdateCoordinator
 from .entity import XthermaCoordinatorEntity
 from .entity_descriptors import (
     XtSwitchEntityDescription,
 )
-from .xtherma_data import XthermaData
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -41,11 +40,7 @@ def _initialize_switches(
     xtherma_data: XthermaData,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    assert not xtherma_data.switches_initialized  # noqa: S101
-
     coordinator = xtherma_data.coordinator
-
-    assert coordinator is not None  # noqa: S101
 
     switches = []
     for desc in coordinator.get_entity_descriptions():
@@ -61,7 +56,7 @@ def _initialize_switches(
 
 async def async_setup_entry(
     hass: HomeAssistant,
-    config_entry: ConfigEntry,
+    config_entry: XthermaConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> bool:
     """HA calls this to initialize sensor platform."""
