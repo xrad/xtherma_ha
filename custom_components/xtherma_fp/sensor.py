@@ -49,11 +49,7 @@ def _initialize_sensors(
     xtherma_data: XthermaData,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    assert not xtherma_data.sensors_initialized  # noqa: S101
-
     coordinator = xtherma_data.coordinator
-
-    assert coordinator is not None  # noqa: S101
 
     sensors = []
     descriptions = coordinator.get_entity_descriptions()

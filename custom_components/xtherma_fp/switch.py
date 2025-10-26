@@ -40,11 +40,7 @@ def _initialize_switches(
     xtherma_data: XthermaData,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    assert not xtherma_data.switches_initialized  # noqa: S101
-
     coordinator = xtherma_data.coordinator
-
-    assert coordinator is not None  # noqa: S101
 
     switches = []
     for desc in coordinator.get_entity_descriptions():
