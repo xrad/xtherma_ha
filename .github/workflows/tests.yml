@@ -40,6 +40,7 @@ jobs:
   hacs:
     runs-on: "ubuntu-latest"
     name: HACS
+    if: github.repository == 'Xtherma/xtherma_ha'
     steps:
       - name: Check out the repository
         uses: "actions/checkout@v5"
