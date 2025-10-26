@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 import homeassistant.helpers.device_registry as dr
@@ -29,7 +30,6 @@ from .const import (
 from .coordinator import XthermaDataUpdateCoordinator
 from .xtherma_client_modbus import XthermaClientModbus
 from .xtherma_client_rest import XthermaClientRest
-from .xtherma_data import XthermaData
 
 if TYPE_CHECKING:
     from homeassistant.config_entries import ConfigEntry
@@ -39,27 +39,26 @@ _LOGGER = logging.getLogger(__name__)
 _PLATFORMS = [Platform.SENSOR, Platform.SWITCH, Platform.NUMBER, Platform.SELECT]
 
 
+@dataclass
+class XthermaData:
+    """Global data for integration."""
+
+    coordinator: XthermaDataUpdateCoordinator
+    sensors_initialized: bool
+    switches_initialized: bool
+    numbers_initialized: bool
+    selects_initialized: bool
+    serial_fp: str
+    device_info: dr.DeviceInfo
+
+
 async def async_setup_entry(
     hass: HomeAssistant,
     entry: ConfigEntry,
 ) -> bool:
     """Initialize integration."""
     _LOGGER.debug("Setup integration")
-
-    # setup global data - Note that subclassing ConfigEntry would be nicer for
-    # type safety, but then the MockConfigEntry used in tests would be incompatible.
-    xtherma_data = XthermaData()
-    entry.runtime_data = xtherma_data
-
     serial_number = entry.data[CONF_SERIAL_NUMBER]
-    xtherma_data.serial_fp = serial_number
-
-    xtherma_data.device_info = dr.DeviceInfo(
-        identifiers={(DOMAIN, entry.entry_id)},
-        name=entry.title,
-        manufacturer=MANUFACTURER,
-        model=xtherma_data.serial_fp,
-    )
 
     # create API client connector
     connection = entry.data.get(CONF_CONNECTION, CONF_CONNECTION_RESTAPI)
@@ -82,26 +81,41 @@ async def async_setup_entry(
             address=address,
         )
 
+    coordinator = XthermaDataUpdateCoordinator(hass, entry, client)
+    device_info = dr.DeviceInfo(
+        identifiers={(DOMAIN, entry.entry_id)},
+        name=entry.title,
+        manufacturer=MANUFACTURER,
+        model=serial_number,
+    )
+
+    entry.runtime_data = XthermaData(
+        coordinator=coordinator,
+        sensors_initialized=False,
+        switches_initialized=False,
+        numbers_initialized=False,
+        selects_initialized=False,
+        serial_fp=serial_number,
+        device_info=device_info,
+    )
+
     # migrate entities
     await async_migrate_devices(hass, entry)
     await async_migrate_entities(hass, entry)
 
-    # create data coordinator
-    xtherma_data.coordinator = XthermaDataUpdateCoordinator(hass, entry, client)
-
     # Try updating data from the client. This can fail, and an exception
     # will be thrown, causing HA to retry this entire setup after a while.
     try:
-        await xtherma_data.coordinator.async_config_entry_first_refresh()
+        await coordinator.async_config_entry_first_refresh()
     except:
-        await xtherma_data.coordinator.close()
+        await coordinator.close()
         raise
 
     # initialize platforms
     await hass.config_entries.async_forward_entry_setups(entry, _PLATFORMS)
 
     # make sure entities immediately have a valid state
-    xtherma_data.coordinator.async_update_listeners()
+    coordinator.async_update_listeners()
 
     return True
 

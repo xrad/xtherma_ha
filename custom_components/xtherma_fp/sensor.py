@@ -14,6 +14,7 @@ from homeassistant.helpers.device_registry import (
 from homeassistant.helpers.entity import Entity, EntityDescription
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
+from . import XthermaData
 from .coordinator import XthermaDataUpdateCoordinator
 from .entity import XthermaCoordinatorEntity
 from .entity_descriptors import (
@@ -21,7 +22,6 @@ from .entity_descriptors import (
     XtSensorEntityDescription,
     XtVersionSensorEntityDescription,
 )
-from .xtherma_data import XthermaData
 
 _LOGGER = logging.getLogger(__name__)
 

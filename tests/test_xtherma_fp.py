@@ -9,6 +9,7 @@ from pytest_homeassistant_custom_component.common import (
     MockConfigEntry,
 )
 
+from custom_components.xtherma_fp import XthermaData
 from custom_components.xtherma_fp.const import (
     CONF_CONNECTION,
     CONF_CONNECTION_RESTAPI,
@@ -17,7 +18,6 @@ from custom_components.xtherma_fp.const import (
     EXTRA_STATE_ATTRIBUTE_PARAMETER,
     FERNPORTAL_URL,
 )
-from custom_components.xtherma_fp.xtherma_data import XthermaData
 from tests.const import MOCK_API_KEY, MOCK_SERIAL_NUMBER
 from tests.helpers import get_platform, load_mock_data, provide_rest_data
 
