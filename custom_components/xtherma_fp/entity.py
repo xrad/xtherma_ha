@@ -10,8 +10,7 @@ from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
 )
 
-from custom_components.xtherma_fp.const import EXTRA_STATE_ATTRIBUTE_PARAMETER
-
+from .const import EXTRA_STATE_ATTRIBUTE_PARAMETER
 from .coordinator import XthermaDataUpdateCoordinator
 
 _LOGGER = logging.getLogger(__name__)

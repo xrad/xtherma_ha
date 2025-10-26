@@ -10,14 +10,13 @@ from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.entity import Entity, EntityDescription
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-from custom_components.xtherma_fp.entity_descriptors import XtSensorEntityDescription
-
 from .const import (
     DOMAIN,
     KEY_ENTRY_INPUT_FACTOR,
     KEY_ENTRY_KEY,
     KEY_ENTRY_VALUE,
 )
+from .entity_descriptors import XtSensorEntityDescription
 from .xtherma_client_common import (
     XthermaModbusBusyError,
     XthermaModbusError,
