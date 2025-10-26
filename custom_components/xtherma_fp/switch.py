@@ -35,11 +35,9 @@ async def async_setup_entry(
         switches.append(
             XthermaSwitchEntity(coordinator, xtherma_data.device_info, desc)
         )
+
     _LOGGER.debug("Created %d switches", len(switches))
     async_add_entities(switches)
-
-    xtherma_data.switches_initialized = True
-
     return True
 
 

@@ -30,10 +30,9 @@ async def async_setup_entry(
             continue
         _LOGGER.debug('Adding number "%s"', desc.key)
         numbers.append(XthermaNumberEntity(coordinator, xtherma_data.device_info, desc))
+
     _LOGGER.debug("Created %d numbers", len(numbers))
     async_add_entities(numbers)
-
-    xtherma_data.numbers_initialized = True
     return True
 
 

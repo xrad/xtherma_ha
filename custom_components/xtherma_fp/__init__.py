@@ -46,10 +46,6 @@ class XthermaData:
     """Global data for integration."""
 
     coordinator: XthermaDataUpdateCoordinator
-    sensors_initialized: bool
-    switches_initialized: bool
-    numbers_initialized: bool
-    selects_initialized: bool
     serial_fp: str
     device_info: dr.DeviceInfo
 
@@ -91,15 +87,7 @@ async def async_setup_entry(
         model=serial_number,
     )
 
-    entry.runtime_data = XthermaData(
-        coordinator=coordinator,
-        sensors_initialized=False,
-        switches_initialized=False,
-        numbers_initialized=False,
-        selects_initialized=False,
-        serial_fp=serial_number,
-        device_info=device_info,
-    )
+    entry.runtime_data = XthermaData(coordinator, serial_number, device_info)
 
     # migrate entities
     await async_migrate_devices(hass, entry)

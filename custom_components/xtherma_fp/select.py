@@ -32,11 +32,9 @@ async def async_setup_entry(
             continue
         _LOGGER.debug('Adding select "%s"', desc.key)
         selects.append(XthermaSelectEntity(coordinator, xtherma_data.device_info, desc))
+
     _LOGGER.debug("Created %d selects", len(selects))
     async_add_entities(selects)
-
-    xtherma_data.selects_initialized = True
-
     return True
 
 

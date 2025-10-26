@@ -51,11 +51,9 @@ async def async_setup_entry(
 
         _LOGGER.debug('Adding sensor "%s"', desc.key)
         sensors.append(sensor)
+
     _LOGGER.debug("Created %d sensors", len(sensors))
     async_add_entities(sensors)
-
-    xtherma_data.sensors_initialized = True
-
     return True
 
 
