@@ -2,9 +2,6 @@
 
 import logging
 
-from homeassistant.components.binary_sensor import (
-    BinarySensorEntity,
-)
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.device_registry import DeviceInfo
@@ -14,7 +11,6 @@ from . import XthermaConfigEntry
 from .coordinator import XthermaDataUpdateCoordinator
 from .entity import XthermaCoordinatorEntity
 from .entity_descriptors import (
-    XtBinarySensorEntityDescription,
     XtSensorEntityDescription,
     XtVersionSensorEntityDescription,
 )
@@ -35,19 +31,15 @@ async def async_setup_entry(
     sensors = []
     descriptions = coordinator.get_entity_descriptions()
     for desc in descriptions:
-        if isinstance(desc, XtBinarySensorEntityDescription):
-            sensor = XthermaBinarySensor(coordinator, xtherma_data.device_info, desc)
-        elif isinstance(desc, XtSensorEntityDescription):
-            if desc.device_class == SensorDeviceClass.ENUM:
-                sensor = XthermaEnumSensor(coordinator, xtherma_data.device_info, desc)
-            elif isinstance(desc, XtVersionSensorEntityDescription):
-                sensor = XthermaVersionSensor(
-                    coordinator, xtherma_data.device_info, desc
-                )
-            else:
-                sensor = XthermaSensor(coordinator, xtherma_data.device_info, desc)
-        else:
+        if not isinstance(desc, XtSensorEntityDescription):
             continue
+
+        if desc.device_class == SensorDeviceClass.ENUM:
+            sensor = XthermaEnumSensor(coordinator, xtherma_data.device_info, desc)
+        elif isinstance(desc, XtVersionSensorEntityDescription):
+            sensor = XthermaVersionSensor(coordinator, xtherma_data.device_info, desc)
+        else:
+            sensor = XthermaSensor(coordinator, xtherma_data.device_info, desc)
 
         _LOGGER.debug('Adding sensor "%s"', desc.key)
         sensors.append(sensor)
@@ -55,29 +47,6 @@ async def async_setup_entry(
     _LOGGER.debug("Created %d sensors", len(sensors))
     async_add_entities(sensors)
     return True
-
-
-class XthermaBinarySensor(XthermaCoordinatorEntity, BinarySensorEntity):
-    """Xtherma Binary Sensor."""
-
-    # keep this for type safe access to custom members
-    xt_description: XtBinarySensorEntityDescription
-
-    @callback
-    def _handle_coordinator_update(self) -> None:
-        """Handle updated data from the coordinator."""
-        value = self.coordinator.read_value(self.entity_description.key)
-        if value is None:
-            return
-        self._attr_is_on = value > 0
-        self.async_write_ha_state()
-
-    @property
-    def icon(self) -> str | None:
-        """Return the icon to use in the frontend, if any."""
-        if self.xt_description.icon_provider:
-            return self.xt_description.icon_provider(self.is_on)
-        return super().icon
 
 
 class XthermaSensor(XthermaCoordinatorEntity, SensorEntity):

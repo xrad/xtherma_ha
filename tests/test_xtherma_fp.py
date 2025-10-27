@@ -46,6 +46,15 @@ async def test_restapi_setup_entry_old(hass, aioclient_mock):
     assert entry.state is ConfigEntryState.LOADED
 
 
+def verify_integration_binary_sensors(hass: HomeAssistant, entry: ConfigEntry):
+    our_sensors = [
+        state
+        for state in hass.states.async_all(Platform.BINARY_SENSOR)
+        if state.entity_id.startswith(f"binary_sensor.{entry.title}")
+    ]
+    assert len(our_sensors) == 7
+
+
 def verify_integration_sensors(hass: HomeAssistant, entry: ConfigEntry):
     our_sensors = [
         state
@@ -53,9 +62,9 @@ def verify_integration_sensors(hass: HomeAssistant, entry: ConfigEntry):
         if state.entity_id.startswith(f"sensor.{entry.title}")
     ]
     if entry.data[CONF_CONNECTION] == CONF_CONNECTION_RESTAPI:
-        assert len(our_sensors) == 54
+        assert len(our_sensors) == 47
     else:
-        assert len(our_sensors) == 56
+        assert len(our_sensors) == 49
 
 
 def verify_integration_switches(hass: HomeAssistant, entry: ConfigEntry):
@@ -105,6 +114,8 @@ async def test_restapi_setup_entry_ok(hass, init_integration):
 
     assert len(hass.config_entries.async_entries(DOMAIN)) == 1
     assert entry.state is ConfigEntryState.LOADED
+
+    verify_integration_binary_sensors(hass, entry)
 
     verify_integration_sensors(hass, entry)
 

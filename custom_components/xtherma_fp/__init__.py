@@ -38,7 +38,13 @@ type XthermaConfigEntry = ConfigEntry[XthermaData]
 
 _LOGGER = logging.getLogger(__name__)
 
-_PLATFORMS = [Platform.SENSOR, Platform.SWITCH, Platform.NUMBER, Platform.SELECT]
+_PLATFORMS = [
+    Platform.BINARY_SENSOR,
+    Platform.SENSOR,
+    Platform.SWITCH,
+    Platform.NUMBER,
+    Platform.SELECT,
+]
 
 
 @dataclass

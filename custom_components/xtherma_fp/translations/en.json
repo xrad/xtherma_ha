@@ -70,6 +70,29 @@
     }
   },
   "entity": {
+    "binary_sensor": {
+      "pk": {
+        "name": "[PK] Circulation pump enabled"
+      },
+      "pk1": {
+        "name": "[PK1] Circulation pump circuit 1 enabled"
+      },
+      "pk2": {
+        "name": "[PK2] Circulation pump circuit 2 enabled"
+      },
+      "pww": {
+        "name": "[PWW] Circulation pump hot water enabled"
+      },
+      "error": {
+        "name": "System ok"
+      },
+      "14a": {
+        "name": "§14a EnWG state"
+      },
+      "evu": {
+        "name": "EVU status"
+      }
+    },
     "sensor": {
       "tvl": {
         "name": "[TVL] Flow temperature"
@@ -113,23 +136,8 @@
       "tr": {
         "name": "[TR] Room temperature"
       },
-      "evu": {
-        "name": "EVU status"
-      },
-      "pk": {
-        "name": "[PK] Circulation pump enabled"
-      },
       "pkl": {
         "name": "[PKL] Circulation pump performance"
-      },
-      "pk1": {
-        "name": "[PK1] Circulation pump circuit 1 enabled"
-      },
-      "pk2": {
-        "name": "[PK2] Circulation pump circuit 2 enabled"
-      },
-      "pww": {
-        "name": "[PWW] Circulation pump hot water enabled"
       },
       "h_target": {
         "name": "Target heating operation"
@@ -246,12 +254,6 @@
       },
       "controller_v": {
         "name": "Controller version"
-      },
-      "error": {
-        "name": "System ok"
-      },
-      "14a": {
-        "name": "§14a EnWG state"
       }
     },
     "switch": {

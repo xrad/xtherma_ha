@@ -39,6 +39,10 @@ def get_platform(hass: HomeAssistant, domain: str) -> EntityPlatform:
     pytest.fail(f"We have no platfom {domain}")
 
 
+def get_binary_sensor_platform(hass: HomeAssistant) -> EntityPlatform:
+    return get_platform(hass, Platform.BINARY_SENSOR)
+
+
 def get_sensor_platform(hass: HomeAssistant) -> EntityPlatform:
     return get_platform(hass, Platform.SENSOR)
 

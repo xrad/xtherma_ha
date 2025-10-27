@@ -70,6 +70,29 @@
     }
   },
   "entity": {
+    "binary_sensor": {
+      "pk": {
+        "name": "[PK] Umwälzpumpe eingeschaltet"
+      },
+      "pk1": {
+        "name": "[PK1] Umwälzpumpe Kreis 1 eingeschaltet"
+      },
+      "pk2": {
+        "name": "[PK2] Umwälzpumpe Kreis 2 eingeschaltet"
+      },
+      "pww": {
+        "name": "[PWW] Zirkulationspumpe Warmwasser eingeschaltet"
+      },
+      "error": {
+        "name": "Anlage ungestört"
+      },
+      "14a": {
+        "name": "§14a EnWG Status"
+      },
+      "evu": {
+        "name": "EVU Status"
+      }
+    },
     "sensor": {
       "tvl": {
         "name": "[TVL] Vorlauftemperatur"
@@ -116,23 +139,8 @@
       "tr": {
         "name": "[TR] Raumtemperatur"
       },
-      "evu": {
-        "name": "EVU Status"
-      },
-      "pk": {
-        "name": "[PK] Umwälzpumpe eingeschaltet"
-      },
       "pkl": {
         "name": "[PKL] Umwälzpumpe Leistung"
-      },
-      "pk1": {
-        "name": "[PK1] Umwälzpumpe Kreis 1 eingeschaltet"
-      },
-      "pk2": {
-        "name": "[PK2] Umwälzpumpe Kreis 2 eingeschaltet"
-      },
-      "pww": {
-        "name": "[PWW] Zirkulationspumpe Warmwasser eingeschaltet"
       },
       "h_target": {
         "name": "Sollwert Heizbetrieb"
@@ -246,12 +254,6 @@
       },
       "controller_v": {
         "name": "Regler Version"
-      },
-      "error": {
-        "name": "Anlage ungestört"
-      },
-      "14a": {
-        "name": "§14a EnWG Status"
       }
     },
     "switch": {
