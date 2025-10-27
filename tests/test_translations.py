@@ -30,6 +30,39 @@ from tests.helpers import provide_rest_data
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
+async def test_binary_sensor_name_translation(hass, init_integration):
+    """Ensure all sensor names are translated."""
+    prefix = f"component.{DOMAIN}.entity.{Platform.BINARY_SENSOR.value}"
+
+    for lang in ["en", "de"]:
+        # collect all entity translations
+        all_entity_translations = await async_get_translations(
+            hass, lang, "entity", [DOMAIN]
+        )
+        domain_entity_translations = {
+            k for k in all_entity_translations if k.startswith(prefix) and ".name" in k
+        }
+
+        # collect all options of all sensors
+        entity_classes = (BinarySensorEntityDescription,)
+        entity_names_rest = {
+            f"{prefix}.{entity_description.key}.name"
+            for entity_description in ENTITY_DESCRIPTIONS
+            if isinstance(entity_description, entity_classes)
+        }
+        entity_names_modbus = {
+            f"{prefix}.{entity_description.key}.name"
+            for reg_desc in MODBUS_ENTITY_DESCRIPTIONS
+            for entity_description in reg_desc.descriptors
+            if isinstance(entity_description, entity_classes)
+        }
+
+        assert (
+            entity_names_rest.union(entity_names_modbus) == domain_entity_translations
+        )
+
+
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_sensor_name_translation(hass, init_integration):
     """Ensure all sensor names are translated."""
     prefix = f"component.{DOMAIN}.entity.{Platform.SENSOR.value}"
@@ -44,10 +77,7 @@ async def test_sensor_name_translation(hass, init_integration):
         }
 
         # collect all options of all sensors
-        entity_classes = (
-            SensorEntityDescription,
-            BinarySensorEntityDescription,
-        )
+        entity_classes = (SensorEntityDescription,)
         entity_names_rest = {
             f"{prefix}.{entity_description.key}.name"
             for entity_description in ENTITY_DESCRIPTIONS
