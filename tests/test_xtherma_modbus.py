@@ -1,9 +1,10 @@
 """Tests for the Xtherma Modbus API."""
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 import pytest
 from homeassistant.config_entries import ConfigEntryState
+from homeassistant.const import EVENT_STATE_CHANGED
 from homeassistant.helpers.update_coordinator import UpdateFailed
 from pymodbus.pdu.pdu import ExceptionResponse
 
@@ -12,6 +13,7 @@ from tests.conftest import MockModbusParam
 from tests.helpers import (
     get_sensor_platform,
     provide_modbus_data,
+    set_modbus_register,
 )
 from tests.test_xtherma_fp import (
     verify_integration_binary_sensors,
@@ -26,6 +28,10 @@ if TYPE_CHECKING:
     from custom_components.xtherma_fp import XthermaData
 
 SENSOR_ENTITY_ID_MODE = "sensor.test_entry_xtherma_modbus_config_current_operating_mode"
+
+SWITCH_ENTITY_ID_MODBUS_450 = (
+    "switch.test_entry_xtherma_modbus_config_cooling_curve_2_active"
+)
 
 
 @pytest.mark.parametrize(
@@ -123,3 +129,51 @@ async def test_modbus_runtime_read_busy(hass, init_modbus_integration, caplog):
         and "custom_components." + DOMAIN in rec.name
         for rec in caplog.records
     )
+
+
+def _test_modbus_update_events() -> list[MockModbusParam]:
+    # prepare register set for 2 update cyles:
+    # 1. initial data in for config entry setup
+    # 2. parameter #450 changes in next update
+    param_setup: list[MockModbusParam] = provide_modbus_data()
+    param_runtime: list[MockModbusParam] = provide_modbus_data()
+    set_modbus_register(param_runtime[0], "450", 0)
+    return [param_setup[0] + param_runtime[0]]
+
+
+@pytest.mark.parametrize(
+    "mock_modbus_tcp_client",
+    _test_modbus_update_events(),
+    indirect=True,
+)
+@pytest.mark.asyncio
+async def test_modbus_update_events(hass, init_modbus_integration):
+    """Test that only actual value changes cause a state update.
+
+    Our entities unconditionally update their state on each coordinator update.
+    Verify that only actual value changes cause a state change event to be fired.
+    """
+    entry = init_modbus_integration
+    assert entry.state.value == "loaded"
+
+    xtherma_data: XthermaData = entry.runtime_data
+    assert xtherma_data is not None
+    assert xtherma_data.coordinator is not None
+
+    events: list[Any] = []
+
+    def event_listener_callback(event):
+        """Callback function that is executed when the event fires."""
+        events.append(event)
+
+    unsub = hass.bus.async_listen(EVENT_STATE_CHANGED, event_listener_callback)
+
+    await xtherma_data.coordinator.async_request_refresh()
+    await hass.async_block_till_done()
+
+    assert len(events) == 1
+    assert events[0].data["entity_id"] == SWITCH_ENTITY_ID_MODBUS_450
+
+    await hass.async_block_till_done()
+
+    unsub()

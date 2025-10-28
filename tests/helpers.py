@@ -25,6 +25,8 @@ from custom_components.xtherma_fp.entity_descriptors import MODBUS_ENTITY_DESCRI
 from tests.conftest import (
     MockModbusParam,
     MockModbusParamExceptionCode,
+    MockModbusParamReadResult,
+    MockModbusParamRegisters,
     MockRestParam,
     MockRestParamHttpError,
     MockRestParamTimeoutError,
@@ -135,6 +137,18 @@ def _load_modbus_data_from_json(
             }
         )
     return regs_list
+
+
+def set_modbus_register(param: MockModbusParam, key: str, value: int):
+    for i, reg_desc in enumerate(MODBUS_ENTITY_DESCRIPTIONS):
+        regs_list: MockModbusParamReadResult = param[i]
+        for j, desc in enumerate(reg_desc.descriptors):
+            if desc is None:
+                continue
+            if desc.key != key:
+                continue
+            regs = cast("MockModbusParamRegisters", regs_list["registers"])
+            regs[j] = value
 
 
 def provide_modbus_data(
