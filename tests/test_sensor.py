@@ -1,11 +1,14 @@
 """Tests for the Xtherma sensor platform."""
 
 from typing import cast
+from unittest.mock import patch
 
 import pytest
 from homeassistant.components.sensor import (
     SensorEntity,
 )
+from homeassistant.const import Platform
+from pytest_homeassistant_custom_component.common import snapshot_platform
 
 from tests.conftest import MockModbusParam, MockModbusParamRegisters
 from tests.helpers import (
@@ -23,6 +26,28 @@ SENSOR_ENTITY_ID_CONTROLLER_V = "sensor.test_entry_xtherma_config_controller_ver
 SENSOR_ENTITY_ID_MODBUS_TA = (
     "sensor.test_entry_xtherma_modbus_config_ta_outdoor_temperature"
 )
+
+
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
+async def test_setup_sensor_rest_api(
+    hass, entity_registry, snapshot, mock_rest_api_client
+) -> None:
+    """Test the setup of sensor platform using REST API."""
+    with patch("custom_components.xtherma_fp._PLATFORMS", [Platform.SENSOR]):
+        entry = await init_integration(hass, mock_rest_api_client)
+
+    await snapshot_platform(hass, entity_registry, snapshot, entry.entry_id)
+
+
+@pytest.mark.parametrize("mock_modbus_tcp_client", provide_modbus_data(), indirect=True)
+async def test_setup_sensor_modbus_tcp(
+    hass, entity_registry, snapshot, mock_modbus_tcp_client
+) -> None:
+    """Test the setup of sensor platform using MODBUS TCP."""
+    with patch("custom_components.xtherma_fp._PLATFORMS", [Platform.SENSOR]):
+        entry = await init_modbus_integration(hass, mock_modbus_tcp_client)
+
+    await snapshot_platform(hass, entity_registry, snapshot, entry.entry_id)
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)

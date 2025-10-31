@@ -1,10 +1,14 @@
 """Tests for the Xtherma number platform."""
 
+from unittest.mock import patch
+
 import pytest
 from homeassistant.components.number import (
     NumberEntity,
 )
+from homeassistant.const import Platform
 from homeassistant.exceptions import HomeAssistantError
+from pytest_homeassistant_custom_component.common import snapshot_platform
 
 from custom_components.xtherma_fp.xtherma_client_common import XthermaReadOnlyError
 from tests.helpers import get_number_platform, provide_modbus_data, provide_rest_data
@@ -20,6 +24,28 @@ NUMBER_ENTITY_ID_MODBUS_451 = (
 NUMBER_ENTITY_ID_MODBUS_411 = (
     "number.test_entry_xtherma_modbus_config_heating_curve_2_outside_temperature_low_p1"
 )
+
+
+@pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
+async def test_setup_number_rest_api(
+    hass, entity_registry, snapshot, mock_rest_api_client
+) -> None:
+    """Test the setup of number platform using REST API."""
+    with patch("custom_components.xtherma_fp._PLATFORMS", [Platform.NUMBER]):
+        entry = await init_integration(hass, mock_rest_api_client)
+
+    await snapshot_platform(hass, entity_registry, snapshot, entry.entry_id)
+
+
+@pytest.mark.parametrize("mock_modbus_tcp_client", provide_modbus_data(), indirect=True)
+async def test_setup_number_modbus_tcp(
+    hass, entity_registry, snapshot, mock_modbus_tcp_client
+) -> None:
+    """Test the setup of number platform using MODBUS TCP."""
+    with patch("custom_components.xtherma_fp._PLATFORMS", [Platform.NUMBER]):
+        entry = await init_modbus_integration(hass, mock_modbus_tcp_client)
+
+    await snapshot_platform(hass, entity_registry, snapshot, entry.entry_id)
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
