@@ -3,6 +3,7 @@
 from typing import TYPE_CHECKING, Any
 
 import pytest
+from homeassistant.components.sensor import DOMAIN as DOMAIN_SENSOR
 from homeassistant.config_entries import ConfigEntryState
 from homeassistant.const import EVENT_STATE_CHANGED
 from homeassistant.helpers.update_coordinator import UpdateFailed
@@ -11,7 +12,7 @@ from pymodbus.pdu.pdu import ExceptionResponse
 from custom_components.xtherma_fp.const import DOMAIN
 from tests.conftest import MockModbusParam
 from tests.helpers import (
-    get_sensor_platform,
+    get_platform,
     provide_empty_modbus_data,
     provide_modbus_data,
     set_modbus_register,
@@ -107,7 +108,7 @@ async def test_modbus_runtime_read_busy(hass, mock_modbus_tcp_client, caplog):
     coordinator = xtherma_data.coordinator
     assert coordinator.last_update_success
 
-    platform = get_sensor_platform(hass)
+    platform = get_platform(hass, DOMAIN_SENSOR)
     state = hass.states.get(SENSOR_ENTITY_ID_MODE)
     entity = platform.entities.get(state.entity_id)
     assert entity is not None
