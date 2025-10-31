@@ -24,6 +24,8 @@ from tests.test_xtherma_fp import (
     verify_parameter_keys,
 )
 
+from .conftest import init_modbus_integration
+
 if TYPE_CHECKING:
     from custom_components.xtherma_fp import XthermaData
 
@@ -40,9 +42,9 @@ SWITCH_ENTITY_ID_MODBUS_450 = (
     indirect=True,
 )
 @pytest.mark.asyncio
-async def test_async_setup_entry_modbus_ok(hass, init_modbus_integration):
+async def test_async_setup_entry_modbus_ok(hass, mock_modbus_tcp_client):
     # Verify setup worked
-    entry = init_modbus_integration
+    entry = await init_modbus_integration(hass, mock_modbus_tcp_client)
 
     assert len(hass.config_entries.async_entries(DOMAIN)) == 1
     assert entry.state is ConfigEntryState.LOADED
@@ -66,9 +68,9 @@ async def test_async_setup_entry_modbus_ok(hass, init_modbus_integration):
     indirect=True,
 )
 @pytest.mark.asyncio
-async def test_modbus_setup_entry_read_busy(hass, init_modbus_integration):
+async def test_modbus_setup_entry_read_busy(hass, mock_modbus_tcp_client):
     """Test busy modbus during setup."""
-    entry = init_modbus_integration
+    entry = await init_modbus_integration(hass, mock_modbus_tcp_client)
     assert entry.state.value == "setup_retry"
     assert entry.reason == "Modbus interface is busy"
 
@@ -90,11 +92,11 @@ def _test_modbus_runtime_read_busy() -> list[MockModbusParam]:
     indirect=True,
 )
 @pytest.mark.asyncio
-async def test_modbus_runtime_read_busy(hass, init_modbus_integration, caplog):
+async def test_modbus_runtime_read_busy(hass, mock_modbus_tcp_client, caplog):
     """Test busy modbus at runtime setup."""
     caplog.set_level("ERROR")
 
-    entry = init_modbus_integration
+    entry = await init_modbus_integration(hass, mock_modbus_tcp_client)
     assert entry.state.value == "loaded"
 
     # get coordinator and verify last update was ok
@@ -147,13 +149,13 @@ def _test_modbus_update_events() -> list[MockModbusParam]:
     indirect=True,
 )
 @pytest.mark.asyncio
-async def test_modbus_update_events(hass, init_modbus_integration):
+async def test_modbus_update_events(hass, mock_modbus_tcp_client):
     """Test that only actual value changes cause a state update.
 
     Our entities unconditionally update their state on each coordinator update.
     Verify that only actual value changes cause a state change event to be fired.
     """
-    entry = init_modbus_integration
+    entry = await init_modbus_integration(hass, mock_modbus_tcp_client)
     assert entry.state.value == "loaded"
 
     xtherma_data: XthermaData = entry.runtime_data

@@ -78,7 +78,6 @@ async def mock_rest_api_client(aioclient_mock, request: pytest.FixtureRequest):
         aioclient_mock.get(url, json=response)
 
 
-@pytest.fixture
 async def init_integration(hass, mock_rest_api_client) -> MockConfigEntry:
     """Integration using REST API."""
     # Create a mock config entry
@@ -181,7 +180,6 @@ async def mock_modbus_tcp_client(request: pytest.FixtureRequest):
         yield mock_instance
 
 
-@pytest.fixture
 async def init_modbus_integration(hass, mock_modbus_tcp_client) -> MockConfigEntry:
     """Integration using Modbus."""
     entry = MockConfigEntry(

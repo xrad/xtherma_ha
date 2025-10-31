@@ -9,6 +9,8 @@ from homeassistant.exceptions import HomeAssistantError
 from custom_components.xtherma_fp.xtherma_client_common import XthermaReadOnlyError
 from tests.helpers import get_number_platform, provide_modbus_data, provide_rest_data
 
+from .conftest import init_integration, init_modbus_integration
+
 NUMBER_ENTITY_ID_451 = (
     "number.test_entry_xtherma_config_cooling_curve_2_outside_temperature_low_p1"
 )
@@ -21,7 +23,8 @@ NUMBER_ENTITY_ID_MODBUS_411 = (
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_number_icon(hass, init_integration):
+async def test_number_icon(hass, mock_rest_api_client):
+    await init_integration(hass, mock_rest_api_client)
     platform = get_number_platform(hass)
     entity = platform.entities.get(NUMBER_ENTITY_ID_451)
     assert entity is not None
@@ -29,7 +32,8 @@ async def test_number_icon(hass, init_integration):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_set_number_rest(hass, init_integration):
+async def test_set_number_rest(hass, mock_rest_api_client):
+    await init_integration(hass, mock_rest_api_client)
     platform = get_number_platform(hass)
     state = hass.states.get(NUMBER_ENTITY_ID_451)
     assert state.state == "33.0"
@@ -48,7 +52,8 @@ async def test_set_number_rest(hass, init_integration):
     indirect=True,  # This tells pytest to pass the parameter to the fixture
 )
 # check writing positive values
-async def test_set_number_modbus(hass, init_modbus_integration, mock_modbus_tcp_client):
+async def test_set_number_modbus(hass, mock_modbus_tcp_client):
+    await init_modbus_integration(hass, mock_modbus_tcp_client)
     platform = get_number_platform(hass)
     state = hass.states.get(NUMBER_ENTITY_ID_MODBUS_451)
     entity = platform.entities.get(state.entity_id)
@@ -69,9 +74,8 @@ async def test_set_number_modbus(hass, init_modbus_integration, mock_modbus_tcp_
     provide_modbus_data(),
     indirect=True,  # This tells pytest to pass the parameter to the fixture
 )
-async def test_set_negative_number_modbus(
-    hass, init_modbus_integration, mock_modbus_tcp_client
-):
+async def test_set_negative_number_modbus(hass, mock_modbus_tcp_client):
+    await init_modbus_integration(hass, mock_modbus_tcp_client)
     platform = get_number_platform(hass)
     state = hass.states.get(NUMBER_ENTITY_ID_MODBUS_411)
     entity = platform.entities.get(state.entity_id)

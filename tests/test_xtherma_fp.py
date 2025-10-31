@@ -20,6 +20,8 @@ from custom_components.xtherma_fp.const import (
 from tests.const import MOCK_API_KEY, MOCK_SERIAL_NUMBER
 from tests.helpers import get_platform, load_mock_data, provide_rest_data
 
+from .conftest import init_integration
+
 
 async def test_restapi_setup_entry_old(hass, aioclient_mock):
     """Verify old config entries without CONF_CONNECTION work."""
@@ -108,9 +110,9 @@ def verify_parameter_keys(hass: HomeAssistant, entry: ConfigEntry):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_restapi_setup_entry_ok(hass, init_integration):
+async def test_restapi_setup_entry_ok(hass, mock_rest_api_client):
     """Verify config entries for REST API work."""
-    entry = init_integration
+    entry = await init_integration(hass, mock_rest_api_client)
 
     assert len(hass.config_entries.async_entries(DOMAIN)) == 1
     assert entry.state is ConfigEntryState.LOADED
@@ -131,9 +133,9 @@ async def test_restapi_setup_entry_ok(hass, init_integration):
 @pytest.mark.parametrize(
     "mock_rest_api_client", provide_rest_data(http_error=429), indirect=True
 )
-async def test_restapi_setup_entry_read_busy(init_integration):
+async def test_restapi_setup_entry_read_busy(hass, mock_rest_api_client):
     """Test busy restapi during setup."""
-    entry = init_integration
+    entry = await init_integration(hass, mock_rest_api_client)
     assert entry.state.value == "setup_retry"
     assert entry.reason == "Read data too frequently"
 
@@ -141,9 +143,9 @@ async def test_restapi_setup_entry_read_busy(init_integration):
 @pytest.mark.parametrize(
     "mock_rest_api_client", provide_rest_data(http_error=404), indirect=True
 )
-async def test_restapi_setup_entry_404(hass, init_integration):
+async def test_restapi_setup_entry_404(hass, mock_rest_api_client):
     """Test busy restapi during setup."""
-    entry = init_integration
+    entry = await init_integration(hass, mock_rest_api_client)
     assert entry.state.value == "setup_retry"
     assert entry.reason == "REST-API error 404"
 
@@ -151,8 +153,8 @@ async def test_restapi_setup_entry_404(hass, init_integration):
 @pytest.mark.parametrize(
     "mock_rest_api_client", provide_rest_data(timeout_error=True), indirect=True
 )
-async def test_restapi_setup_entry_timeout(init_integration):
+async def test_restapi_setup_entry_timeout(hass, mock_rest_api_client):
     """Test busy restapi during setup."""
-    entry = init_integration
+    entry = await init_integration(hass, mock_rest_api_client)
     assert entry.state.value == "setup_retry"
     assert entry.reason == "Timeout error"
