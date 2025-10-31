@@ -28,7 +28,7 @@
         "description": "Verbindung zum Xtherma Gerät neu konfigurieren.",
         "data": {
           "serial_number": "Seriennummer (Fernportal Modul)",
-          "connection":"Verbindungstyp:"
+          "connection": "Verbindungstyp:"
         }
       },
       "reconfigure_rest_api": {
@@ -394,8 +394,11 @@
     "modbus_write_error": {
       "message": "Modbus Schreibfehler {error} beim Ändern des Werts {entity_id}."
     },
+    "modbus_data_empty_error": {
+      "message": "Ignoriere leere Gerätedaten."
+    },
     "rest_api_error": {
-      "message": "REST-API error {error}."
+      "message": "REST-API Fehler {error}."
     },
     "timeout_error": {
       "message": "Zeitüberschreitung."

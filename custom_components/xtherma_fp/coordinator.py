@@ -19,6 +19,7 @@ from .const import (
 from .entity_descriptors import XtSensorEntityDescription
 from .xtherma_client_common import (
     XthermaModbusBusyError,
+    XthermaModbusEmptyDataError,
     XthermaModbusError,
     XthermaNotConnectedError,
     XthermaReadOnlyError,
@@ -175,6 +176,11 @@ class XthermaDataUpdateCoordinator(DataUpdateCoordinator[dict[str, float]]):
                 translation_placeholders={
                     "error": str(err),
                 },
+            ) from err
+        except XthermaModbusEmptyDataError as err:
+            raise UpdateFailed(
+                translation_domain=DOMAIN,
+                translation_key="modbus_data_empty_error",
             ) from err
         except Exception as err:
             raise UpdateFailed(

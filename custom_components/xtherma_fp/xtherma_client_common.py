@@ -56,6 +56,14 @@ class XthermaModbusError(Exception):
         super().__init__()
 
 
+class XthermaModbusEmptyDataError(Exception):
+    """Exception empty data was received via Modbus."""
+
+    def __init__(self) -> None:
+        """Class constructor."""
+        super().__init__()
+
+
 class XthermaReadOnlyError(Exception):
     """Exception indicating a data is read-only."""
 
