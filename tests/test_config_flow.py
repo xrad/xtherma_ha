@@ -36,6 +36,7 @@ from custom_components.xtherma_fp.xtherma_client_common import (
     XthermaRestBusyError,
     XthermaTimeoutError,
 )
+from tests.conftest import init_integration, init_modbus_integration
 from tests.const import (
     MOCK_API_KEY,
     MOCK_MODBUS_ADDRESS,
@@ -229,9 +230,10 @@ async def test_rest_error_timeout(hass, aioclient_mock):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_step_user_abort_entries_match(hass, init_integration):
+async def test_step_user_abort_entries_match(hass, mock_rest_api_client):
     """Test for matching configuration parameters in step_user."""
-    config_data = init_integration.data.copy()
+    entry = await init_integration(hass, mock_rest_api_client)
+    config_data = entry.data.copy()
 
     result = await hass.config_entries.flow.async_init(
         DOMAIN,
@@ -244,9 +246,10 @@ async def test_step_user_abort_entries_match(hass, init_integration):
 
 
 @pytest.mark.parametrize("mock_modbus_tcp_client", provide_modbus_data(), indirect=True)
-async def test_step_modbus_tcp_abort_entries_match(hass, init_modbus_integration):
+async def test_step_modbus_tcp_abort_entries_match(hass, mock_modbus_tcp_client):
     """Test for matching configuration parameters in step_modbus_tcp."""
-    config_data = init_modbus_integration.data.copy()
+    entry = await init_modbus_integration(hass, mock_modbus_tcp_client)
+    config_data = entry.data.copy()
 
     result = await hass.config_entries.flow.async_init(
         DOMAIN, context={"source": "modbus_tcp"}, data=config_data
@@ -256,9 +259,9 @@ async def test_step_modbus_tcp_abort_entries_match(hass, init_modbus_integration
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_step_reconfigure_rest_api(hass, init_integration):
+async def test_step_reconfigure_rest_api(hass, mock_rest_api_client):
     """Test for reconfiguring to rest api."""
-    entry = init_integration
+    entry = await init_integration(hass, mock_rest_api_client)
     assert entry.state is ConfigEntryState.LOADED
     assert entry.data == entry.data | {
         CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
@@ -297,11 +300,11 @@ async def test_step_reconfigure_rest_api(hass, init_integration):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_step_reconfigure_rest_api_errors(hass, init_integration):
+async def test_step_reconfigure_rest_api_errors(hass, mock_rest_api_client):
     """Test for reconfiguring to rest api with errors."""
     errors = {"base": "any_error"}
 
-    entry = init_integration
+    entry = await init_integration(hass, mock_rest_api_client)
     assert entry.state is ConfigEntryState.LOADED
     assert entry.data == entry.data | {
         CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
@@ -336,9 +339,9 @@ async def test_step_reconfigure_rest_api_errors(hass, init_integration):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_step_reconfigure_modbus(hass, init_integration):
+async def test_step_reconfigure_modbus(hass, mock_rest_api_client):
     """Test for reconfiguring to modbus."""
-    entry = init_integration
+    entry = await init_integration(hass, mock_rest_api_client)
     assert entry.state is ConfigEntryState.LOADED
     assert entry.data[CONF_CONNECTION] == CONF_CONNECTION_RESTAPI
 
@@ -378,11 +381,11 @@ async def test_step_reconfigure_modbus(hass, init_integration):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_step_reconfigure_modbus_errors(hass, init_integration):
+async def test_step_reconfigure_modbus_errors(hass, mock_rest_api_client):
     """Test for reconfiguring to modbus with errors."""
     errors = {"base": "any_error"}
 
-    entry = init_integration
+    entry = await init_integration(hass, mock_rest_api_client)
     assert entry.state is ConfigEntryState.LOADED
     assert entry.data[CONF_CONNECTION] == CONF_CONNECTION_RESTAPI
 

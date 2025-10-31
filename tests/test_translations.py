@@ -28,10 +28,13 @@ from custom_components.xtherma_fp.entity_descriptors import (
 )
 from tests.helpers import provide_rest_data
 
+from .conftest import init_integration
+
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_binary_sensor_name_translation(hass, init_integration):
+async def test_binary_sensor_name_translation(hass, mock_rest_api_client):
     """Ensure all sensor names are translated."""
+    await init_integration(hass, mock_rest_api_client)
     prefix = f"component.{DOMAIN}.entity.{Platform.BINARY_SENSOR.value}"
 
     for lang in ["en", "de"]:
@@ -63,8 +66,9 @@ async def test_binary_sensor_name_translation(hass, init_integration):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_sensor_name_translation(hass, init_integration):
+async def test_sensor_name_translation(hass, mock_rest_api_client):
     """Ensure all sensor names are translated."""
+    await init_integration(hass, mock_rest_api_client)
     prefix = f"component.{DOMAIN}.entity.{Platform.SENSOR.value}"
 
     for lang in ["en", "de"]:
@@ -118,8 +122,9 @@ def _get_all_entity_descriptions() -> list[EntityDescription]:
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_enum_sensor_translation(hass, init_integration):
+async def test_enum_sensor_translation(hass, mock_rest_api_client):
     """Ensure all enum sensor values are translated."""
+    await init_integration(hass, mock_rest_api_client)
     prefix = f"component.{DOMAIN}.entity.{Platform.SENSOR.value}"
 
     for lang in ["en", "de"]:
@@ -143,8 +148,9 @@ async def test_enum_sensor_translation(hass, init_integration):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_switch_name_translation(hass, init_integration):
+async def test_switch_name_translation(hass, mock_rest_api_client):
     """Ensure all switch names are translated."""
+    await init_integration(hass, mock_rest_api_client)
     prefix = f"component.{DOMAIN}.entity.{Platform.SWITCH.value}"
 
     for lang in ["en", "de"]:
@@ -176,8 +182,9 @@ async def test_switch_name_translation(hass, init_integration):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_number_name_translation(hass, init_integration):
+async def test_number_name_translation(hass, mock_rest_api_client):
     """Ensure all number names are translated."""
+    await init_integration(hass, mock_rest_api_client)
     prefix = f"component.{DOMAIN}.entity.{Platform.NUMBER.value}"
 
     for lang in ["en", "de"]:
@@ -209,8 +216,9 @@ async def test_number_name_translation(hass, init_integration):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_select_name_translation(hass, init_integration):
+async def test_select_name_translation(hass, mock_rest_api_client):
     """Ensure all select names are translated."""
+    await init_integration(hass, mock_rest_api_client)
     prefix = f"component.{DOMAIN}.entity.{Platform.SELECT.value}"
 
     for lang in ["en", "de"]:
@@ -242,8 +250,9 @@ async def test_select_name_translation(hass, init_integration):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_select_options_translation(hass, init_integration):
+async def test_select_options_translation(hass, mock_rest_api_client):
     """Ensure all select options are translated."""
+    await init_integration(hass, mock_rest_api_client)
     prefix = f"component.{DOMAIN}.entity.{Platform.SELECT.value}"
 
     for lang in ["en", "de"]:

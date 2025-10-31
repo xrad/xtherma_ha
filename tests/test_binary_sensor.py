@@ -2,6 +2,7 @@
 
 import pytest
 
+from tests.conftest import init_integration
 from tests.helpers import (
     get_binary_sensor_platform,
     provide_rest_data,
@@ -16,7 +17,8 @@ BINARY_SENSOR_ENTITY_ID_PWW = (
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_binary_sensor_state(hass, init_integration):
+async def test_binary_sensor_state(hass, mock_rest_api_client):
+    await init_integration(hass, mock_rest_api_client)
     pk = hass.states.get(BINARY_SENSOR_ENTITY_ID_PK)
     assert pk.state == "off"
     pww = hass.states.get(BINARY_SENSOR_ENTITY_ID_PWW)
@@ -24,7 +26,8 @@ async def test_binary_sensor_state(hass, init_integration):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_binary_sensor_icon(hass, init_integration):
+async def test_binary_sensor_icon(hass, mock_rest_api_client):
+    await init_integration(hass, mock_rest_api_client)
     platform = get_binary_sensor_platform(hass)
     pk = hass.states.get(BINARY_SENSOR_ENTITY_ID_PK)
     assert pk.state == "off"
@@ -39,9 +42,9 @@ async def test_binary_sensor_icon(hass, init_integration):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_binary_sensor_name(hass, init_integration):
+async def test_binary_sensor_name(hass, mock_rest_api_client):
     """Check if binary sensors have a proper (translated) names."""
-    await hass.config.async_load()
+    await init_integration(hass, mock_rest_api_client)
     platform = get_binary_sensor_platform(hass)
     state = hass.states.get(BINARY_SENSOR_ENTITY_ID_PWW)
     entity = platform.entities.get(state.entity_id)

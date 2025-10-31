@@ -13,12 +13,15 @@ from tests.helpers import (
     provide_rest_data,
 )
 
+from .conftest import init_integration, init_modbus_integration
+
 SELECT_ENTITY_ID_002 = "select.test_entry_xtherma_config_operating_mode"
 SELECT_ENTITY_ID_MODBUS_002 = "select.test_entry_xtherma_modbus_config_operating_mode"
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_select_entity(hass, init_integration):
+async def test_select_entity(hass, mock_rest_api_client):
+    await init_integration(hass, mock_rest_api_client)
     platform = get_select_platform(hass)
     state = hass.states.get(SELECT_ENTITY_ID_002)
     assert state.state == "auto"
@@ -28,7 +31,8 @@ async def test_select_entity(hass, init_integration):
 
 
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
-async def test_set_select_rest(hass, init_integration):
+async def test_set_select_rest(hass, mock_rest_api_client):
+    await init_integration(hass, mock_rest_api_client)
     platform = get_select_platform(hass)
     state = hass.states.get(SELECT_ENTITY_ID_002)
     assert state.state == "auto"
@@ -46,7 +50,8 @@ async def test_set_select_rest(hass, init_integration):
     provide_modbus_data(),
     indirect=True,  # This tells pytest to pass the parameter to the fixture
 )
-async def test_set_select_modbus(hass, init_modbus_integration, mock_modbus_tcp_client):
+async def test_set_select_modbus(hass, mock_modbus_tcp_client):
+    await init_modbus_integration(hass, mock_modbus_tcp_client)
     platform = get_select_platform(hass)
     state = hass.states.get(SELECT_ENTITY_ID_MODBUS_002)
     entity = platform.entities.get(state.entity_id)
