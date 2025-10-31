@@ -1,0 +1,3051 @@
+# serializer version: 1
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_1_constant_cooling_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_1_constant_cooling_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 1 constant cooling temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '360',
+    'unique_id': 'test_entry_xtherma-360',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_1_constant_cooling_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Cooling curve 1 constant cooling temperature',
+      'icon': 'mdi:thermometer',
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '360',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_1_constant_cooling_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '20.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_1_cooling_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_1_cooling_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 1 cooling temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '356',
+    'unique_id': 'test_entry_xtherma-356',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_1_cooling_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Cooling curve 1 cooling temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '356',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_1_cooling_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '20.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_1_cooling_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_1_cooling_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 1 cooling temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '355',
+    'unique_id': 'test_entry_xtherma-355',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_1_cooling_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Cooling curve 1 cooling temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '355',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_1_cooling_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '25.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_1_outside_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 45,
+      'min': 29,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_1_outside_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 1 outside temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '352',
+    'unique_id': 'test_entry_xtherma-352',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_1_outside_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Cooling curve 1 outside temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 45,
+      'min': 29,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '352',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_1_outside_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '35.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_1_outside_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 32,
+      'min': 16,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_1_outside_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 1 outside temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '351',
+    'unique_id': 'test_entry_xtherma-351',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_1_outside_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Cooling curve 1 outside temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 32,
+      'min': 16,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '351',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_1_outside_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '28.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_2_constant_cooling_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_2_constant_cooling_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 2 constant cooling temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '460',
+    'unique_id': 'test_entry_xtherma-460',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_2_constant_cooling_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Cooling curve 2 constant cooling temperature',
+      'icon': 'mdi:thermometer',
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '460',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_2_constant_cooling_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '20.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_2_cooling_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_2_cooling_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 2 cooling temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '456',
+    'unique_id': 'test_entry_xtherma-456',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_2_cooling_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Cooling curve 2 cooling temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '456',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_2_cooling_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '20.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_2_cooling_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_2_cooling_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 2 cooling temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '455',
+    'unique_id': 'test_entry_xtherma-455',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_2_cooling_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Cooling curve 2 cooling temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '455',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_2_cooling_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '29.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_2_outside_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 45,
+      'min': 29,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_2_outside_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 2 outside temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '452',
+    'unique_id': 'test_entry_xtherma-452',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_2_outside_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Cooling curve 2 outside temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 45,
+      'min': 29,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '452',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_2_outside_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '33.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_2_outside_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 32,
+      'min': 16,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_2_outside_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 2 outside temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '451',
+    'unique_id': 'test_entry_xtherma-451',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_cooling_curve_2_outside_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Cooling curve 2 outside temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 32,
+      'min': 16,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '451',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_cooling_curve_2_outside_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '33.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_1_constant_heating_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_1_constant_heating_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 1 constant heating temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '320',
+    'unique_id': 'test_entry_xtherma-320',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_1_constant_heating_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Heating curve 1 constant heating temperature',
+      'icon': 'mdi:thermometer',
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '320',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_1_constant_heating_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '29.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_1_heating_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_1_heating_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 1 heating temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '316',
+    'unique_id': 'test_entry_xtherma-316',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_1_heating_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Heating curve 1 heating temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '316',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_1_heating_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '22.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_1_heating_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_1_heating_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 1 heating temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '315',
+    'unique_id': 'test_entry_xtherma-315',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_1_heating_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Heating curve 1 heating temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '315',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_1_heating_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '32.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_1_outside_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 25,
+      'min': -9,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_1_outside_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 1 outside temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '312',
+    'unique_id': 'test_entry_xtherma-312',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_1_outside_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Heating curve 1 outside temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 25,
+      'min': -9,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '312',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_1_outside_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '14.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_1_outside_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 25,
+      'min': -20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_1_outside_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 1 outside temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '311',
+    'unique_id': 'test_entry_xtherma-311',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_1_outside_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Heating curve 1 outside temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 25,
+      'min': -20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '311',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_1_outside_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '-9.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_2_constant_heating_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_2_constant_heating_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 2 constant heating temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '420',
+    'unique_id': 'test_entry_xtherma-420',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_2_constant_heating_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Heating curve 2 constant heating temperature',
+      'icon': 'mdi:thermometer',
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '420',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_2_constant_heating_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '35.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_2_heating_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_2_heating_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 2 heating temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '416',
+    'unique_id': 'test_entry_xtherma-416',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_2_heating_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Heating curve 2 heating temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '416',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_2_heating_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '25.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_2_heating_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_2_heating_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 2 heating temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '415',
+    'unique_id': 'test_entry_xtherma-415',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_2_heating_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Heating curve 2 heating temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '415',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_2_heating_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '35.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_2_outside_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 25,
+      'min': -9,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_2_outside_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 2 outside temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '412',
+    'unique_id': 'test_entry_xtherma-412',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_2_outside_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Heating curve 2 outside temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 25,
+      'min': -9,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '412',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_2_outside_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '18.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_2_outside_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 25,
+      'min': -20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_2_outside_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 2 outside temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '411',
+    'unique_id': 'test_entry_xtherma-411',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_heating_curve_2_outside_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Heating curve 2 outside temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 25,
+      'min': -20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '411',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_heating_curve_2_outside_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '-9.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_sg_ready_lower_cooling_temperature_by-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 0,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_sg_ready_lower_cooling_temperature_by',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:snowflake-thermometer',
+    'original_name': 'SG-Ready lower cooling temperature by',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '813',
+    'unique_id': 'test_entry_xtherma-813',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_sg_ready_lower_cooling_temperature_by-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config SG-Ready lower cooling temperature by',
+      'icon': 'mdi:snowflake-thermometer',
+      'max': 30,
+      'min': 0,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '813',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_sg_ready_lower_cooling_temperature_by',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_sg_ready_raise_heating_temperature_by-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 0,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_sg_ready_raise_heating_temperature_by',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:home-thermometer-outline',
+    'original_name': 'SG-Ready raise heating temperature by',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '811',
+    'unique_id': 'test_entry_xtherma-811',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_sg_ready_raise_heating_temperature_by-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config SG-Ready raise heating temperature by',
+      'icon': 'mdi:home-thermometer-outline',
+      'max': 30,
+      'min': 0,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '811',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_sg_ready_raise_heating_temperature_by',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '5.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_sg_ready_raise_warm_water_temperature_by-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 0,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_sg_ready_raise_warm_water_temperature_by',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-water',
+    'original_name': 'SG-Ready raise warm water temperature by',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '812',
+    'unique_id': 'test_entry_xtherma-812',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_sg_ready_raise_warm_water_temperature_by-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config SG-Ready raise warm water temperature by',
+      'icon': 'mdi:thermometer-water',
+      'max': 30,
+      'min': 0,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '812',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_sg_ready_raise_warm_water_temperature_by',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '10.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_target_keep_water_warm-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 55,
+      'min': 30,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_target_keep_water_warm',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-water',
+    'original_name': 'Target keep water warm',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '522',
+    'unique_id': 'test_entry_xtherma-522',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_target_keep_water_warm-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Target keep water warm',
+      'icon': 'mdi:thermometer-water',
+      'max': 55,
+      'min': 30,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '522',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_target_keep_water_warm',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '45.0',
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_target_warm_water_production-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 75,
+      'min': 25,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_target_warm_water_production',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-water',
+    'original_name': 'Target warm water production',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '501',
+    'unique_id': 'test_entry_xtherma-501',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_modbus_tcp[mock_modbus_tcp_client0][number.test_entry_xtherma_modbus_config_target_warm_water_production-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Target warm water production',
+      'icon': 'mdi:thermometer-water',
+      'max': 75,
+      'min': 25,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '501',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_modbus_config_target_warm_water_production',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '50.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_1_constant_cooling_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_1_constant_cooling_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 1 constant cooling temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '360',
+    'unique_id': 'test_entry_xtherma-360',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_1_constant_cooling_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Cooling curve 1 constant cooling temperature',
+      'icon': 'mdi:thermometer',
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '360',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_1_constant_cooling_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '20.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_1_cooling_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_1_cooling_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 1 cooling temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '356',
+    'unique_id': 'test_entry_xtherma-356',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_1_cooling_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Cooling curve 1 cooling temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '356',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_1_cooling_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '20.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_1_cooling_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_1_cooling_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 1 cooling temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '355',
+    'unique_id': 'test_entry_xtherma-355',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_1_cooling_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Cooling curve 1 cooling temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '355',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_1_cooling_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '25.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_1_outside_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 45,
+      'min': 29,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_1_outside_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 1 outside temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '352',
+    'unique_id': 'test_entry_xtherma-352',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_1_outside_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Cooling curve 1 outside temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 45,
+      'min': 29,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '352',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_1_outside_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '35.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_1_outside_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 32,
+      'min': 16,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_1_outside_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 1 outside temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '351',
+    'unique_id': 'test_entry_xtherma-351',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_1_outside_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Cooling curve 1 outside temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 32,
+      'min': 16,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '351',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_1_outside_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '28.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_2_constant_cooling_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_2_constant_cooling_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 2 constant cooling temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '460',
+    'unique_id': 'test_entry_xtherma-460',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_2_constant_cooling_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Cooling curve 2 constant cooling temperature',
+      'icon': 'mdi:thermometer',
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '460',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_2_constant_cooling_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '20.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_2_cooling_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_2_cooling_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 2 cooling temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '456',
+    'unique_id': 'test_entry_xtherma-456',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_2_cooling_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Cooling curve 2 cooling temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '456',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_2_cooling_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '20.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_2_cooling_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_2_cooling_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 2 cooling temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '455',
+    'unique_id': 'test_entry_xtherma-455',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_2_cooling_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Cooling curve 2 cooling temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 30,
+      'min': 7,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '455',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_2_cooling_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '29.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_2_outside_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 45,
+      'min': 29,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_2_outside_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 2 outside temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '452',
+    'unique_id': 'test_entry_xtherma-452',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_2_outside_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Cooling curve 2 outside temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 45,
+      'min': 29,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '452',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_2_outside_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '33.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_2_outside_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 32,
+      'min': 16,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_2_outside_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Cooling curve 2 outside temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '451',
+    'unique_id': 'test_entry_xtherma-451',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_cooling_curve_2_outside_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Cooling curve 2 outside temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 32,
+      'min': 16,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '451',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_cooling_curve_2_outside_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '33.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_1_constant_heating_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_1_constant_heating_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 1 constant heating temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '320',
+    'unique_id': 'test_entry_xtherma-320',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_1_constant_heating_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Heating curve 1 constant heating temperature',
+      'icon': 'mdi:thermometer',
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '320',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_1_constant_heating_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '29.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_1_heating_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_1_heating_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 1 heating temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '316',
+    'unique_id': 'test_entry_xtherma-316',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_1_heating_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Heating curve 1 heating temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '316',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_1_heating_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '22.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_1_heating_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_1_heating_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 1 heating temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '315',
+    'unique_id': 'test_entry_xtherma-315',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_1_heating_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Heating curve 1 heating temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '315',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_1_heating_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '32.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_1_outside_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 25,
+      'min': -9,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_1_outside_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 1 outside temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '312',
+    'unique_id': 'test_entry_xtherma-312',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_1_outside_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Heating curve 1 outside temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 25,
+      'min': -9,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '312',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_1_outside_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '14.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_1_outside_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 25,
+      'min': -20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_1_outside_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 1 outside temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '311',
+    'unique_id': 'test_entry_xtherma-311',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_1_outside_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Heating curve 1 outside temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 25,
+      'min': -20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '311',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_1_outside_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '-9.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_2_constant_heating_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_2_constant_heating_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 2 constant heating temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '420',
+    'unique_id': 'test_entry_xtherma-420',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_2_constant_heating_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Heating curve 2 constant heating temperature',
+      'icon': 'mdi:thermometer',
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '420',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_2_constant_heating_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '35.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_2_heating_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_2_heating_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 2 heating temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '416',
+    'unique_id': 'test_entry_xtherma-416',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_2_heating_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Heating curve 2 heating temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '416',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_2_heating_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '25.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_2_heating_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_2_heating_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 2 heating temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '415',
+    'unique_id': 'test_entry_xtherma-415',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_2_heating_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Heating curve 2 heating temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 75,
+      'min': 20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '415',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_2_heating_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '35.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_2_outside_temperature_high_p2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 25,
+      'min': -9,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_2_outside_temperature_high_p2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 2 outside temperature high (P2)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '412',
+    'unique_id': 'test_entry_xtherma-412',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_2_outside_temperature_high_p2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Heating curve 2 outside temperature high (P2)',
+      'icon': 'mdi:thermometer',
+      'max': 25,
+      'min': -9,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '412',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_2_outside_temperature_high_p2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '18.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_2_outside_temperature_low_p1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 25,
+      'min': -20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_2_outside_temperature_low_p1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': 'Heating curve 2 outside temperature low (P1)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '411',
+    'unique_id': 'test_entry_xtherma-411',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_heating_curve_2_outside_temperature_low_p1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Heating curve 2 outside temperature low (P1)',
+      'icon': 'mdi:thermometer',
+      'max': 25,
+      'min': -20,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '411',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_heating_curve_2_outside_temperature_low_p1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '-9.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_sg_ready_lower_cooling_temperature_by-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 0,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_sg_ready_lower_cooling_temperature_by',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:snowflake-thermometer',
+    'original_name': 'SG-Ready lower cooling temperature by',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '813',
+    'unique_id': 'test_entry_xtherma-813',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_sg_ready_lower_cooling_temperature_by-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config SG-Ready lower cooling temperature by',
+      'icon': 'mdi:snowflake-thermometer',
+      'max': 30,
+      'min': 0,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '813',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_sg_ready_lower_cooling_temperature_by',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_sg_ready_raise_heating_temperature_by-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 0,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_sg_ready_raise_heating_temperature_by',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:home-thermometer-outline',
+    'original_name': 'SG-Ready raise heating temperature by',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '811',
+    'unique_id': 'test_entry_xtherma-811',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_sg_ready_raise_heating_temperature_by-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config SG-Ready raise heating temperature by',
+      'icon': 'mdi:home-thermometer-outline',
+      'max': 30,
+      'min': 0,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '811',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_sg_ready_raise_heating_temperature_by',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '5.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_sg_ready_raise_warm_water_temperature_by-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 30,
+      'min': 0,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_sg_ready_raise_warm_water_temperature_by',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-water',
+    'original_name': 'SG-Ready raise warm water temperature by',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '812',
+    'unique_id': 'test_entry_xtherma-812',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_sg_ready_raise_warm_water_temperature_by-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config SG-Ready raise warm water temperature by',
+      'icon': 'mdi:thermometer-water',
+      'max': 30,
+      'min': 0,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '812',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_sg_ready_raise_warm_water_temperature_by',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '10.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_target_keep_water_warm-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 55,
+      'min': 30,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_target_keep_water_warm',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-water',
+    'original_name': 'Target keep water warm',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '522',
+    'unique_id': 'test_entry_xtherma-522',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_target_keep_water_warm-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Target keep water warm',
+      'icon': 'mdi:thermometer-water',
+      'max': 55,
+      'min': 30,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '522',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_target_keep_water_warm',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '45.0',
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_target_warm_water_production-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'max': 75,
+      'min': 25,
+      'mode': <NumberMode.BOX: 'box'>,
+      'step': 1,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'number',
+    'entity_category': None,
+    'entity_id': 'number.test_entry_xtherma_config_target_warm_water_production',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <NumberDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-water',
+    'original_name': 'Target warm water production',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '501',
+    'unique_id': 'test_entry_xtherma-501',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_number_rest_api[mock_rest_api_client0][number.test_entry_xtherma_config_target_warm_water_production-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Target warm water production',
+      'icon': 'mdi:thermometer-water',
+      'max': 75,
+      'min': 25,
+      'mode': <NumberMode.BOX: 'box'>,
+      'parameter': '501',
+      'step': 1,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'number.test_entry_xtherma_config_target_warm_water_production',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '50.0',
+  })
+# ---
