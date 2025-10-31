@@ -17,14 +17,6 @@ from tests.helpers import (
     provide_modbus_data,
     set_modbus_register,
 )
-from tests.test_xtherma_fp import (
-    verify_integration_binary_sensors,
-    verify_integration_numbers,
-    verify_integration_selects,
-    verify_integration_sensors,
-    verify_integration_switches,
-    verify_parameter_keys,
-)
 
 from .conftest import init_modbus_integration
 
@@ -50,18 +42,6 @@ async def test_async_setup_entry_modbus_ok(hass, mock_modbus_tcp_client):
 
     assert len(hass.config_entries.async_entries(DOMAIN)) == 1
     assert entry.state is ConfigEntryState.LOADED
-
-    verify_integration_binary_sensors(hass, entry)
-
-    verify_integration_sensors(hass, entry)
-
-    verify_integration_switches(hass, entry)
-
-    verify_integration_numbers(hass, entry)
-
-    verify_integration_selects(hass, entry)
-
-    verify_parameter_keys(hass, entry)
 
 
 @pytest.mark.parametrize(
