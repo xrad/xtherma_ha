@@ -3,7 +3,6 @@
 from typing import Any, cast
 
 import pytest
-from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import EntityPlatform, async_get_platforms
 from homeassistant.util.json import (
@@ -39,26 +38,6 @@ def get_platform(hass: HomeAssistant, domain: str) -> EntityPlatform:
         if platform.domain == domain:
             return platform
     pytest.fail(f"We have no platfom {domain}")
-
-
-def get_binary_sensor_platform(hass: HomeAssistant) -> EntityPlatform:
-    return get_platform(hass, Platform.BINARY_SENSOR)
-
-
-def get_sensor_platform(hass: HomeAssistant) -> EntityPlatform:
-    return get_platform(hass, Platform.SENSOR)
-
-
-def get_switch_platform(hass: HomeAssistant) -> EntityPlatform:
-    return get_platform(hass, Platform.SWITCH)
-
-
-def get_number_platform(hass: HomeAssistant) -> EntityPlatform:
-    return get_platform(hass, Platform.NUMBER)
-
-
-def get_select_platform(hass: HomeAssistant) -> EntityPlatform:
-    return get_platform(hass, Platform.SELECT)
 
 
 def find_entry(values: list[dict], key: str) -> dict[str, Any]:
