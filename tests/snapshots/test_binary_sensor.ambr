@@ -1,0 +1,709 @@
+# serializer version: 1
+# name: test_setup_binary_sensor_modbus_tcp[mock_modbus_tcp_client0][binary_sensor.test_entry_xtherma_modbus_config_evu_status-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'binary_sensor',
+    'entity_category': None,
+    'entity_id': 'binary_sensor.test_entry_xtherma_modbus_config_evu_status',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:electric-switch-closed',
+    'original_name': 'EVU status',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'evu',
+    'unique_id': 'test_entry_xtherma-evu',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_binary_sensor_modbus_tcp[mock_modbus_tcp_client0][binary_sensor.test_entry_xtherma_modbus_config_evu_status-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_modbus_config EVU status',
+      'icon': 'mdi:electric-switch-closed',
+      'parameter': 'evu',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.test_entry_xtherma_modbus_config_evu_status',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_setup_binary_sensor_modbus_tcp[mock_modbus_tcp_client0][binary_sensor.test_entry_xtherma_modbus_config_pk1_circulation_pump_circuit_1_enabled-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'binary_sensor',
+    'entity_category': None,
+    'entity_id': 'binary_sensor.test_entry_xtherma_modbus_config_pk1_circulation_pump_circuit_1_enabled',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <BinarySensorDeviceClass.RUNNING: 'running'>,
+    'original_icon': 'mdi:pump-off',
+    'original_name': '[PK1] Circulation pump circuit 1 enabled',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'pk1',
+    'unique_id': 'test_entry_xtherma-pk1',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_binary_sensor_modbus_tcp[mock_modbus_tcp_client0][binary_sensor.test_entry_xtherma_modbus_config_pk1_circulation_pump_circuit_1_enabled-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'running',
+      'friendly_name': 'test_entry_xtherma_modbus_config [PK1] Circulation pump circuit 1 enabled',
+      'icon': 'mdi:pump-off',
+      'parameter': 'pk1',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.test_entry_xtherma_modbus_config_pk1_circulation_pump_circuit_1_enabled',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_setup_binary_sensor_modbus_tcp[mock_modbus_tcp_client0][binary_sensor.test_entry_xtherma_modbus_config_pk2_circulation_pump_circuit_2_enabled-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'binary_sensor',
+    'entity_category': None,
+    'entity_id': 'binary_sensor.test_entry_xtherma_modbus_config_pk2_circulation_pump_circuit_2_enabled',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <BinarySensorDeviceClass.RUNNING: 'running'>,
+    'original_icon': 'mdi:pump-off',
+    'original_name': '[PK2] Circulation pump circuit 2 enabled',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'pk2',
+    'unique_id': 'test_entry_xtherma-pk2',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_binary_sensor_modbus_tcp[mock_modbus_tcp_client0][binary_sensor.test_entry_xtherma_modbus_config_pk2_circulation_pump_circuit_2_enabled-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'running',
+      'friendly_name': 'test_entry_xtherma_modbus_config [PK2] Circulation pump circuit 2 enabled',
+      'icon': 'mdi:pump-off',
+      'parameter': 'pk2',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.test_entry_xtherma_modbus_config_pk2_circulation_pump_circuit_2_enabled',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_setup_binary_sensor_modbus_tcp[mock_modbus_tcp_client0][binary_sensor.test_entry_xtherma_modbus_config_pk_circulation_pump_enabled-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'binary_sensor',
+    'entity_category': None,
+    'entity_id': 'binary_sensor.test_entry_xtherma_modbus_config_pk_circulation_pump_enabled',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <BinarySensorDeviceClass.RUNNING: 'running'>,
+    'original_icon': 'mdi:pump-off',
+    'original_name': '[PK] Circulation pump enabled',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'pk',
+    'unique_id': 'test_entry_xtherma-pk',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_binary_sensor_modbus_tcp[mock_modbus_tcp_client0][binary_sensor.test_entry_xtherma_modbus_config_pk_circulation_pump_enabled-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'running',
+      'friendly_name': 'test_entry_xtherma_modbus_config [PK] Circulation pump enabled',
+      'icon': 'mdi:pump-off',
+      'parameter': 'pk',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.test_entry_xtherma_modbus_config_pk_circulation_pump_enabled',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_setup_binary_sensor_modbus_tcp[mock_modbus_tcp_client0][binary_sensor.test_entry_xtherma_modbus_config_pww_circulation_pump_hot_water_enabled-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'binary_sensor',
+    'entity_category': None,
+    'entity_id': 'binary_sensor.test_entry_xtherma_modbus_config_pww_circulation_pump_hot_water_enabled',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <BinarySensorDeviceClass.RUNNING: 'running'>,
+    'original_icon': 'mdi:pump-off',
+    'original_name': '[PWW] Circulation pump hot water enabled',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'pww',
+    'unique_id': 'test_entry_xtherma-pww',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_binary_sensor_modbus_tcp[mock_modbus_tcp_client0][binary_sensor.test_entry_xtherma_modbus_config_pww_circulation_pump_hot_water_enabled-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'running',
+      'friendly_name': 'test_entry_xtherma_modbus_config [PWW] Circulation pump hot water enabled',
+      'icon': 'mdi:pump',
+      'parameter': 'pww',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.test_entry_xtherma_modbus_config_pww_circulation_pump_hot_water_enabled',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---
+# name: test_setup_binary_sensor_modbus_tcp[mock_modbus_tcp_client0][binary_sensor.test_entry_xtherma_modbus_config_ss14a_enwg_state-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'binary_sensor',
+    'entity_category': None,
+    'entity_id': 'binary_sensor.test_entry_xtherma_modbus_config_ss14a_enwg_state',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': None,
+    'original_icon': None,
+    'original_name': '§14a EnWG state',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '14a',
+    'unique_id': 'test_entry_xtherma-14a',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_binary_sensor_modbus_tcp[mock_modbus_tcp_client0][binary_sensor.test_entry_xtherma_modbus_config_ss14a_enwg_state-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_modbus_config §14a EnWG state',
+      'parameter': '14a',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.test_entry_xtherma_modbus_config_ss14a_enwg_state',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_setup_binary_sensor_modbus_tcp[mock_modbus_tcp_client0][binary_sensor.test_entry_xtherma_modbus_config_system_ok-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'binary_sensor',
+    'entity_category': None,
+    'entity_id': 'binary_sensor.test_entry_xtherma_modbus_config_system_ok',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <BinarySensorDeviceClass.RUNNING: 'running'>,
+    'original_icon': 'mdi:alert',
+    'original_name': 'System ok',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'error',
+    'unique_id': 'test_entry_xtherma-error',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_binary_sensor_modbus_tcp[mock_modbus_tcp_client0][binary_sensor.test_entry_xtherma_modbus_config_system_ok-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'running',
+      'friendly_name': 'test_entry_xtherma_modbus_config System ok',
+      'icon': 'mdi:check',
+      'parameter': 'error',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.test_entry_xtherma_modbus_config_system_ok',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---
+# name: test_setup_binary_sensor_rest_api[mock_rest_api_client0][binary_sensor.test_entry_xtherma_config_evu_status-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'binary_sensor',
+    'entity_category': None,
+    'entity_id': 'binary_sensor.test_entry_xtherma_config_evu_status',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:electric-switch-closed',
+    'original_name': 'EVU status',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'evu',
+    'unique_id': 'test_entry_xtherma-evu',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_binary_sensor_rest_api[mock_rest_api_client0][binary_sensor.test_entry_xtherma_config_evu_status-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_config EVU status',
+      'icon': 'mdi:electric-switch-closed',
+      'parameter': 'evu',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.test_entry_xtherma_config_evu_status',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_setup_binary_sensor_rest_api[mock_rest_api_client0][binary_sensor.test_entry_xtherma_config_pk1_circulation_pump_circuit_1_enabled-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'binary_sensor',
+    'entity_category': None,
+    'entity_id': 'binary_sensor.test_entry_xtherma_config_pk1_circulation_pump_circuit_1_enabled',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <BinarySensorDeviceClass.RUNNING: 'running'>,
+    'original_icon': 'mdi:pump-off',
+    'original_name': '[PK1] Circulation pump circuit 1 enabled',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'pk1',
+    'unique_id': 'test_entry_xtherma-pk1',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_binary_sensor_rest_api[mock_rest_api_client0][binary_sensor.test_entry_xtherma_config_pk1_circulation_pump_circuit_1_enabled-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'running',
+      'friendly_name': 'test_entry_xtherma_config [PK1] Circulation pump circuit 1 enabled',
+      'icon': 'mdi:pump-off',
+      'parameter': 'pk1',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.test_entry_xtherma_config_pk1_circulation_pump_circuit_1_enabled',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_setup_binary_sensor_rest_api[mock_rest_api_client0][binary_sensor.test_entry_xtherma_config_pk2_circulation_pump_circuit_2_enabled-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'binary_sensor',
+    'entity_category': None,
+    'entity_id': 'binary_sensor.test_entry_xtherma_config_pk2_circulation_pump_circuit_2_enabled',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <BinarySensorDeviceClass.RUNNING: 'running'>,
+    'original_icon': 'mdi:pump-off',
+    'original_name': '[PK2] Circulation pump circuit 2 enabled',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'pk2',
+    'unique_id': 'test_entry_xtherma-pk2',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_binary_sensor_rest_api[mock_rest_api_client0][binary_sensor.test_entry_xtherma_config_pk2_circulation_pump_circuit_2_enabled-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'running',
+      'friendly_name': 'test_entry_xtherma_config [PK2] Circulation pump circuit 2 enabled',
+      'icon': 'mdi:pump-off',
+      'parameter': 'pk2',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.test_entry_xtherma_config_pk2_circulation_pump_circuit_2_enabled',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_setup_binary_sensor_rest_api[mock_rest_api_client0][binary_sensor.test_entry_xtherma_config_pk_circulation_pump_enabled-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'binary_sensor',
+    'entity_category': None,
+    'entity_id': 'binary_sensor.test_entry_xtherma_config_pk_circulation_pump_enabled',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <BinarySensorDeviceClass.RUNNING: 'running'>,
+    'original_icon': 'mdi:pump-off',
+    'original_name': '[PK] Circulation pump enabled',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'pk',
+    'unique_id': 'test_entry_xtherma-pk',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_binary_sensor_rest_api[mock_rest_api_client0][binary_sensor.test_entry_xtherma_config_pk_circulation_pump_enabled-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'running',
+      'friendly_name': 'test_entry_xtherma_config [PK] Circulation pump enabled',
+      'icon': 'mdi:pump-off',
+      'parameter': 'pk',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.test_entry_xtherma_config_pk_circulation_pump_enabled',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_setup_binary_sensor_rest_api[mock_rest_api_client0][binary_sensor.test_entry_xtherma_config_pww_circulation_pump_hot_water_enabled-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'binary_sensor',
+    'entity_category': None,
+    'entity_id': 'binary_sensor.test_entry_xtherma_config_pww_circulation_pump_hot_water_enabled',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <BinarySensorDeviceClass.RUNNING: 'running'>,
+    'original_icon': 'mdi:pump-off',
+    'original_name': '[PWW] Circulation pump hot water enabled',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'pww',
+    'unique_id': 'test_entry_xtherma-pww',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_binary_sensor_rest_api[mock_rest_api_client0][binary_sensor.test_entry_xtherma_config_pww_circulation_pump_hot_water_enabled-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'running',
+      'friendly_name': 'test_entry_xtherma_config [PWW] Circulation pump hot water enabled',
+      'icon': 'mdi:pump',
+      'parameter': 'pww',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.test_entry_xtherma_config_pww_circulation_pump_hot_water_enabled',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---
+# name: test_setup_binary_sensor_rest_api[mock_rest_api_client0][binary_sensor.test_entry_xtherma_config_ss14a_enwg_state-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'binary_sensor',
+    'entity_category': None,
+    'entity_id': 'binary_sensor.test_entry_xtherma_config_ss14a_enwg_state',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': None,
+    'original_icon': None,
+    'original_name': '§14a EnWG state',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': '14a',
+    'unique_id': 'test_entry_xtherma-14a',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_binary_sensor_rest_api[mock_rest_api_client0][binary_sensor.test_entry_xtherma_config_ss14a_enwg_state-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_config §14a EnWG state',
+      'parameter': '14a',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.test_entry_xtherma_config_ss14a_enwg_state',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_setup_binary_sensor_rest_api[mock_rest_api_client0][binary_sensor.test_entry_xtherma_config_system_ok-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'binary_sensor',
+    'entity_category': None,
+    'entity_id': 'binary_sensor.test_entry_xtherma_config_system_ok',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <BinarySensorDeviceClass.RUNNING: 'running'>,
+    'original_icon': 'mdi:alert',
+    'original_name': 'System ok',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'error',
+    'unique_id': 'test_entry_xtherma-error',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_binary_sensor_rest_api[mock_rest_api_client0][binary_sensor.test_entry_xtherma_config_system_ok-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'running',
+      'friendly_name': 'test_entry_xtherma_config System ok',
+      'icon': 'mdi:check',
+      'parameter': 'error',
+    }),
+    'context': <ANY>,
+    'entity_id': 'binary_sensor.test_entry_xtherma_config_system_ok',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'on',
+  })
+# ---

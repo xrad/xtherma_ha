@@ -1,0 +1,5553 @@
+# serializer version: 1
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_coefficient_of_performance_heat_pump-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_coefficient_of_performance_heat_pump',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:poll',
+    'original_name': 'Coefficient of performance heat pump',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'efficiency_hp',
+    'unique_id': 'test_entry_xtherma-efficiency_hp',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_coefficient_of_performance_heat_pump-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_modbus_config Coefficient of performance heat pump',
+      'icon': 'mdi:poll',
+      'parameter': 'efficiency_hp',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_coefficient_of_performance_heat_pump',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_compressor_frequency-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_compressor_frequency',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.FREQUENCY: 'frequency'>,
+    'original_icon': 'mdi:sine-wave',
+    'original_name': 'Compressor frequency',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'vf',
+    'unique_id': 'test_entry_xtherma-vf',
+    'unit_of_measurement': <UnitOfFrequency.HERTZ: 'Hz'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_compressor_frequency-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'frequency',
+      'friendly_name': 'test_entry_xtherma_modbus_config Compressor frequency',
+      'icon': 'mdi:sine-wave',
+      'parameter': 'vf',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfFrequency.HERTZ: 'Hz'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_compressor_frequency',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_controller_version-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_controller_version',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:information-outline',
+    'original_name': 'Controller version',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'controller_v',
+    'unique_id': 'test_entry_xtherma-controller_v',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_controller_version-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_modbus_config Controller version',
+      'icon': 'mdi:information-outline',
+      'parameter': 'controller_v',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_controller_version',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2.43',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_current_operating_mode-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'options': list([
+        'standby',
+        'heating',
+        'cooling',
+        'water',
+        'auto',
+      ]),
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_current_operating_mode',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <SensorDeviceClass.ENUM: 'enum'>,
+    'original_icon': 'mdi:cogs',
+    'original_name': 'Current operating mode',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'mode',
+    'unique_id': 'test_entry_xtherma-mode',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_current_operating_mode-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'enum',
+      'friendly_name': 'test_entry_xtherma_modbus_config Current operating mode',
+      'icon': 'mdi:thermometer-water',
+      'options': list([
+        'standby',
+        'heating',
+        'cooling',
+        'water',
+        'auto',
+      ]),
+      'parameter': 'mode',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_current_operating_mode',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'water',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_cooling_operation_electric_power_consumption-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_cooling_operation_electric_power_consumption',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Daily cooling operation electric power consumption',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_hp_in_c',
+    'unique_id': 'test_entry_xtherma-day_hp_in_c',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_cooling_operation_electric_power_consumption-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_modbus_config Daily cooling operation electric power consumption',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'day_hp_in_c',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_cooling_operation_electric_power_consumption',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_cooling_operation_thermal_output-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_cooling_operation_thermal_output',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Daily cooling operation thermal output',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_hp_out_c',
+    'unique_id': 'test_entry_xtherma-day_hp_out_c',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_cooling_operation_thermal_output-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_modbus_config Daily cooling operation thermal output',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'day_hp_out_c',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_cooling_operation_thermal_output',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_1_3_kw_electric_power_consumption-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_1_3_kw_electric_power_consumption',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Daily DHW auxiliary stage 1 (3 kW) electric power consumption',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup3_in_hw',
+    'unique_id': 'test_entry_xtherma-day_backup3_in_hw',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_1_3_kw_electric_power_consumption-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_modbus_config Daily DHW auxiliary stage 1 (3 kW) electric power consumption',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'day_backup3_in_hw',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_1_3_kw_electric_power_consumption',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_1_3_kw_thermal_output-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_1_3_kw_thermal_output',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Daily DHW auxiliary stage 1 (3 kW) thermal output',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup3_out_hw',
+    'unique_id': 'test_entry_xtherma-day_backup3_out_hw',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_1_3_kw_thermal_output-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_modbus_config Daily DHW auxiliary stage 1 (3 kW) thermal output',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'day_backup3_out_hw',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_1_3_kw_thermal_output',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_2_6_kw_electric_power_consumption-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_2_6_kw_electric_power_consumption',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Daily DHW auxiliary stage 2 (6 kW) electric power consumption',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup6_in_hw',
+    'unique_id': 'test_entry_xtherma-day_backup6_in_hw',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_2_6_kw_electric_power_consumption-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_modbus_config Daily DHW auxiliary stage 2 (6 kW) electric power consumption',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'day_backup6_in_hw',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_2_6_kw_electric_power_consumption',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_2_6_kw_thermal_output-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_2_6_kw_thermal_output',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Daily DHW auxiliary stage 2 (6 kW) thermal output',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup6_out_hw',
+    'unique_id': 'test_entry_xtherma-day_backup6_out_hw',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_2_6_kw_thermal_output-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_modbus_config Daily DHW auxiliary stage 2 (6 kW) thermal output',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'day_backup6_out_hw',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_dhw_auxiliary_stage_2_6_kw_thermal_output',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_dhw_operation_electric_power_consumption-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_dhw_operation_electric_power_consumption',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Daily DHW operation electric power consumption',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_hp_in_hw',
+    'unique_id': 'test_entry_xtherma-day_hp_in_hw',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_dhw_operation_electric_power_consumption-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_modbus_config Daily DHW operation electric power consumption',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'day_hp_in_hw',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_dhw_operation_electric_power_consumption',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '1.19',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_1_3_kw_electric_power_consumption-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_1_3_kw_electric_power_consumption',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Daily heating auxiliary stage 1 (3 kW) electric power consumption',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup3_in_h',
+    'unique_id': 'test_entry_xtherma-day_backup3_in_h',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_1_3_kw_electric_power_consumption-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_modbus_config Daily heating auxiliary stage 1 (3 kW) electric power consumption',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'day_backup3_in_h',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_1_3_kw_electric_power_consumption',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_1_3_kw_thermal_output-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_1_3_kw_thermal_output',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Daily heating auxiliary stage 1 (3 kW) thermal output',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup3_out_h',
+    'unique_id': 'test_entry_xtherma-day_backup3_out_h',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_1_3_kw_thermal_output-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_modbus_config Daily heating auxiliary stage 1 (3 kW) thermal output',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'day_backup3_out_h',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_1_3_kw_thermal_output',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_2_6_kw_electric_power_consumption-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_2_6_kw_electric_power_consumption',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Daily heating auxiliary stage 2 (6 kW) electric power consumption',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup6_in_h',
+    'unique_id': 'test_entry_xtherma-day_backup6_in_h',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_2_6_kw_electric_power_consumption-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_modbus_config Daily heating auxiliary stage 2 (6 kW) electric power consumption',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'day_backup6_in_h',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_2_6_kw_electric_power_consumption',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_2_6_kw_thermal_output-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_2_6_kw_thermal_output',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Daily heating auxiliary stage 2 (6 kW) thermal output',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup6_out_h',
+    'unique_id': 'test_entry_xtherma-day_backup6_out_h',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_2_6_kw_thermal_output-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_modbus_config Daily heating auxiliary stage 2 (6 kW) thermal output',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'day_backup6_out_h',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_heating_auxiliary_stage_2_6_kw_thermal_output',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_heating_operation_electric_power_consumption-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_heating_operation_electric_power_consumption',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Daily heating operation electric power consumption',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_hp_in_h',
+    'unique_id': 'test_entry_xtherma-day_hp_in_h',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_heating_operation_electric_power_consumption-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_modbus_config Daily heating operation electric power consumption',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'day_hp_in_h',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_heating_operation_electric_power_consumption',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2.44',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_heating_operation_thermal_output-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_heating_operation_thermal_output',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Daily heating operation thermal output',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_hp_out_h',
+    'unique_id': 'test_entry_xtherma-day_hp_out_h',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_heating_operation_thermal_output-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_modbus_config Daily heating operation thermal output',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'day_hp_out_h',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_heating_operation_thermal_output',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '14.28',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_hot_water_operation_thermal_output-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_hot_water_operation_thermal_output',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Daily hot water operation thermal output',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_hp_out_hw',
+    'unique_id': 'test_entry_xtherma-day_hp_out_hw',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_daily_hot_water_operation_thermal_output-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_modbus_config Daily hot water operation thermal output',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'day_hp_out_hw',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_daily_hot_water_operation_thermal_output',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '3.98',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_heat_output_auxiliary_emergency_heating_thermal-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_heat_output_auxiliary_emergency_heating_thermal',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.POWER: 'power'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Heat output auxiliary/emergency heating (thermal)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'out_backup',
+    'unique_id': 'test_entry_xtherma-out_backup',
+    'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_heat_output_auxiliary_emergency_heating_thermal-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'power',
+      'friendly_name': 'test_entry_xtherma_modbus_config Heat output auxiliary/emergency heating (thermal)',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'out_backup',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_heat_output_auxiliary_emergency_heating_thermal',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_heat_output_heat_pump_thermal-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_heat_output_heat_pump_thermal',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.POWER: 'power'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Heat output heat pump (thermal)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'out_hp',
+    'unique_id': 'test_entry_xtherma-out_hp',
+    'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_heat_output_heat_pump_thermal-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'power',
+      'friendly_name': 'test_entry_xtherma_modbus_config Heat output heat pump (thermal)',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'out_hp',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_heat_output_heat_pump_thermal',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_ld1_fan_1_speed-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_ld1_fan_1_speed',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:fan',
+    'original_name': '[LD1] Fan 1 speed',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'ld1',
+    'unique_id': 'test_entry_xtherma-ld1',
+    'unit_of_measurement': 'rpm',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_ld1_fan_1_speed-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_modbus_config [LD1] Fan 1 speed',
+      'icon': 'mdi:fan',
+      'parameter': 'ld1',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': 'rpm',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_ld1_fan_1_speed',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '5.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_ld2_fan_2_speed-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_ld2_fan_2_speed',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:fan',
+    'original_name': '[LD2] Fan 2 speed',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'ld2',
+    'unique_id': 'test_entry_xtherma-ld2',
+    'unit_of_measurement': 'rpm',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_ld2_fan_2_speed-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_modbus_config [LD2] Fan 2 speed',
+      'icon': 'mdi:fan',
+      'parameter': 'ld2',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': 'rpm',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_ld2_fan_2_speed',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_overall_coefficient_of_performance_incl_auxiliary_heating-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_overall_coefficient_of_performance_incl_auxiliary_heating',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:poll',
+    'original_name': 'Overall coefficient of performance (incl. auxiliary heating)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'efficiency_total',
+    'unique_id': 'test_entry_xtherma-efficiency_total',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_overall_coefficient_of_performance_incl_auxiliary_heating-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_modbus_config Overall coefficient of performance (incl. auxiliary heating)',
+      'icon': 'mdi:poll',
+      'parameter': 'efficiency_total',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_overall_coefficient_of_performance_incl_auxiliary_heating',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_overall_system_heat_output_thermisch-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_overall_system_heat_output_thermisch',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.POWER: 'power'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Overall system heat output (thermisch)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'out_total',
+    'unique_id': 'test_entry_xtherma-out_total',
+    'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_overall_system_heat_output_thermisch-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'power',
+      'friendly_name': 'test_entry_xtherma_modbus_config Overall system heat output (thermisch)',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'out_total',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_overall_system_heat_output_thermisch',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_overall_system_power_consumption_electric-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_overall_system_power_consumption_electric',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.POWER: 'power'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Overall system power consumption (electric)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'in_total',
+    'unique_id': 'test_entry_xtherma-in_total',
+    'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_overall_system_power_consumption_electric-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'power',
+      'friendly_name': 'test_entry_xtherma_modbus_config Overall system power consumption (electric)',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'in_total',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_overall_system_power_consumption_electric',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_pkl_circulation_pump_performance-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_pkl_circulation_pump_performance',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:pump',
+    'original_name': '[PKL] Circulation pump performance',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'pkl',
+    'unique_id': 'test_entry_xtherma-pkl',
+    'unit_of_measurement': '%',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_pkl_circulation_pump_performance-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_modbus_config [PKL] Circulation pump performance',
+      'icon': 'mdi:pump',
+      'parameter': 'pkl',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_pkl_circulation_pump_performance',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_power_consumption_auxiliary_emergency_heating_electric-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_power_consumption_auxiliary_emergency_heating_electric',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.POWER: 'power'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Power consumption auxiliary/emergency heating (electric)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'in_backup',
+    'unique_id': 'test_entry_xtherma-in_backup',
+    'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_power_consumption_auxiliary_emergency_heating_electric-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'power',
+      'friendly_name': 'test_entry_xtherma_modbus_config Power consumption auxiliary/emergency heating (electric)',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'in_backup',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_power_consumption_auxiliary_emergency_heating_electric',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_power_consumption_heat_pump_electric-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_power_consumption_heat_pump_electric',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.POWER: 'power'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Power consumption heat pump (electric)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'in_hp',
+    'unique_id': 'test_entry_xtherma-in_hp',
+    'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_power_consumption_heat_pump_electric-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'power',
+      'friendly_name': 'test_entry_xtherma_modbus_config Power consumption heat pump (electric)',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'in_hp',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_power_consumption_heat_pump_electric',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_sg_ready_status-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'options': list([
+        'off',
+        'normal',
+        'block',
+        'raise',
+        'start',
+      ]),
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_sg_ready_status',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <SensorDeviceClass.ENUM: 'enum'>,
+    'original_icon': 'mdi:cogs',
+    'original_name': 'SG-Ready Status',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'sg',
+    'unique_id': 'test_entry_xtherma-sg',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_sg_ready_status-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'enum',
+      'friendly_name': 'test_entry_xtherma_modbus_config SG-Ready Status',
+      'icon': 'mdi:cancel',
+      'options': list([
+        'off',
+        'normal',
+        'block',
+        'raise',
+        'start',
+      ]),
+      'parameter': 'sg',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_sg_ready_status',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_ta1_outdoor_temperature_average_1h-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_ta1_outdoor_temperature_average_1h',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-auto',
+    'original_name': '[TA1] Outdoor temperature average (1h)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'ta1',
+    'unique_id': 'test_entry_xtherma-ta1',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_ta1_outdoor_temperature_average_1h-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config [TA1] Outdoor temperature average (1h)',
+      'icon': 'mdi:thermometer-auto',
+      'parameter': 'ta1',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_ta1_outdoor_temperature_average_1h',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '12.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_ta24_outdoor_temperature_average_24h-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_ta24_outdoor_temperature_average_24h',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-auto',
+    'original_name': '[TA24] Outdoor temperature average (24h)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'ta24',
+    'unique_id': 'test_entry_xtherma-ta24',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_ta24_outdoor_temperature_average_24h-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config [TA24] Outdoor temperature average (24h)',
+      'icon': 'mdi:thermometer-auto',
+      'parameter': 'ta24',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_ta24_outdoor_temperature_average_24h',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '11.8',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_ta4_outdoor_temperature_average_4h-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_ta4_outdoor_temperature_average_4h',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-auto',
+    'original_name': '[TA4] Outdoor temperature average (4h)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'ta4',
+    'unique_id': 'test_entry_xtherma-ta4',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_ta4_outdoor_temperature_average_4h-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config [TA4] Outdoor temperature average (4h)',
+      'icon': 'mdi:thermometer-auto',
+      'parameter': 'ta4',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_ta4_outdoor_temperature_average_4h',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '12.1',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_ta8_outdoor_temperature_average_8h-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_ta8_outdoor_temperature_average_8h',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-auto',
+    'original_name': '[TA8] Outdoor temperature average (8h)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'ta8',
+    'unique_id': 'test_entry_xtherma-ta8',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_ta8_outdoor_temperature_average_8h-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config [TA8] Outdoor temperature average (8h)',
+      'icon': 'mdi:thermometer-auto',
+      'parameter': 'ta8',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_ta8_outdoor_temperature_average_8h',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '10.9',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_ta_outdoor_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_ta_outdoor_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': '[TA] Outdoor temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'ta',
+    'unique_id': 'test_entry_xtherma-ta',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_ta_outdoor_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config [TA] Outdoor temperature',
+      'icon': 'mdi:thermometer',
+      'parameter': 'ta',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_ta_outdoor_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '13.5',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_target_cooling_1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_target_cooling_1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:snowflake-thermometer',
+    'original_name': 'Target cooling 1',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'c1_target',
+    'unique_id': 'test_entry_xtherma-c1_target',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_target_cooling_1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Target cooling 1',
+      'icon': 'mdi:snowflake-thermometer',
+      'parameter': 'c1_target',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_target_cooling_1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '20.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_target_cooling_2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_target_cooling_2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:snowflake-thermometer',
+    'original_name': 'Target cooling 2',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'c2_target',
+    'unique_id': 'test_entry_xtherma-c2_target',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_target_cooling_2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Target cooling 2',
+      'icon': 'mdi:snowflake-thermometer',
+      'parameter': 'c2_target',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_target_cooling_2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '20.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_target_cooling_operation-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_target_cooling_operation',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:snowflake-thermometer',
+    'original_name': 'Target cooling operation',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'c_target',
+    'unique_id': 'test_entry_xtherma-c_target',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_target_cooling_operation-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Target cooling operation',
+      'icon': 'mdi:snowflake-thermometer',
+      'parameter': 'c_target',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_target_cooling_operation',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '20.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_target_heating_1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_target_heating_1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:home-thermometer-outline',
+    'original_name': 'Target heating 1',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'h1_target',
+    'unique_id': 'test_entry_xtherma-h1_target',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_target_heating_1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Target heating 1',
+      'icon': 'mdi:home-thermometer-outline',
+      'parameter': 'h1_target',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_target_heating_1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '22.9',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_target_heating_2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_target_heating_2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:home-thermometer-outline',
+    'original_name': 'Target heating 2',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'h2_target',
+    'unique_id': 'test_entry_xtherma-h2_target',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_target_heating_2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Target heating 2',
+      'icon': 'mdi:home-thermometer-outline',
+      'parameter': 'h2_target',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_target_heating_2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '35.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_target_heating_operation-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_target_heating_operation',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:home-thermometer-outline',
+    'original_name': 'Target heating operation',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'h_target',
+    'unique_id': 'test_entry_xtherma-h_target',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_target_heating_operation-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Target heating operation',
+      'icon': 'mdi:home-thermometer-outline',
+      'parameter': 'h_target',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_target_heating_operation',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '22.9',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_target_hot_water_production_current-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_target_hot_water_production_current',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-water',
+    'original_name': 'Target hot water production (current)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'hw_target',
+    'unique_id': 'test_entry_xtherma-hw_target',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_target_hot_water_production_current-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config Target hot water production (current)',
+      'icon': 'mdi:thermometer-water',
+      'parameter': 'hw_target',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_target_hot_water_production_current',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '50.0',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_tk1_circuit_1_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_tk1_circuit_1_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': '[TK1] Circuit 1 temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'tk1',
+    'unique_id': 'test_entry_xtherma-tk1',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_tk1_circuit_1_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config [TK1] Circuit 1 temperature',
+      'icon': 'mdi:thermometer',
+      'parameter': 'tk1',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_tk1_circuit_1_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '30.1',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_tk2_circuit_2_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_tk2_circuit_2_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': '[TK2] Circuit 2 temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'tk2',
+    'unique_id': 'test_entry_xtherma-tk2',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_tk2_circuit_2_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config [TK2] Circuit 2 temperature',
+      'icon': 'mdi:thermometer',
+      'parameter': 'tk2',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_tk2_circuit_2_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '-98.9',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_tk_heating_cooling_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_tk_heating_cooling_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': '[TK] Heating / Cooling temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'tk',
+    'unique_id': 'test_entry_xtherma-tk',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_tk_heating_cooling_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config [TK] Heating / Cooling temperature',
+      'icon': 'mdi:thermometer',
+      'parameter': 'tk',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_tk_heating_cooling_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '32.5',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_tr_room_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_tr_room_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': '[TR] Room temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'tr',
+    'unique_id': 'test_entry_xtherma-tr',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_tr_room_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config [TR] Room temperature',
+      'icon': 'mdi:thermometer',
+      'parameter': 'tr',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_tr_room_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '21.9',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_trl_return_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_trl_return_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-chevron-down',
+    'original_name': '[TRL] Return temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'trl',
+    'unique_id': 'test_entry_xtherma-trl',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_trl_return_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config [TRL] Return temperature',
+      'icon': 'mdi:thermometer-chevron-down',
+      'parameter': 'trl',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_trl_return_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '26.7',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_tvl_flow_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_tvl_flow_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-chevron-up',
+    'original_name': '[TVL] Flow temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'tvl',
+    'unique_id': 'test_entry_xtherma-tvl',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_tvl_flow_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config [TVL] Flow temperature',
+      'icon': 'mdi:thermometer-chevron-up',
+      'parameter': 'tvl',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_tvl_flow_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '26.1',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_tw_hot_water_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_tw_hot_water_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-water',
+    'original_name': '[TW] Hot water temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'tw',
+    'unique_id': 'test_entry_xtherma-tw',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_tw_hot_water_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_modbus_config [TW] Hot water temperature',
+      'icon': 'mdi:thermometer-water',
+      'parameter': 'tw',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_tw_hot_water_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '51.5',
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_v_volume_flow-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_v_volume_flow',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.VOLUME_FLOW_RATE: 'volume_flow_rate'>,
+    'original_icon': 'mdi:waves-arrow-right',
+    'original_name': '[V] Volume flow',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'v',
+    'unique_id': 'test_entry_xtherma-v',
+    'unit_of_measurement': <UnitOfVolumeFlowRate.LITERS_PER_MINUTE: 'L/min'>,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_v_volume_flow-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'volume_flow_rate',
+      'friendly_name': 'test_entry_xtherma_modbus_config [V] Volume flow',
+      'icon': 'mdi:waves-arrow-right',
+      'parameter': 'v',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfVolumeFlowRate.LITERS_PER_MINUTE: 'L/min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_v_volume_flow',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_coefficient_of_performance_heat_pump-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_coefficient_of_performance_heat_pump',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:poll',
+    'original_name': 'Coefficient of performance heat pump',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'efficiency_hp',
+    'unique_id': 'test_entry_xtherma-efficiency_hp',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_coefficient_of_performance_heat_pump-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_config Coefficient of performance heat pump',
+      'icon': 'mdi:poll',
+      'parameter': 'efficiency_hp',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_coefficient_of_performance_heat_pump',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_compressor_frequency-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_compressor_frequency',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.FREQUENCY: 'frequency'>,
+    'original_icon': 'mdi:sine-wave',
+    'original_name': 'Compressor frequency',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'vf',
+    'unique_id': 'test_entry_xtherma-vf',
+    'unit_of_measurement': <UnitOfFrequency.HERTZ: 'Hz'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_compressor_frequency-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'frequency',
+      'friendly_name': 'test_entry_xtherma_config Compressor frequency',
+      'icon': 'mdi:sine-wave',
+      'parameter': 'vf',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfFrequency.HERTZ: 'Hz'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_compressor_frequency',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_controller_version-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_controller_version',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:information-outline',
+    'original_name': 'Controller version',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'controller_v',
+    'unique_id': 'test_entry_xtherma-controller_v',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_controller_version-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_config Controller version',
+      'icon': 'mdi:information-outline',
+      'parameter': 'controller_v',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_controller_version',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2.43',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_current_operating_mode-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'options': list([
+        'standby',
+        'heating',
+        'cooling',
+        'water',
+        'auto',
+      ]),
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_current_operating_mode',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <SensorDeviceClass.ENUM: 'enum'>,
+    'original_icon': 'mdi:cogs',
+    'original_name': 'Current operating mode',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'mode',
+    'unique_id': 'test_entry_xtherma-mode',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_current_operating_mode-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'enum',
+      'friendly_name': 'test_entry_xtherma_config Current operating mode',
+      'icon': 'mdi:thermometer-water',
+      'options': list([
+        'standby',
+        'heating',
+        'cooling',
+        'water',
+        'auto',
+      ]),
+      'parameter': 'mode',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_current_operating_mode',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'water',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_cooling_operation_electric_power_consumption-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_cooling_operation_electric_power_consumption',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Daily cooling operation electric power consumption',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_hp_in_c',
+    'unique_id': 'test_entry_xtherma-day_hp_in_c',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_cooling_operation_electric_power_consumption-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_config Daily cooling operation electric power consumption',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'day_hp_in_c',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_cooling_operation_electric_power_consumption',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_cooling_operation_thermal_output-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_cooling_operation_thermal_output',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Daily cooling operation thermal output',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_hp_out_c',
+    'unique_id': 'test_entry_xtherma-day_hp_out_c',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_cooling_operation_thermal_output-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_config Daily cooling operation thermal output',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'day_hp_out_c',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_cooling_operation_thermal_output',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_1_3_kw_electric_power_consumption-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_1_3_kw_electric_power_consumption',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Daily DHW auxiliary stage 1 (3 kW) electric power consumption',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup3_in_hw',
+    'unique_id': 'test_entry_xtherma-day_backup3_in_hw',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_1_3_kw_electric_power_consumption-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_config Daily DHW auxiliary stage 1 (3 kW) electric power consumption',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'day_backup3_in_hw',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_1_3_kw_electric_power_consumption',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_1_3_kw_thermal_output-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_1_3_kw_thermal_output',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Daily DHW auxiliary stage 1 (3 kW) thermal output',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup3_out_hw',
+    'unique_id': 'test_entry_xtherma-day_backup3_out_hw',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_1_3_kw_thermal_output-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_config Daily DHW auxiliary stage 1 (3 kW) thermal output',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'day_backup3_out_hw',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_1_3_kw_thermal_output',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_2_6_kw_electric_power_consumption-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_2_6_kw_electric_power_consumption',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Daily DHW auxiliary stage 2 (6 kW) electric power consumption',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup6_in_hw',
+    'unique_id': 'test_entry_xtherma-day_backup6_in_hw',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_2_6_kw_electric_power_consumption-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_config Daily DHW auxiliary stage 2 (6 kW) electric power consumption',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'day_backup6_in_hw',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_2_6_kw_electric_power_consumption',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_2_6_kw_thermal_output-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_2_6_kw_thermal_output',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Daily DHW auxiliary stage 2 (6 kW) thermal output',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup6_out_hw',
+    'unique_id': 'test_entry_xtherma-day_backup6_out_hw',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_2_6_kw_thermal_output-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_config Daily DHW auxiliary stage 2 (6 kW) thermal output',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'day_backup6_out_hw',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_dhw_auxiliary_stage_2_6_kw_thermal_output',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_dhw_operation_electric_power_consumption-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_dhw_operation_electric_power_consumption',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Daily DHW operation electric power consumption',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_hp_in_hw',
+    'unique_id': 'test_entry_xtherma-day_hp_in_hw',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_dhw_operation_electric_power_consumption-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_config Daily DHW operation electric power consumption',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'day_hp_in_hw',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_dhw_operation_electric_power_consumption',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '1.19',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_1_3_kw_electric_power_consumption-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_1_3_kw_electric_power_consumption',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Daily heating auxiliary stage 1 (3 kW) electric power consumption',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup3_in_h',
+    'unique_id': 'test_entry_xtherma-day_backup3_in_h',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_1_3_kw_electric_power_consumption-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_config Daily heating auxiliary stage 1 (3 kW) electric power consumption',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'day_backup3_in_h',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_1_3_kw_electric_power_consumption',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_1_3_kw_thermal_output-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_1_3_kw_thermal_output',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Daily heating auxiliary stage 1 (3 kW) thermal output',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup3_out_h',
+    'unique_id': 'test_entry_xtherma-day_backup3_out_h',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_1_3_kw_thermal_output-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_config Daily heating auxiliary stage 1 (3 kW) thermal output',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'day_backup3_out_h',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_1_3_kw_thermal_output',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_2_6_kw_electric_power_consumption-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_2_6_kw_electric_power_consumption',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Daily heating auxiliary stage 2 (6 kW) electric power consumption',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup6_in_h',
+    'unique_id': 'test_entry_xtherma-day_backup6_in_h',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_2_6_kw_electric_power_consumption-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_config Daily heating auxiliary stage 2 (6 kW) electric power consumption',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'day_backup6_in_h',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_2_6_kw_electric_power_consumption',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_2_6_kw_thermal_output-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_2_6_kw_thermal_output',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Daily heating auxiliary stage 2 (6 kW) thermal output',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_backup6_out_h',
+    'unique_id': 'test_entry_xtherma-day_backup6_out_h',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_2_6_kw_thermal_output-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_config Daily heating auxiliary stage 2 (6 kW) thermal output',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'day_backup6_out_h',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_heating_auxiliary_stage_2_6_kw_thermal_output',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_heating_operation_electric_power_consumption-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_heating_operation_electric_power_consumption',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Daily heating operation electric power consumption',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_hp_in_h',
+    'unique_id': 'test_entry_xtherma-day_hp_in_h',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_heating_operation_electric_power_consumption-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_config Daily heating operation electric power consumption',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'day_hp_in_h',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_heating_operation_electric_power_consumption',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '2.44',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_heating_operation_thermal_output-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_heating_operation_thermal_output',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Daily heating operation thermal output',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_hp_out_h',
+    'unique_id': 'test_entry_xtherma-day_hp_out_h',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_heating_operation_thermal_output-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_config Daily heating operation thermal output',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'day_hp_out_h',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_heating_operation_thermal_output',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '14.28',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_hot_water_operation_thermal_output-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_hot_water_operation_thermal_output',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 2,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.ENERGY: 'energy'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Daily hot water operation thermal output',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'day_hp_out_hw',
+    'unique_id': 'test_entry_xtherma-day_hp_out_hw',
+    'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_daily_hot_water_operation_thermal_output-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'energy',
+      'friendly_name': 'test_entry_xtherma_config Daily hot water operation thermal output',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'day_hp_out_hw',
+      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      'unit_of_measurement': <UnitOfEnergy.KILO_WATT_HOUR: 'kWh'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_daily_hot_water_operation_thermal_output',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '3.98',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_heat_output_auxiliary_emergency_heating_thermal-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_heat_output_auxiliary_emergency_heating_thermal',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.POWER: 'power'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Heat output auxiliary/emergency heating (thermal)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'out_backup',
+    'unique_id': 'test_entry_xtherma-out_backup',
+    'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_heat_output_auxiliary_emergency_heating_thermal-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'power',
+      'friendly_name': 'test_entry_xtherma_config Heat output auxiliary/emergency heating (thermal)',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'out_backup',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_heat_output_auxiliary_emergency_heating_thermal',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_heat_output_heat_pump_thermal-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_heat_output_heat_pump_thermal',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.POWER: 'power'>,
+    'original_icon': 'mdi:heat-wave',
+    'original_name': 'Heat output heat pump (thermal)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'out_hp',
+    'unique_id': 'test_entry_xtherma-out_hp',
+    'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_heat_output_heat_pump_thermal-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'power',
+      'friendly_name': 'test_entry_xtherma_config Heat output heat pump (thermal)',
+      'icon': 'mdi:heat-wave',
+      'parameter': 'out_hp',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_heat_output_heat_pump_thermal',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_ld1_fan_1_speed-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_ld1_fan_1_speed',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:fan',
+    'original_name': '[LD1] Fan 1 speed',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'ld1',
+    'unique_id': 'test_entry_xtherma-ld1',
+    'unit_of_measurement': 'rpm',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_ld1_fan_1_speed-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_config [LD1] Fan 1 speed',
+      'icon': 'mdi:fan',
+      'parameter': 'ld1',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': 'rpm',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_ld1_fan_1_speed',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '5.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_ld2_fan_2_speed-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_ld2_fan_2_speed',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:fan',
+    'original_name': '[LD2] Fan 2 speed',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'ld2',
+    'unique_id': 'test_entry_xtherma-ld2',
+    'unit_of_measurement': 'rpm',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_ld2_fan_2_speed-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_config [LD2] Fan 2 speed',
+      'icon': 'mdi:fan',
+      'parameter': 'ld2',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': 'rpm',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_ld2_fan_2_speed',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_overall_coefficient_of_performance_incl_auxiliary_heating-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_overall_coefficient_of_performance_incl_auxiliary_heating',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:poll',
+    'original_name': 'Overall coefficient of performance (incl. auxiliary heating)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'efficiency_total',
+    'unique_id': 'test_entry_xtherma-efficiency_total',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_overall_coefficient_of_performance_incl_auxiliary_heating-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_config Overall coefficient of performance (incl. auxiliary heating)',
+      'icon': 'mdi:poll',
+      'parameter': 'efficiency_total',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_overall_coefficient_of_performance_incl_auxiliary_heating',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_pkl_circulation_pump_performance-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_pkl_circulation_pump_performance',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:pump',
+    'original_name': '[PKL] Circulation pump performance',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'pkl',
+    'unique_id': 'test_entry_xtherma-pkl',
+    'unit_of_measurement': '%',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_pkl_circulation_pump_performance-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_config [PKL] Circulation pump performance',
+      'icon': 'mdi:pump',
+      'parameter': 'pkl',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': '%',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_pkl_circulation_pump_performance',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_power_consumption_auxiliary_emergency_heating_electric-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_power_consumption_auxiliary_emergency_heating_electric',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.POWER: 'power'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Power consumption auxiliary/emergency heating (electric)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'in_backup',
+    'unique_id': 'test_entry_xtherma-in_backup',
+    'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_power_consumption_auxiliary_emergency_heating_electric-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'power',
+      'friendly_name': 'test_entry_xtherma_config Power consumption auxiliary/emergency heating (electric)',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'in_backup',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_power_consumption_auxiliary_emergency_heating_electric',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_power_consumption_heat_pump_electric-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_power_consumption_heat_pump_electric',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.POWER: 'power'>,
+    'original_icon': 'mdi:lightning-bolt',
+    'original_name': 'Power consumption heat pump (electric)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'in_hp',
+    'unique_id': 'test_entry_xtherma-in_hp',
+    'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_power_consumption_heat_pump_electric-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'power',
+      'friendly_name': 'test_entry_xtherma_config Power consumption heat pump (electric)',
+      'icon': 'mdi:lightning-bolt',
+      'parameter': 'in_hp',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_power_consumption_heat_pump_electric',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_sg_ready_status-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'options': list([
+        'off',
+        'normal',
+        'block',
+        'raise',
+        'start',
+      ]),
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_sg_ready_status',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': <SensorDeviceClass.ENUM: 'enum'>,
+    'original_icon': 'mdi:cogs',
+    'original_name': 'SG-Ready Status',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'sg',
+    'unique_id': 'test_entry_xtherma-sg',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_sg_ready_status-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'enum',
+      'friendly_name': 'test_entry_xtherma_config SG-Ready Status',
+      'icon': 'mdi:cancel',
+      'options': list([
+        'off',
+        'normal',
+        'block',
+        'raise',
+        'start',
+      ]),
+      'parameter': 'sg',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_sg_ready_status',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': 'off',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_ta1_outdoor_temperature_average_1h-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_ta1_outdoor_temperature_average_1h',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-auto',
+    'original_name': '[TA1] Outdoor temperature average (1h)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'ta1',
+    'unique_id': 'test_entry_xtherma-ta1',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_ta1_outdoor_temperature_average_1h-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config [TA1] Outdoor temperature average (1h)',
+      'icon': 'mdi:thermometer-auto',
+      'parameter': 'ta1',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_ta1_outdoor_temperature_average_1h',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '12.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_ta24_outdoor_temperature_average_24h-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_ta24_outdoor_temperature_average_24h',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-auto',
+    'original_name': '[TA24] Outdoor temperature average (24h)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'ta24',
+    'unique_id': 'test_entry_xtherma-ta24',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_ta24_outdoor_temperature_average_24h-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config [TA24] Outdoor temperature average (24h)',
+      'icon': 'mdi:thermometer-auto',
+      'parameter': 'ta24',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_ta24_outdoor_temperature_average_24h',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '11.8',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_ta4_outdoor_temperature_average_4h-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_ta4_outdoor_temperature_average_4h',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-auto',
+    'original_name': '[TA4] Outdoor temperature average (4h)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'ta4',
+    'unique_id': 'test_entry_xtherma-ta4',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_ta4_outdoor_temperature_average_4h-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config [TA4] Outdoor temperature average (4h)',
+      'icon': 'mdi:thermometer-auto',
+      'parameter': 'ta4',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_ta4_outdoor_temperature_average_4h',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '12.1',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_ta8_outdoor_temperature_average_8h-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_ta8_outdoor_temperature_average_8h',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-auto',
+    'original_name': '[TA8] Outdoor temperature average (8h)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'ta8',
+    'unique_id': 'test_entry_xtherma-ta8',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_ta8_outdoor_temperature_average_8h-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config [TA8] Outdoor temperature average (8h)',
+      'icon': 'mdi:thermometer-auto',
+      'parameter': 'ta8',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_ta8_outdoor_temperature_average_8h',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '10.9',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_ta_outdoor_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_ta_outdoor_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': '[TA] Outdoor temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'ta',
+    'unique_id': 'test_entry_xtherma-ta',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_ta_outdoor_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config [TA] Outdoor temperature',
+      'icon': 'mdi:thermometer',
+      'parameter': 'ta',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_ta_outdoor_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '13.5',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_target_cooling_1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_target_cooling_1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:snowflake-thermometer',
+    'original_name': 'Target cooling 1',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'c1_target',
+    'unique_id': 'test_entry_xtherma-c1_target',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_target_cooling_1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Target cooling 1',
+      'icon': 'mdi:snowflake-thermometer',
+      'parameter': 'c1_target',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_target_cooling_1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '20.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_target_cooling_2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_target_cooling_2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:snowflake-thermometer',
+    'original_name': 'Target cooling 2',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'c2_target',
+    'unique_id': 'test_entry_xtherma-c2_target',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_target_cooling_2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Target cooling 2',
+      'icon': 'mdi:snowflake-thermometer',
+      'parameter': 'c2_target',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_target_cooling_2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '20.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_target_cooling_operation-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_target_cooling_operation',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:snowflake-thermometer',
+    'original_name': 'Target cooling operation',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'c_target',
+    'unique_id': 'test_entry_xtherma-c_target',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_target_cooling_operation-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Target cooling operation',
+      'icon': 'mdi:snowflake-thermometer',
+      'parameter': 'c_target',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_target_cooling_operation',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '20.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_target_heating_1-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_target_heating_1',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:home-thermometer-outline',
+    'original_name': 'Target heating 1',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'h1_target',
+    'unique_id': 'test_entry_xtherma-h1_target',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_target_heating_1-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Target heating 1',
+      'icon': 'mdi:home-thermometer-outline',
+      'parameter': 'h1_target',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_target_heating_1',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '22.9',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_target_heating_2-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_target_heating_2',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:home-thermometer-outline',
+    'original_name': 'Target heating 2',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'h2_target',
+    'unique_id': 'test_entry_xtherma-h2_target',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_target_heating_2-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Target heating 2',
+      'icon': 'mdi:home-thermometer-outline',
+      'parameter': 'h2_target',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_target_heating_2',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '35.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_target_heating_operation-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_target_heating_operation',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:home-thermometer-outline',
+    'original_name': 'Target heating operation',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'h_target',
+    'unique_id': 'test_entry_xtherma-h_target',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_target_heating_operation-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Target heating operation',
+      'icon': 'mdi:home-thermometer-outline',
+      'parameter': 'h_target',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_target_heating_operation',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '22.9',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_target_hot_water_production_current-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_target_hot_water_production_current',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-water',
+    'original_name': 'Target hot water production (current)',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'hw_target',
+    'unique_id': 'test_entry_xtherma-hw_target',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_target_hot_water_production_current-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config Target hot water production (current)',
+      'icon': 'mdi:thermometer-water',
+      'parameter': 'hw_target',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_target_hot_water_production_current',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '50.0',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_tk1_circuit_1_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_tk1_circuit_1_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': '[TK1] Circuit 1 temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'tk1',
+    'unique_id': 'test_entry_xtherma-tk1',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_tk1_circuit_1_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config [TK1] Circuit 1 temperature',
+      'icon': 'mdi:thermometer',
+      'parameter': 'tk1',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_tk1_circuit_1_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '30.1',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_tk2_circuit_2_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_tk2_circuit_2_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': '[TK2] Circuit 2 temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'tk2',
+    'unique_id': 'test_entry_xtherma-tk2',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_tk2_circuit_2_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config [TK2] Circuit 2 temperature',
+      'icon': 'mdi:thermometer',
+      'parameter': 'tk2',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_tk2_circuit_2_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '-98.9',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_tk_heating_cooling_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_tk_heating_cooling_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': '[TK] Heating / Cooling temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'tk',
+    'unique_id': 'test_entry_xtherma-tk',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_tk_heating_cooling_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config [TK] Heating / Cooling temperature',
+      'icon': 'mdi:thermometer',
+      'parameter': 'tk',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_tk_heating_cooling_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '32.5',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_tr_room_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_tr_room_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer',
+    'original_name': '[TR] Room temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'tr',
+    'unique_id': 'test_entry_xtherma-tr',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_tr_room_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config [TR] Room temperature',
+      'icon': 'mdi:thermometer',
+      'parameter': 'tr',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_tr_room_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '21.9',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_trl_return_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_trl_return_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-chevron-down',
+    'original_name': '[TRL] Return temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'trl',
+    'unique_id': 'test_entry_xtherma-trl',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_trl_return_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config [TRL] Return temperature',
+      'icon': 'mdi:thermometer-chevron-down',
+      'parameter': 'trl',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_trl_return_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '26.7',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_tvl_flow_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_tvl_flow_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-chevron-up',
+    'original_name': '[TVL] Flow temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'tvl',
+    'unique_id': 'test_entry_xtherma-tvl',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_tvl_flow_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config [TVL] Flow temperature',
+      'icon': 'mdi:thermometer-chevron-up',
+      'parameter': 'tvl',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_tvl_flow_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '26.1',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_tw_hot_water_temperature-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_tw_hot_water_temperature',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 1,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.TEMPERATURE: 'temperature'>,
+    'original_icon': 'mdi:thermometer-water',
+    'original_name': '[TW] Hot water temperature',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'tw',
+    'unique_id': 'test_entry_xtherma-tw',
+    'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_tw_hot_water_temperature-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'temperature',
+      'friendly_name': 'test_entry_xtherma_config [TW] Hot water temperature',
+      'icon': 'mdi:thermometer-water',
+      'parameter': 'tw',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_tw_hot_water_temperature',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '51.5',
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_v_volume_flow-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': dict({
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+    }),
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_config_v_volume_flow',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+      'sensor': dict({
+        'suggested_display_precision': 0,
+      }),
+    }),
+    'original_device_class': <SensorDeviceClass.VOLUME_FLOW_RATE: 'volume_flow_rate'>,
+    'original_icon': 'mdi:waves-arrow-right',
+    'original_name': '[V] Volume flow',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'v',
+    'unique_id': 'test_entry_xtherma-v',
+    'unit_of_measurement': <UnitOfVolumeFlowRate.LITERS_PER_MINUTE: 'L/min'>,
+  })
+# ---
+# name: test_setup_sensor_rest_api[mock_rest_api_client0][sensor.test_entry_xtherma_config_v_volume_flow-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'device_class': 'volume_flow_rate',
+      'friendly_name': 'test_entry_xtherma_config [V] Volume flow',
+      'icon': 'mdi:waves-arrow-right',
+      'parameter': 'v',
+      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      'unit_of_measurement': <UnitOfVolumeFlowRate.LITERS_PER_MINUTE: 'L/min'>,
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_config_v_volume_flow',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '0.0',
+  })
+# ---

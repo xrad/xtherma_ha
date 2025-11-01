@@ -3,6 +3,7 @@
 from typing import TYPE_CHECKING, Any
 
 import pytest
+from homeassistant.components.sensor import DOMAIN as DOMAIN_SENSOR
 from homeassistant.config_entries import ConfigEntryState
 from homeassistant.const import EVENT_STATE_CHANGED
 from homeassistant.helpers.update_coordinator import UpdateFailed
@@ -11,18 +12,10 @@ from pymodbus.pdu.pdu import ExceptionResponse
 from custom_components.xtherma_fp.const import DOMAIN
 from tests.conftest import MockModbusParam
 from tests.helpers import (
-    get_sensor_platform,
+    get_platform,
     provide_empty_modbus_data,
     provide_modbus_data,
     set_modbus_register,
-)
-from tests.test_xtherma_fp import (
-    verify_integration_binary_sensors,
-    verify_integration_numbers,
-    verify_integration_selects,
-    verify_integration_sensors,
-    verify_integration_switches,
-    verify_parameter_keys,
 )
 
 from .conftest import init_modbus_integration
@@ -49,18 +42,6 @@ async def test_async_setup_entry_modbus_ok(hass, mock_modbus_tcp_client):
 
     assert len(hass.config_entries.async_entries(DOMAIN)) == 1
     assert entry.state is ConfigEntryState.LOADED
-
-    verify_integration_binary_sensors(hass, entry)
-
-    verify_integration_sensors(hass, entry)
-
-    verify_integration_switches(hass, entry)
-
-    verify_integration_numbers(hass, entry)
-
-    verify_integration_selects(hass, entry)
-
-    verify_parameter_keys(hass, entry)
 
 
 @pytest.mark.parametrize(
@@ -107,7 +88,7 @@ async def test_modbus_runtime_read_busy(hass, mock_modbus_tcp_client, caplog):
     coordinator = xtherma_data.coordinator
     assert coordinator.last_update_success
 
-    platform = get_sensor_platform(hass)
+    platform = get_platform(hass, DOMAIN_SENSOR)
     state = hass.states.get(SENSOR_ENTITY_ID_MODE)
     entity = platform.entities.get(state.entity_id)
     assert entity is not None

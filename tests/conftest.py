@@ -12,6 +12,8 @@ from homeassistant.util.json import (
 from pytest_homeassistant_custom_component.common import (
     MockConfigEntry,
 )
+from pytest_homeassistant_custom_component.syrupy import HomeAssistantSnapshotExtension
+from syrupy.assertion import SnapshotAssertion
 
 from custom_components.xtherma_fp.const import (
     CONF_CONNECTION,
@@ -30,6 +32,12 @@ from tests.const import (
     MOCK_MODBUS_PORT,
     MOCK_SERIAL_NUMBER,
 )
+
+
+@pytest.fixture
+def snapshot(snapshot: SnapshotAssertion) -> SnapshotAssertion:
+    """Return snapshot assertion fixture with the Home Assistant extension."""
+    return snapshot.use_extension(HomeAssistantSnapshotExtension)
 
 
 @pytest.fixture(autouse=True)

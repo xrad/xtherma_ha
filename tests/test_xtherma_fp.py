@@ -1,24 +1,19 @@
 """Tests for the Xtherma API."""
 
-import homeassistant.helpers.entity_registry as er
 import pytest
-from homeassistant.config_entries import ConfigEntry, ConfigEntryState
-from homeassistant.const import CONF_API_KEY, Platform
-from homeassistant.core import HomeAssistant
+from homeassistant.config_entries import ConfigEntryState
+from homeassistant.const import CONF_API_KEY
 from pytest_homeassistant_custom_component.common import (
     MockConfigEntry,
 )
 
 from custom_components.xtherma_fp.const import (
-    CONF_CONNECTION,
-    CONF_CONNECTION_RESTAPI,
     CONF_SERIAL_NUMBER,
     DOMAIN,
-    EXTRA_STATE_ATTRIBUTE_PARAMETER,
     FERNPORTAL_URL,
 )
 from tests.const import MOCK_API_KEY, MOCK_SERIAL_NUMBER
-from tests.helpers import get_platform, load_mock_data, provide_rest_data
+from tests.helpers import load_mock_data, provide_rest_data
 
 from .conftest import init_integration
 
@@ -48,67 +43,6 @@ async def test_restapi_setup_entry_old(hass, aioclient_mock):
     assert entry.state is ConfigEntryState.LOADED
 
 
-def verify_integration_binary_sensors(hass: HomeAssistant, entry: ConfigEntry):
-    our_sensors = [
-        state
-        for state in hass.states.async_all(Platform.BINARY_SENSOR)
-        if state.entity_id.startswith(f"binary_sensor.{entry.title}")
-    ]
-    assert len(our_sensors) == 7
-
-
-def verify_integration_sensors(hass: HomeAssistant, entry: ConfigEntry):
-    our_sensors = [
-        state
-        for state in hass.states.async_all(Platform.SENSOR)
-        if state.entity_id.startswith(f"sensor.{entry.title}")
-    ]
-    if entry.data[CONF_CONNECTION] == CONF_CONNECTION_RESTAPI:
-        assert len(our_sensors) == 47
-    else:
-        assert len(our_sensors) == 49
-
-
-def verify_integration_switches(hass: HomeAssistant, entry: ConfigEntry):
-    our_switches = [
-        state
-        for state in hass.states.async_all(Platform.SWITCH)
-        if state.entity_id.startswith(f"switch.{entry.title}")
-    ]
-    assert len(our_switches) == 7
-
-
-def verify_integration_numbers(hass: HomeAssistant, entry: ConfigEntry):
-    our_numbers = [
-        state
-        for state in hass.states.async_all(Platform.NUMBER)
-        if state.entity_id.startswith(f"number.{entry.title}")
-    ]
-    assert len(our_numbers) == 25
-
-
-def verify_integration_selects(hass: HomeAssistant, entry: ConfigEntry):
-    our_selects = [
-        state
-        for state in hass.states.async_all(Platform.SELECT)
-        if state.entity_id.startswith(f"select.{entry.title}")
-    ]
-    assert len(our_selects) == 2
-
-
-def verify_parameter_keys(hass: HomeAssistant, entry: ConfigEntry):
-    entity_reg = er.async_get(hass)
-    entries = er.async_entries_for_config_entry(entity_reg, entry.entry_id)
-    for reg_entity in entries:
-        domain = reg_entity.entity_id.split(".")[0]
-        platform = get_platform(hass, domain)
-        entity = platform.entities.get(reg_entity.entity_id)
-        assert entity is not None
-        assert entity.extra_state_attributes is not None
-        key = entity.extra_state_attributes[EXTRA_STATE_ATTRIBUTE_PARAMETER]
-        assert key == entity.entity_description.key
-
-
 @pytest.mark.parametrize("mock_rest_api_client", provide_rest_data(), indirect=True)
 async def test_restapi_setup_entry_ok(hass, mock_rest_api_client):
     """Verify config entries for REST API work."""
@@ -116,18 +50,6 @@ async def test_restapi_setup_entry_ok(hass, mock_rest_api_client):
 
     assert len(hass.config_entries.async_entries(DOMAIN)) == 1
     assert entry.state is ConfigEntryState.LOADED
-
-    verify_integration_binary_sensors(hass, entry)
-
-    verify_integration_sensors(hass, entry)
-
-    verify_integration_switches(hass, entry)
-
-    verify_integration_numbers(hass, entry)
-
-    verify_integration_selects(hass, entry)
-
-    verify_parameter_keys(hass, entry)
 
 
 @pytest.mark.parametrize(
