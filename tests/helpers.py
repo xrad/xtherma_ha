@@ -66,6 +66,13 @@ def load_mock_data(filename: str) -> JsonValueType:
             KEY_ENTRY_INPUT_FACTOR: "*10",
         },
     )
+    settings.append(
+        {
+            KEY_ENTRY_KEY: "fp_v",
+            KEY_ENTRY_VALUE: "565",
+            KEY_ENTRY_INPUT_FACTOR: "/100",
+        },
+    )
     return mock_data
 
 

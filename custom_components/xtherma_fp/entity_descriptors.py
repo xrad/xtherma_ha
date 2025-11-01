@@ -912,6 +912,11 @@ _sensor_controller_v = XtVersionSensorEntityDescription(
     icon="mdi:information-outline",
     factor="/100",
 )
+_sensor_fp_v = XtVersionSensorEntityDescription(
+    key="fp_v",
+    icon="mdi:information-outline",
+    factor="/100",
+)
 _sensor_mode = XtSensorEntityDescription(
     key="mode",
     device_class=SensorDeviceClass.ENUM,
@@ -1038,6 +1043,7 @@ _MODBUS_TELEMETRY_GENERAL = ModbusRegisterSet(
         _sensor_14a,
         _sensor_sg,
         _sensor_evu,
+        _sensor_fp_v,
     ],
 )
 
