@@ -1038,6 +1038,56 @@
     'state': '3.98',
   })
 # ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_fp_version-entry]
+  EntityRegistryEntrySnapshot({
+    'aliases': set({
+    }),
+    'area_id': None,
+    'capabilities': None,
+    'config_entry_id': <ANY>,
+    'config_subentry_id': <ANY>,
+    'device_class': None,
+    'device_id': <ANY>,
+    'disabled_by': None,
+    'domain': 'sensor',
+    'entity_category': None,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_fp_version',
+    'has_entity_name': True,
+    'hidden_by': None,
+    'icon': None,
+    'id': <ANY>,
+    'labels': set({
+    }),
+    'name': None,
+    'options': dict({
+    }),
+    'original_device_class': None,
+    'original_icon': 'mdi:information-outline',
+    'original_name': 'FP version',
+    'platform': 'xtherma_fp',
+    'previous_unique_id': None,
+    'suggested_object_id': None,
+    'supported_features': 0,
+    'translation_key': 'fp_v',
+    'unique_id': 'test_entry_xtherma-fp_v',
+    'unit_of_measurement': None,
+  })
+# ---
+# name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_fp_version-state]
+  StateSnapshot({
+    'attributes': ReadOnlyDict({
+      'friendly_name': 'test_entry_xtherma_modbus_config FP version',
+      'icon': 'mdi:information-outline',
+      'parameter': 'fp_v',
+    }),
+    'context': <ANY>,
+    'entity_id': 'sensor.test_entry_xtherma_modbus_config_fp_version',
+    'last_changed': <ANY>,
+    'last_reported': <ANY>,
+    'last_updated': <ANY>,
+    'state': '5.65',
+  })
+# ---
 # name: test_setup_sensor_modbus_tcp[mock_modbus_tcp_client0][sensor.test_entry_xtherma_modbus_config_heat_output_auxiliary_emergency_heating_thermal-entry]
   EntityRegistryEntrySnapshot({
     'aliases': set({
