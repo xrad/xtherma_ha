@@ -28,7 +28,7 @@
         "description": "Reconfigure connection to Xtherma device",
         "data": {
           "serial_number": "Serial number (Fernportal module)",
-          "connection":"Connection type:"
+          "connection": "Connection type:"
         }
       },
       "reconfigure_rest_api": {
@@ -393,6 +393,9 @@
     },
     "modbus_write_error": {
       "message": "Modbus write error {error} changing the value of {entity_id}."
+    },
+    "modbus_data_empty_error": {
+      "message": "Ignoring empty device data."
     },
     "rest_api_error": {
       "message": "REST-API error {error}."

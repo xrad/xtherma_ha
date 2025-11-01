@@ -160,3 +160,19 @@ def provide_modbus_data(
     """
     regs_list = _load_modbus_data_from_json("rest_response.json", exc_code=exc_code)
     return [regs_list]
+
+
+def provide_empty_modbus_data(
+    exc_code: MockModbusParamExceptionCode = None,
+) -> list[MockModbusParam]:
+    """Return a list of complete, but empty Modbus register read-outs."""
+    regs_list: MockModbusParam = []
+    for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
+        regs = [0] * len(reg_desc.descriptors)
+        regs_list.append(
+            {
+                "registers": regs,
+                "exc_code": exc_code,
+            }
+        )
+    return [regs_list]
