@@ -20,7 +20,11 @@ from custom_components.xtherma_fp.const import (
     KEY_SETTINGS,
     KEY_TELEMETRY,
 )
-from custom_components.xtherma_fp.entity_descriptors import MODBUS_ENTITY_DESCRIPTIONS
+from custom_components.xtherma_fp.entity_descriptors import (
+    MODBUS_ENTITY_DESCRIPTIONS,
+    MODBUS_REGISTER_RANGES,
+    MODBUS_REGISTER_SIZE,
+)
 from tests.conftest import (
     MockModbusParam,
     MockModbusParamExceptionCode,
@@ -40,16 +44,20 @@ def get_platform(hass: HomeAssistant, domain: str) -> EntityPlatform:
     pytest.fail(f"We have no platfom {domain}")
 
 
-def find_entry(values: list[dict], key: str) -> dict[str, Any]:
-    for entry in values:
-        if entry[KEY_ENTRY_KEY] == key:
-            return entry
-    raise KeyError(key)
-
-
 def load_mock_data(filename: str) -> JsonValueType:
+    """Load mock data from specified JSON file.
+
+    The JSON file is expected to be an exact dump of the REST API response
+    as documented on https://github.com/Xtherma/xtherma_api.
+
+    The same mock data is used for REST API and Modbus/TCP tests where
+    possible. However, the Modbus/TCP interface provides more data
+    than what is received via REST, so we manually enrich the data
+    read from file.
+    """
     mock_data = load_json_value_fixture(filename)
     assert isinstance(mock_data, dict)
+    # add registers only available via Modbus
     settings = mock_data[KEY_SETTINGS]
     assert isinstance(settings, list)
     settings.append(
@@ -69,6 +77,24 @@ def load_mock_data(filename: str) -> JsonValueType:
     return mock_data
 
 
+def flatten_mock_data(mock_data: JsonValueType) -> list[dict[str, Any]]:
+    """Merge telemetry and settings sections for easier access."""
+    mock_data = cast("dict[str, Any]", mock_data)
+    telemetry = cast("list[dict[str, int|str]]", mock_data[KEY_TELEMETRY])
+    settings = cast("list[dict[str, int|str]]", mock_data[KEY_SETTINGS])
+    flattened_mock_data = telemetry
+    flattened_mock_data.extend(settings)
+    return flattened_mock_data
+
+
+def find_entry(flattened_mock_data: list[dict], key: str) -> dict[str, Any]:
+    """Find entry by key in flattened mock data."""
+    for entry in flattened_mock_data:
+        if entry[KEY_ENTRY_KEY] == key:
+            return entry
+    pytest.fail(f"Unknown key {key}")
+
+
 def provide_rest_data(
     http_error: MockRestParamHttpError = None,
     timeout_error: MockRestParamTimeoutError = None,
@@ -86,48 +112,29 @@ def provide_rest_data(
     return [result]
 
 
-def _flatten_mock_data(mock_data: JsonValueType) -> list[dict[str, Any]]:
-    mock_data = cast("dict[str, Any]", mock_data)
-    telemetry = cast("list[dict[str, int|str]]", mock_data[KEY_TELEMETRY])
-    settings = cast("list[dict[str, int|str]]", mock_data[KEY_SETTINGS])
-    all_values = telemetry
-    all_values.extend(settings)
-    return all_values
-
-
-def _load_modbus_data_from_json(
-    filename: str, exc_code: MockModbusParamExceptionCode = None
-) -> MockModbusParam:
-    mock_data = load_mock_data(filename)
-    all_values = _flatten_mock_data(mock_data)
-    regs_list: MockModbusParam = []
+def get_modbus_register_number(key: str) -> int:
     for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
-        regs = [0] * len(reg_desc.descriptors)
         for i, desc in enumerate(reg_desc.descriptors):
             if desc is None:
                 continue
-            entry = find_entry(all_values, desc.key)
-            value = int(str(entry[KEY_ENTRY_VALUE]))
-            regs[i] = value
-        regs_list.append(
-            {
-                "registers": regs,
-                "exc_code": exc_code,
-            }
-        )
-    return regs_list
+            if desc.key == key:
+                return reg_desc.base + i
+    pytest.fail(f"Unknown key {key}")
 
 
 def set_modbus_register(param: MockModbusParam, key: str, value: int):
-    for i, reg_desc in enumerate(MODBUS_ENTITY_DESCRIPTIONS):
-        regs_list: MockModbusParamReadResult = param[i]
-        for j, desc in enumerate(reg_desc.descriptors):
-            if desc is None:
-                continue
-            if desc.key != key:
-                continue
-            regs = cast("MockModbusParamRegisters", regs_list["registers"])
-            regs[j] = value
+    regno = get_modbus_register_number(key)
+    # find corresponding register range and modify value
+    for i, (start, end) in enumerate(MODBUS_REGISTER_RANGES):
+        if regno >= start and regno <= end:
+            offset = regno - start
+            reg_list: MockModbusParamReadResult = param[i]
+            regs = cast("MockModbusParamRegisters", reg_list["registers"])
+            regs[offset] = value
+            return
+    # cannot happen, test_modbus_register_range_coverage verifies
+    # all registers are covered by MODBUS_REGISTER_RANGES
+    pytest.fail(f"Key {key} not found in range?!")
 
 
 def provide_modbus_data(
@@ -137,21 +144,36 @@ def provide_modbus_data(
 
     Currently returns only one read-out based on our standard REST API response.
     """
-    regs_list = _load_modbus_data_from_json("rest_response.json", exc_code=exc_code)
-    return [regs_list]
+    param = provide_empty_modbus_data(exc_code=exc_code)
+    regs_list = param[0]
+
+    # get mock data from file and write it to the correct
+    # register positions
+    mock_data = load_mock_data("rest_response.json")
+    all_values = flatten_mock_data(mock_data)
+    for entry in all_values:
+        key = entry[KEY_ENTRY_KEY]
+        value = int(str(entry[KEY_ENTRY_VALUE]))
+        set_modbus_register(regs_list, key, value)
+
+    return param
 
 
 def provide_empty_modbus_data(
     exc_code: MockModbusParamExceptionCode = None,
 ) -> list[MockModbusParam]:
     """Return a list of complete, but empty Modbus register read-outs."""
+    # flat register map
+    raw_registers = [0] * MODBUS_REGISTER_SIZE
+
+    # prepare respsonses for read_holding_registers()
     regs_list: MockModbusParam = []
-    for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
-        regs = [0] * len(reg_desc.descriptors)
+    for start, end in MODBUS_REGISTER_RANGES:
         regs_list.append(
             {
-                "registers": regs,
+                "registers": raw_registers[start : end + 1],
                 "exc_code": exc_code,
             }
         )
+
     return [regs_list]

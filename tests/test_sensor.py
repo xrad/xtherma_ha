@@ -1,14 +1,13 @@
 """Tests for the Xtherma sensor platform."""
 
-from typing import cast
 from unittest.mock import patch
 
 import pytest
 from homeassistant.const import Platform
 from pytest_homeassistant_custom_component.common import snapshot_platform
 
-from tests.conftest import MockModbusParam, MockModbusParamRegisters
-from tests.helpers import provide_modbus_data, provide_rest_data
+from tests.conftest import MockModbusParam
+from tests.helpers import provide_modbus_data, provide_rest_data, set_modbus_register
 
 from .conftest import init_integration, init_modbus_integration
 
@@ -41,13 +40,10 @@ async def test_setup_sensor_modbus_tcp(
 
 def _test_get_negative_number_modbus_regs() -> list[MockModbusParam]:
     param = provide_modbus_data()
-    regs_list = param[0]
     # change "ta" register #140 to be -20 °C in 2s complement
-    regs: MockModbusParamRegisters = cast(
-        "MockModbusParamRegisters", regs_list[11]["registers"]
-    )
-    regs[0] = ((20 * 10) ^ 65535) + 1
-    return [regs_list]
+    value = ((20 * 10) ^ 65535) + 1
+    set_modbus_register(param[0], "ta", value)
+    return param
 
 
 @pytest.mark.parametrize(

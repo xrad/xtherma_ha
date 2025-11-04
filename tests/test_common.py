@@ -7,7 +7,7 @@ from custom_components.xtherma_fp.entity_descriptors import (
     MODBUS_ENTITY_DESCRIPTIONS,
     XtNumericEntityDescription,
 )
-from tests.helpers import _flatten_mock_data, find_entry, load_mock_data
+from tests.helpers import find_entry, flatten_mock_data, load_mock_data
 
 
 def test_json_load_value_fixture():
@@ -34,12 +34,12 @@ def test_json_load_value_fixture():
 def test_input_factors():
     """Verify that input_factors in REST response match Modbus descriptors."""
     mock_data = load_mock_data("rest_response.json")
-    all_values = _flatten_mock_data(mock_data)
+    flattened_mock_data = flatten_mock_data(mock_data)
     for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
         for desc in reg_desc.descriptors:
             if not isinstance(desc, XtNumericEntityDescription):
                 continue
-            entry = find_entry(all_values, desc.key)
+            entry = find_entry(flattened_mock_data, desc.key)
             input_factor = entry.get(KEY_ENTRY_INPUT_FACTOR)
             if input_factor == "":
                 assert desc.factor is None

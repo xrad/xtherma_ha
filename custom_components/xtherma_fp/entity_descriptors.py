@@ -1144,6 +1144,13 @@ MODBUS_ENTITY_DESCRIPTIONS: list[ModbusRegisterSet] = [
     _MODBUS_TELEMETRY_PER_DAY_ENERGY,
 ]
 
+# The modbus protocol only allows reading up to 125 registers at once.
+# Therefore, we need to split the register ranges accordingly.
+MODBUS_REGISTER_RANGES = [(0, 71), (100, 193)]
+
+# The total size of the modbus register space used.
+MODBUS_REGISTER_SIZE = MODBUS_REGISTER_RANGES[-1][1] + 1
+
 ENTITY_DESCRIPTIONS: list[EntityDescription] = [
     # ------- general system state
     _sensor_001,

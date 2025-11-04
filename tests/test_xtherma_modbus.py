@@ -10,6 +10,10 @@ from homeassistant.helpers.update_coordinator import UpdateFailed
 from pymodbus.pdu.pdu import ExceptionResponse
 
 from custom_components.xtherma_fp.const import DOMAIN
+from custom_components.xtherma_fp.entity_descriptors import (
+    MODBUS_ENTITY_DESCRIPTIONS,
+    MODBUS_REGISTER_RANGES,
+)
 from tests.conftest import MockModbusParam
 from tests.helpers import (
     get_platform,
@@ -214,3 +218,25 @@ async def test_modbus_drop_empty_data(hass, mock_modbus_tcp_client, caplog):
     await hass.async_block_till_done()
 
     unsub()
+
+
+def test_modbus_register_range_coverage():
+    """Test modbus raw read ranges cover all defined registers."""
+
+    def is_address_covered(address: int) -> bool:
+        return any(start <= address <= end for start, end in MODBUS_REGISTER_RANGES)
+
+    for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
+        for i, _desc in enumerate(reg_desc.descriptors):
+            address = reg_desc.base + i
+            assert is_address_covered(address), (
+                f"Register {address} is not covered in MODBUS_REGISTER_RANGES"
+            )
+
+
+def test_modbus_register_descriptions_match_spec(snapshot):
+    """Test modbus register range matches specification."""
+    for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
+        assert snapshot(name=f"{reg_desc.base}") == reg_desc, (
+            f"Mismatch in descriptions for base {reg_desc.base}"
+        )
