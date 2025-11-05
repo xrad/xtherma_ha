@@ -7,8 +7,10 @@ from typing import TYPE_CHECKING, Any
 
 import voluptuous as vol
 from homeassistant.config_entries import (
+    ConfigEntry,
     ConfigFlow,
     ConfigFlowResult,
+    OptionsFlow,
 )
 from homeassistant.const import (
     CONF_ADDRESS,
@@ -17,9 +19,11 @@ from homeassistant.const import (
     CONF_NAME,
     CONF_PORT,
 )
-from homeassistant.core import HomeAssistant
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers import aiohttp_client
 from homeassistant.helpers.selector import (
+    BooleanSelector,
+    BooleanSelectorConfig,
     NumberSelector,
     NumberSelectorConfig,
     NumberSelectorMode,
@@ -32,6 +36,7 @@ from .const import (
     CONF_CONNECTION,
     CONF_CONNECTION_MODBUSTCP,
     CONF_CONNECTION_RESTAPI,
+    CONF_DETECT_EMPTY_MODBUS_DATA,
     CONF_SERIAL_NUMBER,
     DOMAIN,
     FERNPORTAL_URL,
@@ -54,6 +59,7 @@ _LOGGER = logging.getLogger(__name__)
 
 _DEF_MODBUS_PORT = 502
 _DEF_MODBUS_ADDRESS = 1
+_DEF_DETECT_EMPTY_MODBUS_DATA = True
 
 
 CONNECTION_DATA = {
@@ -81,6 +87,16 @@ USER_DATA = {
     ): str,
     **CONNECTION_DATA,
 }
+
+BOOLEAN_SELECTOR = BooleanSelector(BooleanSelectorConfig())
+
+OPTIONS_DATA = {
+    vol.Optional(
+        CONF_DETECT_EMPTY_MODBUS_DATA,
+        default=_DEF_DETECT_EMPTY_MODBUS_DATA,
+    ): BOOLEAN_SELECTOR,
+}
+
 
 CONNECTION_SCHEMA = vol.Schema(CONNECTION_DATA)
 
@@ -111,6 +127,8 @@ MODBUS_SCHEMA = vol.Schema(
         ),
     },
 )
+
+OPTIONS_SCHEMA = vol.Schema(OPTIONS_DATA)
 
 
 async def _validate_connection(
@@ -221,6 +239,14 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
 
     VERSION = 1
     MINOR_VERSION = 0
+
+    @staticmethod
+    @callback
+    def async_get_options_flow(
+        config_entry: ConfigEntry,
+    ) -> XthermaOptionsFlowHandler:
+        """Get the options flow for this handler."""
+        return XthermaOptionsFlowHandler()
 
     _config_data: dict[str, str]
     _reconfigure_data: dict[str, str]
@@ -384,4 +410,24 @@ class XthermaConfigFlow(ConfigFlow, domain=DOMAIN):
                 MODBUS_SCHEMA, self._reconfigure_data
             ),
             errors=errors,
+        )
+
+
+class XthermaOptionsFlowHandler(OptionsFlow):
+    """Handle an options flow for xtherma_fp."""
+
+    _config_data: dict[str, str]
+
+    async def async_step_init(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        """Manage the options."""
+        if user_input is not None:
+            return self.async_create_entry(data=user_input)
+
+        return self.async_show_form(
+            step_id="init",
+            data_schema=self.add_suggested_values_to_schema(
+                OPTIONS_SCHEMA, self.config_entry.options
+            ),
         )

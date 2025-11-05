@@ -17,6 +17,9 @@ CONF_SERIAL_NUMBER = "serial_number"
 CONF_CONNECTION_RESTAPI = "rest_api"
 CONF_CONNECTION_MODBUSTCP = "modbus_tcp"
 
+# options keys
+CONF_DETECT_EMPTY_MODBUS_DATA = "detect_empty_modbus_data"
+
 FERNPORTAL_URL = "https://fernportal.xtherma.de/api/device"
 
 # Fernportal is rate limited to 1500 requests per day, one per minute

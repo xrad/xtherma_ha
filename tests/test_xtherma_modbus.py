@@ -9,7 +9,7 @@ from homeassistant.const import EVENT_STATE_CHANGED
 from homeassistant.helpers.update_coordinator import UpdateFailed
 from pymodbus.pdu.pdu import ExceptionResponse
 
-from custom_components.xtherma_fp.const import DOMAIN
+from custom_components.xtherma_fp.const import CONF_DETECT_EMPTY_MODBUS_DATA, DOMAIN
 from custom_components.xtherma_fp.entity_descriptors import (
     MODBUS_ENTITY_DESCRIPTIONS,
     MODBUS_REGISTER_RANGES,
@@ -168,7 +168,7 @@ async def test_modbus_update_events(hass, mock_modbus_tcp_client):
     unsub()
 
 
-def _test_modbus_drop_empty_data() -> list[MockModbusParam]:
+def _test_provide_modbus_empty_data() -> list[MockModbusParam]:
     # prepare register set for 2 update cyles:
     # 1. initial data in for config entry setup
     # 2. empty data
@@ -179,14 +179,16 @@ def _test_modbus_drop_empty_data() -> list[MockModbusParam]:
 
 @pytest.mark.parametrize(
     "mock_modbus_tcp_client",
-    _test_modbus_drop_empty_data(),
+    _test_provide_modbus_empty_data(),
     indirect=True,
 )
 @pytest.mark.asyncio
 async def test_modbus_drop_empty_data(hass, mock_modbus_tcp_client, caplog):
     """Test that empty data from Modbus is detected and dropped."""
     caplog.set_level("WARNING")
-    entry = await init_modbus_integration(hass, mock_modbus_tcp_client)
+    entry = await init_modbus_integration(
+        hass, mock_modbus_tcp_client, options={CONF_DETECT_EMPTY_MODBUS_DATA: True}
+    )
     assert entry.state.value == "loaded"
 
     xtherma_data: XthermaData = entry.runtime_data
@@ -210,6 +212,52 @@ async def test_modbus_drop_empty_data(hass, mock_modbus_tcp_client, caplog):
 
     # there must be a log entry
     assert any(
+        rec.levelname == "ERROR"
+        and "Ignoring empty device data" in rec.message
+        and "custom_components." + DOMAIN in rec.name
+        for rec in caplog.records
+    )
+
+    await hass.async_block_till_done()
+
+    unsub()
+
+
+@pytest.mark.parametrize(
+    "mock_modbus_tcp_client",
+    _test_provide_modbus_empty_data(),
+    indirect=True,
+)
+@pytest.mark.asyncio
+async def test_modbus_use_empty_data(hass, mock_modbus_tcp_client, caplog):
+    """Test that empty data from Modbus is detected and dropped."""
+    caplog.set_level("WARNING")
+    entry = await init_modbus_integration(
+        hass, mock_modbus_tcp_client, options={CONF_DETECT_EMPTY_MODBUS_DATA: False}
+    )
+    assert entry.state.value == "loaded"
+
+    xtherma_data: XthermaData = entry.runtime_data
+    assert xtherma_data is not None
+    assert xtherma_data.coordinator is not None
+
+    events: list[Any] = []
+
+    def event_listener_callback(event):
+        """Callback function that is executed when the event fires."""
+        events.append(event)
+
+    unsub = hass.bus.async_listen(EVENT_STATE_CHANGED, event_listener_callback)
+
+    # trigger next update reading empty data
+    await xtherma_data.coordinator.async_request_refresh()
+    await hass.async_block_till_done()
+
+    # there must be state changes
+    assert len(events) != 0
+
+    # there must be a log entry
+    assert not any(
         rec.levelname == "ERROR"
         and "Ignoring empty device data" in rec.message
         and "custom_components." + DOMAIN in rec.name
