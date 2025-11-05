@@ -45,6 +45,7 @@ class XthermaClientModbus(XthermaClient):
     """Modbus access client."""
 
     _client: AsyncModbusTcpClient | None = None
+    detect_empty_modbus_data: bool
 
     def __init__(
         self,
@@ -59,6 +60,7 @@ class XthermaClientModbus(XthermaClient):
         self._desc_regset_cache: dict[str, int] = {}
         self._last_update: list[dict[str, Any]] = []
         self._read_buffer = [0] * MODBUS_REGISTER_SIZE
+        self.detect_empty_modbus_data = True
 
     async def connect(self) -> None:
         """Connect client to server endpoint."""
@@ -152,18 +154,22 @@ class XthermaClientModbus(XthermaClient):
 
     async def _read_modbus_ranges(self, client: AsyncModbusTcpClient) -> None:
         """Read ranges defined in MODBUS_REGISTER_RANGES into read buffer."""
-        for start, end in MODBUS_REGISTER_RANGES:
-            await self._read_modbus_range(client, address=start, length=end - start + 1)
+        for r in MODBUS_REGISTER_RANGES:
+            await self._read_modbus_range(client, address=r.first_reg, length=r.length)
+            # we know that no single register range can ever be empty, so lets
+            # throw an exception if we just read empty data.
+            # see also test_modbus_register_ranges_cannot_be_empty()
+            if (
+                self.detect_empty_modbus_data
+                and self._read_buffer[r.non_empty_reg] == 0
+            ):
+                raise XthermaModbusEmptyDataError
 
     async def _read_bank(
         self,
         reg_desc: ModbusRegisterSet,
-    ) -> bool:
-        """Read a bank of modbus holding registers.
-
-        Returns False if empty data was read, True otherwise.
-        """
-        have_data = False
+    ) -> None:
+        """Read a bank of modbus holding registers."""
         for i, desc in enumerate(reg_desc.descriptors):
             if not desc:
                 _LOGGER.debug("no descriptor for %d.%d", reg_desc.base, i)
@@ -171,7 +177,6 @@ class XthermaClientModbus(XthermaClient):
                 entry = {}
                 entry[KEY_ENTRY_KEY] = desc.key
                 raw_value = self._read_buffer[reg_desc.base + i]
-                have_data |= raw_value != 0
                 value = self._decode_int(raw_value, desc)
                 entry[KEY_ENTRY_VALUE] = str(value)
                 if isinstance(desc, XtSensorEntityDescription):
@@ -179,18 +184,14 @@ class XthermaClientModbus(XthermaClient):
                 else:
                     entry[KEY_ENTRY_INPUT_FACTOR] = None
                 self._last_update.append(entry)
-        return have_data
 
     async def async_get_data(self) -> list[dict[str, Any]]:
         """Obtain fresh data."""
         self._last_update = []
         client = await self._get_client()
         await self._read_modbus_ranges(client)
-        have_data = False
         for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
-            have_data |= await self._read_bank(reg_desc)
-        if not have_data:
-            raise XthermaModbusEmptyDataError
+            await self._read_bank(reg_desc)
         return self._last_update
 
     async def async_put_data(self, value: int, desc: EntityDescription) -> None:

@@ -16,6 +16,7 @@ from custom_components.xtherma_fp.entity_descriptors import (
 )
 from tests.conftest import MockModbusParam
 from tests.helpers import (
+    get_modbus_register_number,
     get_platform,
     provide_empty_modbus_data,
     provide_modbus_data,
@@ -224,7 +225,7 @@ def test_modbus_register_range_coverage():
     """Test modbus raw read ranges cover all defined registers."""
 
     def is_address_covered(address: int) -> bool:
-        return any(start <= address <= end for start, end in MODBUS_REGISTER_RANGES)
+        return any(r.first_reg <= address <= r.last_reg for r in MODBUS_REGISTER_RANGES)
 
     for reg_desc in MODBUS_ENTITY_DESCRIPTIONS:
         for i, _desc in enumerate(reg_desc.descriptors):
@@ -240,3 +241,28 @@ def test_modbus_register_descriptions_match_spec(snapshot):
         assert snapshot(name=f"{reg_desc.base}") == reg_desc, (
             f"Mismatch in descriptions for base {reg_desc.base}"
         )
+
+
+def test_modbus_register_ranges_cannot_be_empty():
+    """Verify that none of the MODBUS_REGISTER_RANGES can ever be empty."""
+    # check number of ranges so we know we'll have to modify this
+    # when MODBUS_REGISTER_RANGES changes
+    assert len(MODBUS_REGISTER_RANGES) == 2
+
+    # check non-empty register in range #0
+    regno = get_modbus_register_number("501")
+    assert MODBUS_REGISTER_RANGES[0].non_empty_reg == regno
+    assert (
+        MODBUS_REGISTER_RANGES[0].first_reg
+        <= MODBUS_REGISTER_RANGES[0].non_empty_reg
+        <= MODBUS_REGISTER_RANGES[0].last_reg
+    )
+
+    # check non-empty register in range #1
+    regno = get_modbus_register_number("controller_v")
+    assert MODBUS_REGISTER_RANGES[1].non_empty_reg == regno
+    assert (
+        MODBUS_REGISTER_RANGES[0].first_reg
+        <= MODBUS_REGISTER_RANGES[1].non_empty_reg
+        <= MODBUS_REGISTER_RANGES[1].last_reg
+    )
