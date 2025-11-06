@@ -1,7 +1,7 @@
 """Set up some common test helper things."""
 
 import asyncio
-from typing import cast
+from typing import Any, cast
 from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
@@ -86,16 +86,30 @@ async def mock_rest_api_client(aioclient_mock, request: pytest.FixtureRequest):
         aioclient_mock.get(url, json=response)
 
 
-async def init_integration(hass, mock_rest_api_client) -> MockConfigEntry:
+async def init_integration(
+    hass,
+    mock_rest_api_client,
+    config_data: dict[str, Any] | None = None,
+    options: dict[str, Any] | None = None,
+) -> MockConfigEntry:
     """Integration using REST API."""
+    _config_data: dict[str, Any] = {
+        CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
+        CONF_API_KEY: MOCK_API_KEY,
+        CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
+    }
+    if config_data:
+        _config_data.update(config_data)
+
+    _options: dict[str, Any] = {}
+    if options:
+        _options.update(options)
+
     # Create a mock config entry
     entry = MockConfigEntry(
         domain=DOMAIN,
-        data={
-            CONF_CONNECTION: CONF_CONNECTION_RESTAPI,
-            CONF_API_KEY: MOCK_API_KEY,
-            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
-        },
+        data=_config_data,
+        options=_options,
         entry_id=MOCK_CONFIG_ENTRY_ID,
         version=VERSION,
         title="test_entry_xtherma_config",
@@ -188,17 +202,31 @@ async def mock_modbus_tcp_client(request: pytest.FixtureRequest):
         yield mock_instance
 
 
-async def init_modbus_integration(hass, mock_modbus_tcp_client) -> MockConfigEntry:
+async def init_modbus_integration(
+    hass,
+    mock_modbus_tcp_client,
+    config_data: dict[str, Any] | None = None,
+    options: dict[str, Any] | None = None,
+) -> MockConfigEntry:
     """Integration using Modbus."""
+    _config_data: dict[str, Any] = {
+        CONF_CONNECTION: CONF_CONNECTION_MODBUSTCP,
+        CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
+        CONF_HOST: MOCK_MODBUS_HOST,
+        CONF_PORT: MOCK_MODBUS_PORT,
+        CONF_ADDRESS: MOCK_MODBUS_ADDRESS,
+    }
+    if config_data:
+        _config_data.update(config_data)
+
+    _options: dict[str, Any] = {}
+    if options:
+        _options.update(options)
+
     entry = MockConfigEntry(
         domain=DOMAIN,
-        data={
-            CONF_CONNECTION: CONF_CONNECTION_MODBUSTCP,
-            CONF_SERIAL_NUMBER: MOCK_SERIAL_NUMBER,
-            CONF_HOST: MOCK_MODBUS_HOST,
-            CONF_PORT: MOCK_MODBUS_PORT,
-            CONF_ADDRESS: MOCK_MODBUS_ADDRESS,
-        },
+        data=_config_data,
+        options=_options,
         entry_id=MOCK_CONFIG_ENTRY_ID,
         version=VERSION,
         title="test_entry_xtherma_modbus_config",

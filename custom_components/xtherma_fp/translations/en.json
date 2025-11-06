@@ -69,6 +69,18 @@
       }
     }
   },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "detect_empty_modbus_data": "Detect empty data on Modbus/TCP"
+        },
+        "data_description": {
+          "detect_empty_modbus_data": "Activate to ignore empty data from the Modbus/TCP server and to avoid jumps in the sensor readings."
+        }
+      }
+    }
+  },
   "entity": {
     "binary_sensor": {
       "pk": {

@@ -125,9 +125,9 @@ def get_modbus_register_number(key: str) -> int:
 def set_modbus_register(param: MockModbusParam, key: str, value: int):
     regno = get_modbus_register_number(key)
     # find corresponding register range and modify value
-    for i, (start, end) in enumerate(MODBUS_REGISTER_RANGES):
-        if regno >= start and regno <= end:
-            offset = regno - start
+    for i, r in enumerate(MODBUS_REGISTER_RANGES):
+        if regno >= r.first_reg and regno <= r.last_reg:
+            offset = regno - r.first_reg
             reg_list: MockModbusParamReadResult = param[i]
             regs = cast("MockModbusParamRegisters", reg_list["registers"])
             regs[offset] = value
@@ -168,10 +168,10 @@ def provide_empty_modbus_data(
 
     # prepare respsonses for read_holding_registers()
     regs_list: MockModbusParam = []
-    for start, end in MODBUS_REGISTER_RANGES:
+    for r in MODBUS_REGISTER_RANGES:
         regs_list.append(
             {
-                "registers": raw_registers[start : end + 1],
+                "registers": raw_registers[r.first_reg : r.last_reg + 1],
                 "exc_code": exc_code,
             }
         )

@@ -1144,12 +1144,36 @@ MODBUS_ENTITY_DESCRIPTIONS: list[ModbusRegisterSet] = [
     _MODBUS_TELEMETRY_PER_DAY_ENERGY,
 ]
 
+
 # The modbus protocol only allows reading up to 125 registers at once.
-# Therefore, we need to split the register ranges accordingly.
-MODBUS_REGISTER_RANGES = [(0, 71), (100, 193)]
+# Therefore, we need to split the entire register range into
+# manageable sub ranges.
+@dataclass(kw_only=True, frozen=True)
+class ModbusRegisterRange:
+    """Definition of a register range which is read in one call."""
+
+    # first and last register of this range
+    first_reg: int
+    last_reg: int
+
+    # a register in this range which cannot ever be empty
+    # this is used to detect bogus reads where the device sends us
+    # empty data instead of, for instance, a busy response.
+    non_empty_reg: int
+
+    @property
+    def length(self) -> int:
+        """Number of registers in this range."""
+        return self.last_reg - self.first_reg + 1
+
+
+MODBUS_REGISTER_RANGES: list[ModbusRegisterRange] = [
+    ModbusRegisterRange(first_reg=0, last_reg=71, non_empty_reg=50),
+    ModbusRegisterRange(first_reg=100, last_reg=193, non_empty_reg=100),
+]
 
 # The total size of the modbus register space used.
-MODBUS_REGISTER_SIZE = MODBUS_REGISTER_RANGES[-1][1] + 1
+MODBUS_REGISTER_SIZE = MODBUS_REGISTER_RANGES[-1].last_reg + 1
 
 ENTITY_DESCRIPTIONS: list[EntityDescription] = [
     # ------- general system state

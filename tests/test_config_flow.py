@@ -1,6 +1,7 @@
 """Test config flow."""
 
 import asyncio
+from typing import TYPE_CHECKING, cast
 from unittest.mock import patch
 
 import pytest
@@ -17,7 +18,7 @@ from homeassistant.const import (
 )
 from homeassistant.data_entry_flow import FlowResultType
 
-from custom_components.xtherma_fp import DOMAIN
+from custom_components.xtherma_fp import DOMAIN, XthermaData
 from custom_components.xtherma_fp.config_flow import (
     _validate_connection,
     _validate_modbus_tcp,
@@ -27,6 +28,7 @@ from custom_components.xtherma_fp.const import (
     CONF_CONNECTION,
     CONF_CONNECTION_MODBUSTCP,
     CONF_CONNECTION_RESTAPI,
+    CONF_DETECT_EMPTY_MODBUS_DATA,
     CONF_SERIAL_NUMBER,
     FERNPORTAL_URL,
 )
@@ -46,6 +48,10 @@ from tests.const import (
     MOCK_SERIAL_NUMBER,
 )
 from tests.helpers import load_mock_data, provide_modbus_data, provide_rest_data
+
+if TYPE_CHECKING:
+    from custom_components.xtherma_fp.coordinator import XthermaDataUpdateCoordinator
+    from custom_components.xtherma_fp.xtherma_client_modbus import XthermaClientModbus
 
 MOCK_REST_DATA = {CONF_NAME: MOCK_NAME, CONF_API_KEY: MOCK_API_KEY}
 
@@ -473,3 +479,41 @@ async def test_validate_modbus_tcp(hass, data, side_effect, expected_errors):
         side_effect=side_effect,
     ):
         assert await _validate_modbus_tcp(hass, data) == expected_errors
+
+
+@pytest.mark.parametrize("mock_modbus_tcp_client", provide_modbus_data(), indirect=True)
+async def test_options_flow(hass, mock_modbus_tcp_client):
+    """Test options flow."""
+    entry = await init_modbus_integration(hass, mock_modbus_tcp_client)
+
+    xtherma_data: XthermaData = entry.runtime_data
+    assert xtherma_data is not None
+    assert xtherma_data.coordinator is not None
+    coordinator: XthermaDataUpdateCoordinator = xtherma_data.coordinator
+    client = cast("XthermaClientModbus", coordinator._client)  # noqa: SLF001
+
+    # default is not configured, no setting, default is True
+    setting = entry.data.get(CONF_DETECT_EMPTY_MODBUS_DATA, None)
+    assert setting is None
+    assert client.detect_empty_modbus_data
+
+    for value_to_set in [False, True]:
+        result = await hass.config_entries.options.async_init(
+            entry.entry_id,
+        )
+
+        assert result["type"] is FlowResultType.FORM
+        assert result["step_id"] == "init"
+
+        result = await hass.config_entries.options.async_configure(
+            result["flow_id"],
+            user_input={CONF_DETECT_EMPTY_MODBUS_DATA: value_to_set},
+        )
+
+        # check config result
+        assert result["type"] is FlowResultType.CREATE_ENTRY
+        assert result["data"][CONF_DETECT_EMPTY_MODBUS_DATA] == value_to_set
+
+        # check that update_options_listener() was called and has applied
+        # the new setting
+        assert client.detect_empty_modbus_data == value_to_set

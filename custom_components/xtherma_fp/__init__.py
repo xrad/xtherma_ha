@@ -21,6 +21,7 @@ from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from .const import (
     CONF_CONNECTION,
     CONF_CONNECTION_RESTAPI,
+    CONF_DETECT_EMPTY_MODBUS_DATA,
     CONF_SERIAL_NUMBER,
     DOMAIN,
     FERNPORTAL_URL,
@@ -112,6 +113,19 @@ async def async_setup_entry(
 
     # make sure entities immediately have a valid state
     coordinator.async_update_listeners()
+
+    async def update_options_listener(
+        hass: HomeAssistant, config_entry: ConfigEntry
+    ) -> None:
+        """Handle options update."""
+        del hass
+        if isinstance(client, XthermaClientModbus):
+            detect_empty = config_entry.options.get(CONF_DETECT_EMPTY_MODBUS_DATA, True)
+            client.detect_empty_modbus_data = detect_empty
+
+    await update_options_listener(hass, entry)
+
+    entry.async_on_unload(entry.add_update_listener(update_options_listener))
 
     return True
 
